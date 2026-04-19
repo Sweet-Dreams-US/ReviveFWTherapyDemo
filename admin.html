@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Operator Dashboard — REVIVE Admin</title>
+<meta name="description" content="Internal operator dashboard for Revive Fitness & Recovery." />
+<meta name="robots" content="noindex" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@1,400&family=Manrope:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles/globals.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230B0807'/%3E%3Ctext x='50' y='72' text-anchor='middle' font-family='Anton,Impact' font-size='80' fill='%23FF3819'%3ER%3C/text%3E%3C/svg%3E" />
+</head>
+<body class="admin-body">
+
+<!-- Sidebar -->
+<aside class="admin-sidebar">
+  <a href="index.html" class="admin-brand">
+    REVIVE
+    <span class="admin-brand-tag mono">OPS</span>
+  </a>
+
+  <nav class="admin-nav">
+    <div class="admin-nav-group">
+      <div class="admin-nav-label mono">Operations</div>
+      <a href="#" class="admin-nav-item active"><span class="ic">▣</span> Dashboard</a>
+      <a href="#" class="admin-nav-item"><span class="ic">◆</span> Members</a>
+      <a href="#" class="admin-nav-item"><span class="ic">◉</span> Recovery</a>
+      <a href="#" class="admin-nav-item"><span class="ic">◐</span> Classes</a>
+      <a href="#" class="admin-nav-item"><span class="ic">◇</span> Run Club</a>
+    </div>
+    <div class="admin-nav-group">
+      <div class="admin-nav-label mono">Growth</div>
+      <a href="#" class="admin-nav-item"><span class="ic">★</span> Founders 200</a>
+      <a href="#" class="admin-nav-item"><span class="ic">⌖</span> Waitlist</a>
+      <a href="#" class="admin-nav-item"><span class="ic">⊛</span> Giveaway</a>
+      <a href="#" class="admin-nav-item"><span class="ic">$</span> Revenue</a>
+    </div>
+    <div class="admin-nav-group">
+      <div class="admin-nav-label mono">System</div>
+      <a href="#" class="admin-nav-item"><span class="ic">⚙</span> Settings</a>
+      <a href="#" class="admin-nav-item"><span class="ic">↗</span> Reports</a>
+    </div>
+  </nav>
+
+  <div class="admin-sidebar-foot">
+    <div class="admin-user">
+      <div class="admin-avatar">JM</div>
+      <div>
+        <div style="font-size: 0.875rem;">John M.</div>
+        <div class="mono text-faint" style="font-size: 0.6rem;">Owner / Founder</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- Main -->
+<main class="admin-main">
+  <header class="admin-topbar">
+    <div>
+      <div class="mono text-dim">Saturday — April 19, 2026</div>
+      <h1 style="font-family: var(--font-display); font-size: 2rem; line-height: 1; margin-top: 4px;">Good morning, John.</h1>
+    </div>
+    <div class="admin-topbar-actions">
+      <div class="admin-search">
+        <span class="mono">⌕</span>
+        <input type="search" placeholder="Search members, bookings, leads…" />
+        <span class="mono text-faint">⌘ K</span>
+      </div>
+      <button class="btn-icon" aria-label="Notifications">
+        <span>🔔</span>
+        <span class="badge">3</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Top stats row -->
+  <section class="kpi-row">
+    <div class="kpi">
+      <div class="mono text-dim">Founders Claimed</div>
+      <div class="kpi-value display">153 <span class="kpi-of">/200</span></div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" style="width: 76.5%;"></div></div>
+      <div class="kpi-meta mono"><span class="trend-up">▲ +12 this week</span></div>
+    </div>
+    <div class="kpi">
+      <div class="mono text-dim">Waitlist Signups</div>
+      <div class="kpi-value display">389</div>
+      <div class="kpi-meta mono"><span class="trend-up">▲ +47 last 7d</span> &nbsp;·&nbsp; +14% MoM</div>
+    </div>
+    <div class="kpi">
+      <div class="mono text-dim">Giveaway Entries</div>
+      <div class="kpi-value display">2,142</div>
+      <div class="kpi-meta mono"><span class="trend-up">▲ Closes 6 days</span></div>
+    </div>
+    <div class="kpi">
+      <div class="mono text-dim">Projected MRR (Aug)</div>
+      <div class="kpi-value display">$22.4K</div>
+      <div class="kpi-meta mono"><span class="trend-up">▲ vs $18.1K target</span></div>
+    </div>
+  </section>
+
+  <!-- Two column main area -->
+  <section class="admin-grid">
+    <!-- Left big: Founders Progress + Activity -->
+    <div class="admin-col">
+      <!-- Founders pacing card -->
+      <div class="admin-card">
+        <div class="admin-card-head">
+          <div>
+            <div class="mono text-dim">Founders 200 Pacing</div>
+            <h3 class="display admin-h3">Filling Faster Than Plan</h3>
+          </div>
+          <div class="chip chip-fire mono">On Pace ✓</div>
+        </div>
+
+        <!-- Mini sparkline / bar chart -->
+        <div class="bar-chart">
+          <div class="bar" style="--h: 22%;"><span>Jan</span></div>
+          <div class="bar" style="--h: 38%;"><span>Feb</span></div>
+          <div class="bar" style="--h: 52%;"><span>Mar</span></div>
+          <div class="bar bar-active" style="--h: 76%;"><span>Apr</span></div>
+          <div class="bar bar-projected" style="--h: 88%;"><span>May</span></div>
+          <div class="bar bar-projected" style="--h: 100%;"><span>Jun</span></div>
+        </div>
+        <div class="bar-legend mono">
+          <span><span class="dot dot-fire"></span> Actual</span>
+          <span><span class="dot dot-faint"></span> Projected</span>
+        </div>
+      </div>
+
+      <!-- Recent waitlist signups -->
+      <div class="admin-card">
+        <div class="admin-card-head">
+          <div>
+            <div class="mono text-dim">Recent Waitlist Signups</div>
+            <h3 class="display admin-h3">Last 24 Hours</h3>
+          </div>
+          <a href="#" class="mono text-fire">View All →</a>
+        </div>
+
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Tier</th>
+              <th>Source</th>
+              <th>Time</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Marcus Thompson</strong><br /><span class="mono text-dim">marcus.t@gmail.com</span></td>
+              <td><span class="tier-pill tier-pill-elite">Elite</span></td>
+              <td>Instagram Story</td>
+              <td>2 min ago</td>
+              <td><span class="dot-status dot-status-new">New</span></td>
+            </tr>
+            <tr>
+              <td><strong>Sarah Reichert</strong><br /><span class="mono text-dim">sreichert@outlook.com</span></td>
+              <td><span class="tier-pill tier-pill-plus">Plus</span></td>
+              <td>Direct</td>
+              <td>14 min ago</td>
+              <td><span class="dot-status dot-status-new">New</span></td>
+            </tr>
+            <tr>
+              <td><strong>Devon Kratzer</strong><br /><span class="mono text-dim">devon.k@me.com</span></td>
+              <td><span class="tier-pill tier-pill-plus">Plus</span></td>
+              <td>Referral · M.T.</td>
+              <td>38 min ago</td>
+              <td><span class="dot-status">Confirmed</span></td>
+            </tr>
+            <tr>
+              <td><strong>Allie Brennan</strong><br /><span class="mono text-dim">allie.b@yahoo.com</span></td>
+              <td><span class="tier-pill tier-pill-base">Base</span></td>
+              <td>Giveaway Entry</td>
+              <td>1 hr ago</td>
+              <td><span class="dot-status">Contacted</span></td>
+            </tr>
+            <tr>
+              <td><strong>Jared Stoller</strong><br /><span class="mono text-dim">jstoller@gmail.com</span></td>
+              <td><span class="tier-pill tier-pill-elite">Elite</span></td>
+              <td>Instagram Bio</td>
+              <td>2 hr ago</td>
+              <td><span class="dot-status">Confirmed</span></td>
+            </tr>
+            <tr>
+              <td><strong>Emily Worthington</strong><br /><span class="mono text-dim">emilyw@gmail.com</span></td>
+              <td><span class="tier-pill tier-pill-plus">Plus</span></td>
+              <td>Referral · D.K.</td>
+              <td>3 hr ago</td>
+              <td><span class="dot-status">Confirmed</span></td>
+            </tr>
+            <tr>
+              <td><strong>Tyler Reinhart</strong><br /><span class="mono text-dim">treinhart@me.com</span></td>
+              <td><span class="tier-pill tier-pill-plus">Plus</span></td>
+              <td>Direct</td>
+              <td>5 hr ago</td>
+              <td><span class="dot-status">Confirmed</span></td>
+            </tr>
+            <tr>
+              <td><strong>Hannah Rouch</strong><br /><span class="mono text-dim">hannah.r@gmail.com</span></td>
+              <td><span class="tier-pill tier-pill-elite">Elite</span></td>
+              <td>Founders Page</td>
+              <td>6 hr ago</td>
+              <td><span class="dot-status">Confirmed</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Tier breakdown -->
+      <div class="admin-card">
+        <div class="admin-card-head">
+          <div>
+            <div class="mono text-dim">Founders Tier Mix</div>
+            <h3 class="display admin-h3">153 of 200</h3>
+          </div>
+          <div class="chip mono">Live</div>
+        </div>
+
+        <div class="tier-mix">
+          <div class="mix-row">
+            <div class="mix-label">
+              <span class="tier-pill tier-pill-base">Base</span>
+              <span>$79/mo · 32 members</span>
+            </div>
+            <div class="mix-bar">
+              <div class="mix-fill mix-fill-base" style="width: 21%;"></div>
+            </div>
+            <div class="mix-pct mono">21%</div>
+          </div>
+          <div class="mix-row">
+            <div class="mix-label">
+              <span class="tier-pill tier-pill-plus">Plus</span>
+              <span>$109/mo · 87 members</span>
+            </div>
+            <div class="mix-bar">
+              <div class="mix-fill mix-fill-plus" style="width: 57%;"></div>
+            </div>
+            <div class="mix-pct mono">57%</div>
+          </div>
+          <div class="mix-row">
+            <div class="mix-label">
+              <span class="tier-pill tier-pill-elite">Elite</span>
+              <span>$149/mo · 34 members</span>
+            </div>
+            <div class="mix-bar">
+              <div class="mix-fill mix-fill-elite" style="width: 22%;"></div>
+            </div>
+            <div class="mix-pct mono">22%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right column: Today + Giveaway + Quick actions -->
+    <div class="admin-col">
+      <!-- Today schedule -->
+      <div class="admin-card">
+        <div class="admin-card-head">
+          <div>
+            <div class="mono text-dim">Today · Apr 19</div>
+            <h3 class="display admin-h3">On The Floor</h3>
+          </div>
+          <div class="chip mono">Pre-Open</div>
+        </div>
+
+        <ul class="schedule">
+          <li>
+            <div class="sched-time mono">09:00</div>
+            <div>
+              <div class="h-4">Construction walkthrough</div>
+              <div class="text-soft" style="font-size: 0.875rem;">w/ general contractor + ops lead</div>
+            </div>
+          </li>
+          <li>
+            <div class="sched-time mono">11:30</div>
+            <div>
+              <div class="h-4">Founders pricing strategy call</div>
+              <div class="text-soft" style="font-size: 0.875rem;">w/ Sweet Dreams</div>
+            </div>
+          </li>
+          <li>
+            <div class="sched-time mono">14:00</div>
+            <div>
+              <div class="h-4">Equipment delivery — Eleiko</div>
+              <div class="text-soft" style="font-size: 0.875rem;">4 platforms · 12 racks · 320 plates</div>
+            </div>
+          </li>
+          <li>
+            <div class="sched-time mono">16:30</div>
+            <div>
+              <div class="h-4">Founder dinner — preview night</div>
+              <div class="text-soft" style="font-size: 0.875rem;">28 confirmed · Founders only</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Giveaway snapshot -->
+      <div class="admin-card admin-card-fire">
+        <div class="admin-card-head">
+          <div>
+            <div class="mono text-fire">★ Live Campaign</div>
+            <h3 class="display admin-h3">Wallen Giveaway</h3>
+          </div>
+        </div>
+
+        <div class="giveaway-stats">
+          <div>
+            <div class="kpi-value display" style="font-size: 2rem;">2,142</div>
+            <div class="mono text-dim">Total Entries</div>
+          </div>
+          <div>
+            <div class="kpi-value display" style="font-size: 2rem;">1,876</div>
+            <div class="mono text-dim">Unique Emails</div>
+          </div>
+        </div>
+
+        <div class="divider mt-5" style="background: var(--border-strong);"></div>
+
+        <div class="conv-row mt-5">
+          <span class="mono text-dim">→ Waitlist Conversions</span>
+          <strong>312 (16.6%)</strong>
+        </div>
+        <div class="conv-row">
+          <span class="mono text-dim">→ Instagram Followers Gained</span>
+          <strong>+847</strong>
+        </div>
+        <div class="conv-row">
+          <span class="mono text-dim">→ Closes In</span>
+          <strong>6d 14h 22m</strong>
+        </div>
+
+        <a href="giveaway.html" class="btn btn-fire btn-arrow mt-6" style="width:100%; justify-content:center;">View Public Page</a>
+      </div>
+
+      <!-- Quick actions -->
+      <div class="admin-card">
+        <div class="admin-card-head">
+          <div>
+            <div class="mono text-dim">Quick Actions</div>
+            <h3 class="display admin-h3">Operator Tools</h3>
+          </div>
+        </div>
+
+        <div class="quick-grid">
+          <button class="quick-btn">
+            <span>📥</span>
+            <span>Export Waitlist CSV</span>
+          </button>
+          <button class="quick-btn">
+            <span>✉</span>
+            <span>Email All Founders</span>
+          </button>
+          <button class="quick-btn">
+            <span>🎟</span>
+            <span>Draw Giveaway Winner</span>
+          </button>
+          <button class="quick-btn">
+            <span>📊</span>
+            <span>Generate Investor Report</span>
+          </button>
+          <button class="quick-btn">
+            <span>📅</span>
+            <span>Open Class Builder</span>
+          </button>
+          <button class="quick-btn">
+            <span>⚙</span>
+            <span>Pricing Settings</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom band -->
+  <footer class="admin-foot mono">
+    <span>Demo Environment · No real member data</span>
+    <span>v0.4.2 · Internal build</span>
+    <span><a href="index.html" class="text-fire">← Back to public site</a></span>
+  </footer>
+</main>
+
+<style>
+  /* Override site nav for admin */
+  .admin-body { padding: 0; }
+
+  .admin-body { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+  @media (max-width: 900px) { .admin-body { grid-template-columns: 1fr; } }
+
+  .admin-sidebar {
+    background: var(--bg-1);
+    border-right: 1px solid var(--border);
+    padding: var(--s-6) var(--s-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-7);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+  }
+  @media (max-width: 900px) { .admin-sidebar { position: relative; height: auto; } }
+
+  .admin-brand {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+  }
+  .admin-brand-tag {
+    border: 1px solid var(--fire);
+    color: var(--fire);
+    padding: 2px 6px;
+    font-size: 0.6rem;
+  }
+
+  .admin-nav { display: flex; flex-direction: column; gap: var(--s-6); }
+  .admin-nav-group { display: flex; flex-direction: column; gap: 2px; }
+  .admin-nav-label {
+    color: var(--text-faint);
+    font-size: 0.65rem;
+    margin-bottom: var(--s-2);
+    padding-left: var(--s-3);
+  }
+  .admin-nav-item {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    padding: var(--s-3);
+    font-size: 0.875rem;
+    color: var(--text-soft);
+    border-radius: 0;
+    transition: all var(--dur-fast);
+    border-left: 2px solid transparent;
+  }
+  .admin-nav-item:hover { color: var(--text); background: var(--bg-2); }
+  .admin-nav-item.active { color: var(--fire); border-left-color: var(--fire); background: rgba(255, 56, 25, 0.05); }
+  .admin-nav-item .ic { width: 16px; text-align: center; opacity: 0.7; }
+
+  .admin-sidebar-foot { margin-top: auto; }
+  .admin-user {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    padding: var(--s-3);
+    border: 1px solid var(--border);
+  }
+  .admin-avatar {
+    width: 36px;
+    height: 36px;
+    background: var(--fire);
+    color: var(--bg);
+    display: grid;
+    place-items: center;
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+  }
+
+  /* MAIN */
+  .admin-main { padding: var(--s-6) var(--s-7); display: flex; flex-direction: column; gap: var(--s-6); min-width: 0; }
+
+  .admin-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--s-5);
+    flex-wrap: wrap;
+  }
+  .admin-topbar-actions { display: flex; align-items: center; gap: var(--s-4); }
+  .admin-search {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    background: var(--bg-1);
+    border: 1px solid var(--border);
+    padding: var(--s-3) var(--s-4);
+    min-width: 320px;
+  }
+  .admin-search input { flex: 1; outline: none; font-size: 0.875rem; }
+  .btn-icon {
+    background: var(--bg-1);
+    border: 1px solid var(--border);
+    padding: var(--s-3);
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    position: relative;
+  }
+  .badge {
+    position: absolute;
+    top: -6px; right: -6px;
+    background: var(--fire);
+    color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    padding: 2px 5px;
+    border-radius: 10px;
+  }
+
+  /* KPI Row */
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-4); }
+  @media (max-width: 1100px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .kpi-row { grid-template-columns: 1fr; } }
+  .kpi {
+    border: 1px solid var(--border);
+    background: var(--bg-1);
+    padding: var(--s-5);
+  }
+  .kpi-value {
+    font-size: 2.5rem;
+    line-height: 1;
+    margin-top: var(--s-3);
+    color: var(--text);
+  }
+  .kpi-of { color: var(--text-faint); font-size: 1.5rem; }
+  .kpi-bar {
+    margin-top: var(--s-4);
+    height: 4px;
+    background: var(--surface-2);
+    overflow: hidden;
+  }
+  .kpi-bar-fill { height: 100%; background: var(--fire); }
+  .kpi-meta {
+    margin-top: var(--s-3);
+    font-size: var(--fs-mono);
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+  .trend-up { color: var(--fire); }
+  .trend-down { color: var(--ice); }
+
+  /* Admin Grid */
+  .admin-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: var(--s-6); }
+  @media (max-width: 1100px) { .admin-grid { grid-template-columns: 1fr; } }
+  .admin-col { display: flex; flex-direction: column; gap: var(--s-6); }
+
+  .admin-card {
+    border: 1px solid var(--border);
+    background: var(--bg-1);
+    padding: var(--s-6);
+  }
+  .admin-card-fire {
+    border-color: var(--fire);
+    background: linear-gradient(180deg, rgba(255, 56, 25, 0.04), var(--bg-1));
+  }
+  .admin-card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--s-4); margin-bottom: var(--s-5); flex-wrap: wrap; }
+  .admin-h3 { font-size: 1.5rem; line-height: 1; margin-top: 4px; text-transform: uppercase; }
+
+  .chip {
+    font-size: var(--fs-mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border: 1px solid var(--border-strong);
+    color: var(--text-dim);
+  }
+  .chip-fire { border-color: var(--fire); color: var(--fire); }
+
+  /* Bar chart */
+  .bar-chart {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--s-3);
+    height: 180px;
+    padding-top: var(--s-4);
+    align-items: end;
+  }
+  .bar {
+    position: relative;
+    background: linear-gradient(180deg, var(--fire), var(--fire-deep));
+    height: var(--h);
+    min-height: 8px;
+    transition: opacity var(--dur);
+  }
+  .bar:hover { opacity: 0.85; }
+  .bar-active { background: var(--fire); }
+  .bar-projected { background: repeating-linear-gradient(45deg, var(--surface-2) 0 4px, var(--bg-2) 4px 8px); border: 1px solid var(--border-strong); }
+  .bar > span {
+    position: absolute;
+    bottom: -20px;
+    left: 0; right: 0;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-faint);
+    letter-spacing: 0.1em;
+  }
+  .bar-legend {
+    display: flex;
+    gap: var(--s-5);
+    margin-top: var(--s-7);
+    font-size: var(--fs-mono);
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+  .bar-legend > span { display: flex; align-items: center; gap: var(--s-2); }
+  .dot { display: inline-block; width: 8px; height: 8px; }
+  .dot-fire { background: var(--fire); }
+  .dot-faint { background: var(--surface-2); border: 1px solid var(--border-strong); }
+
+  /* Admin table */
+  .admin-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+  .admin-table thead th {
+    text-align: left;
+    padding: var(--s-3);
+    color: var(--text-dim);
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+  .admin-table tbody tr { border-bottom: 1px solid var(--border); transition: background var(--dur-fast); }
+  .admin-table tbody tr:hover { background: var(--bg-2); }
+  .admin-table td { padding: var(--s-4) var(--s-3); color: var(--text-soft); vertical-align: middle; }
+  .admin-table td strong { color: var(--text); }
+
+  .tier-pill {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: 1px solid currentColor;
+  }
+  .tier-pill-base { color: var(--text-dim); }
+  .tier-pill-plus { color: var(--gold); }
+  .tier-pill-elite { color: var(--fire); }
+
+  .dot-status {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding-left: 14px;
+    position: relative;
+  }
+  .dot-status::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--text-dim);
+  }
+  .dot-status-new { color: var(--fire); }
+  .dot-status-new::before { background: var(--fire); box-shadow: 0 0 0 4px rgba(255, 56, 25, 0.15); }
+
+  /* Tier mix */
+  .tier-mix { display: flex; flex-direction: column; gap: var(--s-5); }
+  .mix-row { display: grid; grid-template-columns: 220px 1fr 50px; gap: var(--s-4); align-items: center; }
+  @media (max-width: 700px) { .mix-row { grid-template-columns: 1fr; gap: var(--s-2); } }
+  .mix-label { display: flex; align-items: center; gap: var(--s-3); font-size: 0.875rem; color: var(--text-soft); }
+  .mix-bar { height: 8px; background: var(--surface-2); }
+  .mix-fill { height: 100%; }
+  .mix-fill-base { background: var(--text-dim); }
+  .mix-fill-plus { background: var(--gold); }
+  .mix-fill-elite { background: var(--fire); }
+  .mix-pct { color: var(--text); text-align: right; }
+
+  /* Schedule */
+  .schedule { display: flex; flex-direction: column; gap: var(--s-3); }
+  .schedule li { display: grid; grid-template-columns: 60px 1fr; gap: var(--s-4); padding: var(--s-3) 0; border-bottom: 1px solid var(--border); }
+  .schedule li:last-child { border-bottom: 0; }
+  .sched-time { color: var(--fire); font-size: 0.875rem; padding-top: 4px; }
+
+  /* Giveaway */
+  .giveaway-stats { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); }
+  .conv-row { display: flex; justify-content: space-between; align-items: center; padding: var(--s-3) 0; border-bottom: 1px dashed var(--border); font-size: 0.875rem; }
+  .conv-row:last-of-type { border-bottom: 0; }
+
+  /* Quick actions */
+  .quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-3); }
+  .quick-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    padding: var(--s-4);
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    color: var(--text);
+    font-size: 0.8125rem;
+    text-align: left;
+    transition: all var(--dur-fast);
+  }
+  .quick-btn:hover { border-color: var(--fire); color: var(--fire); transform: translateY(-2px); }
+
+  /* Footer */
+  .admin-foot {
+    margin-top: var(--s-6);
+    padding: var(--s-5) 0;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--s-4);
+    color: var(--text-faint);
+    font-size: var(--fs-mono);
+    letter-spacing: 0.18em;
+  }
+  .admin-foot a { color: var(--fire); }
+</style>
+
+<script src="scripts/main.js" defer></script>
+</body>
+</html>

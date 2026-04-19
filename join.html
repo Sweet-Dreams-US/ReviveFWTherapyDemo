@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Join the Founders 200 — REVIVE Fort Wayne</title>
+<meta name="description" content="Lock in Founders pricing for life. Limited to 200 spots. The most exclusive cohort Fort Wayne wellness has ever seen." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=Manrope:wght@200;300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles/globals.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230B0807'/%3E%3Ctext x='50' y='72' text-anchor='middle' font-family='Anton,Impact' font-size='80' fill='%23FF3819'%3ER%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-brand">REVIVE</a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="about.html" class="nav-link">Story</a>
+    <a href="experience.html" class="nav-link">Experience</a>
+    <a href="pricing.html" class="nav-link">Membership</a>
+    <a href="giveaway.html" class="nav-link">Giveaway</a>
+  </div>
+  <a href="join.html" class="nav-cta" aria-current="page">Join Waitlist <span aria-hidden="true">→</span></a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Split layout -->
+<main class="join-page">
+  <!-- LEFT — image + manifesto -->
+  <aside class="join-aside">
+    <div class="join-aside-bg">
+      <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=1600&q=80" alt="Atmospheric gym interior" />
+    </div>
+    <div class="join-aside-content">
+      <span class="eyebrow">— The Founders 200 —</span>
+      <h1 class="display mt-4" style="font-size: clamp(3rem, 6vw, 5.5rem);">
+        Be one of <br /><span class="text-fire">200.</span>
+      </h1>
+      <p class="lead mt-6 text-soft" style="max-width:none;">
+        Founders pricing locked for life. First in for opening week. Your name on the wall. Forever-access to closed-door member events.
+      </p>
+      <div class="aside-stats mt-8">
+        <div>
+          <div class="display text-fire" style="font-size: 4rem; line-height: 1;">153</div>
+          <div class="mono text-dim mt-2">Spots Claimed</div>
+        </div>
+        <div>
+          <div class="display" style="font-size: 4rem; line-height: 1;">47</div>
+          <div class="mono text-dim mt-2">Spots Remaining</div>
+        </div>
+      </div>
+      <div class="aside-progress mt-6">
+        <div class="aside-progress-bar" style="--p: 76%;"></div>
+        <div class="mono text-faint mt-3">76% claimed · Closes when full</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- RIGHT — form -->
+  <section class="join-form-wrap form-wrap">
+    <div style="max-width: 540px; width: 100%;">
+      <span class="eyebrow">/01 — Reserve Your Spot</span>
+      <h2 class="h-2 mt-4">Step in.<br />Lock in.</h2>
+      <p class="text-soft mt-4">No payment today. We'll reach out within 48 hours to confirm tier + activate your founders rate before doors open.</p>
+
+      <form class="join-form mt-8" data-demo>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="label" for="firstName">First Name</label>
+            <input class="input" type="text" id="firstName" name="firstName" required />
+          </div>
+          <div class="form-group">
+            <label class="label" for="lastName">Last Name</label>
+            <input class="input" type="text" id="lastName" name="lastName" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="label" for="email">Email</label>
+          <input class="input" type="email" id="email" name="email" required />
+        </div>
+
+        <div class="form-group">
+          <label class="label" for="phone">Phone</label>
+          <input class="input" type="tel" id="phone" name="phone" placeholder="optional" />
+        </div>
+
+        <div class="form-group">
+          <label class="label">Preferred Tier</label>
+          <div class="tier-select">
+            <label class="tier-radio">
+              <input type="radio" name="tier" value="base" />
+              <div>
+                <div class="tier-radio-name">BASE</div>
+                <div class="tier-radio-price">$79/mo</div>
+              </div>
+            </label>
+            <label class="tier-radio">
+              <input type="radio" name="tier" value="plus" checked />
+              <div>
+                <div class="tier-radio-name">PLUS <span class="text-gold mono" style="font-size: 0.65rem;">★ Popular</span></div>
+                <div class="tier-radio-price">$109/mo</div>
+              </div>
+            </label>
+            <label class="tier-radio">
+              <input type="radio" name="tier" value="elite" />
+              <div>
+                <div class="tier-radio-name">ELITE</div>
+                <div class="tier-radio-price">$149/mo</div>
+              </div>
+            </label>
+            <label class="tier-radio">
+              <input type="radio" name="tier" value="undecided" />
+              <div>
+                <div class="tier-radio-name">UNDECIDED</div>
+                <div class="tier-radio-price">Help me choose</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="label" for="goal">What brings you to Revive?</label>
+          <textarea class="textarea" id="goal" name="goal" rows="3" placeholder="Optional — recovery, run club, training again..."></textarea>
+        </div>
+
+        <label class="checkbox-row">
+          <input type="checkbox" name="updates" checked />
+          <span>Send me opening updates and member events. (No spam, max 2/month.)</span>
+        </label>
+
+        <button class="btn btn-primary btn-arrow mt-6" style="width:100%; justify-content:center;" type="submit">Reserve My Founders Spot</button>
+
+        <p class="mono text-faint mt-4 center">No payment due today · Cancel anytime</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<!-- Why this matters -->
+<section class="section" style="border-top: 1px solid var(--border);">
+  <div class="wrap">
+    <div data-reveal>
+      <span class="eyebrow">Why Reserve Now</span>
+      <h2 class="h-1 mt-4">Three reasons.<br /><span class="editorial text-cream">All real.</span></h2>
+    </div>
+    <div class="grid grid-3 mt-8 reasons">
+      <div class="reason" data-reveal>
+        <div class="reason-num">/01</div>
+        <h3 class="h-3 mt-3">Pricing locked.</h3>
+        <p class="text-soft mt-4">Standard rates start at $89/$139/$179. Founders save $10–$30/mo — for life. Membership math: 5 years × $30/mo = $1,800 saved.</p>
+      </div>
+      <div class="reason" data-reveal data-delay="1">
+        <div class="reason-num">/02</div>
+        <h3 class="h-3 mt-3">Guaranteed entry.</h3>
+        <p class="text-soft mt-4">Once we hit 200, we close enrollment until the standard waitlist opens 9/1. Don't bet on getting in later.</p>
+      </div>
+      <div class="reason" data-reveal data-delay="2">
+        <div class="reason-num">/03</div>
+        <h3 class="h-3 mt-3">A real cohort.</h3>
+        <p class="text-soft mt-4">200 founders. A name wall. Quarterly events. Run club. Real community — not a "thanks for your business" email.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-brand">REVIVE<span class="text-fire">.</span></div>
+    <div class="footer-grid mt-8">
+      <div class="footer-col"><h4>Visit</h4><p class="text-soft" style="line-height:1.6;">Coming Soon<br />Fort Wayne, IN<br /><span class="mono text-dim mt-3" style="display:inline-block;">Doors open 08.01.2026</span></p></div>
+      <div class="footer-col"><h4>Explore</h4><ul><li><a href="about.html">Story</a></li><li><a href="experience.html">Experience</a></li><li><a href="pricing.html">Membership</a></li><li><a href="giveaway.html">Giveaway</a></li></ul></div>
+      <div class="footer-col"><h4>Join</h4><ul><li><a href="join.html">Founders Waitlist</a></li><li><a href="admin.html">Member Portal</a></li></ul></div>
+      <div class="footer-col"><h4>Follow</h4><ul><li><a href="https://instagram.com/revivefitnessfw" target="_blank" rel="noopener">Instagram</a></li><li><a href="mailto:hello@revivefw.com">hello@revivefw.com</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© <span data-year>2026</span> Revive Fitness &amp; Recovery</span><span>Site by <a href="https://sweetdreamsmusic.com" target="_blank" rel="noopener">Sweet Dreams Studios</a></span></div>
+  </div>
+</footer>
+
+<style>
+  .join-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    padding-top: 80px;
+  }
+  @media (max-width: 900px) { .join-page { grid-template-columns: 1fr; } }
+
+  .join-aside {
+    position: relative;
+    overflow: hidden;
+    padding: var(--s-9) var(--gutter);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 600px;
+  }
+  .join-aside-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .join-aside-bg img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.1) brightness(0.4); }
+  .join-aside-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(11,8,7,0.7) 0%, rgba(11,8,7,0.85) 100%);
+  }
+  .join-aside-content { position: relative; z-index: 1; max-width: 540px; }
+
+  .aside-stats { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-6); }
+
+  .aside-progress {
+    height: 6px;
+    background: var(--surface-2);
+    position: relative;
+  }
+  .aside-progress-bar {
+    height: 100%;
+    width: var(--p, 76%);
+    background: var(--fire);
+    box-shadow: 0 0 24px var(--fire-glow);
+  }
+
+  .join-form-wrap {
+    padding: var(--s-9) var(--gutter);
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .join-form { display: flex; flex-direction: column; gap: var(--s-6); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); }
+  @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+
+  .tier-select {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-3);
+    margin-top: var(--s-3);
+  }
+  .tier-radio {
+    border: 1px solid var(--border);
+    padding: var(--s-4);
+    cursor: pointer;
+    transition: all var(--dur-fast);
+    position: relative;
+    background: var(--bg);
+  }
+  .tier-radio:hover { border-color: var(--border-strong); }
+  .tier-radio input { position: absolute; opacity: 0; pointer-events: none; }
+  .tier-radio:has(input:checked) { border-color: var(--fire); background: rgba(255, 56, 25, 0.05); }
+  .tier-radio-name {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .tier-radio-price {
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  .form-success.show { animation: fadeUp 0.8s var(--ease-out) both; }
+
+  .reason {
+    border-left: 1px solid var(--border);
+    padding-left: var(--s-6);
+  }
+  .reason-num {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: var(--fire);
+    line-height: 1;
+  }
+</style>
+
+<script src="scripts/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Membership — REVIVE Fort Wayne</title>
+<meta name="description" content="Three tiers, one philosophy. Founding 200 pricing locked for life. Choose Base, Plus, or Elite." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=Manrope:wght@200;300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles/globals.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230B0807'/%3E%3Ctext x='50' y='72' text-anchor='middle' font-family='Anton,Impact' font-size='80' fill='%23FF3819'%3ER%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-brand">REVIVE</a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="about.html" class="nav-link">Story</a>
+    <a href="experience.html" class="nav-link">Experience</a>
+    <a href="pricing.html" class="nav-link" aria-current="page">Membership</a>
+    <a href="giveaway.html" class="nav-link">Giveaway</a>
+  </div>
+  <a href="join.html" class="nav-cta">Join Waitlist <span aria-hidden="true">→</span></a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Page header -->
+<section class="page-header">
+  <div class="wrap">
+    <div class="grid-12">
+      <div style="grid-column: 1 / span 6;" data-reveal>
+        <span class="eyebrow">Membership</span>
+        <h1 class="display fade-up" style="font-size: clamp(3.5rem, 11vw, 10rem); margin-top: 1.5rem;">
+          Choose<br /><span class="editorial text-cream">your reset.</span>
+        </h1>
+      </div>
+      <div style="grid-column: 8 / -1; align-self:end;" data-reveal data-delay="2">
+        <p class="lead">Three tiers. One philosophy. The Founding 200 lock in pricing — for life. After cap, standard rates apply. Forever.</p>
+        <div class="founders-banner mt-6">
+          <div>
+            <div class="mono text-fire">Founders 200 — 47 spots remaining</div>
+            <div class="text-soft mt-2">Lock in Founding pricing before doors open 08.01.2026.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing toggle -->
+<section class="section section-tight">
+  <div class="wrap" style="text-align:center;">
+    <div class="price-toggle" data-price-toggle>
+      <button class="active" data-mode="founders">Founders Pricing</button>
+      <button data-mode="standard">Standard</button>
+    </div>
+    <p class="mono text-faint mt-4" data-price-mode>Founding Member</p>
+  </div>
+</section>
+
+<!-- Tier Cards -->
+<section class="section section-tight">
+  <div class="wrap">
+    <div class="grid grid-3 tiers">
+
+      <!-- BASE -->
+      <article class="tier" data-reveal>
+        <header class="tier-head">
+          <div class="mono text-dim">Tier 01</div>
+          <h2 class="display tier-name">Base</h2>
+          <p class="text-soft mt-3">For the lifters. Train hard. Skip the rest.</p>
+        </header>
+        <div class="tier-price-row">
+          <div class="tier-price">
+            <span class="dollar">$</span>
+            <span data-price data-price-founders="79" data-price-standard="89">79</span>
+          </div>
+          <div class="mono text-dim">/month</div>
+        </div>
+        <a href="join.html" class="btn btn-arrow tier-cta">Lock in Base</a>
+        <ul class="tier-features">
+          <li class="feat-yes">Full strength + cardio floor</li>
+          <li class="feat-yes">Performance turf access</li>
+          <li class="feat-yes">24/7 member access</li>
+          <li class="feat-yes">Locker + amenity bar</li>
+          <li class="feat-no">Recovery sessions</li>
+          <li class="feat-no">Group classes</li>
+          <li class="feat-no">Priority booking</li>
+          <li class="feat-no">Guest passes</li>
+        </ul>
+      </article>
+
+      <!-- PLUS -->
+      <article class="tier tier-popular" data-reveal data-delay="1">
+        <div class="popular-tag">Most chosen</div>
+        <header class="tier-head">
+          <div class="mono" style="color: var(--gold);">Tier 02</div>
+          <h2 class="display tier-name">Plus</h2>
+          <p class="text-soft mt-3">The complete loop. Train + recover, every week.</p>
+        </header>
+        <div class="tier-price-row">
+          <div class="tier-price">
+            <span class="dollar">$</span>
+            <span data-price data-price-founders="109" data-price-standard="139">109</span>
+          </div>
+          <div class="mono text-dim">/month</div>
+        </div>
+        <a href="join.html" class="btn btn-primary btn-arrow tier-cta">Lock in Plus</a>
+        <ul class="tier-features">
+          <li class="feat-yes">Everything in Base</li>
+          <li class="feat-yes">6 recovery sessions / month</li>
+          <li class="feat-yes">Cold plunge + sauna + red light</li>
+          <li class="feat-yes">Normatec compression</li>
+          <li class="feat-yes">1 group class / week</li>
+          <li class="feat-yes">24-hour booking window</li>
+          <li class="feat-no">Unlimited recovery</li>
+          <li class="feat-no">Private suite booking</li>
+        </ul>
+      </article>
+
+      <!-- ELITE -->
+      <article class="tier tier-elite" data-reveal data-delay="2">
+        <header class="tier-head">
+          <div class="mono text-dim">Tier 03</div>
+          <h2 class="display tier-name">Elite</h2>
+          <p class="text-soft mt-3">Unlimited. Priority. No limits.</p>
+        </header>
+        <div class="tier-price-row">
+          <div class="tier-price">
+            <span class="dollar">$</span>
+            <span data-price data-price-founders="149" data-price-standard="179">149</span>
+          </div>
+          <div class="mono text-dim">/month</div>
+        </div>
+        <a href="join.html" class="btn btn-fire btn-arrow tier-cta">Lock in Elite</a>
+        <ul class="tier-features">
+          <li class="feat-yes">Everything in Plus</li>
+          <li class="feat-yes">Unlimited recovery sessions</li>
+          <li class="feat-yes">Unlimited group classes</li>
+          <li class="feat-yes">72-hour priority booking</li>
+          <li class="feat-yes">Priority access to peak classes</li>
+          <li class="feat-yes">2 guest passes / month</li>
+          <li class="feat-yes">1 private suite booking / yr</li>
+          <li class="feat-yes-gold">Founders Events access</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Why founders -->
+<section class="section">
+  <div class="wrap">
+    <div class="grid-12">
+      <div style="grid-column: 1 / span 5;" data-reveal>
+        <span class="eyebrow">Why Founders</span>
+        <h2 class="h-1 mt-4">Locked in.<br /><span class="editorial text-cream">For life.</span></h2>
+      </div>
+      <div style="grid-column: 7 / -1;">
+        <p class="lead" data-reveal>
+          The Founding 200 isn't a discount. It's a contract. The pricing you sign up at is the pricing you pay — forever. As Revive grows, prices rise. Founders don't.
+        </p>
+        <div class="grid grid-2 mt-8">
+          <div class="founder-perk" data-reveal>
+            <div class="mono text-fire">/01</div>
+            <h4 class="h-4 mt-3">Pricing locked for life</h4>
+            <p class="text-soft mt-3">As long as your membership is active, you keep your founding rate. Forever. Period.</p>
+          </div>
+          <div class="founder-perk" data-reveal data-delay="1">
+            <div class="mono text-fire">/02</div>
+            <h4 class="h-4 mt-3">First in line</h4>
+            <p class="text-soft mt-3">Founders get first booking on opening week. First seat at member events. First everything.</p>
+          </div>
+          <div class="founder-perk" data-reveal data-delay="2">
+            <div class="mono text-fire">/03</div>
+            <h4 class="h-4 mt-3">Founder-only events</h4>
+            <p class="text-soft mt-3">Quarterly closed-door dinners, training pop-ups with guest coaches, brand drops.</p>
+          </div>
+          <div class="founder-perk" data-reveal data-delay="3">
+            <div class="mono text-fire">/04</div>
+            <h4 class="h-4 mt-3">Your name on the wall</h4>
+            <p class="text-soft mt-3">Literally. Every Founding 200 member gets a permanent place on the founders wall.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Comparison Table -->
+<section class="section" style="background: var(--bg-1); border-block: 1px solid var(--border);">
+  <div class="wrap">
+    <div data-reveal>
+      <span class="eyebrow">Compare</span>
+      <h2 class="h-1 mt-4">All the details.<br /><span class="editorial text-cream">Side by side.</span></h2>
+    </div>
+
+    <div class="compare-wrap mt-8">
+      <table class="compare">
+        <thead>
+          <tr>
+            <th></th>
+            <th><span class="mono text-dim">Tier 01</span><br /><span class="display">Base</span></th>
+            <th class="popular-th"><span class="mono" style="color: var(--gold);">Tier 02 ★</span><br /><span class="display">Plus</span></th>
+            <th><span class="mono text-dim">Tier 03</span><br /><span class="display">Elite</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th colspan="4" class="row-section">Training</th></tr>
+          <tr><td>Strength + cardio floor</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td>Performance turf</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td>24/7 floor access</td><td>✓</td><td>✓</td><td>✓</td></tr>
+
+          <tr><th colspan="4" class="row-section">Recovery</th></tr>
+          <tr><td>Cold plunge + sauna + red light</td><td>—</td><td>6 / mo</td><td>Unlimited</td></tr>
+          <tr><td>Normatec compression</td><td>—</td><td>✓</td><td>✓</td></tr>
+          <tr><td>Booking window</td><td>—</td><td>24 hr</td><td>72 hr</td></tr>
+          <tr><td>Private recovery suite</td><td>—</td><td>—</td><td>1 / year</td></tr>
+
+          <tr><th colspan="4" class="row-section">Community</th></tr>
+          <tr><td>Run club</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td>Group classes</td><td>—</td><td>1 / wk</td><td>Unlimited</td></tr>
+          <tr><td>Peak class priority</td><td>—</td><td>—</td><td>✓</td></tr>
+          <tr><td>Member events</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td>Founders quarterly events</td><td>—</td><td>—</td><td>✓</td></tr>
+
+          <tr><th colspan="4" class="row-section">Extras</th></tr>
+          <tr><td>Guest passes</td><td>—</td><td>—</td><td>2 / mo</td></tr>
+          <tr><td>Locker + amenity bar</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td>Member app</td><td>✓</td><td>✓</td><td>✓</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>Questions</span>
+    <h2 class="h-1 mt-4" data-reveal data-delay="1">The fine print.</h2>
+
+    <div class="faq mt-8">
+      <details class="faq-item" data-reveal>
+        <summary>What does "Founding 200" actually mean?</summary>
+        <p>The first 200 members at Revive lock in Founding pricing — for life. As long as your membership is active, you never pay standard rates. Founders also get first access to events, first booking on opening week, and a permanent place on our founders wall.</p>
+      </details>
+      <details class="faq-item" data-reveal data-delay="1">
+        <summary>When do you actually open?</summary>
+        <p>August 1, 2026. We're targeting a hard open with a soft-launch week for Founding members the week prior. You'll get notified by email and SMS.</p>
+      </details>
+      <details class="faq-item" data-reveal data-delay="2">
+        <summary>Is there a contract or commitment?</summary>
+        <p>No long-term contract. Memberships are month-to-month. Cancel any time, no fees. Founders pricing only stays active while your membership is uninterrupted.</p>
+      </details>
+      <details class="faq-item" data-reveal data-delay="3">
+        <summary>How do I book recovery sessions?</summary>
+        <p>Through the Revive member app or web portal. Plus members get a 24-hour booking window. Elite gets 72-hour priority — book your week's recovery on Friday and walk in at the time you want.</p>
+      </details>
+      <details class="faq-item" data-reveal data-delay="4">
+        <summary>Can I bring a guest?</summary>
+        <p>Elite members get 2 guest passes per month. Plus and Base members can bring guests for $25/visit. Run club is open to anyone — even non-members — twice a week.</p>
+      </details>
+      <details class="faq-item" data-reveal data-delay="5">
+        <summary>What if I want to upgrade later?</summary>
+        <p>Easy — upgrade anytime through the member app. Your founders pricing scales: if you joined as a Founder Base ($79), upgrading to Plus locks in Founder Plus pricing ($109), not standard.</p>
+      </details>
+      <details class="faq-item" data-reveal data-delay="5">
+        <summary>What happens after the Founding 200 fills?</summary>
+        <p>Standard pricing applies — $89/$139/$179. New members can join the standard membership, but the founders rate is closed permanently. We won't reopen it. Ever.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section center" style="position:relative;">
+  <div style="position:absolute; inset:0; background: radial-gradient(ellipse at center, var(--fire-glow), transparent 60%); filter: blur(60px); pointer-events:none;"></div>
+  <div class="wrap" style="position:relative;">
+    <h2 class="h-mega" data-reveal>Lock it<br /><span class="editorial text-cream">in.</span></h2>
+    <p class="lead mt-6" style="margin-inline:auto;" data-reveal data-delay="1">
+      47 founding spots remaining. When they're gone, they're gone — for good.
+    </p>
+    <div class="mt-8 flex gap-4" style="justify-content:center; flex-wrap:wrap;" data-reveal data-delay="2">
+      <a href="join.html" class="btn btn-primary btn-arrow">Claim a Founding Spot</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-brand">REVIVE<span class="text-fire">.</span></div>
+    <div class="footer-grid mt-8">
+      <div class="footer-col"><h4>Visit</h4><p class="text-soft" style="line-height:1.6;">Coming Soon<br />Fort Wayne, IN<br /><span class="mono text-dim mt-3" style="display:inline-block;">Doors open 08.01.2026</span></p></div>
+      <div class="footer-col"><h4>Explore</h4><ul><li><a href="about.html">Story</a></li><li><a href="experience.html">Experience</a></li><li><a href="pricing.html">Membership</a></li><li><a href="giveaway.html">Giveaway</a></li></ul></div>
+      <div class="footer-col"><h4>Join</h4><ul><li><a href="join.html">Founders Waitlist</a></li><li><a href="admin.html">Member Portal</a></li></ul></div>
+      <div class="footer-col"><h4>Follow</h4><ul><li><a href="https://instagram.com/revivefitnessfw" target="_blank" rel="noopener">Instagram</a></li><li><a href="mailto:hello@revivefw.com">hello@revivefw.com</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© <span data-year>2026</span> Revive Fitness &amp; Recovery</span><span>Site by <a href="https://sweetdreamsmusic.com" target="_blank" rel="noopener">Sweet Dreams Studios</a></span></div>
+  </div>
+</footer>
+
+<style>
+  .founders-banner {
+    border: 1px solid var(--fire);
+    background: linear-gradient(135deg, rgba(255, 56, 25, 0.08), transparent);
+    padding: var(--s-5);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-5);
+  }
+
+  .price-toggle {
+    display: inline-flex;
+    border: 1px solid var(--border-strong);
+    padding: 4px;
+    background: var(--bg-1);
+  }
+  .price-toggle button {
+    padding: 0.7rem 1.4rem;
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    transition: all var(--dur-fast);
+  }
+  .price-toggle button.active { background: var(--fire); color: var(--bg); }
+
+  .tiers { gap: var(--s-5); }
+  .tier {
+    border: 1px solid var(--border);
+    background: var(--bg);
+    padding: var(--s-7);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-6);
+    position: relative;
+    transition: all var(--dur);
+  }
+  .tier:hover { transform: translateY(-4px); }
+  .tier-popular {
+    border-color: var(--gold);
+    background: linear-gradient(180deg, rgba(201, 164, 81, 0.04), var(--bg));
+  }
+  .tier-elite {
+    border-color: var(--border-strong);
+    background: linear-gradient(180deg, rgba(255, 56, 25, 0.03), var(--bg));
+  }
+  .popular-tag {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    background: var(--gold);
+    color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono);
+    letter-spacing: 0.2em;
+    padding: 6px 12px;
+    text-transform: uppercase;
+  }
+  .tier-head { border-bottom: 1px solid var(--border); padding-bottom: var(--s-5); }
+  .tier-name { font-size: clamp(2.5rem, 4vw, 3.5rem); margin-top: var(--s-3); }
+  .tier-price-row { display: flex; align-items: baseline; gap: var(--s-3); }
+  .tier-price {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 7vw, 6rem);
+    line-height: 0.9;
+    color: var(--text);
+    display: flex;
+    align-items: flex-start;
+  }
+  .tier-price .dollar {
+    font-size: 0.45em;
+    margin-top: 0.4em;
+    color: var(--text-dim);
+    margin-right: 4px;
+  }
+  .tier-cta { width: 100%; justify-content: center; }
+  .tier-features { display: flex; flex-direction: column; gap: var(--s-3); border-top: 1px solid var(--border); padding-top: var(--s-5); margin-top: auto; }
+  .tier-features li {
+    font-size: var(--fs-sm);
+    color: var(--text-soft);
+    padding-left: var(--s-5);
+    position: relative;
+    line-height: 1.5;
+  }
+  .tier-features li::before {
+    position: absolute;
+    left: 0;
+    font-family: var(--font-mono);
+    font-weight: 500;
+  }
+  .feat-yes::before { content: '+'; color: var(--fire); }
+  .feat-yes-gold::before { content: '★'; color: var(--gold); }
+  .feat-yes-gold { color: var(--gold) !important; }
+  .feat-no::before { content: '–'; color: var(--text-faint); }
+  .feat-no { color: var(--text-faint); text-decoration: line-through; }
+
+  .founder-perk {
+    border-left: 1px solid var(--border);
+    padding: var(--s-5);
+    padding-left: var(--s-6);
+    background: var(--bg-1);
+  }
+
+  .compare-wrap { overflow-x: auto; }
+  .compare {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--border);
+  }
+  .compare th, .compare td {
+    padding: var(--s-4) var(--s-5);
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    font-size: var(--fs-sm);
+  }
+  .compare th:last-child, .compare td:last-child { border-right: 0; }
+  .compare thead th {
+    padding: var(--s-6) var(--s-5);
+    background: var(--bg-2);
+    font-weight: 400;
+    line-height: 1.2;
+  }
+  .compare thead th .display { font-size: 2rem; display: block; margin-top: 4px; }
+  .compare .popular-th { background: linear-gradient(180deg, rgba(201, 164, 81, 0.06), var(--bg-2)); }
+  .compare tbody th {
+    background: var(--bg-2);
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--fire);
+  }
+  .compare td:first-child { color: var(--text-soft); }
+  .compare td:not(:first-child) {
+    text-align: center;
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+  }
+
+  .faq { display: flex; flex-direction: column; gap: var(--s-2); }
+  .faq-item {
+    border: 1px solid var(--border);
+    background: var(--bg);
+    transition: border-color var(--dur);
+  }
+  .faq-item:hover { border-color: var(--border-strong); }
+  .faq-item[open] { border-color: var(--fire); }
+  .faq-item summary {
+    list-style: none;
+    cursor: pointer;
+    padding: var(--s-5) var(--s-6);
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+    text-transform: uppercase;
+    color: var(--text);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--s-5);
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: '+';
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--fire);
+    transition: transform var(--dur);
+  }
+  .faq-item[open] summary::after { content: '–'; }
+  .faq-item p {
+    padding: 0 var(--s-6) var(--s-6);
+    color: var(--text-soft);
+    max-width: 75ch;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 800px) {
+    .founders-banner { flex-direction: column; align-items: flex-start; }
+    .grid-12 > div { grid-column: 1 / -1 !important; }
+  }
+</style>
+
+<script src="scripts/main.js" defer></script>
+</body>
+</html>
