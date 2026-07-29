@@ -39,17 +39,16 @@
     <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=2400&q=80" alt="Atmospheric gym interior" loading="eager" />
   </div>
 
-  <div class="wrap" style="position:relative; z-index:2; flex:1; display:flex; flex-direction:column; justify-content:flex-end; padding-bottom:8rem; padding-top:10rem;">
-    <div style="max-width: 1200px;">
-      <div class="eyebrow fade-up" style="animation-delay:0.2s;">Fort Wayne, Indiana &nbsp;/&nbsp; Opening Soon</div>
-      <h1 class="display fade-up" style="font-size: clamp(4.5rem, 16vw, 16rem); margin-top: 1.5rem; animation-delay:0.4s;">
-        Train.<br />
-        Recover.<br />
-        <span class="text-fire"><span class="brand">Revive</span>.</span>
-      </h1>
-    </div>
+  <div class="wrap hero-inner">
+    <div class="eyebrow fade-up" style="animation-delay:0.2s;">Fort Wayne, Indiana &nbsp;/&nbsp; Opening Soon</div>
 
-    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); align-items:end; margin-top: 4rem;" class="hero-bottom">
+    <h1 class="display hero-title fade-up" style="animation-delay:0.4s;">
+      Train.<br />
+      Recover.<br />
+      <span class="text-fire"><span class="brand">Revive</span>.</span>
+    </h1>
+
+    <div class="hero-bottom">
       <p class="lead fade-up" style="animation-delay:0.7s;">
         Fort Wayne was missing <span class="editorial text-cream" style="font-size:1.15em;">the experience.</span> So we built it. A premium gym engineered for serious training — paired with recovery rituals you only find in the country's top facilities.
       </p>
@@ -321,7 +320,7 @@
 </section>
 
 <!-- FINAL CTA -->
-<section class="section" style="padding: clamp(6rem, 12vw, 12rem) 0; position:relative; overflow:hidden;">
+<section class="section" style="position:relative; overflow:hidden;">
   <div style="position:absolute; inset:0; background: radial-gradient(ellipse at center, var(--fire-glow), transparent 60%); filter: blur(40px); pointer-events:none;"></div>
   <div class="wrap center" style="position:relative;">
     <span class="eyebrow" data-reveal>006 — The Ask</span>
@@ -348,7 +347,7 @@
       <div class="footer-col">
         <h4>Visit</h4>
         <p class="text-soft" style="line-height:1.6;">
-          Coming Soon<br />
+          Opening August 2026<br />
           Fort Wayne, IN
         </p>
       </div>
@@ -374,13 +373,13 @@
         <ul>
           <li><a href="https://instagram.com/revivefitnessfw" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="#">TikTok</a></li>
-          <li><a href="mailto:hello@revivefw.com">hello@revivefw.com</a></li>
+          
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <span>© 2026 <span class="brand">Revive</span> Fitness &amp; Recovery</span>
-      <span>Site by <a href="https://sweetdreamsmusic.com" target="_blank" rel="noopener">Sweet Dreams Studios</a></span>
+      <span>Site by <a href="https://sweetdreamsmusic.com" target="_blank" rel="noopener" class="credit">Sweet Dreams US</a></span>
     </div>
   </div>
 </footer>
@@ -405,7 +404,7 @@
     z-index: 2;
   }
   .pillar-image {
-    height: 280px;
+    height: clamp(150px, 22vh, 280px);
     overflow: hidden;
     position: relative;
   }
@@ -423,7 +422,7 @@
     transition: transform 1.2s var(--ease-out);
   }
   .pillar:hover .pillar-image img { transform: scale(1.06); }
-  .pillar-body { padding: var(--s-7); padding-top: var(--s-5); }
+  .pillar-body { padding: clamp(1.25rem, 3vh, 3rem); padding-top: var(--s-5); }
   .pillar-list { display: flex; flex-direction: column; gap: var(--s-3); }
   .pillar-list li {
     font-family: var(--font-mono);
@@ -448,9 +447,9 @@
   .inside-grid { gap: 1px; background: var(--border); border: 1px solid var(--border); }
   .inside-card {
     background: var(--bg-1);
-    padding: var(--s-7);
+    padding: clamp(1.25rem, 3vh, 3rem);
     transition: background var(--dur);
-    min-height: 220px;
+    min-height: clamp(120px, 15vh, 220px);
   }
   .inside-card:hover { background: var(--bg-2); }
   .inside-num {
@@ -492,8 +491,6 @@
   .strike { color: var(--text-faint); text-decoration: line-through; font-size: 0.7em; }
 
   @media (max-width: 800px) {
-    .hero-bottom { grid-template-columns: 1fr !important; gap: var(--s-6) !important; }
-    .hero-bottom > div:last-child { justify-self: stretch !important; }
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
   }
 </style>

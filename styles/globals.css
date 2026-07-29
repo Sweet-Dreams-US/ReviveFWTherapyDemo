@@ -56,10 +56,12 @@ ul, ol { list-style: none; }
   --s-5: 1.5rem;
   --s-6: 2rem;
   --s-7: 3rem;
-  --s-8: 4rem;
-  --s-9: 6rem;
-  --s-10: 8rem;
-  --s-11: 12rem;
+  /* Large steps are capped against viewport height so vertical rhythm
+     compresses on short laptop screens instead of overflowing the fold. */
+  --s-8: min(4rem, 6vh);
+  --s-9: min(6rem, 8vh);
+  --s-10: min(8rem, 10vh);
+  --s-11: min(12rem, 14vh);
 
   /* Type scale */
   --fs-mono: 0.6875rem;
@@ -139,9 +141,11 @@ body::before {
 
 h1, h2, h3, h4 { font-weight: 400; }
 
-.h-mega { font-family: var(--font-display); font-size: clamp(4rem, 16vw, 14rem); line-height: 0.86; letter-spacing: -0.015em; text-transform: uppercase; }
-.h-1   { font-family: var(--font-display); font-size: clamp(3rem, 10vw, 8rem); line-height: 0.88; letter-spacing: -0.01em; text-transform: uppercase; }
-.h-2   { font-family: var(--font-display); font-size: clamp(2.25rem, 6vw, 5rem); line-height: 0.92; letter-spacing: -0.005em; text-transform: uppercase; }
+/* Display sizes are bounded by viewport height as well as width. A 16vw
+   heading on a wide-but-short laptop screen was eating ~400px on its own. */
+.h-mega { font-family: var(--font-display); font-size: max(2.5rem, min(16vw, 18vh)); line-height: 0.86; letter-spacing: -0.015em; text-transform: uppercase; }
+.h-1   { font-family: var(--font-display); font-size: max(2.25rem, min(10vw, 12vh)); line-height: 0.88; letter-spacing: -0.01em; text-transform: uppercase; }
+.h-2   { font-family: var(--font-display); font-size: max(2rem, min(6vw, 10vh)); line-height: 0.92; letter-spacing: -0.005em; text-transform: uppercase; }
 .h-3   { font-family: var(--font-display); font-size: clamp(1.75rem, 4vw, 3rem); line-height: 0.95; text-transform: uppercase; }
 .h-4   { font-family: var(--font-display); font-size: clamp(1.25rem, 2.5vw, 1.875rem); line-height: 1; text-transform: uppercase; letter-spacing: 0.01em; }
 
@@ -188,8 +192,10 @@ p .brand, li .brand, .lead .brand, summary .brand, label .brand,
 
 /* ---------- Layout primitives ---------- */
 .wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter); }
-.section { padding: clamp(4rem, 10vw, 9rem) 0; position: relative; }
-.section-tight { padding: clamp(3rem, 6vw, 6rem) 0; }
+/* Vertical rhythm is capped against viewport height too — on a short laptop
+   screen the old 10vw/9rem pair alone ate 256px+ per section. */
+.section { padding: clamp(2.5rem, min(6vw, 8vh), 6rem) 0; position: relative; }
+.section-tight { padding: clamp(2rem, min(4vw, 6vh), 4rem) 0; }
 .divider { height: 1px; background: var(--border); width: 100%; }
 
 .grid { display: grid; gap: var(--s-6); }
@@ -435,11 +441,45 @@ p .brand, li .brand, .lead .brand, summary .brand, label .brand,
 
 /* ---------- Hero patterns ---------- */
 .hero {
-  min-height: 100svh;
+  height: 100svh;          /* was min-height — it let the hero grow past the fold */
   display: flex;
   flex-direction: column;
   position: relative;
   overflow: hidden;
+}
+
+/* Eyebrow pinned top (clear of the 90px fixed nav), headline centred,
+   lead + CTAs pinned bottom. */
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: clamp(6.5rem, 13vh, 9rem);
+  padding-bottom: clamp(2rem, 5vh, 4rem);
+}
+
+/* Sized off viewport HEIGHT as well as width, so the third line
+   ("Revive.") still lands above the fold on short laptop screens. */
+.hero-title {
+  font-size: max(2.75rem, min(15vw, 19vh));
+  margin-top: clamp(0.75rem, 2vh, 1.5rem);
+}
+
+.hero-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gutter);
+  align-items: end;
+  margin-top: clamp(1.25rem, 3vh, 2.5rem);
+}
+.hero-bottom > div:last-child { justify-self: end; flex-wrap: wrap; }
+@media (max-width: 800px) {
+  .hero-bottom { grid-template-columns: 1fr; gap: var(--s-6); }
+  .hero-bottom > div:last-child { justify-self: stretch; }
 }
 
 .hero-image {
@@ -553,6 +593,13 @@ p .brand, li .brand, .lead .brand, summary .brand, label .brand,
 }
 .footer-bottom a { color: var(--text-dim); }
 .footer-bottom a:hover { color: var(--fire); }
+/* Studio credit — Sweet Dreams US sits in Anton, not the footer mono */
+.credit {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  vertical-align: -1px;
+}
 
 /* ---------- Utility ---------- */
 .text-fire { color: var(--fire); }
