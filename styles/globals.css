@@ -43,6 +43,7 @@ ul, ol { list-style: none; }
 
   /* Typography */
   --font-display: 'Anton', 'Impact', sans-serif;
+  --font-brand: 'Montserrat', system-ui, sans-serif;   /* logo font — REVIVE wordmark only */
   --font-editorial: 'Cormorant Garamond', 'Times New Roman', serif;
   --font-body: 'Manrope', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
@@ -144,6 +145,22 @@ h1, h2, h3, h4 { font-weight: 400; }
 .h-3   { font-family: var(--font-display); font-size: clamp(1.75rem, 4vw, 3rem); line-height: 0.95; text-transform: uppercase; }
 .h-4   { font-family: var(--font-display); font-size: clamp(1.25rem, 2.5vw, 1.875rem); line-height: 1; text-transform: uppercase; letter-spacing: 0.01em; }
 
+/* ---------- Brand wordmark ----------
+   The name REVIVE always renders in the logo face (Montserrat Bold),
+   never in Anton. Size and color inherit so it drops into any context. */
+.brand {
+  font-family: var(--font-brand);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+/* In running copy, step down to semibold and drop the display tracking —
+   at 700/0.06em a mid-sentence mention reads as shouting. */
+p .brand, li .brand, .lead .brand, summary .brand, label .brand,
+.text-soft .brand, .text-dim .brand, .footer-bottom .brand, .rules .brand {
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
 .lead {
   font-size: clamp(1.1rem, 1.5vw, 1.5rem);
   line-height: 1.45;
@@ -207,9 +224,10 @@ h1, h2, h3, h4 { font-weight: 400; }
   mix-blend-mode: normal;
 }
 .nav-brand {
-  font-family: var(--font-display);
+  font-family: var(--font-brand);
+  font-weight: 700;
   font-size: 1.5rem;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text);
   display: flex;
@@ -504,9 +522,11 @@ h1, h2, h3, h4 { font-weight: 400; }
 }
 @media (max-width: 800px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
 .footer-brand {
-  font-family: var(--font-display);
+  font-family: var(--font-brand);
+  font-weight: 700;
   font-size: clamp(3rem, 8vw, 6rem);
   line-height: 0.9;
+  letter-spacing: 0.04em;
 }
 .footer-col h4 {
   font-family: var(--font-mono);
