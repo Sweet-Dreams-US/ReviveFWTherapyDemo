@@ -109,7 +109,7 @@
 
       const lead = document.createElement('p');
       lead.className = 'lead mt-4';
-      lead.textContent = "We'll be in touch shortly with next steps. Welcome to Revive.";
+      lead.textContent = "We'll be in touch within 48 hours to lock in your founders rate. Welcome to Revive.";
       successEl.appendChild(lead);
 
       wrap.appendChild(successEl);
