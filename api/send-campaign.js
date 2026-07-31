@@ -93,7 +93,7 @@ module.exports = async (req, res) => {
     if (!password) { res.status(401).json({ error: 'Password required' }); return; }
 
     const mode = ['preview', 'test', 'send'].includes(body.mode) ? body.mode : 'preview';
-    const audience = ['waitlist', 'giveaway', 'all'].includes(body.audience) ? body.audience : 'waitlist';
+    const audience = ['waitlist', 'giveaway', 'all', 'members', 'nonmembers'].includes(body.audience) ? body.audience : 'waitlist';
 
     // --- Auth + fetch recipients (single call, password validated inside the RPC) ---
     const rpc = await fetch(`${SUPABASE_URL}/rest/v1/rpc/revive_list_inquiries`, {
@@ -115,7 +115,9 @@ module.exports = async (req, res) => {
     const seen = new Set();
     const recipients = [];
     for (const row of inquiries) {
-      if (audience !== 'all' && row.type !== audience) continue;
+      if (audience === 'members') { if (!row.is_member) continue; }
+      else if (audience === 'nonmembers') { if (row.is_member) continue; }
+      else if (audience !== 'all' && row.type !== audience) continue;
       const email = String(row.email || '').trim().toLowerCase();
       if (!isEmail(email) || seen.has(email)) continue;
       seen.add(email);

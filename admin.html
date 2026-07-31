@@ -104,6 +104,8 @@
           <div class="inq-controls">
             <div class="inq-filters" id="inqFilters">
               <button class="inq-filter active" data-filter="all">All</button>
+              <button class="inq-filter" data-filter="members">Members</button>
+              <button class="inq-filter" data-filter="nonmembers">Newsletter</button>
               <button class="inq-filter" data-filter="waitlist">Waitlist</button>
               <button class="inq-filter" data-filter="contact">Contact</button>
             </div>
@@ -115,6 +117,7 @@
               <thead>
                 <tr>
                   <th>Name / Email</th>
+                  <th>Member</th>
                   <th>Type</th>
                   <th>Contact</th>
                   <th>Tier</th>
@@ -181,9 +184,10 @@
           <div class="form-group">
             <label class="label" for="campAudience">Audience</label>
             <select class="input" id="campAudience">
-              <option value="waitlist">Founders waitlist</option>
-              <option value="all">All inquiries</option>
-              <option value="giveaway">Giveaway entries</option>
+              <option value="members">Members only</option>
+              <option value="nonmembers">Newsletter (non-members)</option>
+              <option value="waitlist">Waitlist</option>
+              <option value="all">Everyone</option>
             </select>
           </div>
 
@@ -383,6 +387,13 @@
   .admin-table td strong { color: var(--text); }
 
   .tier-pill { display: inline-block; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 3px 8px; border: 1px solid currentColor; }
+  .member-toggle {
+    font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 3px 10px; border: 1px solid var(--border-strong); background: transparent;
+    color: var(--text-faint); cursor: pointer; transition: all var(--dur-fast);
+  }
+  .member-toggle:hover { border-color: var(--text-dim); color: var(--text-soft); }
+  .member-toggle.is-member { border-color: var(--gold); color: var(--gold); background: rgba(201, 164, 81, 0.08); }
   .tier-pill-plus { color: var(--gold); }
   .tier-pill-elite { color: var(--fire); }
 
@@ -482,7 +493,9 @@
 
     var q = search.trim().toLowerCase();
     var rows = inquiries.filter(function (i) {
-      if (filter !== 'all' && i.type !== filter) return false;
+      if (filter === 'members') { if (!i.is_member) return false; }
+      else if (filter === 'nonmembers') { if (i.is_member) return false; }
+      else if (filter !== 'all' && i.type !== filter) return false;
       if (!q) return true;
       var hay = ((i.first_name || '') + ' ' + (i.last_name || '') + ' ' + (i.email || '') + ' ' + (i.phone || '') + ' ' + (i.instagram || '')).toLowerCase();
       return hay.indexOf(q) !== -1;
@@ -495,7 +508,7 @@
     if (!rows.length) {
       var tr0 = el('tr');
       var td0 = el('td', 'text-dim', total ? 'No matches.' : 'No inquiries yet — submissions appear here in real time.');
-      td0.colSpan = 6; td0.style.padding = 'var(--s-6)'; td0.style.textAlign = 'center';
+      td0.colSpan = 7; td0.style.padding = 'var(--s-6)'; td0.style.textAlign = 'center';
       tr0.appendChild(td0); tbody.appendChild(tr0); return;
     }
 
@@ -506,6 +519,27 @@
       nameTd.appendChild(document.createElement('br'));
       nameTd.appendChild(el('span', 'mono text-dim', i.email || ''));
       tr.appendChild(nameTd);
+      var memTd = el('td');
+      var memBtn = el('button', 'member-toggle' + (i.is_member ? ' is-member' : ''), i.is_member ? 'Member' : '—');
+      memBtn.type = 'button';
+      memBtn.title = i.is_member ? 'Click to move to the newsletter list' : 'Click to mark as a member';
+      memBtn.addEventListener('click', async function () {
+        var next = !i.is_member;
+        memBtn.disabled = true;
+        try {
+          var res = await fetch('/api/set-member', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password: password, email: i.email, member: next }),
+          });
+          if (res.status === 401) { showLogin(); return; }
+          if (!res.ok) throw new Error('failed');
+          // update every local row with this email (duplicates share the flag)
+          inquiries.forEach(function (row) { if ((row.email || '').toLowerCase() === (i.email || '').toLowerCase()) row.is_member = next; });
+          render();
+        } catch (e) { memBtn.disabled = false; window.alert('Could not update member status — try again.'); }
+      });
+      memTd.appendChild(memBtn);
+      tr.appendChild(memTd);
       var typeTd = el('td');
       typeTd.appendChild(el('span', 'tier-pill ' + (i.type === 'giveaway' ? 'tier-pill-elite' : 'tier-pill-plus'), i.type === 'giveaway' ? 'Giveaway' : 'Waitlist'));
       tr.appendChild(typeTd);
@@ -563,7 +597,7 @@
   document.getElementById('inqSearch').addEventListener('input', function () { search = this.value; render(); });
 
   document.getElementById('exportCsv').addEventListener('click', function () {
-    var cols = ['created_at', 'type', 'first_name', 'last_name', 'email', 'phone', 'tier', 'instagram', 'goal', 'source', 'status'];
+    var cols = ['created_at', 'is_member', 'type', 'first_name', 'last_name', 'email', 'phone', 'tier', 'instagram', 'goal', 'source', 'status'];
     function cell(v) { if (v == null) return ''; var s = typeof v === 'object' ? JSON.stringify(v) : String(v); return '"' + s.replace(/"/g, '""') + '"'; }
     var lines = [cols.join(',')];
     inquiries.forEach(function (i) { lines.push(cols.map(function (c) { return cell(i[c]); }).join(',')); });
