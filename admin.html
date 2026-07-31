@@ -6,7 +6,7 @@
 <title>Operator Dashboard — REVIVE Admin</title>
 <meta name="description" content="Internal operator dashboard for Revive Fitness & Recovery." />
 <meta name="robots" content="noindex, nofollow" />
-<meta name="theme-color" content="#0B0807" />
+<meta name="theme-color" content="#F7F4EE" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -62,14 +62,15 @@
     <header class="admin-topbar">
       <div>
         <div class="mono text-dim" id="todayStamp">Operator Dashboard</div>
-        <h1 style="font-family: var(--font-display); font-size: 2rem; line-height: 1; margin-top: 4px;">Inquiries</h1>
+        <h1 id="viewTitle" style="font-family: var(--font-display); font-size: 2rem; line-height: 1; margin-top: 4px;">Inquiries</h1>
       </div>
       <div class="admin-topbar-actions">
         <button id="refreshBtn" class="btn btn-arrow" style="padding: 0.6rem 1rem;">Refresh</button>
       </div>
     </header>
 
-    <!-- KPIs -->
+    <!-- ===== VIEW: Inquiries ===== -->
+    <div class="admin-view active" data-view="inquiries">
     <section class="kpi-row">
       <div class="kpi">
         <div class="mono text-dim">Total Inquiries</div>
@@ -134,7 +135,19 @@
 
       <!-- Right column -->
       <div class="admin-col">
-        <!-- Pre-opening dates -->
+        <!-- Note -->
+        <div class="admin-card">
+          <div class="mono text-dim">Heads up</div>
+          <p class="text-soft mt-3" style="font-size: 0.875rem; line-height: 1.6;">Waitlist and contact submissions land here in real time. Use <strong>Export CSV</strong> to pull them into email tools or Mindbody. Memberships themselves are managed in Mindbody / the member app.</p>
+        </div>
+      </div>
+    </section>
+    </div>
+
+    <!-- ===== VIEW: Pre-Opening Dates ===== -->
+    <div class="admin-view" data-view="preopening">
+    <section class="admin-grid">
+      <div class="admin-col">
         <div class="admin-card admin-card-fire" id="preopening">
           <div class="admin-card-head">
             <div>
@@ -154,16 +167,18 @@
           <p id="settingsStatus" class="mono mt-3" style="font-size: 0.75rem; color: var(--text-dim); min-height: 1em;"></p>
           <p class="text-faint mt-3" style="font-size: 0.75rem; line-height: 1.5;">The homepage countdown reads these instantly. Before the presale date it counts to the presale; after, it counts to opening; then shows “Now Open.”</p>
         </div>
-
-        <!-- Note -->
+      </div>
+      <div class="admin-col">
         <div class="admin-card">
           <div class="mono text-dim">Heads up</div>
-          <p class="text-soft mt-3" style="font-size: 0.875rem; line-height: 1.6;">Waitlist and giveaway form submissions land here in real time. Use <strong>Export CSV</strong> to pull them into email tools or Mindbody. Memberships themselves are managed in Mindbody / the member app.</p>
+          <p class="text-soft mt-3" style="font-size: 0.875rem; line-height: 1.6;">The Grand Opening countdown on the public site reads the Grand Opening date from settings. These presale/opening dates drive the phased pre-opening countdown.</p>
         </div>
       </div>
     </section>
+    </div>
 
-    <!-- Founders email campaign -->
+    <!-- ===== VIEW: Send Campaign ===== -->
+    <div class="admin-view" data-view="campaign">
     <section class="admin-card admin-card-fire" id="campaign">
       <div class="admin-card-head">
         <div>
@@ -221,7 +236,10 @@
       </div>
     </section>
 
-    <!-- Jobs -->
+    </div>
+
+    <!-- ===== VIEW: Jobs ===== -->
+    <div class="admin-view" data-view="jobs">
     <section class="admin-card" id="jobs">
       <div class="admin-card-head">
         <div>
@@ -261,7 +279,10 @@
       </div>
     </section>
 
-    <!-- Applications -->
+    </div>
+
+    <!-- ===== VIEW: Applications ===== -->
+    <div class="admin-view" data-view="applications">
     <section class="admin-card" id="applications">
       <div class="admin-card-head">
         <div>
@@ -279,7 +300,10 @@
       <div class="mono text-faint mt-4" id="appCount" style="font-size: 0.7rem;"></div>
     </section>
 
-    <!-- Reports (scaffold) -->
+    </div>
+
+    <!-- ===== VIEW: Reports ===== -->
+    <div class="admin-view" data-view="reports">
     <section class="admin-card" id="reports">
       <div class="admin-card-head">
         <div>
@@ -295,6 +319,8 @@
       </div>
     </section>
 
+    </div>
+
     <footer class="admin-foot mono">
       <span>Revive Fitness &amp; Recovery — Operator Console</span>
       <span><a href="/" class="text-fire">← Public site</a></span>
@@ -303,6 +329,32 @@
 </div>
 
 <style>
+  /* ===== Light theme (admin only — the public site stays dark) =====
+     The whole console runs on the same design tokens as the site; overriding
+     them on .admin-body re-skins every card, table, and button in one place. */
+  body.admin-body {
+    --bg: #F7F4EE;
+    --bg-1: #FFFFFF;
+    --bg-2: #EFEAE0;
+    --surface: #FFFFFF;
+    --surface-2: #E9E2D5;
+    --border: #E2DACB;
+    --border-strong: #CBC0AA;
+    --text: #201A15;
+    --text-soft: #4C443A;
+    --text-dim: #857A6A;
+    --text-faint: #AFA491;
+    --cream: #7A5C2E;         /* cream reads as warm brown on light */
+    --gold: #A8842F;          /* darkened for contrast on white */
+    --ice: #22809B;
+    --fire-glow: rgba(255, 56, 25, 0.12);
+    color-scheme: light;
+    background: var(--bg);
+  }
+  body.admin-body::before { display: none; }  /* film grain off in the console */
+  .admin-view { display: none; }
+  .admin-view.active { display: flex; flex-direction: column; gap: var(--s-6); animation: fadeUp 0.25s var(--ease-out) both; }
+
   /* Login */
   .admin-login {
     position: fixed; inset: 0; z-index: 100;
@@ -424,7 +476,7 @@
   .job-row .jr-title { font-family: var(--font-display); text-transform: uppercase; font-size: 1.1rem; line-height: 1; }
   .job-row .jr-meta { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-dim); margin-top: 4px; }
   .job-status { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 7px; border: 1px solid currentColor; }
-  .job-status-open { color: #7bd88f; } .job-status-draft { color: var(--gold); } .job-status-closed { color: var(--text-faint); }
+  .job-status-open { color: #178A45; } .job-status-draft { color: var(--gold); } .job-status-closed { color: var(--text-faint); }
   .job-fields-check { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-2) var(--s-4); }
   @media (max-width: 600px) { .job-fields-check { grid-template-columns: 1fr; } }
   .job-fields-check label { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-soft); cursor: pointer; }
@@ -633,7 +685,7 @@
   var campStatusEl = document.getElementById('campStatus');
 
   function campSetStatus(msg, kind) {
-    campStatusEl.style.color = kind === 'error' ? 'var(--fire)' : kind === 'ok' ? '#7bd88f' : 'var(--text-dim)';
+    campStatusEl.style.color = kind === 'error' ? 'var(--fire)' : kind === 'ok' ? '#178A45' : 'var(--text-dim)';
     campStatusEl.textContent = msg || '';
   }
 
@@ -881,6 +933,26 @@
     link.download = 'revive-applications-' + new Date().toISOString().slice(0, 10) + '.csv';
     document.body.appendChild(link); link.click(); link.remove();
   });
+
+  // ---- View routing: each sidebar tab is its own page (hash-driven) ----
+  var VIEW_TITLES = {
+    inquiries: 'Inquiries', jobs: 'Jobs', applications: 'Applications',
+    campaign: 'Send Campaign', reports: 'Reports', preopening: 'Pre-Opening Dates',
+  };
+  function showView(name) {
+    if (!VIEW_TITLES[name]) name = 'inquiries';
+    document.querySelectorAll('.admin-view').forEach(function (v) {
+      v.classList.toggle('active', v.getAttribute('data-view') === name);
+    });
+    document.querySelectorAll('.admin-nav a.admin-nav-item[href^="#"]').forEach(function (a) {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + name);
+    });
+    var t = document.getElementById('viewTitle');
+    if (t) t.textContent = VIEW_TITLES[name];
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', function () { showView(location.hash.slice(1)); });
+  showView(location.hash.slice(1));
 
   // Auto-resume session if a password is stored.
   if (password) { init(password).catch(function () { showLogin(); }); } else { showLogin(); }
