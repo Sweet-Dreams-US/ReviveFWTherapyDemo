@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Careers — Join the Team | REVIVE Fort Wayne</title>
+<meta name="description" content="Help build Fort Wayne's first true wellness sanctuary. See open roles at REVIVE and apply online." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@600;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=Manrope:wght@200;300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles/globals.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230B0807'/%3E%3Ctext x='50' y='72' text-anchor='middle' font-family='Anton,Impact' font-size='80' fill='%23FF3819'%3ER%3C/text%3E%3C/svg%3E" />
+<script src="scripts/job-fields.js"></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-brand">REVIVE</a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="pricing.html" class="nav-link">Membership</a>
+    <a href="why-revive.html" class="nav-link">Why Revive?</a>
+    <a href="grand-opening.html" class="nav-link">Grand Opening</a>
+    <a href="careers.html" class="nav-link" aria-current="page">Careers</a>
+  </div>
+  <a href="join.html" class="nav-cta">Join Waitlist <span aria-hidden="true">→</span></a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Page header -->
+<section class="page-header">
+  <div class="wrap">
+    <div class="grid-12">
+      <div style="grid-column: 1 / span 6;" data-reveal>
+        <span class="eyebrow">Careers — Now Hiring</span>
+        <h1 class="display fade-up" style="font-size: clamp(3.5rem, 10vw, 9rem); margin-top: 2rem;">
+          Build it<br /><span class="editorial text-cream">with us.</span>
+        </h1>
+      </div>
+      <div style="grid-column: 8 / -1; align-self:end;" data-reveal data-delay="2">
+        <p class="lead">We're assembling the team for Fort Wayne's first true wellness sanctuary — coaches, front desk, recovery techs, and more. If you love this work, we want to meet you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Jobs -->
+<section class="section section-tight">
+  <div class="wrap">
+    <div id="jobsStatus" class="mono text-dim" data-reveal>Loading open roles…</div>
+    <div id="jobsList" class="jobs-list mt-6"></div>
+  </div>
+</section>
+
+<!-- Application panel -->
+<section class="section" id="applyPanel" style="display:none; background: var(--bg-1); border-block: 1px solid var(--border);">
+  <div class="wrap" style="max-width: 820px;">
+    <span class="eyebrow">Apply</span>
+    <h2 class="h-2 mt-4">Apply — <span class="editorial text-cream" id="applyJobTitle">this role</span></h2>
+    <p class="text-soft mt-4" id="applyJobSummary" style="line-height:1.6;"></p>
+
+    <form id="applyForm" class="apply-form mt-8" novalidate>
+      <input type="hidden" id="applyJobId" name="jobId" />
+      <input type="text" name="company" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true" />
+      <div class="form-row">
+        <div class="form-group"><label class="label" for="af-first">First name *</label><input class="input" id="af-first" name="firstName" required /></div>
+        <div class="form-group"><label class="label" for="af-last">Last name</label><input class="input" id="af-last" name="lastName" /></div>
+      </div>
+      <div class="form-group mt-5"><label class="label" for="af-email">Email *</label><input class="input" id="af-email" name="email" type="email" required /></div>
+      <div id="applyFields" class="apply-fields"></div>
+      <div class="cf-turnstile mt-6" data-sitekey="0x4AAAAAADmEM33rK7aFg_cZ" data-theme="dark"></div>
+      <p id="applyError" class="mono mt-3" style="color: var(--fire); font-size: 0.8rem; min-height: 1em;"></p>
+      <button type="submit" class="btn btn-primary btn-arrow mt-4">Submit Application</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-brand">REVIVE<span class="text-fire">.</span></div>
+    <div class="footer-grid mt-8">
+      <div class="footer-col">
+        <h4>Visit</h4>
+        <p class="text-soft" style="line-height:1.6;">Opening August 2026<br />Fort Wayne, IN</p>
+      </div>
+      <div class="footer-col"><h4>Explore</h4>
+        <ul><li><a href="why-revive.html">Why Revive?</a></li><li><a href="pricing.html">Membership</a></li><li><a href="grand-opening.html">Grand Opening</a></li><li><a href="careers.html">Careers</a></li></ul>
+      </div>
+      <div class="footer-col"><h4>Join</h4>
+        <ul><li><a href="join.html">Founders Waitlist</a></li><li><a href="admin.html">Member Portal</a></li></ul>
+      </div>
+      <div class="footer-col"><h4>Follow</h4>
+        <ul><li><a href="https://instagram.com/revivefitnessfw" target="_blank" rel="noopener">Instagram</a></li><li><a href="mailto:info@revivefw.com">info@revivefw.com</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© <span data-year>2026</span> <span class="brand">Revive</span> Fitness &amp; Recovery</span><span>Site by <a href="https://sweetdreamsmusic.com" target="_blank" rel="noopener" class="credit">Sweet Dreams US</a></span></div>
+  </div>
+</footer>
+
+<style>
+  .jobs-list { display: flex; flex-direction: column; gap: var(--s-4); }
+  .job-card {
+    border: 1px solid var(--border);
+    background: var(--bg);
+    padding: var(--s-7);
+    transition: background var(--dur), border-color var(--dur);
+  }
+  .job-card:hover { background: var(--bg-2); border-color: var(--border-strong); }
+  .job-card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--s-5); flex-wrap: wrap; }
+  .job-title { font-family: var(--font-display); font-size: clamp(1.5rem, 3.5vw, 2.25rem); line-height: 1; text-transform: uppercase; }
+  .job-meta { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-4); }
+  .job-tag {
+    font-family: var(--font-mono); font-size: var(--fs-mono);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-dim); border: 1px solid var(--border); padding: 4px 9px;
+  }
+  .job-summary { color: var(--text-soft); margin-top: var(--s-5); line-height: 1.65; max-width: 70ch; }
+  .job-desc { color: var(--text-soft); margin-top: var(--s-5); line-height: 1.7; white-space: pre-wrap; display: none; max-width: 75ch; }
+  .job-card.expanded .job-desc { display: block; }
+
+  .apply-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); }
+  @media (max-width: 600px) { .apply-form .form-row { grid-template-columns: 1fr; } }
+  .apply-fields { display: flex; flex-direction: column; gap: var(--s-5); margin-top: var(--s-5); }
+  .apply-form .label { display: block; margin-bottom: var(--s-2); }
+  .apply-form .input {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 0.9rem 1rem;
+    color: var(--text);
+    transition: border-color var(--dur-fast);
+  }
+  .apply-form .input:focus { outline: none; border-color: var(--fire); }
+  .apply-form textarea.input { min-height: 120px; resize: vertical; font-family: inherit; }
+  .apply-form input[type="file"].input { padding: 0.7rem 1rem; }
+  .field-hint { font-family: var(--font-mono); font-size: var(--fs-mono); letter-spacing: 0.06em; color: var(--text-faint); margin-top: var(--s-2); }
+  .form-group .label { font-family: var(--font-mono); font-size: var(--fs-mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); }
+  .apply-success { padding: var(--s-8) 0; }
+</style>
+
+<script src="scripts/main.js" defer></script>
+<script>
+(function () {
+  'use strict';
+  var listEl = document.getElementById('jobsList');
+  var statusEl = document.getElementById('jobsStatus');
+  var panel = document.getElementById('applyPanel');
+  var form = document.getElementById('applyForm');
+  var fieldsEl = document.getElementById('applyFields');
+  var titleEl = document.getElementById('applyJobTitle');
+  var summaryEl = document.getElementById('applyJobSummary');
+  var errEl = document.getElementById('applyError');
+  var CATALOG = window.REVIVE_JOB_FIELD_MAP || {};
+  var currentJob = null;
+
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+  function readFileB64(file) {
+    return new Promise(function (resolve, reject) {
+      var r = new FileReader();
+      r.onload = function () { resolve(String(r.result).split(',')[1]); };
+      r.onerror = function () { reject(new Error('Could not read ' + file.name)); };
+      r.readAsDataURL(file);
+    });
+  }
+  async function uploadFile(file) {
+    if (file.size > 3 * 1024 * 1024) throw new Error('"' + file.name + '" is too large (max 3MB).');
+    var b64 = await readFileB64(file);
+    var res = await fetch('/api/upload', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ filename: file.name, contentType: file.type, dataBase64: b64 }) });
+    var j = await res.json().catch(function () { return {}; });
+    if (!res.ok) throw new Error(j.error || 'Upload failed');
+    return j.url;
+  }
+
+  function renderJobs(jobs) {
+    listEl.textContent = '';
+    if (!jobs.length) {
+      statusEl.textContent = '';
+      var empty = el('div', 'job-card');
+      empty.appendChild(el('div', 'job-title', 'No open roles right now'));
+      empty.appendChild(el('p', 'job-summary', "We're always meeting great people ahead of opening. Email info@revivefw.com to introduce yourself."));
+      listEl.appendChild(empty);
+      return;
+    }
+    statusEl.textContent = jobs.length + (jobs.length === 1 ? ' open role' : ' open roles');
+    jobs.forEach(function (job) {
+      var card = el('div', 'job-card');
+      var head = el('div', 'job-card-head');
+      var left = el('div');
+      left.appendChild(el('div', 'job-title', job.title || 'Role'));
+      var meta = el('div', 'job-meta');
+      [job.department, job.employment_type, job.location].forEach(function (t) { if (t) meta.appendChild(el('span', 'job-tag', t)); });
+      left.appendChild(meta);
+      head.appendChild(left);
+      var btn = el('button', 'btn btn-arrow', 'View & Apply');
+      btn.type = 'button';
+      head.appendChild(btn);
+      card.appendChild(head);
+      if (job.summary) card.appendChild(el('p', 'job-summary', job.summary));
+      if (job.description) card.appendChild(el('p', 'job-desc', job.description));
+      btn.addEventListener('click', function () {
+        var expanding = !card.classList.contains('expanded');
+        card.classList.toggle('expanded');
+        btn.textContent = expanding ? 'Apply below ↓' : 'View & Apply';
+        if (expanding) openApply(job);
+      });
+      listEl.appendChild(card);
+    });
+  }
+
+  function openApply(job) {
+    currentJob = job;
+    document.getElementById('applyJobId').value = job.id;
+    titleEl.textContent = job.title || 'this role';
+    summaryEl.textContent = job.summary || '';
+    fieldsEl.textContent = '';
+    (job.fields || []).forEach(function (key) {
+      var def = CATALOG[key];
+      if (!def) return;
+      var group = el('div', 'form-group');
+      var label = el('label', 'label', def.label);
+      label.setAttribute('for', 'af-' + key);
+      group.appendChild(label);
+      var input;
+      if (def.type === 'textarea') { input = el('textarea', 'input'); }
+      else if (def.type === 'file') { input = el('input', 'input'); input.type = 'file'; if (def.accept) input.accept = def.accept; }
+      else { input = el('input', 'input'); input.type = def.type || 'text'; }
+      input.id = 'af-' + key; input.name = key;
+      group.appendChild(input);
+      if (def.hint) group.appendChild(el('div', 'field-hint', def.hint));
+      fieldsEl.appendChild(group);
+    });
+    errEl.textContent = '';
+    panel.style.display = 'block';
+    if (window.turnstile) { try { window.turnstile.reset(); } catch (e) {} }
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    errEl.textContent = '';
+    var btn = form.querySelector('[type=submit]');
+    var data = {};
+    var fileInputs = [];
+    Array.prototype.forEach.call(form.elements, function (f) {
+      if (!f.name) return;
+      if (f.type === 'file') { fileInputs.push(f); return; }
+      data[f.name] = f.value;
+    });
+    data.jobTitle = currentJob ? currentJob.title : '';
+    data.source = 'careers.html';
+    var ts = form.querySelector('[name="cf-turnstile-response"]');
+    if (ts) data['cf-turnstile-response'] = ts.value;
+
+    var lbl = btn.textContent; btn.disabled = true; btn.textContent = 'Submitting…';
+    try {
+      for (var fx = 0; fx < fileInputs.length; fx++) {
+        var fi = fileInputs[fx];
+        if (fi.files && fi.files[0]) { btn.textContent = 'Uploading…'; data[fi.name] = await uploadFile(fi.files[0]); }
+      }
+      btn.textContent = 'Submitting…';
+      var res = await fetch('/api/apply', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+      var j = await res.json().catch(function () { return {}; });
+      if (!res.ok) throw new Error(j.error || 'Something went wrong. Please try again.');
+      var wrap = form.parentNode;
+      form.remove();
+      var ok = el('div', 'apply-success');
+      ok.appendChild(el('span', 'mono text-fire', '— Application received —'));
+      var h = el('h3', 'h-2 mt-4'); h.textContent = "Thanks, we've got it."; ok.appendChild(h);
+      ok.appendChild(el('p', 'lead mt-4', "We review every application. If it's a fit, we'll reach out at the email you provided."));
+      wrap.appendChild(ok);
+    } catch (err) {
+      errEl.textContent = err.message;
+      btn.disabled = false; btn.textContent = lbl;
+      if (window.turnstile) { try { window.turnstile.reset(); } catch (e2) {} }
+    }
+  });
+
+  fetch('/api/jobs', { cache: 'no-store' })
+    .then(function (r) { return r.ok ? r.json() : { jobs: [] }; })
+    .then(function (j) { renderJobs(j.jobs || []); })
+    .catch(function () { statusEl.textContent = 'Could not load roles right now. Email info@revivefw.com to apply.'; });
+})();
+</script>
+</body>
+</html>

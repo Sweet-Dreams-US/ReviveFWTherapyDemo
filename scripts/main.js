@@ -165,4 +165,49 @@
     el.textContent = new Date().getFullYear();
   });
 
+  // ---------- Grand Opening countdown ----------
+  // Ticks every [data-revive-countdown] toward the Grand Opening (Aug 15).
+  // The date can be overridden from the operator console via /api/settings;
+  // if that endpoint isn't reachable the built-in date still works.
+  const cdRoots = document.querySelectorAll('[data-revive-countdown]');
+  if (cdRoots.length) {
+    let grandOpening = new Date('2026-08-15T00:00:00-04:00').getTime();
+    const pad = (n) => String(n).padStart(2, '0');
+
+    const renderAll = () => {
+      const now = Date.now();
+      let live = false;
+      cdRoots.forEach(root => {
+        const q = (s) => root.querySelector(s);
+        let diff = grandOpening - now;
+        if (diff <= 0) {
+          root.classList.add('is-open');
+          const label = q('[data-cd-label]');
+          const sub = q('[data-cd-sub]');
+          if (label) label.textContent = "We're Open";
+          if (sub) sub.textContent = 'The doors are open — come see us.';
+          return;
+        }
+        live = true;
+        const d = Math.floor(diff / 86400000); diff -= d * 86400000;
+        const h = Math.floor(diff / 3600000);  diff -= h * 3600000;
+        const m = Math.floor(diff / 60000);    diff -= m * 60000;
+        const s = Math.floor(diff / 1000);
+        const set = (sel, v) => { const el = q(sel); if (el) el.textContent = pad(v); };
+        set('[data-cd-days]', d); set('[data-cd-hours]', h);
+        set('[data-cd-mins]', m); set('[data-cd-secs]', s);
+      });
+      return live;
+    };
+
+    fetch('/api/settings', { cache: 'no-store' })
+      .then(r => (r.ok ? r.json() : null))
+      .then(j => { if (j && j.grandOpeningDate) grandOpening = new Date(j.grandOpeningDate).getTime(); })
+      .catch(() => {})
+      .finally(renderAll);
+
+    renderAll();
+    const cdTimer = setInterval(() => { if (!renderAll()) clearInterval(cdTimer); }, 1000);
+  }
+
 })();

@@ -5,714 +5,852 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Operator Dashboard — REVIVE Admin</title>
 <meta name="description" content="Internal operator dashboard for Revive Fitness & Recovery." />
-<meta name="robots" content="noindex" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#0B0807" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@600;700&family=Cormorant+Garamond:ital,wght@1,400&family=Manrope:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles/globals.css" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230B0807'/%3E%3Ctext x='50' y='72' text-anchor='middle' font-family='Anton,Impact' font-size='80' fill='%23FF3819'%3ER%3C/text%3E%3C/svg%3E" />
+<script src="/scripts/job-fields.js"></script>
 </head>
 <body class="admin-body">
 
-<!-- Sidebar -->
-<aside class="admin-sidebar">
-  <a href="index.html" class="admin-brand">
-    REVIVE
-    <span class="admin-brand-tag mono">OPS</span>
-  </a>
+<!-- LOGIN GATE -->
+<div id="adminLogin" class="admin-login">
+  <form id="adminLoginForm" class="admin-login-card">
+    <div class="admin-brand" style="font-size: 2rem;">REVIVE <span class="admin-brand-tag mono">OPS</span></div>
+    <p class="text-dim mt-3" style="font-size: 0.9rem;">Operator access only.</p>
+    <div class="form-group mt-6">
+      <label class="label" for="adminPassword">Password</label>
+      <input class="input" type="password" id="adminPassword" autocomplete="current-password" required />
+    </div>
+    <p id="adminLoginError" class="mono" style="color: var(--fire); font-size: 0.8rem; margin-top: 0.75rem;" hidden></p>
+    <button type="submit" class="btn btn-primary btn-arrow mt-5" style="width:100%; justify-content:center;">Enter Dashboard</button>
+  </form>
+</div>
 
-  <nav class="admin-nav">
-    <div class="admin-nav-group">
-      <div class="admin-nav-label mono">Operations</div>
-      <a href="#" class="admin-nav-item active"><span class="ic">▣</span> Dashboard</a>
-      <a href="#" class="admin-nav-item"><span class="ic">◆</span> Members</a>
-      <a href="#" class="admin-nav-item"><span class="ic">◉</span> Recovery</a>
-      <a href="#" class="admin-nav-item"><span class="ic">◐</span> Classes</a>
-      <a href="#" class="admin-nav-item"><span class="ic">◇</span> Run Club</a>
+<!-- APP (revealed after login) -->
+<div id="adminApp" style="display:none;">
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <a href="/" class="admin-brand">REVIVE <span class="admin-brand-tag mono">OPS</span></a>
+    <nav class="admin-nav">
+      <div class="admin-nav-group">
+        <div class="admin-nav-label mono">Operations</div>
+        <a href="#inquiries" class="admin-nav-item active"><span class="ic">▣</span> Inquiries</a>
+        <a href="#jobs" class="admin-nav-item"><span class="ic">▤</span> Jobs</a>
+        <a href="#applications" class="admin-nav-item"><span class="ic">☑</span> Applications</a>
+        <a href="#campaign" class="admin-nav-item"><span class="ic">✉</span> Send Campaign</a>
+        <a href="#reports" class="admin-nav-item"><span class="ic">▦</span> Reports</a>
+        <a href="#preopening" class="admin-nav-item"><span class="ic">◷</span> Pre-Opening Dates</a>
+      </div>
+      <div class="admin-nav-group">
+        <div class="admin-nav-label mono">Links</div>
+        <a href="/" class="admin-nav-item"><span class="ic">↗</span> Public Site</a>
+        <a href="https://apps.apple.com/us/app/revive-fitness-and-recovery/id6768313510" target="_blank" rel="noopener" class="admin-nav-item"><span class="ic">▤</span> Member App</a>
+      </div>
+    </nav>
+    <div class="admin-sidebar-foot">
+      <button id="logoutBtn" class="admin-nav-item" style="width:100%; background:none; border:1px solid var(--border); cursor:pointer;"><span class="ic">⏻</span> Log out</button>
     </div>
-    <div class="admin-nav-group">
-      <div class="admin-nav-label mono">Growth</div>
-      <a href="#" class="admin-nav-item"><span class="ic">★</span> Founders 200</a>
-      <a href="#" class="admin-nav-item"><span class="ic">⌖</span> Waitlist</a>
-      <a href="#" class="admin-nav-item"><span class="ic">⊛</span> Giveaway</a>
-      <a href="#" class="admin-nav-item"><span class="ic">$</span> Revenue</a>
-    </div>
-    <div class="admin-nav-group">
-      <div class="admin-nav-label mono">System</div>
-      <a href="#" class="admin-nav-item"><span class="ic">⚙</span> Settings</a>
-      <a href="#" class="admin-nav-item"><span class="ic">↗</span> Reports</a>
-    </div>
-  </nav>
+  </aside>
 
-  <div class="admin-sidebar-foot">
-    <div class="admin-user">
-      <div class="admin-avatar">JM</div>
+  <!-- Main -->
+  <main class="admin-main">
+    <header class="admin-topbar">
       <div>
-        <div style="font-size: 0.875rem;">John M.</div>
-        <div class="mono text-faint" style="font-size: 0.6rem;">Owner / Founder</div>
+        <div class="mono text-dim" id="todayStamp">Operator Dashboard</div>
+        <h1 style="font-family: var(--font-display); font-size: 2rem; line-height: 1; margin-top: 4px;">Inquiries</h1>
       </div>
-    </div>
-  </div>
-</aside>
-
-<!-- Main -->
-<main class="admin-main">
-  <header class="admin-topbar">
-    <div>
-      <div class="mono text-dim">Saturday — April 19, 2026</div>
-      <h1 style="font-family: var(--font-display); font-size: 2rem; line-height: 1; margin-top: 4px;">Good morning, John.</h1>
-    </div>
-    <div class="admin-topbar-actions">
-      <div class="admin-search">
-        <span class="mono">⌕</span>
-        <input type="search" placeholder="Search members, bookings, leads…" />
-        <span class="mono text-faint">⌘ K</span>
+      <div class="admin-topbar-actions">
+        <button id="refreshBtn" class="btn btn-arrow" style="padding: 0.6rem 1rem;">Refresh</button>
       </div>
-      <button class="btn-icon" aria-label="Notifications">
-        <span>🔔</span>
-        <span class="badge">3</span>
-      </button>
-    </div>
-  </header>
+    </header>
 
-  <!-- Top stats row -->
-  <section class="kpi-row">
-    <div class="kpi">
-      <div class="mono text-dim">Founders Claimed</div>
-      <div class="kpi-value display">153 <span class="kpi-of">/200</span></div>
-      <div class="kpi-bar"><div class="kpi-bar-fill" style="width: 76.5%;"></div></div>
-      <div class="kpi-meta mono"><span class="trend-up">▲ +12 this week</span></div>
-    </div>
-    <div class="kpi">
-      <div class="mono text-dim">Waitlist Signups</div>
-      <div class="kpi-value display">389</div>
-      <div class="kpi-meta mono"><span class="trend-up">▲ +47 last 7d</span> &nbsp;·&nbsp; +14% MoM</div>
-    </div>
-    <div class="kpi">
-      <div class="mono text-dim">Giveaway Entries</div>
-      <div class="kpi-value display">2,142</div>
-      <div class="kpi-meta mono"><span class="trend-up">▲ Closes 6 days</span></div>
-    </div>
-    <div class="kpi">
-      <div class="mono text-dim">Projected MRR (Aug)</div>
-      <div class="kpi-value display">$22.4K</div>
-      <div class="kpi-meta mono"><span class="trend-up">▲ vs $18.1K target</span></div>
-    </div>
-  </section>
+    <!-- KPIs -->
+    <section class="kpi-row">
+      <div class="kpi">
+        <div class="mono text-dim">Total Inquiries</div>
+        <div class="kpi-value display" id="kpiTotal">—</div>
+      </div>
+      <div class="kpi">
+        <div class="mono text-dim">Founders Waitlist</div>
+        <div class="kpi-value display" id="kpiWaitlist">—</div>
+      </div>
+      <div class="kpi">
+        <div class="mono text-dim">Job Applications</div>
+        <div class="kpi-value display" id="kpiApplications">—</div>
+      </div>
+      <div class="kpi">
+        <div class="mono text-dim">Last 7 Days</div>
+        <div class="kpi-value display" id="kpiRecent">—</div>
+      </div>
+    </section>
 
-  <!-- Two column main area -->
-  <section class="admin-grid">
-    <!-- Left big: Founders Progress + Activity -->
-    <div class="admin-col">
-      <!-- Founders pacing card -->
-      <div class="admin-card">
-        <div class="admin-card-head">
-          <div>
-            <div class="mono text-dim">Founders 200 Pacing</div>
-            <h3 class="display admin-h3">Filling Faster Than Plan</h3>
+    <section class="admin-grid">
+      <!-- Inquiries -->
+      <div class="admin-col">
+        <div class="admin-card" id="inquiries">
+          <div class="admin-card-head">
+            <div>
+              <div class="mono text-dim">All Submissions</div>
+              <h3 class="display admin-h3">Every Inquiry</h3>
+            </div>
+            <button id="exportCsv" class="btn btn-arrow" style="padding: 0.5rem 0.9rem; font-size: 0.8rem;">Export CSV</button>
           </div>
-          <div class="chip chip-fire mono">On Pace ✓</div>
-        </div>
 
-        <!-- Mini sparkline / bar chart -->
-        <div class="bar-chart">
-          <div class="bar" style="--h: 22%;"><span>Jan</span></div>
-          <div class="bar" style="--h: 38%;"><span>Feb</span></div>
-          <div class="bar" style="--h: 52%;"><span>Mar</span></div>
-          <div class="bar bar-active" style="--h: 76%;"><span>Apr</span></div>
-          <div class="bar bar-projected" style="--h: 88%;"><span>May</span></div>
-          <div class="bar bar-projected" style="--h: 100%;"><span>Jun</span></div>
-        </div>
-        <div class="bar-legend mono">
-          <span><span class="dot dot-fire"></span> Actual</span>
-          <span><span class="dot dot-faint"></span> Projected</span>
+          <div class="inq-controls">
+            <div class="inq-filters" id="inqFilters">
+              <button class="inq-filter active" data-filter="all">All</button>
+              <button class="inq-filter" data-filter="waitlist">Waitlist</button>
+              <button class="inq-filter" data-filter="contact">Contact</button>
+            </div>
+            <input id="inqSearch" class="input" type="search" placeholder="Search name, email, phone…" style="max-width: 280px;" />
+          </div>
+
+          <div style="overflow-x:auto;">
+            <table class="admin-table" style="margin-top: var(--s-4);">
+              <thead>
+                <tr>
+                  <th>Name / Email</th>
+                  <th>Type</th>
+                  <th>Contact</th>
+                  <th>Tier</th>
+                  <th>Source</th>
+                  <th>When</th>
+                </tr>
+              </thead>
+              <tbody id="inqBody"></tbody>
+            </table>
+          </div>
+          <div class="mono text-faint mt-4" id="inqCount" style="font-size: 0.7rem;"></div>
         </div>
       </div>
 
-      <!-- Recent waitlist signups -->
-      <div class="admin-card">
-        <div class="admin-card-head">
-          <div>
-            <div class="mono text-dim">Recent Waitlist Signups</div>
-            <h3 class="display admin-h3">Last 24 Hours</h3>
+      <!-- Right column -->
+      <div class="admin-col">
+        <!-- Pre-opening dates -->
+        <div class="admin-card admin-card-fire" id="preopening">
+          <div class="admin-card-head">
+            <div>
+              <div class="mono text-fire">◷ Drives the public countdown</div>
+              <h3 class="display admin-h3">Pre-Opening Dates</h3>
+            </div>
           </div>
-          <a href="#" class="mono text-fire">View All →</a>
+          <div class="form-group">
+            <label class="label" for="setPresale">Founders Presale Goes Live</label>
+            <input class="input" type="datetime-local" id="setPresale" />
+          </div>
+          <div class="form-group mt-4">
+            <label class="label" for="setOpening">Public Opening (Founders pricing ends)</label>
+            <input class="input" type="datetime-local" id="setOpening" />
+          </div>
+          <button id="saveSettings" class="btn btn-primary btn-arrow mt-5" style="width:100%; justify-content:center;">Save Dates</button>
+          <p id="settingsStatus" class="mono mt-3" style="font-size: 0.75rem; color: var(--text-dim); min-height: 1em;"></p>
+          <p class="text-faint mt-3" style="font-size: 0.75rem; line-height: 1.5;">The homepage countdown reads these instantly. Before the presale date it counts to the presale; after, it counts to opening; then shows “Now Open.”</p>
         </div>
 
-        <table class="admin-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Tier</th>
-              <th>Source</th>
-              <th>Time</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Marcus Thompson</strong><br /><span class="mono text-dim">marcus.t@gmail.com</span></td>
-              <td><span class="tier-pill tier-pill-elite">Elite</span></td>
-              <td>Instagram Story</td>
-              <td>2 min ago</td>
-              <td><span class="dot-status dot-status-new">New</span></td>
-            </tr>
-            <tr>
-              <td><strong>Sarah Reichert</strong><br /><span class="mono text-dim">sreichert@outlook.com</span></td>
-              <td><span class="tier-pill tier-pill-plus">Plus</span></td>
-              <td>Direct</td>
-              <td>14 min ago</td>
-              <td><span class="dot-status dot-status-new">New</span></td>
-            </tr>
-            <tr>
-              <td><strong>Devon Kratzer</strong><br /><span class="mono text-dim">devon.k@me.com</span></td>
-              <td><span class="tier-pill tier-pill-plus">Plus</span></td>
-              <td>Referral · M.T.</td>
-              <td>38 min ago</td>
-              <td><span class="dot-status">Confirmed</span></td>
-            </tr>
-            <tr>
-              <td><strong>Allie Brennan</strong><br /><span class="mono text-dim">allie.b@yahoo.com</span></td>
-              <td><span class="tier-pill tier-pill-base">Base</span></td>
-              <td>Giveaway Entry</td>
-              <td>1 hr ago</td>
-              <td><span class="dot-status">Contacted</span></td>
-            </tr>
-            <tr>
-              <td><strong>Jared Stoller</strong><br /><span class="mono text-dim">jstoller@gmail.com</span></td>
-              <td><span class="tier-pill tier-pill-elite">Elite</span></td>
-              <td>Instagram Bio</td>
-              <td>2 hr ago</td>
-              <td><span class="dot-status">Confirmed</span></td>
-            </tr>
-            <tr>
-              <td><strong>Emily Worthington</strong><br /><span class="mono text-dim">emilyw@gmail.com</span></td>
-              <td><span class="tier-pill tier-pill-plus">Plus</span></td>
-              <td>Referral · D.K.</td>
-              <td>3 hr ago</td>
-              <td><span class="dot-status">Confirmed</span></td>
-            </tr>
-            <tr>
-              <td><strong>Tyler Reinhart</strong><br /><span class="mono text-dim">treinhart@me.com</span></td>
-              <td><span class="tier-pill tier-pill-plus">Plus</span></td>
-              <td>Direct</td>
-              <td>5 hr ago</td>
-              <td><span class="dot-status">Confirmed</span></td>
-            </tr>
-            <tr>
-              <td><strong>Hannah Rouch</strong><br /><span class="mono text-dim">hannah.r@gmail.com</span></td>
-              <td><span class="tier-pill tier-pill-elite">Elite</span></td>
-              <td>Founders Page</td>
-              <td>6 hr ago</td>
-              <td><span class="dot-status">Confirmed</span></td>
-            </tr>
-          </tbody>
+        <!-- Note -->
+        <div class="admin-card">
+          <div class="mono text-dim">Heads up</div>
+          <p class="text-soft mt-3" style="font-size: 0.875rem; line-height: 1.6;">Waitlist and giveaway form submissions land here in real time. Use <strong>Export CSV</strong> to pull them into email tools or Mindbody. Memberships themselves are managed in Mindbody / the member app.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Founders email campaign -->
+    <section class="admin-card admin-card-fire" id="campaign">
+      <div class="admin-card-head">
+        <div>
+          <div class="mono text-fire">✉ Resend broadcast · personalized</div>
+          <h3 class="display admin-h3">Founders Campaign</h3>
+        </div>
+        <div class="camp-count mono" id="campCount">— recipients</div>
+      </div>
+
+      <p class="text-soft" style="font-size: 0.9rem; line-height: 1.6; max-width: 640px;">
+        Emails everyone on the list below a branded, personalized note that the Founding 100 is live — greeting each person by first name, with the App Store &amp; Google Play buttons.
+        <strong class="text-cream">Always send a test to yourself first.</strong>
+      </p>
+
+      <div class="camp-grid mt-6">
+        <!-- Controls -->
+        <div class="camp-controls">
+          <div class="form-group">
+            <label class="label" for="campAudience">Audience</label>
+            <select class="input" id="campAudience">
+              <option value="waitlist">Founders waitlist</option>
+              <option value="all">All inquiries</option>
+              <option value="giveaway">Giveaway entries</option>
+            </select>
+          </div>
+
+          <div class="form-group mt-4">
+            <label class="label" for="campSubject">Subject line</label>
+            <input class="input" type="text" id="campSubject" value="The Founding 100 is live — your founder spot is open" maxlength="200" />
+          </div>
+
+          <div class="camp-divider"></div>
+
+          <div class="form-group">
+            <label class="label" for="campTest">Send a test to yourself</label>
+            <div class="camp-inline">
+              <input class="input" type="email" id="campTest" placeholder="you@email.com" autocomplete="email" />
+              <button id="campTestBtn" class="btn btn-arrow" style="white-space:nowrap;">Send test</button>
+            </div>
+          </div>
+
+          <button id="campSendBtn" class="btn btn-primary btn-arrow mt-5" style="width:100%; justify-content:center;">Send to <span id="campSendCount">all founders</span> →</button>
+          <p id="campStatus" class="mono mt-3" style="font-size: 0.78rem; line-height: 1.5; min-height: 1em; color: var(--text-dim);"></p>
+          <p class="text-faint mt-2" style="font-size: 0.72rem; line-height: 1.5;">One email per person via Resend. Clicking send delivers immediately and can't be undone — don't double-send.</p>
+        </div>
+
+        <!-- Live preview -->
+        <div class="camp-preview">
+          <div class="mono text-dim" style="font-size: 0.7rem; margin-bottom: 8px;">Live preview <span id="campPreviewName" class="text-faint"></span></div>
+          <div class="camp-frame-wrap">
+            <iframe id="campPreview" title="Email preview" sandbox=""></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Jobs -->
+    <section class="admin-card" id="jobs">
+      <div class="admin-card-head">
+        <div>
+          <div class="mono text-dim">Careers · drives the public /careers page</div>
+          <h3 class="display admin-h3">Jobs</h3>
+        </div>
+        <button id="jobNewBtn" class="btn btn-primary btn-arrow" style="padding:0.5rem 0.9rem; font-size:0.8rem;">+ New Job</button>
+      </div>
+      <div id="jobsList" class="jobs-admin-list"></div>
+
+      <div id="jobEditor" class="job-editor" style="display:none;">
+        <div class="camp-divider"></div>
+        <h4 class="display admin-h3" id="jobEditorTitle" style="font-size:1.15rem;">New Job</h4>
+        <input type="hidden" id="jobId" />
+        <div class="form-row2 mt-4">
+          <div class="form-group"><label class="label" for="jobTitle">Title *</label><input class="input" id="jobTitle" placeholder="e.g. Membership Associate" /></div>
+          <div class="form-group"><label class="label" for="jobStatus">Status</label><select class="input" id="jobStatus"><option value="open">Open — shown on /careers</option><option value="draft">Draft — hidden</option><option value="closed">Closed — hidden</option></select></div>
+        </div>
+        <div class="form-row2 mt-4">
+          <div class="form-group"><label class="label" for="jobDept">Department</label><input class="input" id="jobDept" placeholder="e.g. Front Desk" /></div>
+          <div class="form-group"><label class="label" for="jobType">Employment type</label><input class="input" id="jobType" placeholder="e.g. Full-time" /></div>
+        </div>
+        <div class="form-group mt-4"><label class="label" for="jobLocation">Location</label><input class="input" id="jobLocation" value="Fort Wayne, IN" /></div>
+        <div class="form-group mt-4"><label class="label" for="jobSummary">Short summary</label><input class="input" id="jobSummary" placeholder="One line shown on the job card" /></div>
+        <div class="form-group mt-4"><label class="label" for="jobDesc">Full description</label><textarea class="input" id="jobDesc" rows="5" style="resize:vertical; font-family:inherit;"></textarea></div>
+        <div class="form-group mt-4">
+          <label class="label">Application fields to collect</label>
+          <p class="text-faint" style="font-size:0.72rem; margin-bottom:8px; line-height:1.5;">First name + email are always required. Check any extra info this role should ask applicants for.</p>
+          <div id="jobFields" class="job-fields-check"></div>
+        </div>
+        <div class="camp-inline mt-5">
+          <button id="jobSaveBtn" class="btn btn-primary btn-arrow" style="justify-content:center;">Save Job</button>
+          <button id="jobCancelBtn" class="btn btn-arrow" type="button">Cancel</button>
+          <button id="jobDeleteBtn" class="btn btn-arrow" type="button" style="margin-left:auto; color:var(--fire); border-color:var(--fire);">Delete</button>
+        </div>
+        <p id="jobStatusMsg" class="mono mt-3" style="font-size:0.75rem; color:var(--text-dim); min-height:1em;"></p>
+      </div>
+    </section>
+
+    <!-- Applications -->
+    <section class="admin-card" id="applications">
+      <div class="admin-card-head">
+        <div>
+          <div class="mono text-dim">Careers · submissions</div>
+          <h3 class="display admin-h3">Applications</h3>
+        </div>
+        <button id="appExportCsv" class="btn btn-arrow" style="padding:0.5rem 0.9rem; font-size:0.8rem;">Export CSV</button>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="admin-table" style="margin-top: var(--s-4);">
+          <thead><tr><th>Applicant</th><th>Role</th><th>Phone</th><th>Details</th><th>When</th></tr></thead>
+          <tbody id="appBody"></tbody>
         </table>
       </div>
+      <div class="mono text-faint mt-4" id="appCount" style="font-size: 0.7rem;"></div>
+    </section>
 
-      <!-- Tier breakdown -->
-      <div class="admin-card">
-        <div class="admin-card-head">
-          <div>
-            <div class="mono text-dim">Founders Tier Mix</div>
-            <h3 class="display admin-h3">153 of 200</h3>
-          </div>
-          <div class="chip mono">Live</div>
-        </div>
-
-        <div class="tier-mix">
-          <div class="mix-row">
-            <div class="mix-label">
-              <span class="tier-pill tier-pill-base">Base</span>
-              <span>$79/mo · 32 members</span>
-            </div>
-            <div class="mix-bar">
-              <div class="mix-fill mix-fill-base" style="width: 21%;"></div>
-            </div>
-            <div class="mix-pct mono">21%</div>
-          </div>
-          <div class="mix-row">
-            <div class="mix-label">
-              <span class="tier-pill tier-pill-plus">Plus</span>
-              <span>$109/mo · 87 members</span>
-            </div>
-            <div class="mix-bar">
-              <div class="mix-fill mix-fill-plus" style="width: 57%;"></div>
-            </div>
-            <div class="mix-pct mono">57%</div>
-          </div>
-          <div class="mix-row">
-            <div class="mix-label">
-              <span class="tier-pill tier-pill-elite">Elite</span>
-              <span>$149/mo · 34 members</span>
-            </div>
-            <div class="mix-bar">
-              <div class="mix-fill mix-fill-elite" style="width: 22%;"></div>
-            </div>
-            <div class="mix-pct mono">22%</div>
-          </div>
+    <!-- Reports (scaffold) -->
+    <section class="admin-card" id="reports">
+      <div class="admin-card-head">
+        <div>
+          <div class="mono text-dim">Scaffold · tell me what to build here</div>
+          <h3 class="display admin-h3">Reports</h3>
         </div>
       </div>
-    </div>
-
-    <!-- Right column: Today + Giveaway + Quick actions -->
-    <div class="admin-col">
-      <!-- Today schedule -->
-      <div class="admin-card">
-        <div class="admin-card-head">
-          <div>
-            <div class="mono text-dim">Today · Apr 19</div>
-            <h3 class="display admin-h3">On The Floor</h3>
-          </div>
-          <div class="chip mono">Pre-Open</div>
-        </div>
-
-        <ul class="schedule">
-          <li>
-            <div class="sched-time mono">09:00</div>
-            <div>
-              <div class="h-4">Construction walkthrough</div>
-              <div class="text-soft" style="font-size: 0.875rem;">w/ general contractor + ops lead</div>
-            </div>
-          </li>
-          <li>
-            <div class="sched-time mono">11:30</div>
-            <div>
-              <div class="h-4">Founders pricing strategy call</div>
-              <div class="text-soft" style="font-size: 0.875rem;">w/ Sweet Dreams</div>
-            </div>
-          </li>
-          <li>
-            <div class="sched-time mono">14:00</div>
-            <div>
-              <div class="h-4">Equipment delivery — Eleiko</div>
-              <div class="text-soft" style="font-size: 0.875rem;">4 platforms · 12 racks · 320 plates</div>
-            </div>
-          </li>
-          <li>
-            <div class="sched-time mono">16:30</div>
-            <div>
-              <div class="h-4">Founder dinner — preview night</div>
-              <div class="text-soft" style="font-size: 0.875rem;">28 confirmed · Founders only</div>
-            </div>
-          </li>
-        </ul>
+      <p class="text-soft" style="font-size:0.9rem; line-height:1.6; max-width:640px;">This is where your reports will live. Tell me what you want to track — signups over time, applications by role, campaign open rates, membership funnel — and I'll build it out. A few live numbers to start:</p>
+      <div class="reports-placeholder mt-5">
+        <div class="report-tile"><div class="mono text-dim">Founders Waitlist</div><div class="kpi-value display" id="repWaitlist">—</div></div>
+        <div class="report-tile"><div class="mono text-dim">Job Applications</div><div class="kpi-value display" id="repApplications">—</div></div>
+        <div class="report-tile"><div class="mono text-dim">Open Roles</div><div class="kpi-value display" id="repJobs">—</div></div>
       </div>
+    </section>
 
-      <!-- Giveaway snapshot -->
-      <div class="admin-card admin-card-fire">
-        <div class="admin-card-head">
-          <div>
-            <div class="mono text-fire">★ Live Campaign</div>
-            <h3 class="display admin-h3">Wallen Giveaway</h3>
-          </div>
-        </div>
-
-        <div class="giveaway-stats">
-          <div>
-            <div class="kpi-value display" style="font-size: 2rem;">2,142</div>
-            <div class="mono text-dim">Total Entries</div>
-          </div>
-          <div>
-            <div class="kpi-value display" style="font-size: 2rem;">1,876</div>
-            <div class="mono text-dim">Unique Emails</div>
-          </div>
-        </div>
-
-        <div class="divider mt-5" style="background: var(--border-strong);"></div>
-
-        <div class="conv-row mt-5">
-          <span class="mono text-dim">→ Waitlist Conversions</span>
-          <strong>312 (16.6%)</strong>
-        </div>
-        <div class="conv-row">
-          <span class="mono text-dim">→ Instagram Followers Gained</span>
-          <strong>+847</strong>
-        </div>
-        <div class="conv-row">
-          <span class="mono text-dim">→ Closes In</span>
-          <strong>6d 14h 22m</strong>
-        </div>
-
-        <a href="giveaway.html" class="btn btn-fire btn-arrow mt-6" style="width:100%; justify-content:center;">View Public Page</a>
-      </div>
-
-      <!-- Quick actions -->
-      <div class="admin-card">
-        <div class="admin-card-head">
-          <div>
-            <div class="mono text-dim">Quick Actions</div>
-            <h3 class="display admin-h3">Operator Tools</h3>
-          </div>
-        </div>
-
-        <div class="quick-grid">
-          <button class="quick-btn">
-            <span>📥</span>
-            <span>Export Waitlist CSV</span>
-          </button>
-          <button class="quick-btn">
-            <span>✉</span>
-            <span>Email All Founders</span>
-          </button>
-          <button class="quick-btn">
-            <span>🎟</span>
-            <span>Draw Giveaway Winner</span>
-          </button>
-          <button class="quick-btn">
-            <span>📊</span>
-            <span>Generate Investor Report</span>
-          </button>
-          <button class="quick-btn">
-            <span>📅</span>
-            <span>Open Class Builder</span>
-          </button>
-          <button class="quick-btn">
-            <span>⚙</span>
-            <span>Pricing Settings</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Bottom band -->
-  <footer class="admin-foot mono">
-    <span>Demo Environment · No real member data</span>
-    <span>v0.4.2 · Internal build</span>
-    <span><a href="index.html" class="text-fire">← Back to public site</a></span>
-  </footer>
-</main>
+    <footer class="admin-foot mono">
+      <span>Revive Fitness &amp; Recovery — Operator Console</span>
+      <span><a href="/" class="text-fire">← Public site</a></span>
+    </footer>
+  </main>
+</div>
 
 <style>
-  /* Override site nav for admin */
-  .admin-body { padding: 0; }
+  /* Login */
+  .admin-login {
+    position: fixed; inset: 0; z-index: 100;
+    display: grid; place-items: center;
+    background: radial-gradient(ellipse at 70% 30%, rgba(255,56,25,0.10), var(--bg) 60%);
+    padding: var(--gutter);
+  }
+  .admin-login-card {
+    width: 100%; max-width: 400px;
+    border: 1px solid var(--border-strong);
+    background: var(--bg-1);
+    padding: var(--s-8) var(--s-7);
+  }
 
-  .admin-body { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
-  @media (max-width: 900px) { .admin-body { grid-template-columns: 1fr; } }
+  .admin-body { padding: 0; }
+  #adminApp { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+  @media (max-width: 900px) { #adminApp { grid-template-columns: 1fr; } }
 
   .admin-sidebar {
     background: var(--bg-1);
     border-right: 1px solid var(--border);
     padding: var(--s-6) var(--s-5);
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-7);
-    position: sticky;
-    top: 0;
-    height: 100vh;
+    display: flex; flex-direction: column; gap: var(--s-7);
+    position: sticky; top: 0; height: 100vh;
   }
   @media (max-width: 900px) { .admin-sidebar { position: relative; height: auto; } }
-
   .admin-brand {
-    font-family: var(--font-brand);
-    font-weight: 700;
-    font-size: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    display: flex;
-    align-items: center;
-    gap: var(--s-3);
+    font-family: var(--font-display); font-size: 1.5rem;
+    text-transform: uppercase; letter-spacing: 0.02em;
+    display: flex; align-items: center; gap: var(--s-3);
   }
-  .admin-brand-tag {
-    border: 1px solid var(--fire);
-    color: var(--fire);
-    padding: 2px 6px;
-    font-size: 0.6rem;
-  }
-
+  .admin-brand-tag { border: 1px solid var(--fire); color: var(--fire); padding: 2px 6px; font-size: 0.6rem; }
   .admin-nav { display: flex; flex-direction: column; gap: var(--s-6); }
   .admin-nav-group { display: flex; flex-direction: column; gap: 2px; }
-  .admin-nav-label {
-    color: var(--text-faint);
-    font-size: 0.65rem;
-    margin-bottom: var(--s-2);
-    padding-left: var(--s-3);
-  }
+  .admin-nav-label { color: var(--text-faint); font-size: 0.65rem; margin-bottom: var(--s-2); padding-left: var(--s-3); }
   .admin-nav-item {
-    display: flex;
-    align-items: center;
-    gap: var(--s-3);
-    padding: var(--s-3);
-    font-size: 0.875rem;
-    color: var(--text-soft);
-    border-radius: 0;
-    transition: all var(--dur-fast);
-    border-left: 2px solid transparent;
+    display: flex; align-items: center; gap: var(--s-3);
+    padding: var(--s-3); font-size: 0.875rem; color: var(--text-soft);
+    transition: all var(--dur-fast); border-left: 2px solid transparent;
   }
   .admin-nav-item:hover { color: var(--text); background: var(--bg-2); }
   .admin-nav-item.active { color: var(--fire); border-left-color: var(--fire); background: rgba(255, 56, 25, 0.05); }
-  .admin-nav-item .ic { width: 16px; text-align: center; opacity: 0.7; }
-
+  .admin-nav-item .ic { width: 16px; text-align: center; opacity: 0.8; }
   .admin-sidebar-foot { margin-top: auto; }
-  .admin-user {
-    display: flex;
-    align-items: center;
-    gap: var(--s-3);
-    padding: var(--s-3);
-    border: 1px solid var(--border);
-  }
-  .admin-avatar {
-    width: 36px;
-    height: 36px;
-    background: var(--fire);
-    color: var(--bg);
-    display: grid;
-    place-items: center;
-    font-family: var(--font-display);
-    font-size: 0.875rem;
-  }
 
-  /* MAIN */
   .admin-main { padding: var(--s-6) var(--s-7); display: flex; flex-direction: column; gap: var(--s-6); min-width: 0; }
-
-  .admin-topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--s-5);
-    flex-wrap: wrap;
-  }
+  .admin-topbar { display: flex; justify-content: space-between; align-items: center; gap: var(--s-5); flex-wrap: wrap; }
   .admin-topbar-actions { display: flex; align-items: center; gap: var(--s-4); }
-  .admin-search {
-    display: flex;
-    align-items: center;
-    gap: var(--s-3);
-    background: var(--bg-1);
-    border: 1px solid var(--border);
-    padding: var(--s-3) var(--s-4);
-    min-width: 320px;
-  }
-  .admin-search input { flex: 1; outline: none; font-size: 0.875rem; }
-  .btn-icon {
-    background: var(--bg-1);
-    border: 1px solid var(--border);
-    padding: var(--s-3);
-    width: 40px;
-    height: 40px;
-    display: grid;
-    place-items: center;
-    position: relative;
-  }
-  .badge {
-    position: absolute;
-    top: -6px; right: -6px;
-    background: var(--fire);
-    color: var(--bg);
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    padding: 2px 5px;
-    border-radius: 10px;
-  }
 
-  /* KPI Row */
   .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-4); }
   @media (max-width: 1100px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 600px) { .kpi-row { grid-template-columns: 1fr; } }
-  .kpi {
-    border: 1px solid var(--border);
-    background: var(--bg-1);
-    padding: var(--s-5);
-  }
-  .kpi-value {
-    font-size: 2.5rem;
-    line-height: 1;
-    margin-top: var(--s-3);
-    color: var(--text);
-  }
-  .kpi-of { color: var(--text-faint); font-size: 1.5rem; }
-  .kpi-bar {
-    margin-top: var(--s-4);
-    height: 4px;
-    background: var(--surface-2);
-    overflow: hidden;
-  }
-  .kpi-bar-fill { height: 100%; background: var(--fire); }
-  .kpi-meta {
-    margin-top: var(--s-3);
-    font-size: var(--fs-mono);
-    color: var(--text-dim);
-    letter-spacing: 0.1em;
-  }
-  .trend-up { color: var(--fire); }
-  .trend-down { color: var(--ice); }
+  .kpi { border: 1px solid var(--border); background: var(--bg-1); padding: var(--s-5); }
+  .kpi-value { font-size: 2.5rem; line-height: 1; margin-top: var(--s-3); color: var(--text); }
 
-  /* Admin Grid */
-  .admin-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: var(--s-6); }
+  .admin-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: var(--s-6); align-items: start; }
   @media (max-width: 1100px) { .admin-grid { grid-template-columns: 1fr; } }
   .admin-col { display: flex; flex-direction: column; gap: var(--s-6); }
-
-  .admin-card {
-    border: 1px solid var(--border);
-    background: var(--bg-1);
-    padding: var(--s-6);
-  }
-  .admin-card-fire {
-    border-color: var(--fire);
-    background: linear-gradient(180deg, rgba(255, 56, 25, 0.04), var(--bg-1));
-  }
+  .admin-card { border: 1px solid var(--border); background: var(--bg-1); padding: var(--s-6); }
+  .admin-card-fire { border-color: var(--fire); background: linear-gradient(180deg, rgba(255, 56, 25, 0.04), var(--bg-1)); }
   .admin-card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--s-4); margin-bottom: var(--s-5); flex-wrap: wrap; }
   .admin-h3 { font-size: 1.5rem; line-height: 1; margin-top: 4px; text-transform: uppercase; }
 
-  .chip {
-    font-size: var(--fs-mono);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border: 1px solid var(--border-strong);
-    color: var(--text-dim);
+  .inq-controls { display: flex; justify-content: space-between; align-items: center; gap: var(--s-4); flex-wrap: wrap; }
+  .inq-filters { display: inline-flex; border: 1px solid var(--border-strong); padding: 3px; }
+  .inq-filter {
+    padding: 0.5rem 1rem; font-family: var(--font-mono); font-size: 0.7rem;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim);
+    border: 0; background: transparent; cursor: pointer; transition: all var(--dur-fast);
   }
-  .chip-fire { border-color: var(--fire); color: var(--fire); }
+  .inq-filter.active { background: var(--fire); color: var(--bg); }
 
-  /* Bar chart */
-  .bar-chart {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: var(--s-3);
-    height: 180px;
-    padding-top: var(--s-4);
-    align-items: end;
-  }
-  .bar {
-    position: relative;
-    background: linear-gradient(180deg, var(--fire), var(--fire-deep));
-    height: var(--h);
-    min-height: 8px;
-    transition: opacity var(--dur);
-  }
-  .bar:hover { opacity: 0.85; }
-  .bar-active { background: var(--fire); }
-  .bar-projected { background: repeating-linear-gradient(45deg, var(--surface-2) 0 4px, var(--bg-2) 4px 8px); border: 1px solid var(--border-strong); }
-  .bar > span {
-    position: absolute;
-    bottom: -20px;
-    left: 0; right: 0;
-    text-align: center;
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--text-faint);
-    letter-spacing: 0.1em;
-  }
-  .bar-legend {
-    display: flex;
-    gap: var(--s-5);
-    margin-top: var(--s-7);
-    font-size: var(--fs-mono);
-    color: var(--text-dim);
-    letter-spacing: 0.1em;
-  }
-  .bar-legend > span { display: flex; align-items: center; gap: var(--s-2); }
-  .dot { display: inline-block; width: 8px; height: 8px; }
-  .dot-fire { background: var(--fire); }
-  .dot-faint { background: var(--surface-2); border: 1px solid var(--border-strong); }
-
-  /* Admin table */
   .admin-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
   .admin-table thead th {
-    text-align: left;
-    padding: var(--s-3);
-    color: var(--text-dim);
-    font-family: var(--font-mono);
-    font-size: var(--fs-mono);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    border-bottom: 1px solid var(--border);
+    text-align: left; padding: var(--s-3); color: var(--text-dim);
+    font-family: var(--font-mono); font-size: var(--fs-mono); letter-spacing: 0.15em;
+    text-transform: uppercase; border-bottom: 1px solid var(--border); white-space: nowrap;
   }
   .admin-table tbody tr { border-bottom: 1px solid var(--border); transition: background var(--dur-fast); }
   .admin-table tbody tr:hover { background: var(--bg-2); }
   .admin-table td { padding: var(--s-4) var(--s-3); color: var(--text-soft); vertical-align: middle; }
   .admin-table td strong { color: var(--text); }
 
-  .tier-pill {
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border: 1px solid currentColor;
-  }
-  .tier-pill-base { color: var(--text-dim); }
+  .tier-pill { display: inline-block; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 3px 8px; border: 1px solid currentColor; }
   .tier-pill-plus { color: var(--gold); }
   .tier-pill-elite { color: var(--fire); }
 
-  .dot-status {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    padding-left: 14px;
-    position: relative;
-  }
-  .dot-status::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 50%;
-    transform: translateY(-50%);
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--text-dim);
-  }
-  .dot-status-new { color: var(--fire); }
-  .dot-status-new::before { background: var(--fire); box-shadow: 0 0 0 4px rgba(255, 56, 25, 0.15); }
-
-  /* Tier mix */
-  .tier-mix { display: flex; flex-direction: column; gap: var(--s-5); }
-  .mix-row { display: grid; grid-template-columns: 220px 1fr 50px; gap: var(--s-4); align-items: center; }
-  @media (max-width: 700px) { .mix-row { grid-template-columns: 1fr; gap: var(--s-2); } }
-  .mix-label { display: flex; align-items: center; gap: var(--s-3); font-size: 0.875rem; color: var(--text-soft); }
-  .mix-bar { height: 8px; background: var(--surface-2); }
-  .mix-fill { height: 100%; }
-  .mix-fill-base { background: var(--text-dim); }
-  .mix-fill-plus { background: var(--gold); }
-  .mix-fill-elite { background: var(--fire); }
-  .mix-pct { color: var(--text); text-align: right; }
-
-  /* Schedule */
-  .schedule { display: flex; flex-direction: column; gap: var(--s-3); }
-  .schedule li { display: grid; grid-template-columns: 60px 1fr; gap: var(--s-4); padding: var(--s-3) 0; border-bottom: 1px solid var(--border); }
-  .schedule li:last-child { border-bottom: 0; }
-  .sched-time { color: var(--fire); font-size: 0.875rem; padding-top: 4px; }
-
-  /* Giveaway */
-  .giveaway-stats { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); }
-  .conv-row { display: flex; justify-content: space-between; align-items: center; padding: var(--s-3) 0; border-bottom: 1px dashed var(--border); font-size: 0.875rem; }
-  .conv-row:last-of-type { border-bottom: 0; }
-
-  /* Quick actions */
-  .quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-3); }
-  .quick-btn {
-    display: flex;
-    align-items: center;
-    gap: var(--s-3);
-    padding: var(--s-4);
-    border: 1px solid var(--border);
-    background: var(--bg-2);
-    color: var(--text);
-    font-size: 0.8125rem;
-    text-align: left;
-    transition: all var(--dur-fast);
-  }
-  .quick-btn:hover { border-color: var(--fire); color: var(--fire); transform: translateY(-2px); }
-
-  /* Footer */
   .admin-foot {
-    margin-top: var(--s-6);
-    padding: var(--s-5) 0;
-    border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: var(--s-4);
-    color: var(--text-faint);
-    font-size: var(--fs-mono);
-    letter-spacing: 0.18em;
+    margin-top: var(--s-6); padding: var(--s-5) 0; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--s-4);
+    color: var(--text-faint); font-size: var(--fs-mono); letter-spacing: 0.18em;
   }
   .admin-foot a { color: var(--fire); }
+
+  /* Campaign */
+  .camp-count { color: var(--fire); font-size: 0.8rem; letter-spacing: 0.12em; border: 1px solid var(--border-strong); padding: 6px 12px; white-space: nowrap; }
+  .camp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-7); align-items: start; }
+  @media (max-width: 900px) { .camp-grid { grid-template-columns: 1fr; } }
+  .camp-controls select.input { appearance: none; -webkit-appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--text-dim) 50%), linear-gradient(135deg, var(--text-dim) 50%, transparent 50%); background-position: calc(100% - 18px) 1.15em, calc(100% - 13px) 1.15em; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; padding-right: 40px; }
+  .camp-divider { height: 1px; background: var(--border); margin: var(--s-5) 0; }
+  .camp-inline { display: flex; gap: var(--s-3); align-items: stretch; }
+  .camp-inline .input { flex: 1; }
+  .camp-preview { position: sticky; top: var(--s-6); }
+  .camp-frame-wrap { border: 1px solid var(--border-strong); background: #0b0807; height: 560px; overflow: hidden; }
+  #campPreview { width: 100%; height: 100%; border: 0; display: block; background: #0b0807; }
+
+  /* Jobs + Applications + Reports */
+  .form-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); }
+  @media (max-width: 600px) { .form-row2 { grid-template-columns: 1fr; } }
+  .jobs-admin-list { display: flex; flex-direction: column; gap: var(--s-3); }
+  .job-row { display: flex; justify-content: space-between; align-items: center; gap: var(--s-4); border: 1px solid var(--border); padding: var(--s-4) var(--s-5); flex-wrap: wrap; }
+  .job-row .jr-title { font-family: var(--font-display); text-transform: uppercase; font-size: 1.1rem; line-height: 1; }
+  .job-row .jr-meta { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-dim); margin-top: 4px; }
+  .job-status { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 7px; border: 1px solid currentColor; }
+  .job-status-open { color: #7bd88f; } .job-status-draft { color: var(--gold); } .job-status-closed { color: var(--text-faint); }
+  .job-fields-check { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-2) var(--s-4); }
+  @media (max-width: 600px) { .job-fields-check { grid-template-columns: 1fr; } }
+  .job-fields-check label { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-soft); cursor: pointer; }
+  .reports-placeholder { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-4); }
+  @media (max-width: 700px) { .reports-placeholder { grid-template-columns: 1fr; } }
+  .report-tile { border: 1px solid var(--border); background: var(--bg-1); padding: var(--s-5); }
 </style>
 
-<script src="scripts/main.js" defer></script>
+<script>
+(function () {
+  'use strict';
+  var PW_KEY = 'revive_admin_pw';
+  var loginEl = document.getElementById('adminLogin');
+  var appEl = document.getElementById('adminApp');
+  var loginForm = document.getElementById('adminLoginForm');
+  var pwInput = document.getElementById('adminPassword');
+  var loginError = document.getElementById('adminLoginError');
+
+  var password = sessionStorage.getItem(PW_KEY) || '';
+  var inquiries = [];
+  var filter = 'all';
+  var search = '';
+
+  function showApp() { loginEl.style.display = 'none'; appEl.style.display = 'grid'; }
+  function showLogin() { appEl.style.display = 'none'; loginEl.style.display = 'grid'; pwInput.focus(); }
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function toLocalInput(iso) {
+    var d = new Date(iso);
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) + 'T' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+  }
+  function fmtWhen(iso) {
+    var d = new Date(iso);
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' · ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+  }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function tdText(v) { var td = el('td'); td.textContent = (v == null || v === '') ? '—' : v; return td; }
+
+  async function fetchInquiries(pw) {
+    var res = await fetch('/api/inquiries', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: pw }) });
+    if (res.status === 401) throw new Error('unauthorized');
+    if (!res.ok) throw new Error('load');
+    var j = await res.json();
+    return j.inquiries || [];
+  }
+
+  async function loadSettings() {
+    try {
+      var r = await fetch('/api/settings', { cache: 'no-store' });
+      if (!r.ok) return;
+      var j = await r.json();
+      if (j.foundersPresaleDate) document.getElementById('setPresale').value = toLocalInput(j.foundersPresaleDate);
+      if (j.publicOpeningDate) document.getElementById('setOpening').value = toLocalInput(j.publicOpeningDate);
+    } catch (e) { /* non-fatal */ }
+  }
+
+  function render() {
+    var total = inquiries.length;
+    var wl = inquiries.filter(function (i) { return i.type === 'waitlist'; }).length;
+    var gv = inquiries.filter(function (i) { return i.type === 'giveaway'; }).length;
+    var weekAgo = Date.now() - 7 * 86400000;
+    var recent = inquiries.filter(function (i) { return new Date(i.created_at).getTime() > weekAgo; }).length;
+    document.getElementById('kpiTotal').textContent = total;
+    document.getElementById('kpiWaitlist').textContent = wl;
+    document.getElementById('kpiRecent').textContent = recent;
+
+    var q = search.trim().toLowerCase();
+    var rows = inquiries.filter(function (i) {
+      if (filter !== 'all' && i.type !== filter) return false;
+      if (!q) return true;
+      var hay = ((i.first_name || '') + ' ' + (i.last_name || '') + ' ' + (i.email || '') + ' ' + (i.phone || '') + ' ' + (i.instagram || '')).toLowerCase();
+      return hay.indexOf(q) !== -1;
+    });
+
+    var tbody = document.getElementById('inqBody');
+    tbody.textContent = '';
+    document.getElementById('inqCount').textContent = rows.length + ' of ' + total + ' shown';
+
+    if (!rows.length) {
+      var tr0 = el('tr');
+      var td0 = el('td', 'text-dim', total ? 'No matches.' : 'No inquiries yet — submissions appear here in real time.');
+      td0.colSpan = 6; td0.style.padding = 'var(--s-6)'; td0.style.textAlign = 'center';
+      tr0.appendChild(td0); tbody.appendChild(tr0); return;
+    }
+
+    rows.forEach(function (i) {
+      var tr = el('tr');
+      var nameTd = el('td');
+      nameTd.appendChild(el('strong', null, ((i.first_name || '') + ' ' + (i.last_name || '')).trim() || '—'));
+      nameTd.appendChild(document.createElement('br'));
+      nameTd.appendChild(el('span', 'mono text-dim', i.email || ''));
+      tr.appendChild(nameTd);
+      var typeTd = el('td');
+      typeTd.appendChild(el('span', 'tier-pill ' + (i.type === 'giveaway' ? 'tier-pill-elite' : 'tier-pill-plus'), i.type === 'giveaway' ? 'Giveaway' : 'Waitlist'));
+      tr.appendChild(typeTd);
+      tr.appendChild(tdText(i.phone || (i.instagram ? '@' + String(i.instagram).replace(/^@/, '') : '')));
+      tr.appendChild(tdText(i.tier ? String(i.tier).toUpperCase() : ''));
+      tr.appendChild(tdText(i.source || ''));
+      tr.appendChild(tdText(fmtWhen(i.created_at)));
+      tbody.appendChild(tr);
+    });
+  }
+
+  async function init(pw) {
+    inquiries = await fetchInquiries(pw);
+    password = pw;
+    sessionStorage.setItem(PW_KEY, pw);
+    showApp();
+    render();
+    loadSettings();
+    loadCampaignPreview();
+    loadJobs();
+    loadApplications();
+  }
+
+  loginForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    loginError.hidden = true;
+    var btn = loginForm.querySelector('[type=submit]');
+    var lbl = btn.textContent; btn.disabled = true; btn.textContent = 'Checking…';
+    try {
+      await init(pwInput.value);
+    } catch (err) {
+      sessionStorage.removeItem(PW_KEY);
+      loginError.textContent = err.message === 'unauthorized' ? 'Incorrect password.' : 'Could not connect. Try again.';
+      loginError.hidden = false;
+    } finally { btn.disabled = false; btn.textContent = lbl; }
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', function () {
+    sessionStorage.removeItem(PW_KEY); password = ''; inquiries = []; pwInput.value = ''; showLogin();
+  });
+
+  document.getElementById('refreshBtn').addEventListener('click', async function () {
+    var b = this; var l = b.textContent; b.disabled = true; b.textContent = '…';
+    try { inquiries = await fetchInquiries(password); render(); } catch (e) { if (e.message === 'unauthorized') showLogin(); }
+    finally { b.disabled = false; b.textContent = l; }
+  });
+
+  document.getElementById('inqFilters').addEventListener('click', function (e) {
+    var btn = e.target.closest('.inq-filter'); if (!btn) return;
+    filter = btn.getAttribute('data-filter');
+    this.querySelectorAll('.inq-filter').forEach(function (b) { b.classList.toggle('active', b === btn); });
+    render();
+  });
+
+  document.getElementById('inqSearch').addEventListener('input', function () { search = this.value; render(); });
+
+  document.getElementById('exportCsv').addEventListener('click', function () {
+    var cols = ['created_at', 'type', 'first_name', 'last_name', 'email', 'phone', 'tier', 'instagram', 'goal', 'source', 'status'];
+    function cell(v) { if (v == null) return ''; var s = typeof v === 'object' ? JSON.stringify(v) : String(v); return '"' + s.replace(/"/g, '""') + '"'; }
+    var lines = [cols.join(',')];
+    inquiries.forEach(function (i) { lines.push(cols.map(function (c) { return cell(i[c]); }).join(',')); });
+    var blob = new Blob([lines.join('\r\n')], { type: 'text/csv;charset=utf-8' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'revive-inquiries-' + new Date().toISOString().slice(0, 10) + '.csv';
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+
+  document.getElementById('saveSettings').addEventListener('click', async function () {
+    var presale = document.getElementById('setPresale').value;
+    var opening = document.getElementById('setOpening').value;
+    var status = document.getElementById('settingsStatus');
+    status.style.color = 'var(--text-dim)'; status.textContent = 'Saving…';
+    try {
+      var res = await fetch('/api/settings', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          password: password,
+          foundersPresaleDate: presale ? new Date(presale).toISOString() : null,
+          publicOpeningDate: opening ? new Date(opening).toISOString() : null,
+        }),
+      });
+      if (!res.ok) { var j = await res.json().catch(function () { return {}; }); throw new Error(j.error || 'Save failed'); }
+      status.style.color = 'var(--fire)'; status.textContent = 'Saved ✓ — the public countdown is updated.';
+      setTimeout(function () { status.textContent = ''; }, 3500);
+    } catch (e) { status.style.color = 'var(--fire)'; status.textContent = e.message; }
+  });
+
+  // ---- Founders email campaign ----
+  var campTimer = null;
+  var campStatusEl = document.getElementById('campStatus');
+
+  function campSetStatus(msg, kind) {
+    campStatusEl.style.color = kind === 'error' ? 'var(--fire)' : kind === 'ok' ? '#7bd88f' : 'var(--text-dim)';
+    campStatusEl.textContent = msg || '';
+  }
+
+  async function campPost(payload) {
+    var res = await fetch('/api/send-campaign', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(Object.assign({ password: password }, payload)),
+    });
+    var j = await res.json().catch(function () { return {}; });
+    if (res.status === 401) { showLogin(); throw new Error(j.error || 'Session expired — log in again.'); }
+    if (!res.ok) throw new Error(j.error || 'Request failed');
+    return j;
+  }
+
+  function loadCampaignPreview() {
+    var audience = document.getElementById('campAudience').value;
+    var subject = document.getElementById('campSubject').value;
+    campPost({ mode: 'preview', audience: audience, subject: subject }).then(function (j) {
+      var n = j.count || 0;
+      document.getElementById('campCount').textContent = n + (n === 1 ? ' recipient' : ' recipients');
+      document.getElementById('campSendCount').textContent = n === 1 ? '1 founder' : ('all ' + n + ' founders');
+      document.getElementById('campPreview').srcdoc = j.html || '';
+      document.getElementById('campPreviewName').textContent = '· opens “Good Afternoon!”';
+    }).catch(function (e) { campSetStatus(e.message, 'error'); });
+  }
+
+  function scheduleCampaignPreview() {
+    if (campTimer) clearTimeout(campTimer);
+    campTimer = setTimeout(loadCampaignPreview, 450);
+  }
+
+  document.getElementById('campAudience').addEventListener('change', loadCampaignPreview);
+  document.getElementById('campSubject').addEventListener('input', scheduleCampaignPreview);
+
+  document.getElementById('campTestBtn').addEventListener('click', async function () {
+    var email = document.getElementById('campTest').value.trim();
+    if (!email) { campSetStatus('Enter an email address to send the test to.', 'error'); return; }
+    var b = this; var l = b.textContent; b.disabled = true; b.textContent = 'Sending…';
+    campSetStatus('Sending test…');
+    try {
+      await campPost({ mode: 'test', testEmail: email, subject: document.getElementById('campSubject').value });
+      campSetStatus('Test sent to ' + email + ' ✓ — check your inbox (and spam).', 'ok');
+    } catch (e) { campSetStatus(e.message, 'error'); }
+    finally { b.disabled = false; b.textContent = l; }
+  });
+
+  document.getElementById('campSendBtn').addEventListener('click', async function () {
+    var audience = document.getElementById('campAudience').value;
+    var subject = document.getElementById('campSubject').value;
+    var countText = document.getElementById('campCount').textContent;
+    if (!window.confirm('Send this email now to ' + countText + '?\n\nIt delivers immediately and cannot be undone. Make sure you already sent yourself a test.')) return;
+    var b = this; b.disabled = true; b.setAttribute('aria-busy', 'true');
+    campSetStatus('Sending campaign… keep this tab open.');
+    try {
+      var j = await campPost({ mode: 'send', audience: audience, subject: subject });
+      if (j.failed > 0) campSetStatus('Sent ' + j.sent + ' of ' + j.total + '. ' + j.failed + ' failed: ' + (j.errors || []).join('; '), 'error');
+      else campSetStatus('✓ Sent to all ' + j.sent + ' ' + (j.sent === 1 ? 'founder' : 'founders') + '.', 'ok');
+    } catch (e) { campSetStatus(e.message, 'error'); }
+    finally { b.disabled = false; b.removeAttribute('aria-busy'); }
+  });
+
+  // ================= Jobs + Applications =================
+  var jobs = [];
+  var applications = [];
+  var JOB_FIELDS = window.REVIVE_JOB_FIELDS || [];
+
+  async function apiPost(url, payload) {
+    var res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({ password: password }, payload)) });
+    var j = await res.json().catch(function () { return {}; });
+    if (res.status === 401) { showLogin(); throw new Error(j.error || 'Session expired — log in again.'); }
+    if (!res.ok) throw new Error(j.error || 'Request failed');
+    return j;
+  }
+  function setRep(id, v) { var e = document.getElementById(id); if (e) e.textContent = v; }
+
+  async function loadJobs() {
+    try {
+      var j = await apiPost('/api/admin-jobs', { action: 'list' });
+      jobs = j.jobs || [];
+      renderJobs();
+      setRep('repJobs', jobs.filter(function (x) { return x.status === 'open'; }).length);
+    } catch (e) { /* non-fatal */ }
+  }
+
+  function renderJobs() {
+    var list = document.getElementById('jobsList');
+    list.textContent = '';
+    if (!jobs.length) { list.appendChild(el('p', 'text-dim', 'No jobs yet. Click “+ New Job” to post one.')); return; }
+    jobs.forEach(function (job) {
+      var row = el('div', 'job-row');
+      var left = el('div');
+      left.appendChild(el('div', 'jr-title', job.title || 'Untitled'));
+      var meta = [job.department, job.employment_type, job.location].filter(Boolean).join(' · ');
+      left.appendChild(el('div', 'jr-meta', meta || '—'));
+      row.appendChild(left);
+      var right = el('div', 'camp-inline');
+      right.appendChild(el('span', 'job-status job-status-' + (job.status || 'open'), job.status || 'open'));
+      var edit = el('button', 'btn btn-arrow', 'Edit'); edit.style.padding = '0.4rem 0.8rem'; edit.style.fontSize = '0.75rem';
+      edit.addEventListener('click', function () { openJobEditor(job); });
+      right.appendChild(edit);
+      row.appendChild(right);
+      list.appendChild(row);
+    });
+  }
+
+  function renderFieldChecks(selected) {
+    var wrap = document.getElementById('jobFields');
+    wrap.textContent = '';
+    JOB_FIELDS.forEach(function (f) {
+      var lab = el('label');
+      var cb = document.createElement('input'); cb.type = 'checkbox'; cb.value = f.key; cb.checked = selected.indexOf(f.key) !== -1;
+      lab.appendChild(cb); lab.appendChild(document.createTextNode(' ' + f.label));
+      wrap.appendChild(lab);
+    });
+  }
+
+  function openJobEditor(job) {
+    job = job || {};
+    document.getElementById('jobEditor').style.display = 'block';
+    document.getElementById('jobEditorTitle').textContent = job.id ? 'Edit Job' : 'New Job';
+    document.getElementById('jobId').value = job.id || '';
+    document.getElementById('jobTitle').value = job.title || '';
+    document.getElementById('jobStatus').value = job.status || 'open';
+    document.getElementById('jobDept').value = job.department || '';
+    document.getElementById('jobType').value = job.employment_type || '';
+    document.getElementById('jobLocation').value = job.location || 'Fort Wayne, IN';
+    document.getElementById('jobSummary').value = job.summary || '';
+    document.getElementById('jobDesc').value = job.description || '';
+    renderFieldChecks(Array.isArray(job.fields) ? job.fields : []);
+    document.getElementById('jobDeleteBtn').style.display = job.id ? '' : 'none';
+    document.getElementById('jobStatusMsg').textContent = '';
+    document.getElementById('jobEditor').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function collectJob() {
+    var fields = [];
+    document.querySelectorAll('#jobFields input[type=checkbox]:checked').forEach(function (cb) { fields.push(cb.value); });
+    return {
+      id: document.getElementById('jobId').value || undefined,
+      title: document.getElementById('jobTitle').value.trim(),
+      status: document.getElementById('jobStatus').value,
+      department: document.getElementById('jobDept').value.trim(),
+      employment_type: document.getElementById('jobType').value.trim(),
+      location: document.getElementById('jobLocation').value.trim(),
+      summary: document.getElementById('jobSummary').value.trim(),
+      description: document.getElementById('jobDesc').value,
+      fields: fields,
+    };
+  }
+
+  document.getElementById('jobNewBtn').addEventListener('click', function () { openJobEditor(null); });
+  document.getElementById('jobCancelBtn').addEventListener('click', function () { document.getElementById('jobEditor').style.display = 'none'; });
+  document.getElementById('jobSaveBtn').addEventListener('click', async function () {
+    var job = collectJob();
+    var msg = document.getElementById('jobStatusMsg');
+    if (!job.title) { msg.style.color = 'var(--fire)'; msg.textContent = 'A title is required.'; return; }
+    var b = this; b.disabled = true; msg.style.color = 'var(--text-dim)'; msg.textContent = 'Saving…';
+    try {
+      await apiPost('/api/admin-jobs', { action: 'save', job: job });
+      document.getElementById('jobEditor').style.display = 'none';
+      await loadJobs();
+    } catch (e) { msg.style.color = 'var(--fire)'; msg.textContent = e.message; }
+    finally { b.disabled = false; }
+  });
+  document.getElementById('jobDeleteBtn').addEventListener('click', async function () {
+    var id = document.getElementById('jobId').value;
+    if (!id || !window.confirm('Delete this job permanently? Applications already received are kept.')) return;
+    var msg = document.getElementById('jobStatusMsg');
+    try { await apiPost('/api/admin-jobs', { action: 'delete', id: id }); document.getElementById('jobEditor').style.display = 'none'; await loadJobs(); }
+    catch (e) { msg.style.color = 'var(--fire)'; msg.textContent = e.message; }
+  });
+
+  async function loadApplications() {
+    try {
+      var j = await apiPost('/api/applications', {});
+      applications = j.applications || [];
+      renderApplications();
+      setRep('kpiApplications', applications.length);
+      setRep('repApplications', applications.length);
+      setRep('repWaitlist', inquiries.filter(function (i) { return i.type === 'waitlist'; }).length);
+    } catch (e) { /* non-fatal */ }
+  }
+
+  function renderApplications() {
+    var body = document.getElementById('appBody');
+    body.textContent = '';
+    document.getElementById('appCount').textContent = applications.length + (applications.length === 1 ? ' application' : ' applications');
+    if (!applications.length) {
+      var tr0 = el('tr'); var td0 = el('td', 'text-dim', 'No applications yet — they land here in real time.');
+      td0.colSpan = 5; td0.style.padding = 'var(--s-6)'; td0.style.textAlign = 'center';
+      tr0.appendChild(td0); body.appendChild(tr0); return;
+    }
+    applications.forEach(function (a) {
+      var tr = el('tr');
+      var nameTd = el('td');
+      nameTd.appendChild(el('strong', null, ((a.first_name || '') + ' ' + (a.last_name || '')).trim() || '—'));
+      nameTd.appendChild(document.createElement('br'));
+      nameTd.appendChild(el('span', 'mono text-dim', a.email || ''));
+      tr.appendChild(nameTd);
+      tr.appendChild(tdText(a.job_title || ''));
+      tr.appendChild(tdText(a.phone || ''));
+      var dTd = el('td');
+      var data = a.data || {};
+      var fileKeys = ['resume_url', 'cover_letter'];
+      var otherKeys = Object.keys(data).filter(function (k) { return fileKeys.indexOf(k) === -1; });
+      var box = el('div'); box.style.cssText = 'display:flex;flex-wrap:wrap;gap:10px;align-items:center;';
+      fileKeys.forEach(function (fk) {
+        var v = data[fk];
+        if (v && /^https?:\/\//.test(String(v))) {
+          var link = el('a', 'mono', fk === 'resume_url' ? 'Resume ↗' : 'Cover letter ↗');
+          link.href = v; link.target = '_blank'; link.rel = 'noopener';
+          link.style.cssText = 'color:var(--fire);font-size:0.75rem;';
+          box.appendChild(link);
+        }
+      });
+      if (otherKeys.length) {
+        var vbtn = el('button', 'btn btn-arrow', 'View'); vbtn.style.cssText = 'padding:0.3rem 0.7rem;font-size:0.72rem;';
+        vbtn.addEventListener('click', function () {
+          var lines = otherKeys.map(function (k) { return k.replace(/_/g, ' ') + ': ' + data[k]; }).join('\n\n');
+          window.alert('Application — ' + ((a.first_name || '') + ' ' + (a.last_name || '')).trim() + '\nRole: ' + (a.job_title || '—') + '\nEmail: ' + (a.email || '') + '\n\n' + lines);
+        });
+        box.appendChild(vbtn);
+      }
+      if (box.childElementCount) dTd.appendChild(box); else dTd.textContent = '—';
+      tr.appendChild(dTd);
+      tr.appendChild(tdText(fmtWhen(a.created_at)));
+      body.appendChild(tr);
+    });
+  }
+
+  document.getElementById('appExportCsv').addEventListener('click', function () {
+    var base = ['created_at', 'job_title', 'first_name', 'last_name', 'email', 'phone'];
+    var extraSet = {};
+    applications.forEach(function (a) { Object.keys(a.data || {}).forEach(function (k) { extraSet[k] = true; }); });
+    var extra = Object.keys(extraSet);
+    function cell(v) { if (v == null) return ''; var s = typeof v === 'object' ? JSON.stringify(v) : String(v); return '"' + s.replace(/"/g, '""') + '"'; }
+    var lines = [base.concat(extra).join(',')];
+    applications.forEach(function (a) {
+      var rowv = base.map(function (c) { return cell(a[c]); });
+      extra.forEach(function (k) { rowv.push(cell((a.data || {})[k])); });
+      lines.push(rowv.join(','));
+    });
+    var blob = new Blob([lines.join('\r\n')], { type: 'text/csv;charset=utf-8' });
+    var link = document.createElement('a'); link.href = URL.createObjectURL(blob);
+    link.download = 'revive-applications-' + new Date().toISOString().slice(0, 10) + '.csv';
+    document.body.appendChild(link); link.click(); link.remove();
+  });
+
+  // Auto-resume session if a password is stored.
+  if (password) { init(password).catch(function () { showLogin(); }); } else { showLogin(); }
+})();
+</script>
 </body>
 </html>

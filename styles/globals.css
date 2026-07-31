@@ -690,3 +690,38 @@ p .brand, li .brand, .lead .brand, summary .brand, label .brand,
   filter: blur(60px);
   pointer-events: none;
 }
+
+/* ==========================================================================
+   Additions — Grand Opening countdown band (home + grand-opening pages)
+   ========================================================================== */
+.countdown-band { background: var(--bg-1); border-block: 1px solid var(--border); }
+.rc-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-6);
+  flex-wrap: wrap;
+}
+.rc-head { max-width: 360px; }
+.rc-clock { display: flex; align-items: baseline; gap: var(--s-3); }
+.rc-block { display: flex; flex-direction: column; align-items: center; gap: var(--s-2); min-width: 64px; }
+.rc-block > span:first-child {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  line-height: 1;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.rc-block .mono { color: var(--text-dim); }
+.rc-sep {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  color: var(--fire);
+  align-self: flex-start;
+  padding-top: 4px;
+}
+.rc-cta { white-space: nowrap; }
+[data-revive-countdown].is-open .rc-clock { display: none; }
+@media (max-width: 900px) {
+  .rc-row { flex-direction: column; align-items: flex-start; }
+}
