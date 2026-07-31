@@ -1,8 +1,13 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
-    { "source": "/about.html", "destination": "/why-revive.html", "permanent": true },
-    { "source": "/experience.html", "destination": "/why-revive.html", "permanent": true },
+    { "source": "/about", "destination": "/why-revive", "permanent": true },
+    { "source": "/about.html", "destination": "/why-revive", "permanent": true },
+    { "source": "/experience", "destination": "/why-revive", "permanent": true },
+    { "source": "/experience.html", "destination": "/why-revive", "permanent": true },
+    { "source": "/giveaway", "destination": "/", "permanent": true },
     { "source": "/giveaway.html", "destination": "/", "permanent": true }
   ],
   "headers": [
