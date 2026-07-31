@@ -69,10 +69,16 @@
             <span class="dollar">$</span>
             <span>79</span>
           </div>
-          <div class="mono text-dim">/month</div>
+          <div>
+            <div class="mono text-fire">/month · Founders</div>
+            <div class="mono text-faint" style="margin-top: 2px;">until Aug 15</div>
+          </div>
         </div>
-        <p class="mono text-faint">Founders rate · $89/mo standard after Aug 15</p>
-        <a href="join.html" class="btn btn-arrow tier-cta">Lock in Base</a>
+        <div class="price-after">
+          <span class="mono text-dim">After opening</span>
+          <span class="after-amt">$89<span class="mono text-dim">/mo</span></span>
+        </div>
+        <a href="join.html" class="btn btn btn-arrow tier-cta">Lock in Base</a>
         <ul class="tier-features">
           <li class="feat-yes">Full strength + cardio floor</li>
           <li class="feat-yes">Performance turf access</li>
@@ -98,9 +104,15 @@
             <span class="dollar">$</span>
             <span>109</span>
           </div>
-          <div class="mono text-dim">/month</div>
+          <div>
+            <div class="mono text-fire">/month · Founders</div>
+            <div class="mono text-faint" style="margin-top: 2px;">until Aug 15</div>
+          </div>
         </div>
-        <p class="mono text-faint">Founders rate · $139/mo standard after Aug 15</p>
+        <div class="price-after">
+          <span class="mono text-dim">After opening</span>
+          <span class="after-amt">$139<span class="mono text-dim">/mo</span></span>
+        </div>
         <a href="join.html" class="btn btn-primary btn-arrow tier-cta">Lock in Plus</a>
         <ul class="tier-features">
           <li class="feat-yes">Everything in Base</li>
@@ -126,9 +138,15 @@
             <span class="dollar">$</span>
             <span>149</span>
           </div>
-          <div class="mono text-dim">/month</div>
+          <div>
+            <div class="mono text-fire">/month · Founders</div>
+            <div class="mono text-faint" style="margin-top: 2px;">until Aug 15</div>
+          </div>
         </div>
-        <p class="mono text-faint">Founders rate · $179/mo standard after Aug 15</p>
+        <div class="price-after">
+          <span class="mono text-dim">After opening</span>
+          <span class="after-amt">$179<span class="mono text-dim">/mo</span></span>
+        </div>
         <a href="join.html" class="btn btn-fire btn-arrow tier-cta">Lock in Elite</a>
         <ul class="tier-features">
           <li class="feat-yes">Everything in Plus</li>
@@ -204,6 +222,10 @@
           </tr>
         </thead>
         <tbody>
+          <tr><th colspan="4" class="row-section">Pricing</th></tr>
+          <tr><td>Founders — until Aug 15</td><td>$79/mo</td><td>$109/mo</td><td>$149/mo</td></tr>
+          <tr><td>After opening (standard)</td><td>$89/mo</td><td>$139/mo</td><td>$179/mo</td></tr>
+
           <tr><th colspan="4" class="row-section">Training</th></tr>
           <tr><td>Strength + cardio floor</td><td>✓</td><td>✓</td><td>✓</td></tr>
           <tr><td>Performance turf</td><td>✓</td><td>✓</td><td>✓</td></tr>
@@ -358,6 +380,20 @@
     margin-top: 0.4em;
     color: var(--text-dim);
     margin-right: 4px;
+  }
+  .price-after {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--s-4);
+    border: 1px dashed var(--border-strong);
+    padding: var(--s-3) var(--s-4);
+  }
+  .price-after .after-amt {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    color: var(--text-soft);
+    letter-spacing: 0.01em;
   }
   .tier-cta { width: 100%; justify-content: center; }
   .tier-features { display: flex; flex-direction: column; gap: var(--s-3); border-top: 1px solid var(--border); padding-top: var(--s-5); margin-top: auto; }
