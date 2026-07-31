@@ -182,15 +182,14 @@
     <section class="admin-card admin-card-fire" id="campaign">
       <div class="admin-card-head">
         <div>
-          <div class="mono text-fire">✉ Resend broadcast · personalized</div>
-          <h3 class="display admin-h3">Founders Campaign</h3>
+          <div class="mono text-fire">✉ Email lists · sending paused</div>
+          <h3 class="display admin-h3">Email Campaign</h3>
         </div>
         <div class="camp-count mono" id="campCount">— recipients</div>
       </div>
 
       <p class="text-soft" style="font-size: 0.9rem; line-height: 1.6; max-width: 640px;">
-        Emails everyone on the list below a branded, personalized note that the Founding 100 is live — greeting each person by first name, with the App Store &amp; Google Play buttons.
-        <strong class="text-cream">Always send a test to yourself first.</strong>
+        <strong>No campaign is loaded and sending is turned off.</strong> Your audience lists stay ready — Members and Newsletter — with live recipient counts below. When it's time to send something, a new email gets written and loaded here first.
       </p>
 
       <div class="camp-grid mt-6">
@@ -208,7 +207,7 @@
 
           <div class="form-group mt-4">
             <label class="label" for="campSubject">Subject line</label>
-            <input class="input" type="text" id="campSubject" value="The Founding 100 is live — your founder spot is open" maxlength="200" />
+            <input class="input" type="text" id="campSubject" value="" placeholder="No campaign loaded" maxlength="200" disabled />
           </div>
 
           <div class="camp-divider"></div>
@@ -217,13 +216,13 @@
             <label class="label" for="campTest">Send a test to yourself</label>
             <div class="camp-inline">
               <input class="input" type="email" id="campTest" placeholder="you@email.com" autocomplete="email" />
-              <button id="campTestBtn" class="btn btn-arrow" style="white-space:nowrap;">Send test</button>
+              <button id="campTestBtn" class="btn btn-arrow" style="white-space:nowrap;" disabled>Sending off</button>
             </div>
           </div>
 
-          <button id="campSendBtn" class="btn btn-primary btn-arrow mt-5" style="width:100%; justify-content:center;">Send to <span id="campSendCount">all founders</span> →</button>
+          <button id="campSendBtn" class="btn btn-primary btn-arrow mt-5" style="width:100%; justify-content:center; opacity:0.5; cursor:not-allowed;" disabled>Sending disabled · <span id="campSendCount">no campaign loaded</span></button>
           <p id="campStatus" class="mono mt-3" style="font-size: 0.78rem; line-height: 1.5; min-height: 1em; color: var(--text-dim);"></p>
-          <p class="text-faint mt-2" style="font-size: 0.72rem; line-height: 1.5;">One email per person via Resend. Clicking send delivers immediately and can't be undone — don't double-send.</p>
+          <p class="text-faint mt-2" style="font-size: 0.72rem; line-height: 1.5;">Sending stays disabled until a new campaign email is written and loaded.</p>
         </div>
 
         <!-- Live preview -->
@@ -706,9 +705,9 @@
     campPost({ mode: 'preview', audience: audience, subject: subject }).then(function (j) {
       var n = j.count || 0;
       document.getElementById('campCount').textContent = n + (n === 1 ? ' recipient' : ' recipients');
-      document.getElementById('campSendCount').textContent = n === 1 ? '1 founder' : ('all ' + n + ' founders');
+      document.getElementById('campSendCount').textContent = 'no campaign loaded';
       document.getElementById('campPreview').srcdoc = j.html || '';
-      document.getElementById('campPreviewName').textContent = '· opens “Good Afternoon!”';
+      document.getElementById('campPreviewName').textContent = '';
     }).catch(function (e) { campSetStatus(e.message, 'error'); });
   }
 
