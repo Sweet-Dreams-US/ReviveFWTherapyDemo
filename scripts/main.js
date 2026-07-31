@@ -109,7 +109,7 @@
 
       const lead = document.createElement('p');
       lead.className = 'lead mt-4';
-      lead.textContent = "We'll be in touch shortly with next steps. Welcome to the Founding 200.";
+      lead.textContent = "We'll be in touch shortly with next steps. Welcome to Revive.";
       successEl.appendChild(lead);
 
       wrap.appendChild(successEl);
@@ -139,23 +139,6 @@
         const id = tab.dataset.tab;
         tabs.forEach(t => t.classList.toggle('active', t === tab));
         panels.forEach(p => p.classList.toggle('active', p.dataset.panel === id));
-      });
-    });
-  });
-
-  // ---------- Pricing toggle (founders vs standard) ----------
-  document.querySelectorAll('[data-price-toggle]').forEach(toggle => {
-    const opts = toggle.querySelectorAll('button');
-    opts.forEach(btn => {
-      btn.addEventListener('click', () => {
-        opts.forEach(b => b.classList.toggle('active', b === btn));
-        const mode = btn.dataset.mode;
-        document.querySelectorAll('[data-price]').forEach(el => {
-          el.textContent = el.dataset[mode === 'founders' ? 'priceFounders' : 'priceStandard'];
-        });
-        document.querySelectorAll('[data-price-mode]').forEach(el => {
-          el.textContent = mode === 'founders' ? 'Founding Member' : 'Standard';
-        });
       });
     });
   });
