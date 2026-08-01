@@ -1,0 +1,7 @@
+# REVIVE Fitness & Recovery — Fort Wayne, IN
+# Crawl the public site; keep the operator panel and API private.
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://revivefw.com/sitemap.xml
