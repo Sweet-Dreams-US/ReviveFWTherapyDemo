@@ -2,3 +2,5 @@
 .env.local
 .playwright-mcp
 _*.png
+
+.env*

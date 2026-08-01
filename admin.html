@@ -306,12 +306,66 @@
     <section class="admin-card" id="reports">
       <div class="admin-card-head">
         <div>
-          <div class="mono text-dim">Scaffold · tell me what to build here</div>
+          <div class="mono text-dim">Site traffic · Vercel Web Analytics</div>
           <h3 class="display admin-h3">Reports</h3>
         </div>
+        <div class="inq-filters" id="repRangeBtns">
+          <button class="inq-filter" data-range="day">Day</button>
+          <button class="inq-filter active" data-range="week">Week</button>
+          <button class="inq-filter" data-range="month">Month</button>
+        </div>
       </div>
-      <p class="text-soft" style="font-size:0.9rem; line-height:1.6; max-width:640px;">This is where your reports will live. Tell me what you want to track — signups over time, applications by role, campaign open rates, membership funnel — and I'll build it out. A few live numbers to start:</p>
-      <div class="reports-placeholder mt-5">
+
+      <p id="repStatus" class="mono text-dim" style="font-size:0.75rem; min-height:1em;">Loading traffic…</p>
+
+      <!-- Totals -->
+      <div class="reports-placeholder mt-4">
+        <div class="report-tile"><div class="mono text-dim">Visitors</div><div class="kpi-value display" id="repVisitors">—</div><div class="mono text-faint mt-2" id="repRangeLabel"></div></div>
+        <div class="report-tile"><div class="mono text-dim">Pageviews</div><div class="kpi-value display" id="repPageviews">—</div><div class="mono text-faint mt-2">total page loads</div></div>
+        <div class="report-tile"><div class="mono text-dim">Views / Visitor</div><div class="kpi-value display" id="repRatio">—</div><div class="mono text-faint mt-2">engagement</div></div>
+      </div>
+
+      <!-- Timeseries -->
+      <div class="mt-6">
+        <div class="mono text-dim" style="font-size:0.7rem; margin-bottom:10px;">Visitors over time <span class="text-faint" id="repChartHint"></span></div>
+        <div class="rep-chart" id="repChart"></div>
+        <div class="rep-chart-x mono text-faint"><span id="repChartStart"></span><span id="repChartEnd"></span></div>
+      </div>
+
+      <!-- Pages + Referrers -->
+      <div class="rep-two mt-6">
+        <div>
+          <div class="admin-card-head" style="margin-bottom: var(--s-3);">
+            <h4 class="display admin-h3" style="font-size:1.1rem;">Pages</h4>
+            <input id="repPageSearch" class="input" type="search" placeholder="Filter pages…" style="max-width:180px; padding:0.45rem 0.7rem; font-size:0.8rem;" />
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="admin-table rep-table" id="repPagesTable">
+              <thead><tr><th data-sort="key">Page</th><th data-sort="visitors" class="rep-sort-active">Visitors ↓</th><th data-sort="pageviews">Views</th></tr></thead>
+              <tbody id="repPagesBody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <div class="admin-card-head" style="margin-bottom: var(--s-3);">
+            <h4 class="display admin-h3" style="font-size:1.1rem;">Referrers</h4>
+            <input id="repRefSearch" class="input" type="search" placeholder="Filter referrers…" style="max-width:180px; padding:0.45rem 0.7rem; font-size:0.8rem;" />
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="admin-table rep-table" id="repRefsTable">
+              <thead><tr><th data-sort="key">Source</th><th data-sort="visitors" class="rep-sort-active">Visitors ↓</th><th data-sort="pageviews">Views</th></tr></thead>
+              <tbody id="repRefsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-faint mt-5" style="font-size:0.72rem; line-height:1.5;">Heads up: the tracking script was off between July 29–31, so that gap shows no data. Collection resumed July 31.</p>
+
+      <!-- Operations quick numbers -->
+      <div class="camp-divider"></div>
+      <div class="mono text-dim" style="font-size:0.7rem; margin-bottom:10px;">Operations</div>
+      <div class="reports-placeholder">
         <div class="report-tile"><div class="mono text-dim">Founders Waitlist</div><div class="kpi-value display" id="repWaitlist">—</div></div>
         <div class="report-tile"><div class="mono text-dim">Job Applications</div><div class="kpi-value display" id="repApplications">—</div></div>
         <div class="report-tile"><div class="mono text-dim">Open Roles</div><div class="kpi-value display" id="repJobs">—</div></div>
@@ -482,6 +536,29 @@
   .reports-placeholder { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-4); }
   @media (max-width: 700px) { .reports-placeholder { grid-template-columns: 1fr; } }
   .report-tile { border: 1px solid var(--border); background: var(--bg-1); padding: var(--s-5); }
+
+  /* Traffic dashboard */
+  .rep-chart {
+    display: flex; align-items: flex-end; gap: 3px;
+    height: 190px; padding: var(--s-3);
+    border: 1px solid var(--border); background: var(--bg-1);
+  }
+  .rep-bar {
+    flex: 1; min-width: 3px; min-height: 2px;
+    background: var(--fire); opacity: 0.85;
+    transition: opacity var(--dur-fast);
+    position: relative;
+  }
+  .rep-bar:hover { opacity: 1; }
+  .rep-bar.rep-bar-empty { background: var(--border); }
+  .rep-chart-x { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.62rem; }
+  .rep-two { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-7); align-items: start; }
+  @media (max-width: 1000px) { .rep-two { grid-template-columns: 1fr; } }
+  .rep-table thead th { cursor: pointer; user-select: none; white-space: nowrap; }
+  .rep-table thead th:hover { color: var(--text); }
+  .rep-table thead th.rep-sort-active { color: var(--fire); }
+  .rep-table td:nth-child(2), .rep-table td:nth-child(3),
+  .rep-table th:nth-child(2), .rep-table th:nth-child(3) { text-align: right; }
 </style>
 
 <script>
@@ -612,6 +689,7 @@
     loadCampaignPreview();
     loadJobs();
     loadApplications();
+    if ((location.hash.slice(1) || 'inquiries') === 'reports') loadReports();
   }
 
   loginForm.addEventListener('submit', async function (e) {
@@ -933,6 +1011,163 @@
     document.body.appendChild(link); link.click(); link.remove();
   });
 
+  // ================= Reports: Vercel Web Analytics dashboard =================
+  var repRange = 'week';
+  var repCache = {};
+  var repSort = { pages: { key: 'visitors', dir: -1 }, refs: { key: 'visitors', dir: -1 } };
+  var repLoading = false;
+  var REP_LABELS = { day: 'last 24 hours', week: 'last 7 days', month: 'last 30 days' };
+
+  function repFetch(mode) {
+    return fetch('/api/analytics', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: password, mode: mode, range: repRange }),
+    }).then(function (r) {
+      if (r.status === 401) { showLogin(); throw new Error('unauthorized'); }
+      if (!r.ok) throw new Error('load failed');
+      return r.json();
+    });
+  }
+
+  function loadReports(force) {
+    if (!password) return;
+    var range = repRange;
+    if (!force && repCache[range]) { renderReports(repCache[range]); return; }
+    if (repLoading) return;
+    repLoading = true;
+    var st = document.getElementById('repStatus');
+    st.textContent = 'Loading traffic…';
+    Promise.all([repFetch('totals'), repFetch('timeseries'), repFetch('pages'), repFetch('referrers')])
+      .then(function (rs) {
+        var data = {
+          totals: (rs[0].result && rs[0].result.data) || {},
+          series: (rs[1].result && rs[1].result.data) || [],
+          pages: (rs[2].result && rs[2].result.data) || [],
+          refs: (rs[3].result && rs[3].result.data) || [],
+          granularity: rs[1].granularity, since: rs[1].since, until: rs[1].until, range: range,
+        };
+        repCache[range] = data;
+        renderReports(data);
+        st.textContent = '';
+      })
+      .catch(function (e) {
+        if (e.message !== 'unauthorized') st.textContent = 'Could not load analytics — refresh to retry.';
+      })
+      .finally(function () { repLoading = false; });
+  }
+
+  function repBucketLabel(d, granularity) {
+    return granularity === 'hour'
+      ? d.toLocaleTimeString('en-US', { hour: 'numeric' })
+      : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  }
+
+  function renderReports(data) {
+    var t = data.totals;
+    document.getElementById('repVisitors').textContent = (t.visitors != null) ? t.visitors.toLocaleString() : '—';
+    document.getElementById('repPageviews').textContent = (t.pageviews != null) ? t.pageviews.toLocaleString() : '—';
+    document.getElementById('repRatio').textContent = (t.visitors > 0) ? (t.pageviews / t.visitors).toFixed(1) : '—';
+    document.getElementById('repRangeLabel').textContent = REP_LABELS[data.range] || '';
+    document.getElementById('repChartHint').textContent = '· ' + (data.granularity === 'hour' ? 'hourly' : 'daily');
+
+    // --- chart: build full bucket list so gaps show as empty bars ---
+    var chart = document.getElementById('repChart');
+    chart.textContent = '';
+    var step = data.granularity === 'hour' ? 3600000 : 86400000;
+    var start = new Date(data.since); var end = new Date(data.until);
+    if (data.granularity === 'hour') start.setMinutes(0, 0, 0); else start.setHours(0, 0, 0, 0);
+    var byKey = {};
+    data.series.forEach(function (row) {
+      var d = new Date(row.timestamp);
+      var key = data.granularity === 'hour' ? d.toISOString().slice(0, 13) : d.toISOString().slice(0, 10);
+      byKey[key] = row;
+    });
+    var buckets = [];
+    var max = 1;
+    for (var ts = start.getTime(); ts <= end.getTime(); ts += step) {
+      var d = new Date(ts);
+      var key = data.granularity === 'hour' ? d.toISOString().slice(0, 13) : d.toISOString().slice(0, 10);
+      var row = byKey[key];
+      var v = row ? (row.visitors || 0) : 0;
+      if (v > max) max = v;
+      buckets.push({ d: d, visitors: v, pageviews: row ? (row.pageviews || 0) : 0 });
+    }
+    buckets.forEach(function (b) {
+      var bar = el('div', 'rep-bar' + (b.visitors === 0 ? ' rep-bar-empty' : ''));
+      bar.style.height = Math.max(2, Math.round((b.visitors / max) * 100)) + '%';
+      bar.title = repBucketLabel(b.d, data.granularity) + ' — ' + b.visitors + ' visitors · ' + b.pageviews + ' views';
+      chart.appendChild(bar);
+    });
+    document.getElementById('repChartStart').textContent = repBucketLabel(start, data.granularity);
+    document.getElementById('repChartEnd').textContent = repBucketLabel(end, data.granularity);
+
+    renderRepTable('pages');
+    renderRepTable('refs');
+  }
+
+  function repRows(kind) {
+    var data = repCache[repRange];
+    if (!data) return [];
+    var raw = kind === 'pages' ? data.pages : data.refs;
+    return raw.map(function (r) {
+      var key = kind === 'pages' ? r.requestPath : r.referrerHostname;
+      if (key === '' || key == null) key = kind === 'pages' ? '(unknown)' : '(direct / none)';
+      return { key: key, visitors: r.visitors || 0, pageviews: r.pageviews || 0 };
+    });
+  }
+
+  function renderRepTable(kind) {
+    var body = document.getElementById(kind === 'pages' ? 'repPagesBody' : 'repRefsBody');
+    var search = (document.getElementById(kind === 'pages' ? 'repPageSearch' : 'repRefSearch').value || '').trim().toLowerCase();
+    var sort = repSort[kind];
+    var rows = repRows(kind).filter(function (r) { return !search || r.key.toLowerCase().indexOf(search) !== -1; });
+    rows.sort(function (a, b) {
+      var av = a[sort.key], bv = b[sort.key];
+      if (typeof av === 'string') return sort.dir * av.localeCompare(bv);
+      return sort.dir * (av - bv);
+    });
+    body.textContent = '';
+    if (!rows.length) {
+      var tr0 = el('tr'); var td0 = el('td', 'text-dim', 'No data for this range.');
+      td0.colSpan = 3; td0.style.padding = 'var(--s-5)';
+      tr0.appendChild(td0); body.appendChild(tr0); return;
+    }
+    rows.forEach(function (r) {
+      var tr = el('tr');
+      var kTd = el('td'); kTd.appendChild(el('strong', null, r.key)); tr.appendChild(kTd);
+      tr.appendChild(tdText(r.visitors.toLocaleString()));
+      tr.appendChild(tdText(r.pageviews.toLocaleString()));
+      body.appendChild(tr);
+    });
+    // header sort indicators
+    var table = document.getElementById(kind === 'pages' ? 'repPagesTable' : 'repRefsTable');
+    table.querySelectorAll('thead th').forEach(function (th) {
+      var base = th.getAttribute('data-sort') === 'key' ? (kind === 'pages' ? 'Page' : 'Source') : (th.getAttribute('data-sort') === 'visitors' ? 'Visitors' : 'Views');
+      var active = th.getAttribute('data-sort') === sort.key;
+      th.classList.toggle('rep-sort-active', active);
+      th.textContent = base + (active ? (sort.dir === -1 ? ' ↓' : ' ↑') : '');
+    });
+  }
+
+  document.getElementById('repRangeBtns').addEventListener('click', function (e) {
+    var btn = e.target.closest('.inq-filter'); if (!btn) return;
+    repRange = btn.getAttribute('data-range');
+    this.querySelectorAll('.inq-filter').forEach(function (b) { b.classList.toggle('active', b === btn); });
+    loadReports();
+  });
+  document.getElementById('repPageSearch').addEventListener('input', function () { renderRepTable('pages'); });
+  document.getElementById('repRefSearch').addEventListener('input', function () { renderRepTable('refs'); });
+  [['repPagesTable', 'pages'], ['repRefsTable', 'refs']].forEach(function (pair) {
+    document.getElementById(pair[0]).querySelector('thead').addEventListener('click', function (e) {
+      var th = e.target.closest('th'); if (!th) return;
+      var key = th.getAttribute('data-sort');
+      var sort = repSort[pair[1]];
+      if (sort.key === key) sort.dir = -sort.dir;
+      else { sort.key = key; sort.dir = key === 'key' ? 1 : -1; }
+      renderRepTable(pair[1]);
+    });
+  });
+
   // ---- View routing: each sidebar tab is its own page (hash-driven) ----
   var VIEW_TITLES = {
     inquiries: 'Inquiries', jobs: 'Jobs', applications: 'Applications',
@@ -949,6 +1184,7 @@
     var t = document.getElementById('viewTitle');
     if (t) t.textContent = VIEW_TITLES[name];
     window.scrollTo(0, 0);
+    if (name === 'reports') loadReports();
   }
   window.addEventListener('hashchange', function () { showView(location.hash.slice(1)); });
   showView(location.hash.slice(1));
