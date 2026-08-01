@@ -362,6 +362,18 @@
 
       <p class="text-faint mt-5" style="font-size:0.72rem; line-height:1.5;">Heads up: the tracking script was off between July 29–31, so that gap shows no data. Collection resumed July 31.</p>
 
+      <!-- Social baseline (static snapshot, captured opening day) -->
+      <div class="camp-divider"></div>
+      <div class="admin-card-head" style="margin-bottom: var(--s-2);">
+        <div>
+          <div class="mono text-fire">Baseline · captured Aug 1, 2026 (opening day)</div>
+          <h4 class="display admin-h3" style="font-size:1.35rem;">Social — Before vs After June 16</h4>
+        </div>
+        <div class="mono text-faint" style="font-size:0.68rem; text-align:right; line-height:1.6;">Before: May 2 – Jun 15 · prior mgmt<br />After: Jun 16 – Jul 30 · Sweet Dreams</div>
+      </div>
+      <p class="text-soft" style="font-size:0.85rem; line-height:1.6; max-width:680px;">Fixed snapshot of Meta (FB+IG combined), Facebook, Instagram, and TikTok performance around the June 16 handover — the yardstick for everything after. Compare the live site traffic above against this.</p>
+      <div id="socialBaseline" class="mt-5"><p class="mono text-dim" style="font-size:0.75rem;">Loading social baseline…</p></div>
+
       <!-- Operations quick numbers -->
       <div class="camp-divider"></div>
       <div class="mono text-dim" style="font-size:0.7rem; margin-bottom:10px;">Operations</div>
@@ -559,6 +571,32 @@
   .rep-table thead th.rep-sort-active { color: var(--fire); }
   .rep-table td:nth-child(2), .rep-table td:nth-child(3),
   .rep-table th:nth-child(2), .rep-table th:nth-child(3) { text-align: right; }
+
+  /* Social baseline */
+  .rep-tiles4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-4); }
+  @media (max-width: 1100px) { .rep-tiles4 { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .rep-tiles4 { grid-template-columns: 1fr; } }
+  .rep-tile-change { font-family: var(--font-display); font-size: 2rem; line-height: 1; margin-top: var(--s-3); color: var(--fire); }
+  .social-h { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); margin: var(--s-6) 0 var(--s-3); }
+  .soc-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  .soc-table th { text-align: left; padding: var(--s-2) var(--s-3); color: var(--text-dim); font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  .soc-table td { padding: var(--s-2) var(--s-3); color: var(--text-soft); border-bottom: 1px solid var(--border); }
+  .soc-table td:first-child { color: var(--text); }
+  .soc-table .soc-up { color: #178A45; font-weight: 600; white-space: nowrap; }
+  .soc-table .soc-down { color: var(--fire); font-weight: 600; white-space: nowrap; }
+  .rep-plat { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-4); }
+  @media (max-width: 1100px) { .rep-plat { grid-template-columns: 1fr; } }
+  .rep-plat-card { border: 1px solid var(--border); background: var(--bg-1); padding: var(--s-5); }
+  .rep-plat-card h5 { font-family: var(--font-display); font-size: 1rem; text-transform: uppercase; margin-bottom: var(--s-3); }
+  .rep-plat-card li { font-size: 0.8rem; color: var(--text-soft); line-height: 1.5; padding: 5px 0; border-bottom: 1px solid var(--border); display: flex; gap: var(--s-3); justify-content: space-between; }
+  .rep-plat-card li:last-child { border-bottom: 0; }
+  .rep-plat-card li .k { color: var(--text-dim); white-space: nowrap; }
+  .rep-plat-card li .v { text-align: right; }
+  .rep-findings { counter-reset: f; display: flex; flex-direction: column; gap: var(--s-2); }
+  .rep-findings li { counter-increment: f; font-size: 0.85rem; color: var(--text-soft); line-height: 1.55; padding-left: 2rem; position: relative; }
+  .rep-findings li::before { content: counter(f, decimal-leading-zero); position: absolute; left: 0; font-family: var(--font-mono); font-size: 0.7rem; color: var(--fire); top: 3px; }
+  .rep-caveats li { font-size: 0.72rem; color: var(--text-faint); line-height: 1.5; padding: 2px 0; padding-left: 1rem; position: relative; }
+  .rep-caveats li::before { content: '—'; position: absolute; left: 0; }
 </style>
 
 <script>
@@ -1031,6 +1069,7 @@
 
   function loadReports(force) {
     if (!password) return;
+    loadSocialBaseline();
     var range = repRange;
     if (!force && repCache[range]) { renderReports(repCache[range]); return; }
     if (repLoading) return;
@@ -1167,6 +1206,135 @@
       renderRepTable(pair[1]);
     });
   });
+
+  // ---- Social baseline (static snapshot, password-gated) ----
+  var socialLoaded = false;
+
+  function socCell(text) {
+    var td = el('td');
+    var s = String(text == null ? '' : text);
+    if (/^\+/.test(s)) td.appendChild(el('span', 'soc-up', s));
+    else if (/^[−-]\d/.test(s)) td.appendChild(el('span', 'soc-down', s));
+    else td.textContent = s;
+    return td;
+  }
+  function socTable(columns, rows) {
+    var wrap = el('div'); wrap.style.overflowX = 'auto';
+    var table = el('table', 'soc-table');
+    var thead = el('thead'); var htr = el('tr');
+    columns.forEach(function (c) { htr.appendChild(el('th', null, c)); });
+    thead.appendChild(htr); table.appendChild(thead);
+    var tbody = el('tbody');
+    rows.forEach(function (r) {
+      var tr = el('tr');
+      r.forEach(function (c) { tr.appendChild(socCell(c)); });
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody); wrap.appendChild(table);
+    return wrap;
+  }
+
+  function renderSocialBaseline(b) {
+    var root = document.getElementById('socialBaseline');
+    root.textContent = '';
+
+    // headline tiles
+    var TILE_METRICS = { 'Views': 1, 'Interactions': 1, 'Shares': 1, 'Follows from content': 1 };
+    var tiles = el('div', 'rep-tiles4');
+    b.headline.rows.forEach(function (r) {
+      if (!TILE_METRICS[r[0]]) return;
+      var t = el('div', 'report-tile');
+      t.appendChild(el('div', 'mono text-dim', r[0] === 'Follows from content' ? 'Follows' : r[0]));
+      t.appendChild(el('div', 'rep-tile-change', r[3]));
+      t.appendChild(el('div', 'mono text-faint mt-2', r[1] + ' → ' + r[2]));
+      tiles.appendChild(t);
+    });
+    root.appendChild(tiles);
+
+    // headline + per-day side by side
+    var two1 = el('div', 'rep-two');
+    var colA = el('div');
+    colA.appendChild(el('div', 'social-h', 'Headline — Meta combined (primary source)'));
+    colA.appendChild(socTable(b.headline.columns, b.headline.rows));
+    var colB = el('div');
+    colB.appendChild(el('div', 'social-h', 'Per day (normalized for window length)'));
+    colB.appendChild(socTable(b.perDay.columns, b.perDay.rows));
+    colB.appendChild(el('div', 'social-h', 'What changed'));
+    colB.appendChild(socTable(b.whatChanged.columns, b.whatChanged.rows));
+    two1.appendChild(colA); two1.appendChild(colB);
+    root.appendChild(two1);
+
+    // top posts
+    var two2 = el('div', 'rep-two');
+    var tpA = el('div');
+    tpA.appendChild(el('div', 'social-h', 'Top posts — After (Jun 16 → Jul 30)'));
+    tpA.appendChild(socTable(b.topPosts.columns, b.topPosts.after));
+    var tpB = el('div');
+    tpB.appendChild(el('div', 'social-h', 'Top posts — Before (May 2 → Jun 15)'));
+    tpB.appendChild(socTable(b.topPosts.columns, b.topPosts.before));
+    two2.appendChild(tpA); two2.appendChild(tpB);
+    root.appendChild(two2);
+
+    // platforms
+    root.appendChild(el('div', 'social-h', 'By platform'));
+    var plat = el('div', 'rep-plat');
+    ['facebook', 'instagram', 'tiktok'].forEach(function (key) {
+      var p = b.platforms[key];
+      var card = el('div', 'rep-plat-card');
+      card.appendChild(el('h5', null, p.title));
+      var ul = el('ul');
+      p.rows.forEach(function (r) {
+        var li = el('li');
+        li.appendChild(el('span', 'k', r[0]));
+        var v = el('span', 'v'); v.appendChild(socCell(r[1]).firstChild || document.createTextNode(r[1]));
+        li.appendChild(v);
+        ul.appendChild(li);
+      });
+      card.appendChild(ul);
+      plat.appendChild(card);
+    });
+    root.appendChild(plat);
+
+    // timing
+    root.appendChild(el('div', 'social-h', 'Timing — the one real weakness'));
+    root.appendChild(socTable(b.timing.columns, b.timing.rows));
+    var note = el('p', 'text-soft mt-3'); note.style.cssText = 'font-size:0.82rem; line-height:1.6; max-width:720px;';
+    note.textContent = b.timing.note;
+    root.appendChild(note);
+
+    // findings
+    root.appendChild(el('div', 'social-h', 'What to carry forward'));
+    var ol = el('ol', 'rep-findings');
+    b.findings.forEach(function (f) { ol.appendChild(el('li', null, f)); });
+    root.appendChild(ol);
+
+    // caveats
+    root.appendChild(el('div', 'social-h', 'Caveats'));
+    var cv = el('ul', 'rep-caveats');
+    b.meta.caveats.forEach(function (c) { cv.appendChild(el('li', null, c)); });
+    root.appendChild(cv);
+  }
+
+  function loadSocialBaseline() {
+    if (socialLoaded || !password) return;
+    fetch('/api/social-baseline', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: password }),
+    }).then(function (r) {
+      if (r.status === 401) { showLogin(); throw new Error('unauthorized'); }
+      if (!r.ok) throw new Error('load');
+      return r.json();
+    }).then(function (j) {
+      socialLoaded = true;
+      renderSocialBaseline(j.baseline);
+    }).catch(function (e) {
+      if (e.message !== 'unauthorized') {
+        var root = document.getElementById('socialBaseline');
+        root.textContent = '';
+        root.appendChild(el('p', 'mono text-dim', 'Could not load the social baseline — refresh to retry.'));
+      }
+    });
+  }
 
   // ---- View routing: each sidebar tab is its own page (hash-driven) ----
   var VIEW_TITLES = {
