@@ -1,24 +1,28 @@
 # Scheduled blog release — runs Mon/Wed/Fri, regenerates the blog for "today"
-# (America/New_York) and pushes any newly-due posts. Vercel's Git integration
-# then auto-deploys the commit. The generator is date-gated and idempotent, so a
-# missed run self-heals on the next one (it always publishes everything due).
+# (America/New_York) and deploys straight to Vercel production.
 #
-# Requirements (one-time, in the GitHub repo):
-#   - Actions enabled (Settings → Actions → Allow all actions).
-#   - Workflow write permission (Settings → Actions → Workflow permissions →
-#     "Read and write permissions"). The `permissions:` block below also grants it.
-#   - Vercel connected to this repo for production deploys on push to main
-#     (already the case). If it is not, add a Vercel Deploy Hook as a secret and
-#     uncomment the final step.
+# This deploys with a Vercel token instead of pushing commits back to the repo,
+# so it needs NEITHER "read and write" workflow permissions (often org-locked)
+# NOR Vercel's git push-to-deploy. The generator is date-gated and idempotent, so
+# a missed run self-heals on the next one (it always deploys everything due).
+#
+# ONE-TIME SETUP (repo → Settings → Secrets and variables → Actions):
+#   - Add a secret named VERCEL_TOKEN.
+#     Create the token at https://vercel.com/account/tokens (scope it to the
+#     Sweet Dreams team). Nothing else is required — the org/project IDs below
+#     are public identifiers, not secrets.
 name: Publish scheduled blog posts
 
 on:
   schedule:
     - cron: '0 13 * * 1,3,5'   # 13:00 UTC Mon/Wed/Fri (~9am US Eastern)
-  workflow_dispatch: {}         # allow manual "publish now" from the Actions tab
+  workflow_dispatch: {}         # manual "publish now" from the Actions tab
 
-permissions:
-  contents: write
+# Non-secret Vercel identifiers (from .vercel/project.json) so the CLI links
+# non-interactively in CI.
+env:
+  VERCEL_ORG_ID: team_4mlJIxMh7QofsXFfy1SA8fIG
+  VERCEL_PROJECT_ID: prj_KzU7wTEpIXREQ3gy7SU3oWMq8qGm
 
 concurrency:
   group: publish-blog
@@ -36,25 +40,13 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
       - name: Regenerate blog for today (Eastern)
         run: node scripts/build-blog.js
 
-      - name: Commit and push any newly published posts
-        run: |
-          git config user.name "revive-blog-bot"
-          git config user.email "info@revivefw.com"
-          git add blog blog.html sitemap.xml
-          if git diff --cached --quiet; then
-            echo "No posts due today — nothing to publish."
-          else
-            git commit -m "Blog: publish scheduled posts for $(TZ=America/New_York date +%Y-%m-%d)"
-            git push
-            echo "Published new post(s)."
-          fi
-
-      # If Vercel does NOT auto-deploy on push, create a Deploy Hook in the Vercel
-      # project (Settings → Git → Deploy Hooks), store it as the repo secret
-      # VERCEL_DEPLOY_HOOK, and uncomment:
-      # - name: Trigger Vercel deploy
-      #   if: ${{ secrets.VERCEL_DEPLOY_HOOK != '' }}
-      #   run: curl -s -X POST "${{ secrets.VERCEL_DEPLOY_HOOK }}"
+      - name: Deploy to production
+        run: vercel deploy --prod --yes --token="$VERCEL_TOKEN"
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
