@@ -4,3 +4,9 @@ GOOGLE-SHEET-SETUP.md
 README.md
 .env.local
 .gitignore
+
+# Blog source (markdown + internal style/facts brief + calendar) — the generator
+# turns these into /blog/*.html at build time; the raw source must NOT be public.
+blog-content
+scripts/build-blog.js
+REVIVE-AUDIT.md

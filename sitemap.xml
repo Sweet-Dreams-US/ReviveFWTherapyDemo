@@ -48,4 +48,19 @@
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
+  <!-- BLOG:START -->
+  <url><loc>https://revivefw.com/blog</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://revivefw.com/blog/why-light-weights-feel-heavy-leverage-explained</loc><lastmod>2026-08-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://revivefw.com/blog/why-your-body-speeds-up-before-you-lift</loc><lastmod>2026-08-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://revivefw.com/blog/how-to-describe-where-it-hurts</loc><lastmod>2026-08-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://revivefw.com/blog/six-fundamental-movement-patterns</loc><lastmod>2026-08-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://revivefw.com/blog/you-dont-sweat-out-toxins-what-sweat-really-is</loc><lastmod>2026-08-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://revivefw.com/blog/why-your-body-pushes-back</loc><lastmod>2026-08-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://revivefw.com/blog/do-you-need-medical-clearance-before-lifting</loc><lastmod>2026-08-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://revivefw.com/blog/why-caffeine-stops-working-receptors-explained</loc><lastmod>2026-08-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://revivefw.com/blog/why-some-tissues-heal-slower</loc><lastmod>2026-08-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://revivefw.com/blog/how-hard-should-you-lift-training-principles</loc><lastmod>2026-08-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://revivefw.com/blog/why-muscle-fibers-are-all-or-nothing</loc><lastmod>2026-08-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://revivefw.com/blog/your-skeleton-responds-to-what-you-lift</loc><lastmod>2026-08-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <!-- BLOG:END -->
 </urlset>
