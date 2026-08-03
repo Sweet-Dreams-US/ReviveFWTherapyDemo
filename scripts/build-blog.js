@@ -230,14 +230,19 @@ function loadPosts() {
 
   // ordering / effective dates
   posts.sort((a, b) => a.num - b.num);
+  // Standalone timely posts (not in the curriculum calendar) carry their own
+  // `publish_date` in front-matter and publish on that date — they do NOT consume
+  // a Mon/Wed/Fri drip slot. Everything else follows the seed-then-drip schedule.
+  const isStandalone = (p) => p.num === 9999 && p.data.publish_date;
+  let ci = 0;
   if (startArg) {
-    // manual override for testing: remap the whole run MWF from a start date
     const start = startArg === 'today' ? TODAY : startArg;
-    posts.forEach((p, idx) => { p.date = addDaysMWF(start, idx); });
+    posts.forEach((p) => { if (isStandalone(p)) p.date = p.data.publish_date; else { p.date = addDaysMWF(start, ci); ci++; } });
   } else {
-    // production schedule: seed batch on launch day, then MWF drip
-    posts.forEach((p, idx) => {
-      p.date = idx < SCHEDULE.SEED ? SCHEDULE.LAUNCH : addDaysMWF(SCHEDULE.DRIP_START, idx - SCHEDULE.SEED);
+    posts.forEach((p) => {
+      if (isStandalone(p)) { p.date = p.data.publish_date; return; }
+      p.date = ci < SCHEDULE.SEED ? SCHEDULE.LAUNCH : addDaysMWF(SCHEDULE.DRIP_START, ci - SCHEDULE.SEED);
+      ci++;
     });
   }
   return posts;
@@ -381,7 +386,7 @@ function renderPost(post, prev, next) {
         <header class="post-head">
           <div class="post-eyebrow mono"><span class="text-fire">${esc(post.category)}</span> &nbsp;/&nbsp; ${esc(d.reading_time || '')} read${post.date ? ` &nbsp;/&nbsp; ${prettyDate(post.date)}` : ''}</div>
           <h1 class="post-title">${esc(d.title)}</h1>
-          <p class="post-course mono text-dim">${esc(d.course || '')}</p>
+          ${d.course ? `<p class="post-course mono text-dim">${esc(d.course)}</p>` : ''}
         </header>
         <div class="post-intro">${introHtml}</div>
         ${sectionsHtml}
@@ -410,13 +415,17 @@ function renderPost(post, prev, next) {
 function renderIndex(published) {
   const byCat = {};
   for (const p of published) { (byCat[p.category] = byCat[p.category] || []).push(p); }
-  const catOrder = ['Training', 'Recovery', 'Nutrition', 'Mindset', 'Health Basics'];
+  const catOrder = ['News', 'Training', 'Recovery', 'Nutrition', 'Mindset', 'Health Basics'];
   const cats = Object.keys(byCat).sort((a, b) => {
     const ia = catOrder.indexOf(a), ib = catOrder.indexOf(b);
     return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
   });
 
-  const latest = published.slice().sort((a, b) => (b.date || '').localeCompare(a.date || '')).slice(0, 3);
+  const latest = published.slice().sort((a, b) => {
+    const d = (b.date || '').localeCompare(a.date || '');
+    if (d) return d;
+    return (a.category === 'News' ? 0 : 1) - (b.category === 'News' ? 0 : 1); // timely posts lead ties
+  }).slice(0, 3);
   const latestHtml = latest.map(p => `
         <a class="feat-card" href="/blog/${p.slug}">
           <div class="feat-cat mono text-fire">${esc(p.category)}</div>
