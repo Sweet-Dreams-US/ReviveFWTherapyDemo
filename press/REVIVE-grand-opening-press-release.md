@@ -1,13 +1,13 @@
 # FOR IMMEDIATE RELEASE
 
 **Media Contact:** Cody Kieler, Owner, REVIVE
-[PHONE] · [EMAIL — e.g. info@revivefw.com] · revivefw.com
+(260) 417-7668 · info@revivefw.com · revivefw.com
 
 ---
 
 ## REVIVE OPENS ITS DOORS: FORT WAYNE GETS A PREMIUM GYM AND FULL RECOVERY SUITE, GRAND OPENING AUGUST 15
 
-**FORT WAYNE, IN — August [X], 2026 —** REVIVE, a premium fitness and recovery facility, will celebrate its grand opening on **Saturday, August 15, from 10 a.m. to 2 p.m.** at 3233 St. Joe Center Rd. The event is free and open to the public.
+**FORT WAYNE, IN — August 3, 2026 —** REVIVE, a premium fitness and recovery facility, will celebrate its grand opening on **Saturday, August 15, from 10 a.m. to 2 p.m.** at 3233 St. Joe Center Rd. The event is free and open to the public.
 
 REVIVE pairs a premium training floor with a full recovery suite — including sauna, cold plunge, red light therapy, and compression therapy — under one roof, a combination uncommon among Fort Wayne gyms. The facility is built around the idea that recovery belongs alongside training, not as an afterthought or an add-on sale.
 
@@ -24,7 +24,7 @@ Grand opening day will include:
 
 REVIVE is also offering founding lifetime pricing to everyone who joins before the grand opening. Members who sign up on or before August 15 lock in their founding monthly rate for as long as they remain members; standard rates apply afterward. Membership tiers and booking are available at revivefw.com.
 
-Members of the media are invited to attend, tour the facility, and arrange interviews with owner Cody Kieler. To coordinate coverage, contact [PHONE] or [EMAIL].
+Members of the media are invited to attend, tour the facility, and arrange interviews with owner Cody Kieler. To coordinate coverage, contact (260) 417-7668 or info@revivefw.com.
 
 ### About REVIVE
 
