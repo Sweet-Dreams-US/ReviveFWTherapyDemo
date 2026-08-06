@@ -18,7 +18,9 @@ Grand opening day will include:
 - Live music from Jtubbs
 - Free haircuts courtesy of Laced
 - Food from Moe's Southwest Grill
-- Guest appearances and collaborations with King's Nutrition, Bronzed by Lex, and Exquisite Energy
+- A $100 gift card giveaway from Hep Cap
+- 15% off at Flawless & Hep Cap Boutique with code REVIVE15 — in store and online, August 15–31
+- Guest appearances and collaborations with King's Nutrition, Bronzed by Lex, Exquisite Energy, and Complete Health
 - Facility tours of the full training floor and recovery suite
 - Enrollment fees waived for anyone who signs up on-site August 15
 
