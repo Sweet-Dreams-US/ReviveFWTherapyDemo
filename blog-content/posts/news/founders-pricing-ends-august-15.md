@@ -18,7 +18,7 @@ Founders pricing is not a sale. It is a rate you keep. Here is exactly what that
 
 Join before the grand opening on August 15 and the rate you sign up at is the rate you pay for as long as your membership stays active. Not for a promotional year. For the life of the membership.
 
-The founding rates are **$79 a month for Base, $109 for Plus, and $149 for Elite.** After August 15, those become $89, $139, and $179 — the standard rates the gym runs from then on. As REVIVE grows and adds to the space, prices will move. Founders do not move with them. That is the whole deal: you trade acting early for a rate that never climbs.
+The founding rates are **$79 a month for Base, $109 for Plus, and $139 for Elite.** After August 15, those become $89, $139, and $169 — the standard rates the gym runs from then on. As REVIVE grows and adds to the space, prices will move. Founders do not move with them. That is the whole deal: you trade acting early for a rate that never climbs.
 
 It is month-to-month, with no long-term contract. You can cancel any time. The only thing you cannot do is get the founding rate back once it closes.
 

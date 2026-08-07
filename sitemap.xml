@@ -49,7 +49,7 @@
     <priority>0.6</priority>
   </url>
   <!-- BLOG:START -->
-  <url><loc>https://revivefw.com/blog</loc><lastmod>2026-08-06</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://revivefw.com/blog</loc><lastmod>2026-08-07</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://revivefw.com/blog/why-light-weights-feel-heavy-leverage-explained</loc><lastmod>2026-08-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://revivefw.com/blog/why-your-body-speeds-up-before-you-lift</loc><lastmod>2026-08-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://revivefw.com/blog/how-to-describe-where-it-hurts</loc><lastmod>2026-08-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -64,6 +64,7 @@
   <url><loc>https://revivefw.com/blog/your-skeleton-responds-to-what-you-lift</loc><lastmod>2026-08-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://revivefw.com/blog/how-long-until-lifting-changes-your-body</loc><lastmod>2026-08-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://revivefw.com/blog/how-a-decision-becomes-a-rep-synapses</loc><lastmod>2026-08-05</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://revivefw.com/blog/why-your-spine-has-curves</loc><lastmod>2026-08-07</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://revivefw.com/blog/founders-pricing-ends-august-15</loc><lastmod>2026-08-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://revivefw.com/blog/revive-grand-opening-august-15</loc><lastmod>2026-08-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <!-- BLOG:END -->
