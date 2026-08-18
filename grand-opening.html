@@ -20,6 +20,7 @@
 <meta name="twitter:description" content="Tour the facility, meet the team, celebrate with local partners. 3233 St Joe Center Rd, Fort Wayne." />
 <meta name="twitter:image" content="https://revivefw.com/assets/og-image.png" />
 <meta name="theme-color" content="#0B0807" />
+<link rel="preconnect" href="https://xpellfnufhvmqkabvabn.supabase.co" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@600;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=Manrope:wght@200;300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -150,6 +151,41 @@
     <p class="center mono text-faint mt-8" data-reveal>More partners to be announced.</p>
   </div>
 </section>
+
+<!-- Grand Opening gallery -->
+<section class="section" id="gallery">
+  <div class="wrap">
+    <div class="center" data-reveal>
+      <span class="eyebrow">Grand Opening — In Photos</span>
+      <h2 class="h-1 mt-4">The day<br /><span class="editorial text-cream">in pictures.</span></h2>
+    </div>
+    <div class="go-gallery mt-8">
+      <figure class="go-shot go-feature" data-reveal><img loading="lazy" src="https://xpellfnufhvmqkabvabn.supabase.co/storage/v1/object/public/Images/CodyJaqulineOwnersGrandOpening.jpg" alt="Cody and Jaqueline Kieler, owners of REVIVE, at the grand opening" /></figure>
+      <figure class="go-shot" data-reveal><img loading="lazy" src="https://xpellfnufhvmqkabvabn.supabase.co/storage/v1/object/public/Images/ReviveTeamGrandopening3.jpg" alt="The REVIVE team on grand opening day" /></figure>
+      <figure class="go-shot" data-reveal><img loading="lazy" src="https://xpellfnufhvmqkabvabn.supabase.co/storage/v1/object/public/Images/MomandSonLiftingGrandOpening.jpg" alt="A mom and son lifting together at the REVIVE grand opening" /></figure>
+      <figure class="go-shot" data-reveal><img loading="lazy" src="https://xpellfnufhvmqkabvabn.supabase.co/storage/v1/object/public/Images/2RandomGuyssmilingatGrandOpening.jpg" alt="Members at the REVIVE grand opening in Fort Wayne" /></figure>
+      <figure class="go-shot" data-reveal><img loading="lazy" src="https://xpellfnufhvmqkabvabn.supabase.co/storage/v1/object/public/Images/JoshandFriendFistPumpatGrandOpening.jpg" alt="A fist bump at the REVIVE grand opening" /></figure>
+      <figure class="go-shot" data-reveal><img loading="lazy" src="https://xpellfnufhvmqkabvabn.supabase.co/storage/v1/object/public/Images/MenUsingFreeWeightsGrandopening.jpg" alt="Training on the free-weight floor at the grand opening" /></figure>
+      <figure class="go-shot" data-reveal><img loading="lazy" src="https://xpellfnufhvmqkabvabn.supabase.co/storage/v1/object/public/Images/UseRowMachineGrandOpening.jpg" alt="Using the rowing machine at the REVIVE grand opening" /></figure>
+      <figure class="go-shot" data-reveal><img loading="lazy" src="https://xpellfnufhvmqkabvabn.supabase.co/storage/v1/object/public/Images/JaqlineGrandOpeningwithCustomer.jpg" alt="Jaqueline welcoming a member at the grand opening" /></figure>
+      <figure class="go-shot" data-reveal><img loading="lazy" src="https://xpellfnufhvmqkabvabn.supabase.co/storage/v1/object/public/Images/GrandOpeningKingsNutrition.jpg" alt="King's Nutrition at the REVIVE grand opening" /></figure>
+      <figure class="go-shot" data-reveal><img loading="lazy" src="https://xpellfnufhvmqkabvabn.supabase.co/storage/v1/object/public/Images/GrandOpeningBronzedByLex.jpg" alt="Bronzed by Lex at the REVIVE grand opening" /></figure>
+      <figure class="go-shot" data-reveal><img loading="lazy" src="https://xpellfnufhvmqkabvabn.supabase.co/storage/v1/object/public/Images/CodywithLacedBarbersGrandOpening.jpg" alt="Cody with the Laced barbers offering free haircuts" /></figure>
+    </div>
+  </div>
+</section>
+
+<style>
+  .go-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); grid-auto-rows: 185px; grid-auto-flow: dense; gap: 10px; }
+  .go-shot { margin: 0; overflow: hidden; border: 1px solid var(--border); background: var(--bg-1); }
+  .go-shot img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s var(--ease-out); }
+  .go-shot:hover img { transform: scale(1.06); }
+  .go-feature { grid-column: span 2; grid-row: span 2; }
+  @media (max-width: 600px) {
+    .go-gallery { grid-template-columns: 1fr 1fr; grid-auto-rows: 150px; }
+    .go-feature { grid-column: span 2; grid-row: span 2; }
+  }
+</style>
 
 <!-- CTA -->
 <section class="section center" style="position:relative;">
