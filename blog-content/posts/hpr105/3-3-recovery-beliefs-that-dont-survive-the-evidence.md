@@ -37,7 +37,7 @@ Cold water immersion after resistance training has been studied reasonably well,
 
 Three pieces of context matter before you cancel your plunges.
 
-First, this concern is specific to hypertrophy and strength adaptation. If your goal on a given day is to feel functional tomorrow — you have a competition, a tournament, back-to-back sessions, a Hyrox event — dampening the response is the point, and the trade is a reasonable one to make deliberately.
+First, this concern is specific to hypertrophy and strength adaptation. If your goal on a given day is to feel functional tomorrow — you have a competition, a tournament, back-to-back sessions, a race — dampening the response is the point, and the trade is a reasonable one to make deliberately.
 
 Second, the effect is about proximity. Putting hours between your last heavy set and the water, or plunging on conditioning and rest days instead, keeps most of the benefit without paying the adaptation tax.
 

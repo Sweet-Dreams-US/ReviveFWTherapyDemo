@@ -3,8 +3,10 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/founders", "destination": "/100", "permanent": false },
-    { "source": "/founding", "destination": "/100", "permanent": false },
+    { "source": "/founders", "destination": "/pricing", "permanent": true },
+    { "source": "/founding", "destination": "/pricing", "permanent": true },
+    { "source": "/100", "destination": "/pricing", "permanent": true },
+    { "source": "/100.html", "destination": "/pricing", "permanent": true },
     { "source": "/about", "destination": "/why-revive", "permanent": true },
     { "source": "/about.html", "destination": "/why-revive", "permanent": true },
     { "source": "/experience", "destination": "/why-revive", "permanent": true },

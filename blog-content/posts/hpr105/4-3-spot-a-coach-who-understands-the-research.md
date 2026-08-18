@@ -89,7 +89,7 @@ So treat these as a filter rather than a verdict. What you are screening out is 
 
 ## The Revive Tip
 
-Try question two on your next visit. Pick anything in the building — the red light beds, the plunge protocol, the class structure — and ask how strong the evidence behind it actually is. You should get a straight answer, including the parts where the research is thin, because that is the standard we are trying to build here rather than a marketing line. Founding members have more influence over that culture than anyone who joins later, since the standard gets set early and then holds. [See what the founding group is](https://revivefw.com/100) and hold us to it.
+Try question two on your next visit. Pick anything in the building — the red light beds, the plunge protocol, the class structure — and ask how strong the evidence behind it actually is. You should get a straight answer, including the parts where the research is thin, because that is the standard we are trying to build here rather than a marketing line. Early members have more influence over that culture than anyone who joins later, since the standard gets set early and then holds. [Come see the room for a day](https://revivefw.com/join) and hold us to it.
 
 ## What to read next
 

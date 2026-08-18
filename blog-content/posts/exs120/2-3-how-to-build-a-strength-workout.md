@@ -87,7 +87,7 @@ Pick the template that matches the days you will actually show up, then stay on 
 
 ## The Revive Tip
 
-If you have never tested a real rep max, do it in a proper rack rather than guessing forever. Our competition racks and Olympic platforms have safeties you can set to the exact height of your bottom position, which means you can take a heavy three-rep set to a real limit and simply set the bar down if it stalls. Do that once on a squat and once on a press, log the numbers, and every working weight for the next twelve weeks writes itself. Founding pricing on that floor is still open at the [Founders Waitlist](https://revivefw.com/join).
+If you have never tested a real rep max, do it in a proper rack rather than guessing forever. Our competition racks and Olympic platforms have safeties you can set to the exact height of your bottom position, which means you can take a heavy three-rep set to a real limit and simply set the bar down if it stalls. Do that once on a squat and once on a press, log the numbers, and every working weight for the next twelve weeks writes itself. You can walk that floor for a day on us — [the August day pass is free](https://revivefw.com/join).
 
 ## What to read next
 

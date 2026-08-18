@@ -29,7 +29,7 @@ Machines also remove the balance requirement. Less demand on stabilizing muscles
 
 ### The "machines aren't functional" claim, honestly
 
-When effort and progression are matched, machines build muscle and strength. That part is not really controversial anymore. What machines do not do is teach you to coordinate a whole-body movement, stabilize a load in space, or produce force from the ground up — and if you play a sport, chase a Hyrox time, or want to carry both kids and the groceries in one trip, you need that too.
+When effort and progression are matched, machines build muscle and strength. That part is not really controversial anymore. What machines do not do is teach you to coordinate a whole-body movement, stabilize a load in space, or produce force from the ground up — and if you play a sport, chase a conditioning benchmark, or want to carry both kids and the groceries in one trip, you need that too.
 
 So the real answer is a division of labor. Barbells and dumbbells train the pattern. Machines train the tissue. A program that uses both is not a compromise; it is just a program that understands what each tool is for.
 

@@ -22,8 +22,7 @@ Goal: rank in search, build trust, and send readers to ReviveFW.com.
 | Why Revive | `https://revivefw.com/why-revive` | the tip is about the facility philosophy, equipment, or what makes it different |
 | Grand Opening | `https://revivefw.com/grand-opening` | the tip invites someone to come see the place |
 | Run Club | `https://revivefw.com/run-club` | the tip involves cardio, aerobic base, community, or a free way to start |
-| Founders Waitlist | `https://revivefw.com/join` | the tip involves locking in founding pricing or getting on the list |
-| The Founding 100 | `https://revivefw.com/100` | the tip references the founding member program |
+| Join Revive | `https://revivefw.com/join` | the tip involves joining, or claiming the free August day pass |
 | Careers | `https://revivefw.com/careers` | only if the post is about working in the field |
 
 **Recovery services:**
@@ -37,7 +36,7 @@ Goal: rank in search, build trust, and send readers to ReviveFW.com.
 **Training:**
 - Strength floor — Olympic platforms, competition racks, Pendulum, Hammer Strength, Eleiko
 - Performance turf — 30-yard sprint strip, sled work, conditioning loop
-- Group classes — strength, Hyrox, Pilates (capped attendance)
+- Group classes — led by Revive trainers; strength, conditioning, mobility (capped attendance)
 
 **Community:**
 - Free Saturday Run Club
@@ -47,11 +46,18 @@ Goal: rank in search, build trust, and send readers to ReviveFW.com.
 **Membership tiers:**
 | Tier | Price | Includes |
 |---|---|---|
-| BASE | $79/mo | Gym access |
-| PLUS | $109/mo | Gym + 6 recovery sessions/mo + 1 weekly class |
-| ELITE | $149/mo | Unlimited recovery and classes, priority booking |
+| ESSENTIAL | $89/mo | Gym access |
+| PLUS | $139/mo | Gym + 6 recovery sessions/mo + 1 weekly class |
+| ELITE | $169/mo | Unlimited recovery and classes, priority booking |
 
-**Never state or imply:** hours of operation, staff names, class schedules, specific trainer credentials, phone numbers, promotions or discounts not listed above, or any service not on this page.
+All memberships are month-to-month — no contract, no initiation fee. There is one
+set of prices; founders/presale pricing no longer exists and must never be mentioned.
+
+**Current offers (the only promotions that may be referenced):**
+- August — free day pass, open to anyone, full facility access for a day.
+- September — join on Elite and get a free personal training session with Kings Nutrition.
+
+**Never state or imply:** hours of operation, staff names, class schedules, specific trainer credentials, phone numbers, promotions or discounts not listed above, founders/presale/locked-for-life pricing, Hyrox, Pilates, or any service not on this page.
 
 ---
 

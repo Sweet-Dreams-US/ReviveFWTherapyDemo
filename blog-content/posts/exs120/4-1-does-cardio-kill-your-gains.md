@@ -23,7 +23,7 @@ Every contraction you make is paid for with ATP, and your body has three ways of
 
 **The phosphagen system** uses creatine phosphate stored right inside the muscle to regenerate ATP almost instantly. Enormous power, tiny tank — it dominates for roughly the first ten seconds of an all-out effort. A heavy set of five, a sled push down the turf, a 30-yard sprint: this is that system. Refilling those stores takes minutes, not seconds, which is precisely why heavy strength work calls for two to five minutes of rest and why cutting rest short makes your top set feel like a different exercise.
 
-**The glycolytic system** breaks down carbohydrate rapidly without needing oxygen and carries most of the load from roughly ten seconds out to about two minutes. This is the 400-meter, the 20-rep squat set, the third round of a Hyrox station. It is also where the burn lives.
+**The glycolytic system** breaks down carbohydrate rapidly without needing oxygen and carries most of the load from roughly ten seconds out to about two minutes. This is the 400-meter, the 20-rep squat set, the third round of a conditioning circuit. It is also where the burn lives.
 
 And the burn is worth correcting, because the internet has this exactly backwards. Lactic acid is not what is hurting, and lactate is not a waste product. Lactate is a fuel — your heart, your slow-twitch fibers and your liver actively use it, and your body shuttles it around to do so. The burning sensation tracks with the accumulation of hydrogen ions and other metabolic byproducts as production outruns clearance. Lactate happens to rise at the same time, which is how it got blamed. It is a bystander with bad PR.
 

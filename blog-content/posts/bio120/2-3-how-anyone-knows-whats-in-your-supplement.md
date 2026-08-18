@@ -51,7 +51,7 @@ Certification also does not solve the underlying question of whether the ingredi
 
 If you are in a tested sport, or you work in a field with drug testing, treat every unsealed powder as a risk you did not need to take. Check for a named certification and keep the container.
 
-For everyone else, the useful move is smaller. Pick one product, look up whether it is third-party certified, and if you cannot verify it in five minutes, that is your answer. Then put the attention somewhere it compounds — a training plan you follow and recovery you actually book. That is the whole idea behind [the Founding 100](https://revivefw.com/100), and members who ask this kind of question are exactly who we built it for.
+For everyone else, the useful move is smaller. Pick one product, look up whether it is third-party certified, and if you cannot verify it in five minutes, that is your answer. Then put the attention somewhere it compounds — a training plan you follow and recovery you actually book. That is the whole idea behind how we [built this place](https://revivefw.com/pricing), and members who ask this kind of question are exactly who we built it for.
 
 ## What to read next
 

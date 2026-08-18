@@ -725,3 +725,19 @@ p .brand, li .brand, .lead .brand, summary .brand, label .brand,
 @media (max-width: 900px) {
   .rc-row { flex-direction: column; align-items: flex-start; }
 }
+
+/* ==========================================================================
+   Additions — Current offers band (home)
+   ========================================================================== */
+.offer-band { background: var(--bg-1); border-block: 1px solid var(--border); }
+.offer-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-8);
+}
+.offer-item { border-left: 2px solid var(--fire); padding-left: var(--s-6); }
+.offer-item:last-child { border-left-color: var(--gold); }
+.offer-item p { max-width: 46ch; }
+@media (max-width: 900px) {
+  .offer-row { grid-template-columns: 1fr; gap: var(--s-7); }
+}

@@ -85,7 +85,7 @@ And a note that runs against the grain of a recovery gym: the research suggests 
 
 ## The Revive Tip
 
-If you are coming back after a long layoff, cap your first two weeks at roughly half of what you think you can handle, and do it where someone can see you. Revive's competition racks have safeties on every station and the platforms are set up so a failed rep is a non-event — but the better protection is not training alone in a corner. Capped-attendance classes and a floor with people on it mean somebody notices when a set goes wrong. Revive is filling its first hundred memberships now, so if you are not in yet, that is the door. [Learn about the Founding 100](https://revivefw.com/100).
+If you are coming back after a long layoff, cap your first two weeks at roughly half of what you think you can handle, and do it where someone can see you. Revive's competition racks have safeties on every station and the platforms are set up so a failed rep is a non-event — but the better protection is not training alone in a corner. Capped-attendance classes and a floor with people on it mean somebody notices when a set goes wrong. Revive is filling its first hundred memberships now, so if you are not in yet, that is the door. [See what a membership includes](https://revivefw.com/pricing).
 
 ## What to read next
 

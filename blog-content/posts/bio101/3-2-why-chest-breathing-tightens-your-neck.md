@@ -29,7 +29,7 @@ The diaphragm has a second job. It forms the ceiling of the pressurized containe
 
 You also have **accessory muscles of respiration**, and they are supposed to be part-timers.
 
-The **scalenes** run from your cervical vertebrae down to the first two ribs, so contracting them lifts the rib cage. **Sternocleidomastoid** runs from the sternum and clavicle up to the bone behind your ear and does something similar. Upper trapezius, levator scapulae, and pectoralis minor join in. During a hard sprint or a Hyrox interval, that is exactly what they are for.
+The **scalenes** run from your cervical vertebrae down to the first two ribs, so contracting them lifts the rib cage. **Sternocleidomastoid** runs from the sternum and clavicle up to the bone behind your ear and does something similar. Upper trapezius, levator scapulae, and pectoralis minor join in. During a hard sprint or a conditioning interval, that is exactly what they are for.
 
 The problem is duration, not effort. When shallow upper-chest breathing becomes the default — and stress reliably makes it the default — those part-timers work every minute of the day. Nobody would program a set that lasts nine hours.
 

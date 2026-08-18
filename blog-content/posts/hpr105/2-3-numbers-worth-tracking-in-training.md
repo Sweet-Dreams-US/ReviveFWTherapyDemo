@@ -89,7 +89,7 @@ And a bigger limit: nothing you do at a gym measures your *health*. Not the scal
 
 ## The Revive Tip
 
-Take a baseline in your first week, before anything changes — that's the number you'll wish you had in October. Three tests is plenty: one strength lift on the platform, one aerobic effort, and grip if you want a cheap health-related marker. Then log session-RPE after every session, including recovery. Retest at eight to twelve weeks under the same conditions, and use the private recovery suite when you want a quiet twenty minutes to actually record what you noticed. If you're coming in with [the Founding 100](https://revivefw.com/100), you get to build that record from day one instead of reconstructing it later.
+Take a baseline in your first week, before anything changes — that's the number you'll wish you had in October. Three tests is plenty: one strength lift on the platform, one aerobic effort, and grip if you want a cheap health-related marker. Then log session-RPE after every session, including recovery. Retest at eight to twelve weeks under the same conditions, and use the private recovery suite when you want a quiet twenty minutes to actually record what you noticed. If you [start now](https://revivefw.com/join), you get to build that record from day one instead of reconstructing it later.
 
 ## What to read next
 

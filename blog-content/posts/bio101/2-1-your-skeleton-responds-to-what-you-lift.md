@@ -53,7 +53,7 @@ Here is the honest limit for adults. Loading is associated with better bone mine
 
 ## The Revive Tip
 
-Give your skeleton something to respond to. Once a week, make one session about load rather than fatigue: a heavy compound lift on the platforms or competition racks, a few sets of loaded carries, and some low-level impact on the turf. Heavy and unhurried beats light and breathless for this particular purpose. Then be patient, because bone measures progress in seasons. That long horizon is exactly why we built [The Founding 100](https://revivefw.com/100) around people planning to still be training here in five years.
+Give your skeleton something to respond to. Once a week, make one session about load rather than fatigue: a heavy compound lift on the platforms or competition racks, a few sets of loaded carries, and some low-level impact on the turf. Heavy and unhurried beats light and breathless for this particular purpose. Then be patient, because bone measures progress in seasons. That long horizon is why we built the place around people planning to still be training here in five years — [come try a day on us](https://revivefw.com/join) and see whether it fits yours.
 
 ## What to read next
 

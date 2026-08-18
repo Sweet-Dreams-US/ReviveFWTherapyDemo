@@ -67,7 +67,7 @@ Dietary protein is not raw material for construction from zero. It tops off a re
 
 ## The Revive Tip
 
-Protein without a reason to use it is expensive food. The signal that tells your body to direct amino acids toward muscle is mechanical tension, and that means getting on the strength floor and progressively loading something — the competition racks, the Eleiko bars, the Pendulum work. Two honest sessions a week, held for months, will do more with an ordinary diet than a perfect protein plan does with no training stimulus underneath it. If you have been meaning to make that a real habit rather than an intention, [get your name on the list before founding pricing closes](https://revivefw.com/join).
+Protein without a reason to use it is expensive food. The signal that tells your body to direct amino acids toward muscle is mechanical tension, and that means getting on the strength floor and progressively loading something — the competition racks, the Eleiko bars, the Pendulum work. Two honest sessions a week, held for months, will do more with an ordinary diet than a perfect protein plan does with no training stimulus underneath it. If you have been meaning to make that a real habit rather than an intention, [start with a free day pass](https://revivefw.com/join).
 
 ## What to read next
 

@@ -53,7 +53,7 @@ One myth this chapter kills: stretching does not lengthen a muscle in any way we
 
 ## The Revive Tip
 
-The protein you are rebuilding turns over on a timeline of weeks and months, not sessions, so the variable that decides your results is how many good weeks you string together. Two or three sessions a week on the strength floor, held for a year, beats a heroic six weeks every time — and the competition racks and Eleiko bars are there so the movement quality holds up when you do add weight. If you are thinking in years rather than weeks, that is exactly who the founding member program was built for: [see The Founding 100](https://revivefw.com/100).
+The protein you are rebuilding turns over on a timeline of weeks and months, not sessions, so the variable that decides your results is how many good weeks you string together. Two or three sessions a week on the strength floor, held for a year, beats a heroic six weeks every time — and the competition racks and Eleiko bars are there so the movement quality holds up when you do add weight. If you are thinking in years rather than weeks, that is exactly who we built this for: [see what a membership includes](https://revivefw.com/pricing).
 
 ## What to read next
 

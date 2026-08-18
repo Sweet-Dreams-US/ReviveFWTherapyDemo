@@ -57,7 +57,7 @@ Chemists also distinguish theoretical yield from actual yield, and biology never
 
 Since most of the mass leaves through your lungs, the training that matters most for fat loss is the kind you can repeat for years, not the kind that wrecks you for three days. Aerobic work on the conditioning loop, capped-size group classes, sled work at a pace you can hold — sustainable volume beats heroic sessions that you abandon in March.
 
-Pick two sessions a week you would still do in bad weather, and build everything else around them. If you are weighing what to commit to, founding pricing details are on the [waitlist page](https://revivefw.com/join).
+Pick two sessions a week you would still do in bad weather, and build everything else around them. If you are weighing what to commit to, every tier and price is on the [membership page](https://revivefw.com/pricing).
 
 ## What to read next
 

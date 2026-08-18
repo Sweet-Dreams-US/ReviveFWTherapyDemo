@@ -35,7 +35,7 @@ Notice that "simple" and "complex" do not appear on that list. They are useful s
 
 **Starch** comes in two architectures. Amylose is a straight chain and digests relatively slowly. Amylopectin is heavily branched, which gives enzymes far more places to attack, so it digests fast. The ratio varies by plant, and then cooking, cooling, grinding, and ripeness all shift it further. Cooked and cooled starch forms resistant starch, which partially escapes digestion and behaves more like fiber.
 
-**Glycogen** is your stored carbohydrate, and its two pools do different jobs. Liver glycogen can be released back into the bloodstream to defend blood glucose between meals. Muscle glycogen cannot. It lacks the enzyme required to export glucose, so muscle glycogen fuels only the muscle it is sitting in. That is why the last third of a long conditioning piece or a Hyrox-style workout feels the way it does — you are draining a local tank that nothing else can refill mid-session.
+**Glycogen** is your stored carbohydrate, and its two pools do different jobs. Liver glycogen can be released back into the bloodstream to defend blood glucose between meals. Muscle glycogen cannot. It lacks the enzyme required to export glucose, so muscle glycogen fuels only the muscle it is sitting in. That is why the last third of a long conditioning piece or a circuit-style workout feels the way it does — you are draining a local tank that nothing else can refill mid-session.
 
 **Fiber** is not one substance, and grouping it as a single number on a label hides most of what matters.
 
@@ -75,7 +75,7 @@ What survives all of this is unglamorous: the physical form of the food, how muc
 
 ## The Revive Tip
 
-Match your fueling awareness to what you are actually doing. Heavy low-rep work on the platforms leans on the phosphagen system and barely touches glycogen. A Hyrox class or intervals on the conditioning loop is glycolytic and drains muscle glycogen hard — and that tank is local, so it does not refill mid-session. If your last two rounds consistently fall apart while your first two feel fine, that is a fueling and recovery pattern worth looking at, not a willpower problem. Training that often also changes what makes sense from a plan, so [look at what your week actually requires](https://revivefw.com/pricing) before you add sessions.
+Match your fueling awareness to what you are actually doing. Heavy low-rep work on the platforms leans on the phosphagen system and barely touches glycogen. A conditioning class or intervals on the turf loop is glycolytic and drains muscle glycogen hard — and that tank is local, so it does not refill mid-session. If your last two rounds consistently fall apart while your first two feel fine, that is a fueling and recovery pattern worth looking at, not a willpower problem. Training that often also changes what makes sense from a plan, so [look at what your week actually requires](https://revivefw.com/pricing) before you add sessions.
 
 ## What to read next
 

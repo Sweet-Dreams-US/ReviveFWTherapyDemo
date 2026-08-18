@@ -82,7 +82,7 @@ The metric that actually predicts outcomes is unglamorous: **sessions completed 
 
 Decide your minimum re-entry session now, before you need it, and write it somewhere you will find it. Twenty minutes: one main lift, a short conditioning piece on the turf, then the cold plunge or fifteen minutes in the infrared sauna. That is the whole session. It exists to end a lapse, nothing else.
 
-Then set your target as sessions per month rather than a streak, and give the plan a full twelve weeks before you judge it. If you are still deciding whether Revive is the right place to run that experiment, [get on the founders list](https://revivefw.com/join) — it is a decision made once instead of one you renegotiate every Tuesday evening.
+Then set your target as sessions per month rather than a streak, and give the plan a full twelve weeks before you judge it. If you are still deciding whether Revive is the right place to run that experiment, [take the free August day pass](https://revivefw.com/join) — one decision instead of one you renegotiate every Tuesday evening.
 
 ## What to read next
 

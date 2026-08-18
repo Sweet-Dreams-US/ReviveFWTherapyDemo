@@ -55,7 +55,7 @@ Fats have no charged ends, so they attract each other only through fleeting, wea
 
 Creatine only pays off if something in your week demands the energy system it supports. That means short, hard, heavy work: sets in the three-to-six-rep range on the competition racks, sled pushes on the turf, sprint repeats where you actually stop and recover between them.
 
-If your training is all steady-state, you have supplied a system you rarely stress. Build two sessions a week around real intensity on the platforms and strength floor, then decide whether anything else in your cabinet has earned its place. Founding member details are on [The Founding 100 page](https://revivefw.com/100).
+If your training is all steady-state, you have supplied a system you rarely stress. Build two sessions a week around real intensity on the platforms and strength floor, then decide whether anything else in your cabinet has earned its place. Membership details are on [the pricing page](https://revivefw.com/pricing).
 
 ## What to read next
 

@@ -89,7 +89,7 @@ When you get in front of a coach here, lead with the true version rather than th
 
 That sentence tells us what to design around. Programs fail on logistics far more often than on effort.
 
-Write your version down before you come in — the three sentences you would normally soften. Bring it to a class or to the strength floor and say it out loud to whoever is coaching. To be in that conversation early, [put your name on the founders list](https://revivefw.com/join).
+Write your version down before you come in — the three sentences you would normally soften. Bring it to a class or to the strength floor and say it out loud to whoever is coaching. To be in that conversation early, [come in on a free day pass](https://revivefw.com/join).
 
 ## What to read next
 

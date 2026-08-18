@@ -84,7 +84,7 @@ What you can reasonably expect is that the person coaching you knows the boundar
 
 ## The Revive Tip
 
-When you fill out your intake, put the awkward stuff on the form. The old back injury, the blood pressure medication, the shoulder you have been working around since 2019. It changes what we recommend on day one — particularly whether you should be in a cold plunge at all before you have talked to your doctor. If you are still deciding whether to join, get your name on the list now and treat that first intake conversation as the actual start, not the paperwork before it. [Join the founders list here](https://revivefw.com/join) and come in with your history ready.
+When you fill out your intake, put the awkward stuff on the form. The old back injury, the blood pressure medication, the shoulder you have been working around since 2019. It changes what we recommend on day one — particularly whether you should be in a cold plunge at all before you have talked to your doctor. If you are still deciding whether to join, get your name on the list now and treat that first intake conversation as the actual start, not the paperwork before it. [Book a free day pass here](https://revivefw.com/join) and come in with your history ready.
 
 ## What to read next
 

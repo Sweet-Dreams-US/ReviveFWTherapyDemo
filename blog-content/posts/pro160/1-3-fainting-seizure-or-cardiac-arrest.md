@@ -65,7 +65,7 @@ And to say it plainly: reading this does not make you competent to do it. Hands-
 
 ## The Revive Tip
 
-Do not be the person nobody notices. If you are training alone at an odd hour, or booking the private recovery suite for a solo session, tell someone at the desk you are in there and roughly how long you plan to be. It costs you one sentence. Training somewhere people learn your name is a real safety feature, not a marketing line — that is part of what a small founding group buys you. [See how The Founding 100 works](https://revivefw.com/100) if you want to be part of that group.
+Do not be the person nobody notices. If you are training alone at an odd hour, or booking the private recovery suite for a solo session, tell someone at the desk you are in there and roughly how long you plan to be. It costs you one sentence. Training somewhere people learn your name is a real safety feature, not a marketing line — that is part of what capped classes and a staffed floor buy you. [Come see the room for a day](https://revivefw.com/join) if you want to judge that for yourself.
 
 ## What to read next
 

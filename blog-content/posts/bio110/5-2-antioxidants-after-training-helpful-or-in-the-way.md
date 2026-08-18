@@ -53,7 +53,7 @@ That result is not settled science. Doses, timing, populations, and outcome meas
 
 ## The Revive Tip
 
-Do not stack a high-dose antioxidant on top of your hardest sessions and expect it to speed things up. The soreness you are trying to erase is attached to the signal you paid for with the work. Put your effort into the inputs nobody argues about: sleep, enough protein, unhurried time between hard days. At Revive that looks like a Normatec suite or the infrared sauna on the day between, rather than a bottle on the day of. Adaptation runs on months, so if you plan to train seriously through next year, [get on the founders list](https://revivefw.com/join).
+Do not stack a high-dose antioxidant on top of your hardest sessions and expect it to speed things up. The soreness you are trying to erase is attached to the signal you paid for with the work. Put your effort into the inputs nobody argues about: sleep, enough protein, unhurried time between hard days. At Revive that looks like a Normatec suite or the infrared sauna on the day between, rather than a bottle on the day of. Adaptation runs on months, so if you plan to train seriously through next year, [start with a free day pass](https://revivefw.com/join).
 
 ## What to read next
 

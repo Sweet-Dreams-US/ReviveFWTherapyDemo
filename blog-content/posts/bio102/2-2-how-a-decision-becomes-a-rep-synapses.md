@@ -49,7 +49,7 @@ What is notable about this junction is its safety margin. In a healthy adult it 
 
 ## The Revive Tip
 
-Practice the technical thing while your nervous system is fresh, not at the end when you are cooked. Put a new movement — a clean, a Turkish get-up, a first attempt at a Hyrox station — in the first fifteen minutes of a session, keep the sets short, and stop while every rep still looks the same. Skill is built by repetitions your brain can actually attend to. Our group classes are capped for the same reason: fewer people in the room means someone is watching your reps instead of counting heads. Read more about how the floor is set up at [Why Revive](https://revivefw.com/why-revive).
+Practice the technical thing while your nervous system is fresh, not at the end when you are cooked. Put a new movement — a clean, a Turkish get-up, a first attempt at a loaded carry — in the first fifteen minutes of a session, keep the sets short, and stop while every rep still looks the same. Skill is built by repetitions your brain can actually attend to. Our group classes are capped for the same reason: fewer people in the room means someone is watching your reps instead of counting heads. Read more about how the floor is set up at [Why Revive](https://revivefw.com/why-revive).
 
 ## What to read next
 

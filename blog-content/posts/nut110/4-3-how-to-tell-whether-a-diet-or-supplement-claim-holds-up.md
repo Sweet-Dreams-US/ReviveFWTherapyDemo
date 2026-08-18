@@ -77,7 +77,7 @@ Before you buy anything, look at the bottle and find two things: a third-party s
 
 Then aim the same skepticism at your training. The things with the deepest evidence behind them are unglamorous — consistent strength work, an aerobic base, sleep, protein, and showing up in February when nobody feels like it. Recovery tools like the sauna and the cold plunge are worth using because they make consistency easier and feel good after hard weeks, not because any tub or cabinet replaces the work.
 
-If you want the training and recovery side handled under one roof at founding pricing, get on the [Founders Waitlist](https://revivefw.com/join).
+If you want the training and recovery side handled under one roof, [see what a membership includes](https://revivefw.com/pricing).
 
 ## What to read next
 

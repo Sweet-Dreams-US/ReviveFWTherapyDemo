@@ -63,7 +63,7 @@ If you find something inaccurate in your chart, that is worth flagging — and t
 
 ## The Revive Tip
 
-Start a log on day one instead of trying to reconstruct one later. Three lines after each session — what you trained, what it felt like on a 1 to 10, and what recovery you used — is enough to spot the pattern that a single memory will always miss. Members who track for a few months can tell you exactly which weeks broke them, and that information is worth more than any wearable. If you are considering joining, [the founding member program](https://revivefw.com/100) is the cleanest way to have a full year of that history behind you.
+Start a log on day one instead of trying to reconstruct one later. Three lines after each session — what you trained, what it felt like on a 1 to 10, and what recovery you used — is enough to spot the pattern that a single memory will always miss. Members who track for a few months can tell you exactly which weeks broke them, and that information is worth more than any wearable. If you are considering joining, [a membership](https://revivefw.com/pricing) is the cleanest way to have a full year of that history behind you.
 
 ## What to read next
 

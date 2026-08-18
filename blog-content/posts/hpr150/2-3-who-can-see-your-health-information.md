@@ -62,7 +62,7 @@ The same care applies to phones. Do not text a screenshot of your labs to a trai
 
 ## The Revive Tip
 
-Before you fill out an intake form here or anywhere else, ask the four questions above and see how fast you get a straight answer. You should expect to know who sees your health history, where it lives, and what happens to it if you leave. On the floor, the same courtesy applies to phones — ask before you film, and keep other members out of the shot. If you are getting on the list, [the founders waitlist is here](https://revivefw.com/join), and yes, you can ask us those questions before you put anything in a box.
+Before you fill out an intake form here or anywhere else, ask the four questions above and see how fast you get a straight answer. You should expect to know who sees your health history, where it lives, and what happens to it if you leave. On the floor, the same courtesy applies to phones — ask before you film, and keep other members out of the shot. If you want to look around first, [the free August day pass is here](https://revivefw.com/join), and yes, you can ask us those questions before you put anything in a box.
 
 ## What to read next
 

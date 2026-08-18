@@ -53,7 +53,7 @@ It is also not a premium feature. For nearly every amino acid sold to gym member
 
 Stereochemistry is a good reminder that the details on a label can be technically true and practically irrelevant. Training does not have that problem. Progressive load on the strength floor, a real aerobic base, and enough recovery to absorb both are unglamorous and extremely well supported.
 
-If you have been meaning to make that switch, get your name on the [founders list](https://revivefw.com/join) and put the supplement budget toward the part of the equation that actually compounds.
+If you have been meaning to make that switch, [come train a day on us](https://revivefw.com/join) and put the supplement budget toward the part of the equation that actually compounds.
 
 ## What to read next
 

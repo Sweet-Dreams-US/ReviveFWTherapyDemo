@@ -61,7 +61,7 @@ Here is the honest limit. Every anatomy image you have seen is either one partic
 
 ## The Revive Tip
 
-Next time something in a joint feels off, do not lead with a diagnosis you found online. Get on the strength floor with a coach, point to the actual spot, and let them landmark you — acromion, greater tubercle, iliac crest — and see whether what you feel lines up with what is under your skin. That conversation goes faster in a room where somebody knows your training history, which is most of the point of the founding member program. [See how the Founding 100 works](https://revivefw.com/100).
+Next time something in a joint feels off, do not lead with a diagnosis you found online. Get on the strength floor with a coach, point to the actual spot, and let them landmark you — acromion, greater tubercle, iliac crest — and see whether what you feel lines up with what is under your skin. That conversation goes faster in a room where somebody knows your training history, which is most of the point of training in one place. [See what a membership includes](https://revivefw.com/pricing).
 
 ## What to read next
 

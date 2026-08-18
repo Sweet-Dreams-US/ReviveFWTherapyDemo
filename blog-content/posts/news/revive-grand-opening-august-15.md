@@ -48,7 +48,7 @@ One honest note: opening day is a party, not a workout. The floor and recovery s
 
 There is no pressure to sign up at the event. But if you already know you want in, opening day is the best time to do it: **enrollment fees are waived for anyone who signs up on-site on August 15.**
 
-It is also the last day for founders pricing. Saturday, August 15 is when the founding rate closes and standard pricing begins, so the people who join on or before that day lock in the lowest rate REVIVE will ever offer, for as long as they stay members. If that matters to you, opening day is the deadline, not just the celebration.
+Memberships are month-to-month with no contract and no initiation fee — Essential at $89, Plus at $139, Elite at $169. And all through August, anyone can claim a free day pass and try the whole facility before deciding anything.
 
 ## The Revive Tip
 
@@ -56,4 +56,4 @@ Come hungry and come curious. The best way to use opening day is to actually get
 
 ## What to read next
 
-If you are weighing whether to join on the 15th, it is worth understanding exactly what founders pricing locks in — and why it closes for good when the doors open.
+If you are weighing whether the recovery side is worth it, start with what the evidence actually supports — and what it does not.
