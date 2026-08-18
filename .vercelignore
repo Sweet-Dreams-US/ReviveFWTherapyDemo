@@ -9,5 +9,6 @@ README.md
 # turns these into /blog/*.html at build time; the raw source must NOT be public.
 blog-content
 scripts/build-blog.js
+scripts/check-app-links.js
 REVIVE-AUDIT.md
 press/

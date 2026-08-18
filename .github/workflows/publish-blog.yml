@@ -46,6 +46,9 @@ jobs:
       - name: Regenerate blog for today (Eastern)
         run: node scripts/build-blog.js
 
+      - name: Guard — every app link must point to the REVIVE app (never Mindbody)
+        run: node scripts/check-app-links.js
+
       - name: Deploy to production
         run: vercel deploy --prod --yes --token="$VERCEL_TOKEN"
         env:

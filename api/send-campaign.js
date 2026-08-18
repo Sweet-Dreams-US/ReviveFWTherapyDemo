@@ -5,6 +5,13 @@
 // newsletter / waitlist / everyone) so the admin page can show list sizes.
 // When a new campaign is written, the full sender (template + Resend batch with
 // preview/test rails) can be restored — see git history and REVIVE-AUDIT.md.
+//
+// APP-LINK RULE (never send a Mindbody-app link again): any "download the app"
+// link in a campaign email MUST be the REVIVE app, never the generic Mindbody app:
+//   Apple:  https://apps.apple.com/us/app/revive-fitness-and-recovery/id6768313510
+//   Google: https://play.google.com/store/apps/details?id=com.fitnessmobileapps.revivefitnessandrecovery45023
+// After writing any template, run `node scripts/check-app-links.js` (it also runs
+// in CI and must pass before deploy).
 module.exports = async (req, res) => {
   if (req.method !== 'POST') { res.status(405).json({ error: 'Method not allowed' }); return; }
 
