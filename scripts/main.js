@@ -76,46 +76,6 @@
     counters.forEach(c => ic.observe(c));
   }
 
-  // ---------- Form interactions (demo only) ----------
-  document.querySelectorAll('form[data-demo]').forEach(form => {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const wrap = form.closest('.form-wrap') || form;
-      const data = Object.fromEntries(new FormData(form));
-      console.log('[REVIVE Demo] Form submission:', data);
-
-      const success = form.querySelector('.form-success');
-      if (success) {
-        success.classList.add('show');
-        form.classList.add('submitted');
-        return;
-      }
-
-      // Build success state with safe DOM methods
-      while (wrap.firstChild) wrap.removeChild(wrap.firstChild);
-
-      const successEl = document.createElement('div');
-      successEl.className = 'form-success show';
-
-      const eyebrow = document.createElement('span');
-      eyebrow.className = 'mono text-fire';
-      eyebrow.textContent = '— Submission Received —';
-      successEl.appendChild(eyebrow);
-
-      const heading = document.createElement('h3');
-      heading.className = 'h-2 mt-4';
-      heading.textContent = "You're in.";
-      successEl.appendChild(heading);
-
-      const lead = document.createElement('p');
-      lead.className = 'lead mt-4';
-      lead.textContent = "We'll be in touch within 48 hours to get you booked in. Welcome to Revive.";
-      successEl.appendChild(lead);
-
-      wrap.appendChild(successEl);
-    });
-  });
-
   // ---------- Tilt on hover for cards (subtle) ----------
   const tiltCards = document.querySelectorAll('[data-tilt]');
   tiltCards.forEach(card => {

@@ -28,6 +28,8 @@
 <link rel="icon" href="/favicon.ico" sizes="32x32" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<!-- Meta Pixel — base code + PageView; ID lives in the script -->
+<script src="/scripts/meta-pixel.js"></script>
 </head>
 <body>
 
@@ -83,7 +85,7 @@
       <h2 class="h-2 mt-4">Step in.<br />No pressure.</h2>
       <p class="text-soft mt-4">No payment today. Tell us what you're after — a free day pass or a membership — and we'll reach out within 48 hours to get you booked in.</p>
 
-      <form class="join-form mt-8" data-demo>
+      <form class="join-form mt-8" id="joinForm" novalidate>
         <div class="form-row">
           <div class="form-group">
             <label class="label" for="firstName">First Name</label>
@@ -155,6 +157,15 @@
           <input type="checkbox" name="updates" checked />
           <span>Send me opening updates and member events. (No spam, max 2/month.)</span>
         </label>
+
+        <!-- Honeypot: hidden from people, irresistible to bots. /api/inquiry
+             silently 200s any submission that fills it in. -->
+        <div class="hp-field" aria-hidden="true">
+          <label for="company">Company</label>
+          <input type="text" id="company" name="company" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <p class="form-error mono" id="joinError" role="alert"></p>
 
         <button class="btn btn-primary btn-arrow mt-6" style="width:100%; justify-content:center;" type="submit">Send It</button>
 
@@ -297,6 +308,14 @@
 
   .form-success.show { animation: fadeUp 0.8s var(--ease-out) both; }
 
+  .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .form-error {
+    color: var(--fire);
+    font-size: 0.78rem;
+    margin-top: var(--s-4);
+    min-height: 1em;
+  }
+
   .reason {
     border-left: 1px solid var(--border);
     padding-left: var(--s-6);
@@ -310,6 +329,97 @@
 </style>
 
 <script src="scripts/main.js" defer></script>
+<script>
+/* Join form — real submission to /api/inquiry.
+ *
+ * The Meta `Lead` event fires HERE and only here: after the API returns 200.
+ * Not on click, not on validation pass — a submission that 4xx/5xx'd is not a
+ * lead, and counting it would teach the campaign to optimize toward failures.
+ *
+ * `metaEventId` is generated up front and sent with the request, so the server's
+ * Conversions API Lead (api/inquiry.js) carries the same event_id as the browser
+ * Pixel's and Meta counts the pair once. */
+(function () {
+  var form = document.getElementById('joinForm');
+  if (!form) return;
+  var errEl = document.getElementById('joinError');
+  var submitted = false; // guards double-fire on double-click
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    if (submitted) return;
+    errEl.textContent = '';
+
+    var btn = form.querySelector('[type=submit]');
+    var data = {};
+    Array.prototype.forEach.call(form.elements, function (f) {
+      if (!f.name) return;
+      if (f.type === 'radio') { if (f.checked) data[f.name] = f.value; return; }
+      if (f.type === 'checkbox') { data[f.name] = f.checked; return; }
+      data[f.name] = f.value;
+    });
+    data.type = 'waitlist';
+    data.source = window.location.pathname + window.location.search;
+
+    if (!data.email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email)) {
+      errEl.textContent = 'Please enter a valid email address.';
+      return;
+    }
+
+    var eventId = (window.reviveMeta && window.reviveMeta.newEventId())
+      || ('ev-' + Date.now().toString(36));
+    data.metaEventId = eventId;
+
+    var label = btn.textContent;
+    submitted = true; btn.disabled = true; btn.textContent = 'Sending…';
+
+    try {
+      var res = await fetch('/api/inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      var j = await res.json().catch(function () { return {}; });
+      if (!res.ok) throw new Error(j.error || 'Something went wrong. Please try again.');
+
+      // Confirmed success — now, and only now, the Lead is real.
+      if (window.reviveMeta) {
+        window.reviveMeta.track('Lead', {
+          content_name: data.tier === 'daypass' ? 'Free Day Pass' : 'Membership Inquiry',
+          content_category: 'Membership',
+          lead_type: data.tier || 'unspecified'
+        }, eventId);
+      }
+
+      var wrap = form.closest('.form-wrap') || form.parentNode;
+      var isDayPass = data.tier === 'daypass';
+      while (wrap.firstChild) wrap.removeChild(wrap.firstChild);
+      var ok = document.createElement('div');
+      ok.className = 'form-success show';
+      var eyebrow = document.createElement('span');
+      eyebrow.className = 'mono text-fire';
+      eyebrow.textContent = isDayPass ? '— Day Pass Requested —' : '— Submission Received —';
+      ok.appendChild(eyebrow);
+      var h = document.createElement('h3');
+      h.className = 'h-2 mt-4';
+      h.textContent = "You're in.";
+      ok.appendChild(h);
+      var p = document.createElement('p');
+      p.className = 'lead mt-4';
+      p.textContent = isDayPass
+        ? "We'll be in touch within 48 hours to set up your free day pass. Bring shoes and a water bottle."
+        : "We'll be in touch within 48 hours to get you booked in. Welcome to Revive.";
+      ok.appendChild(p);
+      wrap.appendChild(ok);
+    } catch (err) {
+      // No Lead fired — the submission did not land.
+      submitted = false;
+      errEl.textContent = err.message;
+      btn.disabled = false; btn.textContent = label;
+    }
+  });
+})();
+</script>
 <!-- Vercel Web Analytics -->
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
 <script defer src="/_vercel/insights/script.js"></script>

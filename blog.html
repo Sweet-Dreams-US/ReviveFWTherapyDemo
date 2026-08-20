@@ -40,6 +40,8 @@
 <link rel="icon" href="/favicon.ico" sizes="32x32" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<!-- Meta Pixel — base code + PageView; ID lives in the script -->
+<script src="/scripts/meta-pixel.js"></script>
 </head>
 <body>
 <nav class="nav" id="nav">
@@ -74,6 +76,12 @@
   <div class="wrap">
     <div class="mono text-dim" style="margin-bottom: var(--s-4);">Latest</div>
     <div class="feat-grid">
+        <a class="feat-card" href="/blog/what-happens-inside-a-muscle-when-it-contracts">
+          <div class="feat-cat mono text-fire">Health Basics</div>
+          <h3 class="feat-title">What actually happens inside a muscle when it contracts</h3>
+          <p class="feat-desc text-soft">Nothing inside a muscle gets shorter when you flex. Here is what really moves, why ATP is needed to let go, and why relaxing costs energy too.</p>
+          <div class="feat-meta mono text-dim">4 min read &middot; Aug 19, 2026</div>
+        </a>
         <a class="feat-card" href="/blog/barbell-technique-setup-that-decides-the-lift">
           <div class="feat-cat mono text-fire">Training</div>
           <h3 class="feat-title">Barbell technique: the setup details that decide the lift</h3>
@@ -85,12 +93,6 @@
           <h3 class="feat-title">Why your shoulder moves more than your hip, and what it costs</h3>
           <p class="feat-desc text-soft">The shoulder trades stability for range and the hip does the opposite. Here is how each joint is built, what that trade means in training, and where risk sits.</p>
           <div class="feat-meta mono text-dim">4 min read &middot; Aug 14, 2026</div>
-        </a>
-        <a class="feat-card" href="/blog/why-rep-ten-feels-nothing-like-rep-one">
-          <div class="feat-cat mono text-fire">Health Basics</div>
-          <h3 class="feat-title">Why rep ten feels nothing like rep one of the same set</h3>
-          <p class="feat-desc text-soft">The weight never changed, so why does the last rep feel like a different exercise? Here is how your body hires muscle, and why you cannot skip the line.</p>
-          <div class="feat-meta mono text-dim">4 min read &middot; Aug 12, 2026</div>
         </a></div>
   </div>
 </section>
@@ -102,7 +104,7 @@
       <div class="cat-chips">
       <a href="#news" class="cat-chip mono">News <span class="text-dim">1</span></a>
       <a href="#training" class="cat-chip mono">Training <span class="text-dim">7</span></a>
-      <a href="#health-basics" class="cat-chip mono">Health Basics <span class="text-dim">12</span></a>
+      <a href="#health-basics" class="cat-chip mono">Health Basics <span class="text-dim">13</span></a>
       </div>
     </div>
     
@@ -179,9 +181,16 @@
       <section class="idx-cat" id="health-basics">
         <div class="idx-cat-head">
           <h2 class="idx-cat-title">Health Basics</h2>
-          <span class="mono text-dim">12 articles</span>
+          <span class="mono text-dim">13 articles</span>
         </div>
         <ul class="idx-list">
+          <li class="idx-row">
+            <a href="/blog/what-happens-inside-a-muscle-when-it-contracts" class="idx-link">
+              <span class="idx-title">What actually happens inside a muscle when it contracts</span>
+              <span class="idx-desc text-soft">Nothing inside a muscle gets shorter when you flex. Here is what really moves, why ATP is needed to let go, and why relaxing costs energy too.</span>
+            </a>
+            <span class="idx-meta mono text-dim">4 min</span>
+          </li>
           <li class="idx-row">
             <a href="/blog/shoulder-mobility-versus-hip-stability" class="idx-link">
               <span class="idx-title">Why your shoulder moves more than your hip, and what it costs</span>
