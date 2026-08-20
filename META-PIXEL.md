@@ -13,27 +13,29 @@ shared file**, so the Pixel ID lives in exactly one place.
 
 ---
 
-## ⚠️ Before this goes live: set the Pixel ID
+## Status: LIVE
 
-`scripts/meta-pixel.js` line 29 currently reads:
+Pixel ID **`1236948538486968`** (Events Manager dataset `ReviveFWwebsiteData`) is
+set in `scripts/meta-pixel.js` and deployed. `META_PIXEL_ID` and `META_CAPI_TOKEN`
+are already in the Vercel production env, so the browser Pixel and the
+Conversions API are both live.
 
-```js
-var PIXEL_ID = 'REPLACE_WITH_META_PIXEL_ID';
-```
+Verified against production on the real pixel — beacons to `facebook.com/tr`
+carried `id=1236948538486968`:
 
-Replace it with the real ID from **Events Manager → Data Sources → Pixels**.
+| Event | Fired | `content_name` |
+|---|---|---|
+| `PageView` | ✅ | — |
+| `ViewContent` | ✅ | `Free 7-Day Pass — Landing Page` |
+| `Lead` | ✅ on real form submit | `Free 7-Day Pass` |
 
-Until then the pixel is **inert by design**: it loads nothing from Meta, defines
-no `fbq`, fires no events, and logs one console warning. Nothing breaks, and no
-events land on a wrong pixel. The site is safe to deploy in this state.
-
-The same ID must also be set as the `META_PIXEL_ID` env var in Vercel (see
-Conversions API below). **If the two differ, browser and server events land on
-different pixels and deduplication silently fails.**
+The `Lead` beacon carried event id `94f289be-c429-4704-aa09-a18a045503ca`, and
+the same id went to the server as `metaEventId` — look for that one in Events
+Manager to confirm the browser/server pair deduplicated into a single Lead.
 
 A Pixel ID is a public identifier — it ships in the page source by design. It is
 not a secret and belongs in the repo. The **CAPI access token is** the secret and
-must stay in Vercel env only.
+stays in Vercel env only.
 
 ---
 
@@ -130,19 +132,17 @@ Required Vercel env vars:
 
 ## Verification (do this before the campaign goes live)
 
-1. Set `PIXEL_ID` in `scripts/meta-pixel.js` and `META_PIXEL_ID` in Vercel, then
-   deploy.
-2. Install the **Meta Pixel Helper** Chrome extension.
-3. Load `revivefw.com` — Helper shows **1 pixel, PageView**.
-4. Load `revivefw.com/free-pass` — Helper shows **PageView + ViewContent**
+1. Install the **Meta Pixel Helper** Chrome extension.
+2. Load `revivefw.com` — Helper shows **1 pixel, PageView**.
+3. Load `revivefw.com/free-pass` — Helper shows **PageView + ViewContent**
    (`content_name: Free 7-Day Pass — Landing Page`).
-5. Submit the form with a real address you can check. Confirm:
+4. Submit the form with a real address you can check. Confirm:
    - Helper shows **exactly one `Lead`**.
    - The lead arrives at `info@revivefw.com` and in the admin console.
-6. **Refresh the page and press back** — confirm **no second `Lead`**.
-7. In **Events Manager → Test Events**, confirm the `Lead` shows as received from
+5. **Refresh the page and press back** — confirm **no second `Lead`**.
+6. In **Events Manager → Test Events**, confirm the `Lead` shows as received from
    **both** Browser and Server, deduplicated into one event.
-8. Remove `META_TEST_EVENT_CODE` from Vercel.
+7. Remove `META_TEST_EVENT_CODE` from Vercel.
 
 Already verified locally against a stubbed API: PageView/ViewContent/Lead all
 fire on the right pages, `Lead` fires exactly once on success, zero times on a

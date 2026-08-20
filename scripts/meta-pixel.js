@@ -23,10 +23,10 @@
   'use strict';
 
   // ---- Config -------------------------------------------------------------
-  // Replace with the real Pixel ID from Events Manager > Data Sources > Pixels.
+  // Events Manager dataset "ReviveFWwebsiteData".
   // Must match META_PIXEL_ID in the Vercel env, or browser and server events
   // land on different pixels and dedup silently fails.
-  var PIXEL_ID = 'REPLACE_WITH_META_PIXEL_ID';
+  var PIXEL_ID = '1236948538486968';
 
   // Pathnames that also fire ViewContent, with the content_name Meta reports on.
   var OFFER_PAGES = {
