@@ -27,7 +27,9 @@ carried `id=1236948538486968`:
 |---|---|---|
 | `PageView` | ✅ | — |
 | `ViewContent` | ✅ | `Free 7-Day Pass — Landing Page` |
-| `Lead` | ✅ on real form submit | `Free 7-Day Pass` |
+| `Lead` | ✅ on real form submit (`/join` only) | `Membership Inquiry` |
+| `FindLocation` | on "Get Directions" click (`/free-pass`) | `Free 7-Day Pass — Directions` |
+| `Contact` | on phone tap (`/free-pass`) | `Free 7-Day Pass — Phone` |
 
 The `Lead` beacon carried event id `94f289be-c429-4704-aa09-a18a045503ca`, and
 the same id went to the server as `metaEventId` — look for that one in Events
@@ -60,7 +62,9 @@ Tracking staff would pollute the audiences and the funnel numbers.
 |---|---|---|
 | `PageView` | Every page, automatically | From the base code. |
 | `ViewContent` | `/free-pass`, `/join`, `/pricing` | Separates "saw the offer" from "saw any page". Carries `content_name` so each is distinguishable in Events Manager. |
-| `Lead` | `/free-pass` and `/join`, on the form's **success state** | Fires only after `POST /api/inquiry` returns 200. See below. |
+| `Lead` | `/join` only, on the form's **success state** | Fires only after `POST /api/inquiry` returns 200. See below. |
+| `FindLocation` | `/free-pass`, on "Get Directions" | Intent to visit. Once per page view. |
+| `Contact` | `/free-pass`, on the phone number | Intent to visit. Once per page view. |
 
 Offer pages are configured in the `OFFER_PAGES` map in `scripts/meta-pixel.js` —
 add a path there to fire `ViewContent` on it.
@@ -79,8 +83,14 @@ The form is a **native HTML form**, not a third-party embed — no Typeform, no
 iframe, no booking widget — so it is wired with a normal JS submit handler and
 needs no redirect-to-thank-you-page workaround.
 
-`Lead` fires in the submit handlers of `free-pass.html` and `join.html`, and only
-on a confirmed HTTP 200 from `/api/inquiry`:
+**`/free-pass` has no form.** The pass is obtained by walking in and asking at the
+desk, so there is no on-site conversion — and no `Lead` is fired there. Inventing
+one would hand Meta a conversion to optimize toward that does not correspond to
+anything real. What the page does fire is `FindLocation` (directions) and
+`Contact` (phone tap): honest intent signals describing exactly what happened.
+
+`Lead` fires in the submit handler of `join.html`, and only on a confirmed HTTP
+200 from `/api/inquiry`:
 
 - **Not** on button click, and **not** on validation pass.
 - On a 4xx/5xx the visitor sees an error, the button re-enables, and **no `Lead`
@@ -122,13 +132,15 @@ Required Vercel env vars:
   offer in Google's index. It is deliberately **not** in `sitemap.xml`.
 - Short aliases for print/QR/bio links, all redirecting to it:
   `/freepass`, `/7day`, `/pass`.
-- The form is a **reservation**, not a gate — the page says plainly that you can
-  also just walk in. Expect a meaningful share of claims to arrive in person with
-  no `Lead` event attached; that gap is inherent to an in-person offer, and it is
-  why ad-platform numbers will under-count real conversions here.
-- Submissions land as `tier: freepass7`, so pass claims are separable from
-  membership enquiries in Supabase, the admin console, and the notification email
-  (subject line: "FREE 7-DAY PASS request").
+- **No form, no reservation, no signup.** The offer is: walk in, ask the front
+  desk for the 7-day pass, train that same visit. The page exists to explain that
+  and to get people through the door.
+- Because the conversion happens entirely in person, **Meta cannot see it**. The
+  strongest on-site signals are `FindLocation` and `Contact`. Optimize the
+  campaign for landing page views (or those events, once volume allows) — never
+  for a conversion the site cannot observe.
+- The true conversion count lives at the front desk. Ask Cody to keep a tally of
+  pass pickups; that is the only real denominator for this campaign.
 
 ## Verification (do this before the campaign goes live)
 
@@ -136,10 +148,10 @@ Required Vercel env vars:
 2. Load `revivefw.com` — Helper shows **1 pixel, PageView**.
 3. Load `revivefw.com/free-pass` — Helper shows **PageView + ViewContent**
    (`content_name: Free 7-Day Pass — Landing Page`).
-4. Submit the form with a real address you can check. Confirm:
-   - Helper shows **exactly one `Lead`**.
-   - The lead arrives at `info@revivefw.com` and in the admin console.
-5. **Refresh the page and press back** — confirm **no second `Lead`**.
+4. Click **Get Directions** on `/free-pass` — Helper shows **FindLocation**.
+5. On `/join`, submit the form with a real address you can check. Confirm Helper
+   shows **exactly one `Lead`**, the lead arrives at `info@revivefw.com` and in
+   the admin console, and a refresh + back does **not** fire a second one.
 6. In **Events Manager → Test Events**, confirm the `Lead` shows as received from
    **both** Browser and Server, deduplicated into one event.
 7. Remove `META_TEST_EVENT_CODE` from Vercel.

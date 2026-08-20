@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Join REVIVE | Fort Wayne Gym + Recovery</title>
-<meta name="description" content="Join REVIVE, Fort Wayne's gym + recovery facility. Memberships from $89/mo, month-to-month, no contract. Or claim a free 7-day pass through August 31." />
+<meta name="description" content="Join REVIVE, Fort Wayne's gym + recovery facility. Memberships from $89/mo, month-to-month, no contract. Or walk in for a free 7-day pass through August 31." />
 
 <link rel="canonical" href="https://revivefw.com/join" />
 <meta property="og:site_name" content="REVIVE Fitness &amp; Recovery" />
@@ -63,13 +63,13 @@
         Come <br /><span class="text-fire">try it.</span>
       </h1>
       <p class="lead mt-6 text-soft" style="max-width:none;">
-        Three memberships, one set of prices, month-to-month. Not ready to commit? Take the <a href="/free-pass" class="text-fire" style="text-decoration:underline; text-underline-offset:3px;">free 7-day pass</a> instead — claim it in person by August 31 and train the same visit. And in September, Elite members get a free personal training session with Kings Nutrition.
+        Three memberships, one set of prices, month-to-month. Not ready to commit? Take the <a href="/free-pass" class="text-fire" style="text-decoration:underline; text-underline-offset:3px;">free 7-day pass</a> instead — no signup at all, just walk in and ask by August 31. And in September, Elite members get a free personal training session with Kings Nutrition.
       </p>
       <p class="mono mt-6"><a href="/pricing" class="text-fire" style="text-decoration:underline; text-underline-offset:3px;">See all three memberships →</a></p>
       <div class="aside-stats mt-8">
         <div>
-          <div class="display text-fire" style="font-size: 4rem; line-height: 1;">7 Days</div>
-          <div class="mono text-dim mt-2">Free Pass, Until Aug 31</div>
+          <div class="display text-fire" style="font-size: 4rem; line-height: 1;">$0</div>
+          <div class="mono text-dim mt-2">7-Day Pass, Walk In</div>
         </div>
         <div>
           <div class="display" style="font-size: 4rem; line-height: 1;">7 Days</div>
@@ -111,15 +111,8 @@
         <div class="form-group">
           <label class="label">What are you after?</label>
           <div class="tier-select">
-            <label class="tier-radio tier-radio-wide">
-              <input type="radio" name="tier" value="freepass7" checked />
-              <div>
-                <div class="tier-radio-name">FREE 7-DAY PASS <span class="text-fire mono" style="font-size: 0.65rem;">★ until Aug 31</span></div>
-                <div class="tier-radio-price">$0 — a full week, no card</div>
-              </div>
-            </label>
             <label class="tier-radio">
-              <input type="radio" name="tier" value="essential" />
+              <input type="radio" name="tier" value="essential" checked />
               <div>
                 <div class="tier-radio-name">ESSENTIAL</div>
                 <div class="tier-radio-price">$89/mo</div>
@@ -191,7 +184,7 @@
       <div class="reason" data-reveal>
         <div class="reason-num">/01</div>
         <h3 class="h-3 mt-3">Try before you pay.</h3>
-        <p class="text-soft mt-4">Until August 31 the 7-day pass is free — the whole training floor plus recovery, for a week. No card on file, nothing to cancel.</p>
+        <p class="text-soft mt-4">Until August 31 the 7-day pass is free — the whole training floor plus recovery, for a week. No signup, no card on file: <a href="/free-pass">walk in and ask</a>.</p>
       </div>
       <div class="reason" data-reveal data-delay="1">
         <div class="reason-num">/02</div>
@@ -397,20 +390,19 @@
       // Confirmed success — now, and only now, the Lead is real.
       if (window.reviveMeta) {
         window.reviveMeta.track('Lead', {
-          content_name: data.tier === 'freepass7' ? 'Free 7-Day Pass' : 'Membership Inquiry',
+          content_name: 'Membership Inquiry',
           content_category: 'Membership',
           lead_type: data.tier || 'unspecified'
         }, eventId);
       }
 
       var wrap = form.closest('.form-wrap') || form.parentNode;
-      var isPass = data.tier === 'freepass7';
       while (wrap.firstChild) wrap.removeChild(wrap.firstChild);
       var ok = document.createElement('div');
       ok.className = 'form-success show';
       var eyebrow = document.createElement('span');
       eyebrow.className = 'mono text-fire';
-      eyebrow.textContent = isPass ? '— 7-Day Pass Reserved —' : '— Submission Received —';
+      eyebrow.textContent = '— Submission Received —';
       ok.appendChild(eyebrow);
       var h = document.createElement('h3');
       h.className = 'h-2 mt-4';
@@ -418,9 +410,7 @@
       ok.appendChild(h);
       var p = document.createElement('p');
       p.className = 'lead mt-4';
-      p.textContent = isPass
-        ? "Come by whenever suits you — bring an ID, pick up your 7-day pass at the front desk, and you can train that same visit."
-        : "We'll be in touch within 48 hours to get you booked in. Welcome to Revive.";
+      p.textContent = "We'll be in touch within 48 hours to get you booked in. Welcome to Revive.";
       ok.appendChild(p);
       wrap.appendChild(ok);
     } catch (err) {

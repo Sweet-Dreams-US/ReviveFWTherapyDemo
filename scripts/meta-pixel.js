@@ -13,6 +13,8 @@
  *
  * Lead is NOT fired here. It fires from the join form's success handler in
  * join.html, only after /api/inquiry returns 200 — see reviveMeta.track().
+ * /free-pass has no form at all (the pass is obtained by walking in and asking),
+ * so it fires no Lead — only FindLocation / Contact on directions and phone taps.
  *
  * Server-side deduplication: every event we fire gets an event_id. When the
  * same event is also sent from the server (api/inquiry.js -> api/_meta.js),
