@@ -31,6 +31,7 @@
 <link rel="icon" href="/favicon.ico" sizes="32x32" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <!-- Meta Pixel — base code + PageView; ID lives in the script -->
 <script src="/scripts/meta-pixel.js"></script>
 </head>
@@ -183,7 +184,11 @@
 
           <p class="form-error mono" id="passError" role="alert"></p>
 
-          <button class="btn btn-primary btn-arrow" style="width:100%; justify-content:center;" type="submit">Reserve My 7-Day Pass</button>
+          <!-- Cloudflare Turnstile. TURNSTILE_SECRET_KEY is set in production, so
+             /api/inquiry rejects any submission without a token. -->
+        <div class="cf-turnstile mt-6" data-sitekey="0x4AAAAAADmEM33rK7aFg_cZ" data-theme="dark"></div>
+
+        <button class="btn btn-primary btn-arrow" style="width:100%; justify-content:center;" type="submit">Reserve My 7-Day Pass</button>
           <p class="mono text-faint mt-4 center">No card required · No obligation · Claim by Aug 31</p>
         </form>
       </div>
@@ -326,6 +331,13 @@
       || ('ev-' + Date.now().toString(36));
     data.metaEventId = eventId;
 
+    var ts = form.querySelector('[name="cf-turnstile-response"]');
+    if (ts) data['cf-turnstile-response'] = ts.value;
+    if (!data['cf-turnstile-response']) {
+      errEl.textContent = 'Just a moment — finishing the bot check. Try again in a second.';
+      return;
+    }
+
     var label = btn.textContent;
     submitted = true; btn.disabled = true; btn.textContent = 'Reserving…';
 
@@ -367,6 +379,7 @@
       submitted = false;
       errEl.textContent = err.message;
       btn.disabled = false; btn.textContent = label;
+      if (window.turnstile) { try { window.turnstile.reset(); } catch (e2) {} }
     }
   });
 })();
