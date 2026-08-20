@@ -53,7 +53,7 @@ Which means the changeover is a dial, not a lever that snaps at a specific hour.
 
 ## The Revive Tip
 
-The practical version: if you train early and unfed, do not make that the day you attempt something heavy and new. Fasted training is fine for easy conditioning or a moderate strength session. It is a poor setting for a maximum attempt or your first conditioning class, because low glycogen availability shows up first in the highest-output efforts — the last third, where the class is decided. On those days, eat something with carbohydrate an hour beforehand and see whether the finish changes. If you are still deciding whether a real weekly routine fits your schedule at all, [test it with a free day pass](https://revivefw.com/join).
+The practical version: if you train early and unfed, do not make that the day you attempt something heavy and new. Fasted training is fine for easy conditioning or a moderate strength session. It is a poor setting for a maximum attempt or your first conditioning class, because low glycogen availability shows up first in the highest-output efforts — the last third, where the class is decided. On those days, eat something with carbohydrate an hour beforehand and see whether the finish changes. If you are still deciding whether a real weekly routine fits your schedule at all, [come test it in person](https://revivefw.com/join).
 
 ## What to read next
 

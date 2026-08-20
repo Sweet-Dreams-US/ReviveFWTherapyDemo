@@ -22,7 +22,7 @@ Goal: rank in search, build trust, and send readers to ReviveFW.com.
 | Why Revive | `https://revivefw.com/why-revive` | the tip is about the facility philosophy, equipment, or what makes it different |
 | Grand Opening | `https://revivefw.com/grand-opening` | the tip invites someone to come see the place |
 | Run Club | `https://revivefw.com/run-club` | the tip involves cardio, aerobic base, community, or a free way to start |
-| Join Revive | `https://revivefw.com/join` | the tip involves joining, or claiming the free August day pass |
+| Join Revive | `https://revivefw.com/join` | the tip involves joining or coming in to try the place |
 | Careers | `https://revivefw.com/careers` | only if the post is about working in the field |
 
 **Recovery services:**
@@ -54,8 +54,13 @@ All memberships are month-to-month — no contract, no initiation fee. There is 
 set of prices; founders/presale pricing no longer exists and must never be mentioned.
 
 **Current offers (the only promotions that may be referenced):**
-- August — free day pass, open to anyone, full facility access for a day.
+- Through August 31 — free 7-day pass, open to anyone, full facility access for a week,
+  claimed in person at the front desk (you can train the same visit).
 - September — join on Elite and get a free personal training session with Kings Nutrition.
+
+Posts drip on a calendar months ahead, so an evergreen post must NEVER name a
+dated offer or deadline — it will still be publishing long after the offer ends.
+Offers belong on the site, not in the tips.
 
 **Never state or imply:** hours of operation, staff names, class schedules, specific trainer credentials, phone numbers, promotions or discounts not listed above, founders/presale/locked-for-life pricing, Hyrox, Pilates, or any service not on this page.
 

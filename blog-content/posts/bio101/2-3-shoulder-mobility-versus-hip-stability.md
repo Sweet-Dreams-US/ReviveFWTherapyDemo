@@ -53,7 +53,7 @@ Now the honest limit. A lot of mobility content assumes any missing range is sof
 
 ## The Revive Tip
 
-Program those two joints differently, because they are asking for different things. The shoulder generally needs control added to the range it already has: mid-range pressing and pulling, scapular work, and no ego on overhead lifts until the setup is solid. The hip generally needs range added to the stability it already has: full-depth loaded work, split stances, and unhurried positions held long enough to matter. Our group classes with Revive trainers are capped so a coach can actually see you, which is where that distinction gets coached rather than guessed. Class spots are capped and booked through the member app; if you want to see one first, the [August day pass is free](https://revivefw.com/join).
+Program those two joints differently, because they are asking for different things. The shoulder generally needs control added to the range it already has: mid-range pressing and pulling, scapular work, and no ego on overhead lifts until the setup is solid. The hip generally needs range added to the stability it already has: full-depth loaded work, split stances, and unhurried positions held long enough to matter. Our group classes with Revive trainers are capped so a coach can actually see you, which is where that distinction gets coached rather than guessed. Class spots are capped and booked through the member app; if you want to sit in on one first, [come see us](https://revivefw.com/join).
 
 ## What to read next
 

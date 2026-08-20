@@ -97,7 +97,7 @@ async function sendEmail(type, row) {
   const to = process.env.NOTIFY_EMAIL || 'info@revivefw.com';
   const from = process.env.NOTIFY_FROM || 'REVIVE Website <noreply@revivefw.com>';
   const label = type === 'contact' ? 'Contact Message' : type === 'giveaway' ? 'Giveaway Entry'
-    : row.tier === 'daypass' ? 'Free Day Pass Request' : 'Membership Inquiry';
+    : row.tier === 'freepass7' ? 'FREE 7-DAY PASS request' : 'Membership Inquiry';
   const name = `${row.first_name} ${row.last_name}`.trim();
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
   const fields = [
@@ -135,7 +135,7 @@ async function sendMetaLead(row, req, eventId) {
       // Mirrors the browser Pixel's Lead payload (join.html) — same event_id, so
       // Meta dedupes the pair and reports one Lead with the better match quality.
       content_name: row.type === 'contact' ? 'Contact Form'
-        : row.tier === 'daypass' ? 'Free Day Pass'
+        : row.tier === 'freepass7' ? 'Free 7-Day Pass'
         : 'Membership Inquiry',
       content_category: 'Membership',
       lead_type: row.tier || row.type,

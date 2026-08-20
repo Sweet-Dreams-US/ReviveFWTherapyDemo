@@ -41,7 +41,7 @@ must stay in Vercel env only.
 
 ### Base code — `scripts/meta-pixel.js`
 
-Loaded synchronously from the `<head>` of **every public page** (31 pages: 10
+Loaded synchronously from the `<head>` of **every public page** (32 pages: 11
 top-level + 21 blog posts), so `PageView` fires on every load, not just the
 landing page. Installed via:
 
@@ -57,8 +57,8 @@ Tracking staff would pollute the audiences and the funnel numbers.
 | Event | Where it fires | Notes |
 |---|---|---|
 | `PageView` | Every page, automatically | From the base code. |
-| `ViewContent` | `/join` and `/pricing` only | Separates "saw the offer" from "saw any page". Carries `content_name` so the two are distinguishable in Events Manager. |
-| `Lead` | `/join`, on the form's **success state** | Fires only after `POST /api/inquiry` returns 200. See below. |
+| `ViewContent` | `/free-pass`, `/join`, `/pricing` | Separates "saw the offer" from "saw any page". Carries `content_name` so each is distinguishable in Events Manager. |
+| `Lead` | `/free-pass` and `/join`, on the form's **success state** | Fires only after `POST /api/inquiry` returns 200. See below. |
 
 Offer pages are configured in the `OFFER_PAGES` map in `scripts/meta-pixel.js` —
 add a path there to fire `ViewContent` on it.
@@ -68,7 +68,7 @@ event (in-person signup, app-store install) happens on-site, so firing them here
 would be inaccurate and would mislead campaign optimization.
 
 **No `<noscript>` fallback image.** It would require hardcoding the Pixel ID a
-second time on all 31 pages, creating a second source of truth for the sake of
+second time on all 32 pages, creating a second source of truth for the sake of
 JS-disabled visitors — who cannot use the form (or most of the site) anyway.
 
 ### The `Lead` trigger
@@ -77,8 +77,8 @@ The form is a **native HTML form**, not a third-party embed — no Typeform, no
 iframe, no booking widget — so it is wired with a normal JS submit handler and
 needs no redirect-to-thank-you-page workaround.
 
-`Lead` fires in `join.html`'s submit handler, and only on a confirmed HTTP 200
-from `/api/inquiry`:
+`Lead` fires in the submit handlers of `free-pass.html` and `join.html`, and only
+on a confirmed HTTP 200 from `/api/inquiry`:
 
 - **Not** on button click, and **not** on validation pass.
 - On a 4xx/5xx the visitor sees an error, the button re-enables, and **no `Lead`
@@ -110,14 +110,32 @@ Required Vercel env vars:
 
 ---
 
+## The campaign landing page — `/free-pass`
+
+**Send the ads here**, not to `/join`.
+
+- Single offer, single form, stripped nav (logo + one CTA) — no competing links.
+- `noindex, nofollow`: it's a paid-traffic page, so it shouldn't compete with
+  `/pricing` and `/join` in organic search, and it must not outlive the Aug 31
+  offer in Google's index. It is deliberately **not** in `sitemap.xml`.
+- Short aliases for print/QR/bio links, all redirecting to it:
+  `/freepass`, `/7day`, `/pass`.
+- The form is a **reservation**, not a gate — the page says plainly that you can
+  also just walk in. Expect a meaningful share of claims to arrive in person with
+  no `Lead` event attached; that gap is inherent to an in-person offer, and it is
+  why ad-platform numbers will under-count real conversions here.
+- Submissions land as `tier: freepass7`, so pass claims are separable from
+  membership enquiries in Supabase, the admin console, and the notification email
+  (subject line: "FREE 7-DAY PASS request").
+
 ## Verification (do this before the campaign goes live)
 
 1. Set `PIXEL_ID` in `scripts/meta-pixel.js` and `META_PIXEL_ID` in Vercel, then
    deploy.
 2. Install the **Meta Pixel Helper** Chrome extension.
 3. Load `revivefw.com` — Helper shows **1 pixel, PageView**.
-4. Load `revivefw.com/join` — Helper shows **PageView + ViewContent**
-   (`content_name: Free Day Pass — Claim Page`).
+4. Load `revivefw.com/free-pass` — Helper shows **PageView + ViewContent**
+   (`content_name: Free 7-Day Pass — Landing Page`).
 5. Submit the form with a real address you can check. Confirm:
    - Helper shows **exactly one `Lead`**.
    - The lead arrives at `info@revivefw.com` and in the admin console.

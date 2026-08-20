@@ -61,7 +61,7 @@ One boundary here isn't about programming. Breathlessness out of proportion to t
 
 ## The Revive Tip
 
-Give the first ten minutes somewhere to happen. Before conditioning work, use the performance turf as a ramp: easy loops, then a few build-ups on the 30-yard sprint strip, then start your real session. You're paying the oxygen deficit at a pace where it costs you nothing — the cheapest performance improvement in the building, and it takes eight minutes. If you're not a member yet, come run a day on us first. [Claim the free August day pass](https://revivefw.com/join).
+Give the first ten minutes somewhere to happen. Before conditioning work, use the performance turf as a ramp: easy loops, then a few build-ups on the 30-yard sprint strip, then start your real session. You're paying the oxygen deficit at a pace where it costs you nothing — the cheapest performance improvement in the building, and it takes eight minutes. If you're not a member yet, come try it before you commit. [Start here](https://revivefw.com/join).
 
 ## What to read next
 

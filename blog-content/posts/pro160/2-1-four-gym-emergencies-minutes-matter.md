@@ -66,7 +66,7 @@ The standing rule for this series applies here: an article is not a certificatio
 
 ## The Revive Tip
 
-If you carry a rescue inhaler or an epinephrine auto-injector, bring it into the building and say so on your intake. Tell whoever is leading your class — group sessions here are capped precisely so the person running the room can know who is in it. Same goes for a cardiac history or a stroke in your past. None of it disqualifies you from training; it changes how a first session gets built. If you are still deciding, [book a free day pass](https://revivefw.com/join) and treat that first conversation as the real beginning.
+If you carry a rescue inhaler or an epinephrine auto-injector, bring it into the building and say so on your intake. Tell whoever is leading your class — group sessions here are capped precisely so the person running the room can know who is in it. Same goes for a cardiac history or a stroke in your past. None of it disqualifies you from training; it changes how a first session gets built. If you are still deciding, [come in and talk to us](https://revivefw.com/join) and treat that first conversation as the real beginning.
 
 ## What to read next
 

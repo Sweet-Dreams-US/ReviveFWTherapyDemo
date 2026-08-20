@@ -59,7 +59,7 @@ One thing sweat is not: a meaningful route for eliminating anything besides wate
 
 ## The Revive Tip
 
-Heat is a habit, not an event. Two or three short sauna sessions a week — cedar dry or infrared, ten to twenty minutes, water beside you — beat one heroic forty-minute sit you never repeat. Come off a training day, sit, breathe, rehydrate, and give it a few weeks before you judge it. If you want that in your winter rather than a someday plan, start this month. [The August day pass is free](https://revivefw.com/join).
+Heat is a habit, not an event. Two or three short sauna sessions a week — cedar dry or infrared, ten to twenty minutes, water beside you — beat one heroic forty-minute sit you never repeat. Come off a training day, sit, breathe, rehydrate, and give it a few weeks before you judge it. If you want that in your winter rather than a someday plan, start now rather than someday. [Begin here](https://revivefw.com/join).
 
 ## What to read next
 

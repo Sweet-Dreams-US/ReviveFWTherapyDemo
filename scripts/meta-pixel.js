@@ -30,7 +30,8 @@
 
   // Pathnames that also fire ViewContent, with the content_name Meta reports on.
   var OFFER_PAGES = {
-    '/join': 'Free Day Pass — Claim Page',
+    '/free-pass': 'Free 7-Day Pass — Landing Page',
+    '/join': 'Join / Membership Enquiry',
     '/pricing': 'Membership Pricing'
   };
 

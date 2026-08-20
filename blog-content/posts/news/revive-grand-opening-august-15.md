@@ -48,7 +48,7 @@ One honest note: opening day is a party, not a workout. The floor and recovery s
 
 There is no pressure to sign up at the event. But if you already know you want in, opening day is the best time to do it: **enrollment fees are waived for anyone who signs up on-site on August 15.**
 
-Memberships are month-to-month with no contract and no initiation fee — Essential at $89, Plus at $139, Elite at $169. And all through August, anyone can claim a free day pass and try the whole facility before deciding anything.
+Memberships are month-to-month with no contract and no initiation fee — Essential at $89, Plus at $139, Elite at $169. And through August 31, anyone can claim a free 7-day pass and try the whole facility for a week before deciding anything.
 
 ## The Revive Tip
 
