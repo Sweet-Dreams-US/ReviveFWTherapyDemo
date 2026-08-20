@@ -39,7 +39,7 @@
 <!-- Stripped nav: logo + one action. A landing page has one job. -->
 <nav class="nav nav-lp" id="nav">
   <a href="/" class="nav-brand">REVIVE</a>
-  <a href="#visit" class="nav-cta">Where To Find Us <span aria-hidden="true">&rarr;</span></a>
+  <a href="#visit" class="nav-cta">Just Walk In &amp; Ask <span aria-hidden="true">&rarr;</span></a>
 </nav>
 
 <!-- HERO -->
@@ -56,9 +56,11 @@
       <span class="text-fire">On us.</span>
     </h1>
 
+    <p class="lp-walkin fade-up" style="animation-delay:0.55s;">Just walk in and ask for a pass.</p>
+
     <div class="hero-bottom">
       <p class="lead fade-up" style="animation-delay:0.7s;">
-        Not a tour. Not a trial session. A full week of everything — the training floor, the performance turf, and recovery. <span class="editorial text-cream" style="font-size:1.15em;">No signup, no form. Just walk in and ask.</span>
+        Not a tour. Not a trial session. A full week of everything — the training floor, the performance turf, and recovery. <span class="editorial text-cream" style="font-size:1.15em;">No signup, no form, no card.</span>
       </p>
       <div class="fade-up flex gap-4" style="animation-delay:0.9s; justify-self:end; flex-wrap:wrap;">
         <a href="#visit" class="btn btn-primary btn-arrow">Where To Find Us</a>
@@ -220,8 +222,33 @@
 <style>
   .nav-lp { justify-content: space-between; }
   .nav-lp .nav-links { display: none; }
+  /* globals.css hides .nav-cta under 800px because the hamburger normally takes
+     over. This page has no hamburger and no nav links, so the sticky bar would
+     be just a logo on mobile — where most of the ad traffic lands. Keep the CTA,
+     sized down to fit. */
+  @media (max-width: 800px) {
+    .nav-lp .nav-cta {
+      display: inline-flex;
+      font-size: 0.6rem;
+      padding: 0.55rem 0.75rem;
+      gap: var(--s-2);
+    }
+  }
+  @media (max-width: 360px) {
+    .nav-lp .nav-cta { font-size: 0.55rem; padding: 0.5rem 0.6rem; }
+  }
 
   .lp-hero .hero-title { font-size: clamp(3.5rem, 10vw, 9rem); }
+  .lp-walkin {
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 2.6vw, 2rem);
+    line-height: 1.1;
+    color: var(--text-cream, var(--text));
+    margin-top: var(--s-4);
+    padding-left: var(--s-4);
+    border-left: 3px solid var(--fire);
+    max-width: 22ch;
+  }
 
   .lp-step { border-left: 2px solid var(--fire); padding-left: var(--s-6); }
   .lp-step-num {
