@@ -69,7 +69,7 @@ This is not offered as a reason to give up. It is offered as a design input. If 
 
 Before you pick a program, spend ten minutes auditing the three layers on the last routine that fell apart. Be specific about which one broke.
 
-If it was time, build around two or three real strength sessions instead of five imaginary ones, and use a Normatec compression session or the cold plunge on the days you would otherwise skip entirely — showing up for twenty minutes keeps the habit alive. If it was isolation, get into a capped group class where your absence is noticed.
+If it was time, build around two or three real strength sessions instead of five imaginary ones, and use a Normatec compression session or the cold plunge on the days you would otherwise skip entirely — showing up for twenty minutes keeps the habit alive. If it was isolation, put a standing session in the diary somewhere your absence is noticed — the Saturday run club counts.
 
 Revive put the strength floor and the recovery lounge under one roof for exactly this reason. [See how the place is built](https://revivefw.com/why-revive), then pick the version of training that survives your actual week.
 

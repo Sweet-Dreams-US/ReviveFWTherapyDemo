@@ -53,7 +53,7 @@ NAD+ deserves the honest-limits paragraph, because it has become an advertising 
 
 ## The Revive Tip
 
-If the mechanism is gene expression, then the training variable that matters most is not intensity — it is how many times you repeat the signal before quitting. Pick a block length you can actually defend. Ten to twelve weeks, two or three sessions a week, mostly the same movements, load creeping up, is enough to move the things that move. Capped-attendance group classes help here because the schedule does the deciding for you instead of your Tuesday mood. And if starting alongside other people who are also on week one makes it more likely to stick, [that is what our group classes are for](https://revivefw.com/pricing).
+If the mechanism is gene expression, then the training variable that matters most is not intensity — it is how many times you repeat the signal before quitting. Pick a block length you can actually defend. Ten to twelve weeks, two or three sessions a week, mostly the same movements, load creeping up, is enough to move the things that move. A standing appointment with a coach helps here because the schedule does the deciding for you instead of your Tuesday mood. And if starting somewhere people notice whether you showed up makes it more likely to stick, [that is the point of training here](https://revivefw.com/pricing).
 
 ## What to read next
 

@@ -55,7 +55,7 @@ The honest limit: we know training switches these programs on, but nobody can cu
 
 ## The Revive Tip
 
-Give the machinery a real block of time instead of a good week. Pick one thing — three days a week on the strength floor, or two lifts plus two aerobic sessions — and hold it for eight to twelve weeks without redesigning it. Track one number, not six. Group classes here are capped on purpose so you get coached rather than counted, which matters most in the first two months when you are still learning the movements. If you are planning to give it a season, come see how the room reads first: [start here](https://revivefw.com/join).
+Give the machinery a real block of time instead of a good week. Pick one thing — three days a week on the strength floor, or two lifts plus two aerobic sessions — and hold it for eight to twelve weeks without redesigning it. Track one number, not six. There are coaches on the floor here on purpose, which matters most in the first two months when you are still learning the movements. If you are planning to give it a season, come see how the room reads first: [start here](https://revivefw.com/join).
 
 ## What to read next
 

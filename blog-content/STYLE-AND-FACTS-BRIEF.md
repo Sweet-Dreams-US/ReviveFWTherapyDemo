@@ -27,6 +27,8 @@ Goal: rank in search, build trust, and send readers to ReviveFW.com.
 
 **Recovery services:**
 - 3 cold plunge units, 38–42°F
+  (the dedicated recovery space is still being built — recovery equipment is
+  currently set up on the main floor; never call it a "recovery wing")
 - Cedar dry sauna
 - Infrared sauna
 - Medical-grade red light therapy beds
@@ -36,7 +38,8 @@ Goal: rank in search, build trust, and send readers to ReviveFW.com.
 **Training:**
 - Strength floor — Olympic platforms, competition racks, Pendulum, Hammer Strength, Eleiko
 - Performance turf — 30-yard sprint strip, sled work, conditioning loop
-- Group classes — led by Revive trainers; strength, conditioning, mobility (capped attendance)
+- Coaching on the training floor (group classes are NOT running yet — never mention
+  classes, class sizes, capped attendance, or booking a class)
 
 **Community:**
 - Free Saturday Run Club
@@ -62,7 +65,7 @@ Posts drip on a calendar months ahead, so an evergreen post must NEVER name a
 dated offer or deadline — it will still be publishing long after the offer ends.
 Offers belong on the site, not in the tips.
 
-**Never state or imply:** hours of operation, staff names, class schedules, specific trainer credentials, phone numbers, promotions or discounts not listed above, founders/presale/locked-for-life pricing, Hyrox, Pilates, or any service not on this page.
+**Never state or imply:** hours of operation, staff names, class schedules, specific trainer credentials, phone numbers, promotions or discounts not listed above, founders/presale/locked-for-life pricing, Hyrox, Pilates, group classes or class sizes, or any service not on this page.
 
 ---
 

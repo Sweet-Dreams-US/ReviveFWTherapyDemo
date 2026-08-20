@@ -84,7 +84,7 @@ The general rule is that the clinical and licensed pathways demand a degree and 
 
 ## The Revive Tip
 
-Before your next group class or floor session, ask the coach two questions: what certification do you hold, and when do you send someone to a clinician instead of coaching them through it? Any good coach answers both in about thirty seconds and isn't annoyed by the question. Class sizes here are capped specifically so that conversation can happen — you're not one of forty people in a room. And if you finished this post thinking you'd rather be the person answering those questions, that's a real career with real pathways: [here's what working here looks like](https://revivefw.com/careers).
+Before your next session with a coach, ask two questions: what certification do you hold, and when do you send someone to a clinician instead of coaching them through it? Any good coach answers both in about thirty seconds and isn't annoyed by the question. There are coaches on the floor here specifically so that conversation can happen — you're not left to work it out alone. And if you finished this post thinking you'd rather be the person answering those questions, that's a real career with real pathways: [here's what working here looks like](https://revivefw.com/careers).
 
 ## What to read next
 

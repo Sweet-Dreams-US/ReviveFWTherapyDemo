@@ -63,7 +63,7 @@ The version that works best is usually the mildest one: prepay, join something t
 
 ## The Revive Tip
 
-Do the two cheapest things on this list, this week. Keep a training log — a notebook is fine — and write the date, the lifts, and the loads every session, then look at the month once. And get into a capped group class rather than only using the open floor, so that at least one hour a week is a place where someone expects you.
+Do the two cheapest things on this list, this week. Keep a training log — a notebook is fine — and write the date, the lifts, and the loads every session, then look at the month once. And put one session a week in the diary with a coach rather than only using the open floor, so that at least one hour a week is a place where someone expects you.
 
 If you want the commitment-device version, a membership is the straightforward one: a start date, a booked class, and a decision made now instead of every Tuesday at 5:40 p.m. [Here is what each membership includes](https://revivefw.com/pricing).
 
