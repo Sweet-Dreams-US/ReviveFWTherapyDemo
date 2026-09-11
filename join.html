@@ -28,7 +28,6 @@
 <link rel="icon" href="/favicon.ico" sizes="32x32" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <!-- Meta Pixel — base code + PageView; ID lives in the script -->
 <script src="/scripts/meta-pixel.js"></script>
 </head>
@@ -44,7 +43,7 @@
     <a href="/run-club" class="nav-link">Run Club</a>
     <a href="/careers" class="nav-link">Careers</a>
   </div>
-  <a href="/join" class="nav-cta" aria-current="page">Join Waitlist <span aria-hidden="true">→</span></a>
+  <a href="/free-pass" class="nav-cta" aria-current="page">Free 7-Day Pass <span aria-hidden="true">→</span></a>
   <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
     <span></span><span></span><span></span>
   </button>
@@ -79,96 +78,22 @@
     </div>
   </aside>
 
-  <!-- RIGHT — form -->
-  <section class="join-form-wrap form-wrap">
+  <!-- RIGHT — membership options; no inquiry form -->
+  <section class="join-options-wrap" aria-labelledby="join-options-heading">
     <div style="max-width: 540px; width: 100%;">
       <span class="eyebrow">/01 — Get Started</span>
-      <h2 class="h-2 mt-4">Step in.<br />No pressure.</h2>
-      <p class="text-soft mt-4">No payment today. Tell us what you're after and we'll reach out within 48 hours to get you booked in.</p>
-
-      <form class="join-form mt-8" id="joinForm" novalidate>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="label" for="firstName">First Name</label>
-            <input class="input" type="text" id="firstName" name="firstName" required />
-          </div>
-          <div class="form-group">
-            <label class="label" for="lastName">Last Name</label>
-            <input class="input" type="text" id="lastName" name="lastName" required />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="label" for="email">Email</label>
-          <input class="input" type="email" id="email" name="email" required />
-        </div>
-
-        <div class="form-group">
-          <label class="label" for="phone">Phone</label>
-          <input class="input" type="tel" id="phone" name="phone" placeholder="optional" />
-        </div>
-
-        <div class="form-group">
-          <label class="label">What are you after?</label>
-          <div class="tier-select">
-            <label class="tier-radio">
-              <input type="radio" name="tier" value="essential" checked />
-              <div>
-                <div class="tier-radio-name">ESSENTIAL</div>
-                <div class="tier-radio-price">$89/mo</div>
-              </div>
-            </label>
-            <label class="tier-radio">
-              <input type="radio" name="tier" value="plus" />
-              <div>
-                <div class="tier-radio-name">PLUS <span class="text-gold mono" style="font-size: 0.65rem;">★ Popular</span></div>
-                <div class="tier-radio-price">$139/mo</div>
-              </div>
-            </label>
-            <label class="tier-radio">
-              <input type="radio" name="tier" value="elite" />
-              <div>
-                <div class="tier-radio-name">ELITE <span class="text-gold mono" style="font-size: 0.65rem;">★ Sept PT</span></div>
-                <div class="tier-radio-price">$169/mo</div>
-              </div>
-            </label>
-            <label class="tier-radio tier-radio-wide">
-              <input type="radio" name="tier" value="undecided" />
-              <div>
-                <div class="tier-radio-name">UNDECIDED</div>
-                <div class="tier-radio-price">Help me choose</div>
-              </div>
-            </label>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="label" for="goal">What brings you to <span class="brand">Revive</span>?</label>
-          <textarea class="textarea" id="goal" name="goal" rows="3" placeholder="Optional — recovery, run club, training again..."></textarea>
-        </div>
-
-        <label class="checkbox-row">
-          <input type="checkbox" name="updates" checked />
-          <span>Send me opening updates and member events. (No spam, max 2/month.)</span>
-        </label>
-
-        <!-- Honeypot: hidden from people, irresistible to bots. /api/inquiry
-             silently 200s any submission that fills it in. -->
-        <div class="hp-field" aria-hidden="true">
-          <label for="company">Company</label>
-          <input type="text" id="company" name="company" tabindex="-1" autocomplete="off" />
-        </div>
-
-        <p class="form-error mono" id="joinError" role="alert"></p>
-
-        <!-- Cloudflare Turnstile. TURNSTILE_SECRET_KEY is set in production, so
-             /api/inquiry rejects any submission without a token. -->
-        <div class="cf-turnstile mt-6" data-sitekey="0x4AAAAAADmEM33rK7aFg_cZ" data-theme="dark"></div>
-
-        <button class="btn btn-primary btn-arrow mt-6" style="width:100%; justify-content:center;" type="submit">Send It</button>
-
-        <p class="mono text-faint mt-4 center">No payment due today · Cancel anytime</p>
-      </form>
+      <h2 class="h-2 mt-4" id="join-options-heading">Ready when<br />you are.</h2>
+      <p class="text-soft mt-4">Explore memberships in the REVIVE app, or stop by the front desk and we’ll help you choose. No signup request or callback needed.</p>
+      <div class="flex gap-4 mt-8" style="flex-wrap:wrap;">
+        <a href="https://apps.apple.com/us/app/revive-fitness-and-recovery/id6768313510" target="_blank" rel="noopener" class="btn btn-primary btn-arrow">iPhone App</a>
+        <a href="https://play.google.com/store/apps/details?id=com.fitnessmobileapps.revivefitnessandrecovery45023" target="_blank" rel="noopener" class="btn btn-arrow">Android App</a>
+      </div>
+      <h3 class="h-3 mt-8">Want to try REVIVE first?</h3>
+      <p class="text-soft mt-4">Explore the free 7-day pass. Already claimed through a Facebook or Instagram form? Bring your email or form confirmation to the front desk. Your seven days begin when you check in.</p>
+      <a href="/free-pass" class="btn btn-primary btn-arrow mt-6">Free 7-Day Pass</a>
+      <p class="mono text-dim mt-8">3233 St Joe Center Rd · Fort Wayne</p>
+      <p class="text-soft mt-3">Mon–Fri 5am–11pm · Sat–Sun 8am–8pm</p>
+      <a href="/free-pass#visit" class="btn btn-arrow mt-4">Directions &amp; Hours</a>
     </div>
   </section>
 </main>
@@ -261,58 +186,12 @@
     box-shadow: 0 0 24px var(--fire-glow);
   }
 
-  .join-form-wrap {
+  .join-options-wrap {
     padding: var(--s-9) var(--gutter);
     background: var(--bg);
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .join-form { display: flex; flex-direction: column; gap: var(--s-6); }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); }
-  @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
-
-  .tier-select {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--s-3);
-    margin-top: var(--s-3);
-  }
-  @media (max-width: 560px) { .tier-select { grid-template-columns: 1fr; } }
-  .tier-radio {
-    border: 1px solid var(--border);
-    padding: var(--s-4);
-    cursor: pointer;
-    transition: all var(--dur-fast);
-    position: relative;
-    background: var(--bg);
-  }
-  .tier-radio-wide { grid-column: 1 / -1; }
-  .tier-radio:hover { border-color: var(--border-strong); }
-  .tier-radio input { position: absolute; opacity: 0; pointer-events: none; }
-  .tier-radio:has(input:checked) { border-color: var(--fire); background: rgba(255, 56, 25, 0.05); }
-  .tier-radio-name {
-    font-family: var(--font-display);
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-  .tier-radio-price {
-    font-family: var(--font-mono);
-    font-size: var(--fs-xs);
-    color: var(--text-dim);
-    margin-top: 2px;
-  }
-
-  .form-success.show { animation: fadeUp 0.8s var(--ease-out) both; }
-
-  .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-  .form-error {
-    color: var(--fire);
-    font-size: 0.78rem;
-    margin-top: var(--s-4);
-    min-height: 1em;
   }
 
   .reason {
@@ -328,102 +207,7 @@
 </style>
 
 <script src="scripts/main.js" defer></script>
-<script>
-/* Join form — real submission to /api/inquiry.
- *
- * The Meta `Lead` event fires HERE and only here: after the API returns 200.
- * Not on click, not on validation pass — a submission that 4xx/5xx'd is not a
- * lead, and counting it would teach the campaign to optimize toward failures.
- *
- * `metaEventId` is generated up front and sent with the request, so the server's
- * Conversions API Lead (api/inquiry.js) carries the same event_id as the browser
- * Pixel's and Meta counts the pair once. */
-(function () {
-  var form = document.getElementById('joinForm');
-  if (!form) return;
-  var errEl = document.getElementById('joinError');
-  var submitted = false; // guards double-fire on double-click
-
-  form.addEventListener('submit', async function (e) {
-    e.preventDefault();
-    if (submitted) return;
-    errEl.textContent = '';
-
-    var btn = form.querySelector('[type=submit]');
-    var data = {};
-    Array.prototype.forEach.call(form.elements, function (f) {
-      if (!f.name) return;
-      if (f.type === 'radio') { if (f.checked) data[f.name] = f.value; return; }
-      if (f.type === 'checkbox') { data[f.name] = f.checked; return; }
-      data[f.name] = f.value;
-    });
-    data.type = 'waitlist';
-    data.source = window.location.pathname + window.location.search;
-
-    if (!data.email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email)) {
-      errEl.textContent = 'Please enter a valid email address.';
-      return;
-    }
-
-    var eventId = (window.reviveMeta && window.reviveMeta.newEventId())
-      || ('ev-' + Date.now().toString(36));
-    data.metaEventId = eventId;
-
-    var ts = form.querySelector('[name="cf-turnstile-response"]');
-    if (ts) data['cf-turnstile-response'] = ts.value;
-    if (!data['cf-turnstile-response']) {
-      errEl.textContent = 'Just a moment — finishing the bot check. Try again in a second.';
-      return;
-    }
-
-    var label = btn.textContent;
-    submitted = true; btn.disabled = true; btn.textContent = 'Sending…';
-
-    try {
-      var res = await fetch('/api/inquiry', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      var j = await res.json().catch(function () { return {}; });
-      if (!res.ok) throw new Error(j.error || 'Something went wrong. Please try again.');
-
-      // Confirmed success — now, and only now, the Lead is real.
-      if (window.reviveMeta) {
-        window.reviveMeta.track('Lead', {
-          content_name: 'Membership Inquiry',
-          content_category: 'Membership',
-          lead_type: data.tier || 'unspecified'
-        }, eventId);
-      }
-
-      var wrap = form.closest('.form-wrap') || form.parentNode;
-      while (wrap.firstChild) wrap.removeChild(wrap.firstChild);
-      var ok = document.createElement('div');
-      ok.className = 'form-success show';
-      var eyebrow = document.createElement('span');
-      eyebrow.className = 'mono text-fire';
-      eyebrow.textContent = '— Submission Received —';
-      ok.appendChild(eyebrow);
-      var h = document.createElement('h3');
-      h.className = 'h-2 mt-4';
-      h.textContent = "You're in.";
-      ok.appendChild(h);
-      var p = document.createElement('p');
-      p.className = 'lead mt-4';
-      p.textContent = "We'll be in touch within 48 hours to get you booked in. Welcome to Revive.";
-      ok.appendChild(p);
-      wrap.appendChild(ok);
-    } catch (err) {
-      // No Lead fired — the submission did not land.
-      submitted = false;
-      errEl.textContent = err.message;
-      btn.disabled = false; btn.textContent = label;
-      if (window.turnstile) { try { window.turnstile.reset(); } catch (e2) {} }
-    }
-  });
-})();
-</script>
+<!-- Public inquiry collection has been retired. -->
 <!-- Vercel Web Analytics -->
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
 <script defer src="/_vercel/insights/script.js"></script>

@@ -11,13 +11,12 @@
  *   ViewContent  — offer pages only (see OFFER_PAGES), so "saw the offer" is
  *                  separable from "saw any page".
  *
- * Lead is NOT fired here. It fires from the join form's success handler in
- * join.html, only after /api/inquiry returns 200 — see reviveMeta.track().
- * /free-pass has no form at all (the pass is obtained by walking in and asking),
- * so it fires no Lead — only FindLocation / Contact on directions and phone taps.
+ * Lead is NOT fired here. Public inquiry intake is retired, and website pass
+ * claims remain deferred. /free-pass explains redemption of Meta form claims;
+ * it fires no Lead — only FindLocation / Contact on directions and phone taps.
  *
  * Server-side deduplication: every event we fire gets an event_id. When the
- * same event is also sent from the server (api/inquiry.js -> api/_meta.js),
+ * same event is also sent from the server in a future claim workflow,
  * both sides send the SAME id and Meta counts it once. Never send a browser
  * event and a server event for one action without a shared id.
  * ========================================================================== */
@@ -33,7 +32,7 @@
   // Pathnames that also fire ViewContent, with the content_name Meta reports on.
   var OFFER_PAGES = {
     '/free-pass': 'Free 7-Day Pass — Landing Page',
-    '/join': 'Join / Membership Enquiry',
+    '/join': 'Join / Membership Options',
     '/pricing': 'Membership Pricing'
   };
 

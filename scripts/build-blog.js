@@ -299,7 +299,7 @@ function nav(depth) {
     <a href="/run-club" class="nav-link">Run Club</a>
     <a href="/careers" class="nav-link">Careers</a>
   </div>
-  <a href="/join" class="nav-cta">Join Waitlist <span aria-hidden="true">&rarr;</span></a>
+  <a href="/free-pass" class="nav-cta">Free 7-Day Pass <span aria-hidden="true">&rarr;</span></a>
   <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
 </nav>`;
 }
@@ -489,7 +489,7 @@ function renderIndex(published) {
   </div>
 </section>` + (empty ? `
 <section class="section"><div class="wrap center">
-  <p class="lead text-soft">The first articles drop soon. <a href="/join" class="text-fire">Join the waitlist</a> and we'll tell you when.</p>
+  <p class="lead text-soft">The first articles drop soon. Explore <a href="/why-revive" class="text-fire">training and recovery at REVIVE</a> in the meantime.</p>
 </div></section>` : `
 <section class="section section-tight">
   <div class="wrap">
