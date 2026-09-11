@@ -14,7 +14,7 @@
     try {
       var response = await fetch('/api/claim-pass', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fullName: name, email: email, phone: data.get('phone') || '', company: data.get('company') || '', turnstileToken: token, adMeasurement: !!(window.reviveMeta && window.reviveMeta.allowed()) }),
+        body: JSON.stringify({ fullName: name, email: email, phone: data.get('phone') || '', company: data.get('company') || '', turnstileToken: token, adMeasurement: !!(window.reviveMeta && typeof window.reviveMeta.allowed === 'function' && window.reviveMeta.allowed()) }),
         signal: AbortSignal.timeout(55000)
       });
       var result = await response.json();
@@ -24,7 +24,7 @@
       }
       document.getElementById('claimReceipt').textContent = name + '\n' + email + '\nFREE Gym & Recovery for 7 Days';
       document.getElementById('claimEmailStatus').textContent = result.email_status === 'sent'
-        ? 'Your pass email is on its way. You can also use this confirmation at the front desk.'
+        ? 'A pass email has been sent to this address. You can also use this confirmation at the front desk. Submitting again does not send another email or reset an existing pass.'
         : 'Your claim is saved. Keep this confirmation for the front desk; your email may be delayed.';
       form.hidden = true; document.getElementById('claimIntro').hidden = true;
       var success = document.getElementById('claimSuccess'); success.hidden = false; success.focus();
