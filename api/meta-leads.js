@@ -8,6 +8,30 @@ module.exports = async (req, res) => {
     if (typeof body === 'string') { try { body = JSON.parse(body); } catch (_) { return res.status(400).json({ error: 'Invalid JSON' }); } }
     body = body || {};
     await requireAdmin(body.password);
+    if (body.action === 'send_experience_preview') {
+      const email = String(body.email || '').trim().toLowerCase();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return res.status(400).json({ error: 'A valid existing lead email is required' });
+      const data = await rpc('revive_meta_list', { p_token: body.password, p_offset: 0, p_query: email, p_filter: 'all' });
+      const lead = data.leads.find(l => l.email === email && l.id === body.id);
+      if (!lead) return res.status(404).json({ error: 'Lead not found' });
+      if (lead.do_not_contact) return res.status(400).json({ error: 'This lead is marked do not contact' });
+      const marker = '[Experience preview v1 sent]';
+      if ((lead.notes || '').includes(marker)) return res.status(200).json({ ok: true, already_sent: true });
+      if ((lead.notes || '').length > 3700) return res.status(400).json({ error: 'Please shorten the staff notes before recording this test' });
+      if (!process.env.RESEND_API_KEY) return res.status(503).json({ error: 'Email is not configured' });
+      const response = await fetch('https://api.resend.com/emails', {
+        method: 'POST', headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json', 'Idempotency-Key': `experience-preview-v1-${lead.id}` },
+        body: JSON.stringify(require('./_experience-email').experienceEmail(lead.email)), signal: AbortSignal.timeout(15000)
+      });
+      const sent = await response.json();
+      if (!response.ok || !sent.id) return res.status(502).json({ error: 'Email was not accepted. Check Resend before retrying.' });
+      let recorded = true;
+      try {
+        await rpc('revive_meta_update', { p_token: body.password, p_id: lead.id, p_version: lead.version, p_action: 'notes', p_value: false,
+          p_notes: (lead.notes ? lead.notes + '\n\n' : '') + marker + ' ' + new Date().toISOString() + '\nResend ID: ' + sent.id + '\nManual preview only. Redemption and automation state unchanged.', p_feedback: lead.feedback || '' });
+      } catch (_) { recorded = false; }
+      return res.status(200).json({ ok: true, email_status: 'sent', email_id: sent.id, recorded });
+    }
     // Explicit staff-created claims use the same storage and initial email as the public form.
     if (body.action === 'create_claim') {
       const name = String(body.fullName || '').trim(), email = String(body.email || '').trim().toLowerCase();

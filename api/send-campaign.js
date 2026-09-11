@@ -74,7 +74,7 @@ module.exports = async (req, res) => {
       html: `<!doctype html><html><body style="margin:0;background:#F7F4EE;font-family:Arial,Helvetica,sans-serif;">
 <div style="padding:60px 30px;text-align:center;color:#857A6A;">
   <div style="font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#AFA491;">No campaign loaded</div>
-  <p style="max-width:400px;margin:16px auto 0;font-size:15px;line-height:1.6;">There's no email queued right now. Your audience lists stay ready — when it's time to send, a new campaign will be written and loaded here first.</p>
+  <p style="max-width:400px;margin:16px auto 0;font-size:15px;line-height:1.6;">There's no email queued right now. Your audience lists stay ready. When it's time to send, a new campaign will be written and loaded here first.</p>
 </div>
 </body></html>`,
     });

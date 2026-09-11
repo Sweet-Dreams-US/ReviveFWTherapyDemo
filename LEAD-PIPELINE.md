@@ -23,7 +23,11 @@ The initial transactional pass email is sent via Resend after storage. An outbox
 
 Authenticated staff may explicitly create a claim using `/api/meta-leads` action `create_claim` with the existing password, fullName, email, and optional phone. This uses the same claim-and-email helper. Meta Sheet import still does not send an email. Existing job application notifications are unchanged. No marketing emails, timed trial emails, or Meta Lead events are enabled by this release. Per-lead pause flags prepare for the future follow-ups; clearing one does not enable those jobs.
 
-The admin shows a proposed schedule relative to activation: Day 1 experience, Day 3 feedback, Day 5 membership options (proposal allows Day 5–6), Day 7 trial ending, Day 10 extension, Day 13 commitment offer. These are planning dates, not queued jobs.
+The admin shows a proposed schedule relative to activation: one first visit email two hours after redemption, Day 5 membership options (proposal allows Day 5–6), Day 7 trial ending, Day 10 extension, Day 13 commitment offer. The separate Day 3 feedback email was removed at the owner's request. These are planning dates, not queued jobs. Automatic timed sending remains paused during step by step testing.
+
+All authored email copy and subjects must avoid dashes, including hyphens, en dashes, and em dashes. Use sentences, commas, colons, or words such as "to" and "through". Preserve functional URLs, email addresses, HTML/CSS syntax, and user submitted data unchanged. This rule covers the pass email, the first visit email, and future templates.
+
+The authenticated `send_experience_preview` action on `/api/meta-leads` sends the first visit template to the exact existing lead selected by ID and email. It does not redeem the pass or enable automation. A stable Resend idempotency key protects immediate retries, and a staff note records the test and provider ID without altering trial state. Reply feedback goes to info@revivefw.com; inbox replies are not automatically imported into admin.
 
 Before implementing the Resend sequence, settle the templates, consent/unsubscribe handling, sender, Day 7 bonus, extension eligibility, and six-month rate/terms. The proposal's classes wording conflicts with the site's current verified facts and must not be used without confirmation. Marking a confirmation as sent records an external action; it does not send email.
 

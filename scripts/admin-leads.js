@@ -81,8 +81,8 @@
       }); card.append(save);
       card.append(el('p', 'mono text-dim mt-6', 'Planned follow-up · email setup pending'));
       var plan = el('ul', 'lead-plan');
-      [[1, 'Experience follow-up'], [3, 'Feedback request'], [5, 'Membership options (Day 5–6)'], [7, 'Trial ending · bonus to be decided'], [10, 'Additional trial · offer to be decided'], [13, 'Commitment offer · rate to be decided']].forEach(function (step) {
-        var row = el('li'); row.append(el('span', '', 'Day ' + step[0] + ' — ' + step[1]), el('span', '', lead.is_member || lead.do_not_contact ? 'Suppressed' : lead.activated_at ? when(Date.parse(lead.activated_at) + step[0] * 86400000) + ' · Paused' : 'Waiting for activation'));
+      [[2, 'First visit follow-up · 2 hours after redemption'], [120, 'Day 5 · Membership options (Day 5–6)'], [168, 'Day 7 · Trial ending · bonus to be decided'], [240, 'Day 10 · Additional trial · offer to be decided'], [312, 'Day 13 · Commitment offer · rate to be decided']].forEach(function (step) {
+        var row = el('li'); row.append(el('span', '', step[1]), el('span', '', lead.is_member || lead.do_not_contact ? 'Suppressed' : lead.activated_at ? when(Date.parse(lead.activated_at) + step[0] * 3600000) + ' · Paused' : 'Waiting for activation'));
         plan.append(row);
       }); card.append(plan);
       card.append(el('p', 'lead-source', 'Campaign: ' + (lead.meta.campaign_name || '—') + ' · Ad: ' + (lead.meta.ad_name || '—') + ' · Platform: ' + (lead.meta.platform || '—') + '\nFitness routine: ' + (lead.fitness_routine || '—') + '\nSource lead ID: ' + lead.meta_lead_id));

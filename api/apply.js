@@ -93,7 +93,7 @@ async function notifyEmail(row, req) {
   try {
     const resp = await fetch('https://api.resend.com/emails', {
       method: 'POST', headers: { Authorization: `Bearer ${KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from, to: [to], reply_to: row.email, subject: `New Application — ${row.jobTitle || 'Careers'} — ${name || row.email}`, html }),
+      body: JSON.stringify({ from, to: [to], reply_to: row.email, subject: `New Application: ${row.jobTitle || 'Careers'} | ${name || row.email}`, html }),
     });
     if (!resp.ok) console.error('resend apply notify failed', resp.status, await resp.text());
   } catch (e) { console.error('resend apply error', e); }
