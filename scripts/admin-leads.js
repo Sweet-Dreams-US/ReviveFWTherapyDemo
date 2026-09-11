@@ -7,7 +7,7 @@
   function state(lead) {
     if (lead.is_member) return 'Joined';
     if (!lead.activated_at) return 'Not activated';
-    return Date.now() >= Date.parse(lead.activated_at) + 7 * 86400000 ? 'Trial ended' : 'Active pass';
+    return Date.now() >= Date.parse(window.revivePassSchedule.schedule(lead.activated_at).expiresAt) ? 'Trial ended' : 'Active pass';
   }
   async function api(url, body) {
     var response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({ password: password }, body)) });
@@ -48,7 +48,8 @@
       var card = el('details', 'lead-card'); card.dataset.id = lead.id; card.open = opened.has(lead.id);
       var summary = el('summary'); var identity = el('div'); identity.append(el('strong', '', lead.full_name), el('div', 'lead-contact', lead.email + (lead.phone ? ' · ' + lead.phone : '')));
       summary.append(identity, el('span', 'lead-badge', state(lead))); card.append(summary);
-      card.append(el('p', 'lead-source', 'Submitted: ' + when(lead.lead_created_at) + ' · Activated: ' + when(lead.activated_at) + (lead.activated_at ? ' · Pass ends: ' + when(Date.parse(lead.activated_at) + 7 * 86400000) : '')));
+      var passSchedule = window.revivePassSchedule.schedule(lead.activated_at);
+      card.append(el('p', 'lead-source', 'Submitted: ' + when(lead.lead_created_at) + ' · Activated: ' + when(lead.activated_at) + (lead.activated_at ? ' · Pass and joining bonus end: ' + when(passSchedule.expiresAt) : '')));
       var emailState = { not_sent: 'Not sent', sending: 'Sending', sent: 'Sent — accepted by Resend', needs_review: 'Needs review — check Resend before retrying' };
       card.append(el('p', 'lead-source', 'Pass email: ' + (emailState[lead.pass_email_status] || 'Not sent') + (lead.pass_email_sent_at ? ' · ' + when(lead.pass_email_sent_at) : '') + (lead.pass_email_id ? '\nResend message ID: ' + lead.pass_email_id : '') + '\nInbox delivery, opens, and clicks are not tracked in this panel yet.'));
       var controls = el('div', 'lead-controls');
@@ -89,8 +90,9 @@
       }); card.append(save);
       card.append(el('p', 'mono text-dim mt-6', 'Planned follow-up · email setup pending'));
       var plan = el('ul', 'lead-plan');
-      [[2, 'First visit follow-up · 2 hours after redemption'], [120, 'Day 5 · Membership options (Day 5–6)'], [168, 'Day 7 · Trial ending · bonus to be decided'], [240, 'Day 10 · Additional trial · offer to be decided'], [312, 'Day 13 · Commitment offer · rate to be decided']].forEach(function (step) {
-        var row = el('li'); row.append(el('span', '', step[1]), el('span', '', lead.is_member || lead.do_not_contact ? 'Suppressed' : lead.activated_at ? when(Date.parse(lead.activated_at) + step[0] * 3600000) + ' · Paused' : 'Waiting for activation'));
+      card.append(el('p', 'lead-source', 'Join by closing on Day 7: Essential or Plus receive 1 free Kings Nutrition PT session. Elite receives 2 total. Enrollment must be completed at the front desk. PT scheduling and fulfillment are handled by staff.'));
+      [[lead.activated_at && Date.parse(lead.activated_at) + 2 * 3600000, 'First visit follow-up · 2 hours after redemption'], [passSchedule.day5, 'Day 5 · Kings Nutrition PT offer · 9 AM ET'], [passSchedule.day7, 'Day 7 · Final day reminder · 9 AM ET'], [lead.activated_at && Date.parse(lead.activated_at) + 240 * 3600000, 'Day 10 · Additional trial · offer to be decided'], [lead.activated_at && Date.parse(lead.activated_at) + 312 * 3600000, 'Day 13 · Commitment offer · rate to be decided']].forEach(function (step) {
+        var row = el('li'); row.append(el('span', '', step[1]), el('span', '', lead.is_member || lead.do_not_contact ? 'Suppressed' : lead.activated_at ? when(step[0]) + ' · Paused' : 'Waiting for activation'));
         plan.append(row);
       }); card.append(plan);
       card.append(el('p', 'lead-source', 'Campaign: ' + (lead.meta.campaign_name || '—') + ' · Ad: ' + (lead.meta.ad_name || '—') + ' · Platform: ' + (lead.meta.platform || '—') + '\nFitness routine: ' + (lead.fitness_routine || '—') + '\nSource lead ID: ' + lead.meta_lead_id));

@@ -3,10 +3,11 @@ const assert = require('node:assert/strict');
 const { passEmail } = require('../api/_pass-email');
 const { experienceEmail } = require('../api/_experience-email');
 const { day5Email } = require('../api/_day5-email');
+const { day7Email } = require('../api/_day7-email');
 const feedbackUrl = 'https://revivefw.com/pass-feedback#token=private-test-link';
 const clean = value => value.replace(/https?:\/\/\S+/g, '').replace(/<[^>]*>/g, '').replace(/&(?:ndash|mdash|hyphen);|&#(?:45|8211|8212);/g, '-');
 test('authored email subjects and rendered copy have no dashes', () => {
-  for (const template of [passEmail, experienceEmail, day5Email]) {
+  for (const template of [passEmail, experienceEmail, e => day5Email(e, '2026-09-11T20:09:05Z'), e => day7Email(e, '2026-09-11T20:09:05Z')]) {
     const email = template('cole@sweetdreams.us', feedbackUrl);
     assert.doesNotMatch(email.subject, /[-\u2010-\u2015]/);
     assert.doesNotMatch(clean(email.text), /[-\u2010-\u2015]/);
