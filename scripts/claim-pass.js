@@ -14,11 +14,14 @@
     try {
       var response = await fetch('/api/claim-pass', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fullName: name, email: email, phone: data.get('phone') || '', company: data.get('company') || '', turnstileToken: token }),
+        body: JSON.stringify({ fullName: name, email: email, phone: data.get('phone') || '', company: data.get('company') || '', turnstileToken: token, adMeasurement: !!(window.reviveMeta && window.reviveMeta.allowed()) }),
         signal: AbortSignal.timeout(55000)
       });
       var result = await response.json();
       if (!response.ok || !result.ok) throw new Error(result.error || 'Could not save your claim. Please try again.');
+      if (result.meta_event_id && window.reviveMeta) {
+        window.reviveMeta.track('Lead', { content_name: 'Free 7 Day Gym and Recovery Pass', content_category: 'Membership' }, result.meta_event_id);
+      }
       document.getElementById('claimReceipt').textContent = name + '\n' + email + '\nFREE Gym & Recovery for 7 Days';
       document.getElementById('claimEmailStatus').textContent = result.email_status === 'sent'
         ? 'Your pass email is on its way. You can also use this confirmation at the front desk.'

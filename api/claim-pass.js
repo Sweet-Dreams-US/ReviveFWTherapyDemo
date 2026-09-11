@@ -31,7 +31,12 @@ module.exports = async (req, res) => {
     return res.status(503).json({ error: 'Security check is temporarily unavailable. Please try again.' });
   }
   try {
-    return res.status(200).json(await claimAndEmail({ name, email, phone }));
+    const saved = await claimAndEmail({ name, email, phone });
+    let tracking = {};
+    // A measurement failure must never turn a saved claim into a form error.
+    try { tracking = await require('./_pass-tracking').trackClaim(req, body, email, phone); }
+    catch (_) { console.error('Pass conversion registration failed'); }
+    return res.status(200).json({ ...saved, ...tracking });
   } catch (_) {
     return res.status(502).json({ error: 'We could not save your claim. Please try again. Your seven days have not started.' });
   }

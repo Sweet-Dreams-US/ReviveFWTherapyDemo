@@ -8,7 +8,17 @@ module.exports = async (req, res) => {
     if (typeof body === 'string') { try { body = JSON.parse(body); } catch (_) { return res.status(400).json({ error: 'Invalid JSON' }); } }
     body = body || {};
     await requireAdmin(body.password);
-    if (['send_experience_preview', 'send_day5_preview', 'send_day7_preview', 'feedback_link'].includes(body.action)) {
+    if (body.action === 'tracking_health') return res.status(200).json(await require('./_meta').trackingHealth());
+    if (body.action === 'email_status') {
+      if (!/^[a-f0-9-]{36}$/i.test(body.emailId || '')) return res.status(400).json({ error: 'Email ID required' });
+      if (!process.env.RESEND_API_KEY) return res.status(503).json({ error: 'Email is not configured' });
+      const r = await fetch('https://api.resend.com/emails/' + body.emailId, { headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}` }, signal: AbortSignal.timeout(8000) });
+      const sent = await r.json();
+      if (!r.ok) return res.status(502).json({ error: 'Provider email status unavailable', provider_status: r.status });
+      return res.status(200).json({ id: sent.id, last_event: sent.last_event, created_at: sent.created_at });
+    }
+    if (['send_pass_preview', 'send_experience_preview', 'send_day5_preview', 'send_day7_preview', 'feedback_link'].includes(body.action)) {
+      const pass = body.action === 'send_pass_preview';
       const day5 = body.action === 'send_day5_preview';
       const day7 = body.action === 'send_day7_preview';
       const email = String(body.email || '').trim().toLowerCase();
@@ -17,21 +27,21 @@ module.exports = async (req, res) => {
       const lead = data.leads.find(l => l.email === email && l.id === body.id);
       if (!lead) return res.status(404).json({ error: 'Lead not found' });
       let feedbackUrl;
-      if (!day5 && !day7) {
+      if (!pass && !day5 && !day7) {
         try { feedbackUrl = require('./_feedback-link').feedbackLink(lead); }
         catch (_) { return res.status(400).json({ error: 'A pass activated within the last 30 days is required for this feedback link.' }); }
-      } else if (!lead.activated_at || lead.is_member) {
+      } else if (!pass && (!lead.activated_at || lead.is_member)) {
         return res.status(400).json({ error: 'The offer preview requires an activated pass for a lead who has not joined.' });
       }
       if (body.action === 'feedback_link') return res.status(200).json({ url: feedbackUrl });
       if (lead.do_not_contact) return res.status(400).json({ error: 'This lead is marked do not contact' });
-      const marker = day5 ? '[Day 5 preview v2 sent]' : day7 ? '[Day 7 preview v1 sent]' : '[Experience preview v2 sent]';
+      const marker = pass ? '[Pass preview v1 sent]' : day5 ? '[Day 5 preview v2 sent]' : day7 ? '[Day 7 preview v1 sent]' : '[Experience preview v2 sent]';
       if ((lead.notes || '').includes(marker)) return res.status(200).json({ ok: true, already_sent: true });
       if ((lead.notes || '').length > 3700) return res.status(400).json({ error: 'Please shorten the staff notes before recording this test' });
       if (!process.env.RESEND_API_KEY) return res.status(503).json({ error: 'Email is not configured' });
       const response = await fetch('https://api.resend.com/emails', {
-        method: 'POST', headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json', 'Idempotency-Key': `${day5 ? 'day5-preview-v2' : day7 ? 'day7-preview-v1' : 'experience-preview-v2'}-${lead.id}` },
-        body: JSON.stringify(day5 ? require('./_day5-email').day5Email(lead.email, lead.activated_at) : day7 ? require('./_day7-email').day7Email(lead.email, lead.activated_at) : require('./_experience-email').experienceEmail(lead.email, feedbackUrl)), signal: AbortSignal.timeout(15000)
+        method: 'POST', headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json', 'Idempotency-Key': `${pass ? 'pass-preview-v1' : day5 ? 'day5-preview-v2' : day7 ? 'day7-preview-v1' : 'experience-preview-v2'}-${lead.id}` },
+        body: JSON.stringify(pass ? require('./_pass-email').passEmail(lead.email) : day5 ? require('./_day5-email').day5Email(lead.email, lead.activated_at) : day7 ? require('./_day7-email').day7Email(lead.email, lead.activated_at) : require('./_experience-email').experienceEmail(lead.email, feedbackUrl)), signal: AbortSignal.timeout(15000)
       });
       const sent = await response.json();
       if (!response.ok || !sent.id) return res.status(502).json({ error: 'Email was not accepted. Check Resend before retrying.' });

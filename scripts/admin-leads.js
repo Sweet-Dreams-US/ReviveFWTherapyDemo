@@ -96,6 +96,7 @@
         plan.append(row);
       }); card.append(plan);
       card.append(el('p', 'lead-source', 'Campaign: ' + (lead.meta.campaign_name || '—') + ' · Ad: ' + (lead.meta.ad_name || '—') + ' · Platform: ' + (lead.meta.platform || '—') + '\nFitness routine: ' + (lead.fitness_routine || '—') + '\nSource lead ID: ' + lead.meta_lead_id));
+      if (lead.meta.ad_measurement) card.append(el('p', 'lead-source', 'Meta website conversion: ' + lead.meta.ad_measurement.status + '\nEvent ID: ' + lead.meta.ad_measurement.event_id + '\nSent means accepted by Meta, not attributed to an ad.'));
       $('leadList').append(card);
     });
     $('leadMore').hidden = leads.length >= offset;

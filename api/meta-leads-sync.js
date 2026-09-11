@@ -16,7 +16,10 @@ module.exports = async (req, res) => {
       if (typeof body === 'string') { try { body = JSON.parse(body); } catch (_) { return res.status(400).json({ error: 'Invalid JSON' }); } }
       await requireAdmin(body && body.password);
     }
-    res.status(200).json(await runSync(secret));
+    // Queue retries are independent of Google availability. This sends tracking
+    // events only, not email, and does not activate any paused lead sequence.
+    const tracking = await require('./_pass-tracking').flushConversions().catch(() => ({ error: 'Tracking retry failed' }));
+    res.status(200).json({ ...await runSync(secret), tracking });
   } catch (error) {
     console.error('Meta lead sync failed', error.status || 502);
     res.status(error.status || 502).json({ error: error.status === 401 ? 'Unauthorized' : 'Could not sync leads. Check sheet access and try again.' });

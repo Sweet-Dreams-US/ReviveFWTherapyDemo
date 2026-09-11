@@ -30,7 +30,6 @@
 <script src="scripts/job-fields.js"></script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <!-- Meta Pixel — base code + PageView; ID lives in the script -->
-<script src="/scripts/meta-pixel.js"></script>
 </head>
 <body>
 
@@ -91,7 +90,7 @@
       </div>
       <div class="form-group mt-5"><label class="label" for="af-email">Email *</label><input class="input" id="af-email" name="email" type="email" required /></div>
       <div id="applyFields" class="apply-fields"></div>
-      <div class="cf-turnstile mt-6" data-sitekey="0x4AAAAAADmEM33rK7aFg_cZ" data-theme="dark"></div>
+      <div class="cf-turnstile mt-6" data-sitekey="0x4AAAAAADmEM33rK7aFg_cZ" data-theme="dark" data-action="job_application"></div>
       <p id="applyError" class="mono mt-3" style="color: var(--fire); font-size: 0.8rem; min-height: 1em;"></p>
       <button type="submit" class="btn btn-primary btn-arrow mt-4">Submit Application</button>
     </form>
