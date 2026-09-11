@@ -68,6 +68,14 @@
         });
       });
       card.append(controls);
+      var guest = el('section', 'lead-guest-feedback');
+      guest.append(el('strong', '', 'Guest first visit feedback'));
+      if (lead.visit_feedback_at && lead.visit_feedback) {
+        var response = lead.visit_feedback;
+        guest.append(el('p', '', 'Received: ' + when(lead.visit_feedback_at) + '\nRating: ' + response.rating + ' / 5 · Tried: ' + (response.areas || []).join(', ') + '\nHelp planning next visit: ' + (response.wants_help ? 'Requested' : 'Not requested')),
+          el('p', '', response.comments || 'No written comments.'));
+      } else { guest.append(el('p', '', 'No response submitted yet.')); }
+      card.append(guest);
       var notes = el('div', 'lead-notes'), feedbackLabel = el('label', '', 'Feedback / interests'), noteLabel = el('label', '', 'Staff notes');
       var feedback = el('textarea', 'textarea'); feedback.value = lead.feedback || ''; feedback.maxLength = 2000;
       var note = el('textarea', 'textarea'); note.value = lead.notes || ''; note.maxLength = 4000;

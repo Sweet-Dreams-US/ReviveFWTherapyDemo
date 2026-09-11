@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><meta name="referrer" content="no-referrer">
+<title>Your First Visit | REVIVE</title>
+<link rel="stylesheet" href="/styles/pass-feedback.css">
+<script src="/scripts/pass-feedback.js" defer></script>
+</head><body>
+<header><a href="/" aria-label="REVIVE home">REVIVE<span>.</span></a><span class="brand-label">FITNESS &amp; RECOVERY</span></header>
+<main><p class="eyebrow">YOUR FIRST VISIT</p><h1>How did<br><span>it feel?</span></h1>
+<p class="intro">A quick check in. A better next visit.</p>
+<p id="feedbackStatus" role="status" aria-live="polite">Opening your personal feedback form…</p>
+<noscript>Please enable JavaScript to open your personal feedback form.</noscript>
+<form id="visitFeedbackForm" hidden>
+<section class="identity" aria-label="Your details"><p>YOUR DETAILS ARE ALREADY HERE</p>
+<div class="identity-grid"><label>Full name<input id="guestName" readonly autocomplete="off"></label><label>Email<input id="guestEmail" type="email" readonly autocomplete="off"></label></div>
+<small>This private link connects your feedback to your pass. Please do not share it.</small></section>
+<fieldset><legend>How was your first visit?</legend><p class="hint">Choose a rating from 1 (not great) to 5 (loved it).</p>
+<div class="ratings"><label><input type="radio" name="rating" value="1" required><span>1</span></label><label><input type="radio" name="rating" value="2"><span>2</span></label><label><input type="radio" name="rating" value="3"><span>3</span></label><label><input type="radio" name="rating" value="4"><span>4</span></label><label><input type="radio" name="rating" value="5"><span>5</span></label></div></fieldset>
+<fieldset><legend>What did you try?</legend><p class="hint">Choose one or both.</p><div class="areas"><label><input type="checkbox" name="areas" value="Gym"> Gym</label><label><input type="checkbox" name="areas" value="Recovery"> Recovery</label></div></fieldset>
+<label class="comments">Anything you would like us to know? <span class="hint">Optional</span><textarea id="visitComments" maxlength="2000" rows="4" placeholder="What stood out? What could we make better?"></textarea></label>
+<p class="hint">Please leave medical details and other sensitive information out of this form.</p>
+<label class="help"><input id="wantsHelp" type="checkbox"> I would like the team to help me plan my next visit.</label>
+<div class="cf-turnstile" data-sitekey="0x4AAAAAADmEM33rK7aFg_cZ" data-theme="light" data-size="flexible" data-action="pass_feedback"></div>
+<p id="feedbackError" role="alert"></p><button id="feedbackSubmit" type="submit">SHARE MY EXPERIENCE <span aria-hidden="true">↗</span></button>
+<p class="fine">Your feedback goes to the REVIVE team. It does not change your pass dates or enroll you in a membership. <a href="/privacy">Privacy policy</a></p>
+</form>
+<section id="feedbackThanks" hidden tabindex="-1"><h2>Thank you for sharing.</h2><p>Your feedback is saved for our team. We look forward to seeing you again.</p><a href="/free-pass#redeem">About your pass →</a></section>
+</main><footer>3233 St Joe Center Rd, Fort Wayne, IN 46835<br><a href="tel:+12604177668">(260) 417 7668</a> · <a href="/privacy">Privacy</a></footer>
+</body></html>

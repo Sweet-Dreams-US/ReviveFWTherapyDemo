@@ -4,13 +4,13 @@ const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 
-test('public pages only allow job applications and the pass claim', () => {
+test('public pages only allow job applications, pass claims and private visit feedback', () => {
   const files = fs.readdirSync(root).filter(f => f.endsWith('.html') && f !== 'admin.html')
     .concat(fs.readdirSync(path.join(root, 'blog')).filter(f => f.endsWith('.html')).map(f => 'blog/' + f));
   for (const file of files) {
     const html = fs.readFileSync(path.join(root, file), 'utf8');
     assert.doesNotMatch(html, /join\s+(?:the\s+)?waitlist|joinForm|\/api\/inquiry|>Newsletter</i, file);
-    if (!['careers.html', 'free-pass.html'].includes(file)) assert.doesNotMatch(html, /<form\b/i, file);
+    if (!['careers.html', 'free-pass.html', 'pass-feedback.html'].includes(file)) assert.doesNotMatch(html, /<form\b/i, file);
   }
   assert.match(fs.readFileSync(path.join(root, 'careers.html'), 'utf8'), /id="applyForm"/);
   assert.match(fs.readFileSync(path.join(root, 'free-pass.html'), 'utf8'), /id="redeem"/);

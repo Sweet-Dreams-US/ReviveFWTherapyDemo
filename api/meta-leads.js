@@ -8,20 +8,24 @@ module.exports = async (req, res) => {
     if (typeof body === 'string') { try { body = JSON.parse(body); } catch (_) { return res.status(400).json({ error: 'Invalid JSON' }); } }
     body = body || {};
     await requireAdmin(body.password);
-    if (body.action === 'send_experience_preview') {
+    if (body.action === 'send_experience_preview' || body.action === 'feedback_link') {
       const email = String(body.email || '').trim().toLowerCase();
       if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return res.status(400).json({ error: 'A valid existing lead email is required' });
       const data = await rpc('revive_meta_list', { p_token: body.password, p_offset: 0, p_query: email, p_filter: 'all' });
       const lead = data.leads.find(l => l.email === email && l.id === body.id);
       if (!lead) return res.status(404).json({ error: 'Lead not found' });
+      let feedbackUrl;
+      try { feedbackUrl = require('./_feedback-link').feedbackLink(lead); }
+      catch (_) { return res.status(400).json({ error: 'A pass activated within the last 30 days is required for this feedback link.' }); }
+      if (body.action === 'feedback_link') return res.status(200).json({ url: feedbackUrl });
       if (lead.do_not_contact) return res.status(400).json({ error: 'This lead is marked do not contact' });
-      const marker = '[Experience preview v1 sent]';
+      const marker = '[Experience preview v2 sent]';
       if ((lead.notes || '').includes(marker)) return res.status(200).json({ ok: true, already_sent: true });
       if ((lead.notes || '').length > 3700) return res.status(400).json({ error: 'Please shorten the staff notes before recording this test' });
       if (!process.env.RESEND_API_KEY) return res.status(503).json({ error: 'Email is not configured' });
       const response = await fetch('https://api.resend.com/emails', {
-        method: 'POST', headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json', 'Idempotency-Key': `experience-preview-v1-${lead.id}` },
-        body: JSON.stringify(require('./_experience-email').experienceEmail(lead.email)), signal: AbortSignal.timeout(15000)
+        method: 'POST', headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json', 'Idempotency-Key': `experience-preview-v2-${lead.id}` },
+        body: JSON.stringify(require('./_experience-email').experienceEmail(lead.email, feedbackUrl)), signal: AbortSignal.timeout(15000)
       });
       const sent = await response.json();
       if (!response.ok || !sent.id) return res.status(502).json({ error: 'Email was not accepted. Check Resend before retrying.' });
