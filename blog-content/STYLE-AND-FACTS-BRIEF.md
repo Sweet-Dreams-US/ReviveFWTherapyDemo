@@ -57,8 +57,8 @@ All memberships are month-to-month — no contract, no initiation fee. There is 
 set of prices; founders/presale pricing no longer exists and must never be mentioned.
 
 **Current offers (the only promotions that may be referenced):**
-- Through August 31 — free 7-day pass, open to anyone, full facility access for a week,
-  claimed in person at the front desk (you can train the same visit).
+- Free 7-day pass — no specific claim deadline, full facility access for a week,
+  redeemed by showing the free-pass email or form submission at the front desk. Seven days begin at redemption, not form submission.
 - September — join on Elite and get a free personal training session with Kings Nutrition.
 
 Posts drip on a calendar months ahead, so an evergreen post must NEVER name a

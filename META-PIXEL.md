@@ -83,11 +83,10 @@ The form is a **native HTML form**, not a third-party embed — no Typeform, no
 iframe, no booking widget — so it is wired with a normal JS submit handler and
 needs no redirect-to-thank-you-page workaround.
 
-**`/free-pass` has no form.** The pass is obtained by walking in and asking at the
-desk, so there is no on-site conversion — and no `Lead` is fired there. Inventing
-one would hand Meta a conversion to optimize toward that does not correspond to
-anything real. What the page does fire is `FindLocation` (directions) and
-`Contact` (phone tap): honest intent signals describing exactly what happened.
+**`/free-pass` has no website claim form yet.** It explains redemption after a
+lead form submission. No `Lead` fires there; directions and phone taps remain
+`FindLocation` and `Contact` intent signals. A separate lead/email workflow will
+be configured later.
 
 `Lead` fires in the submit handler of `join.html`, and only on a confirmed HTTP
 200 from `/api/inquiry`:
@@ -126,19 +125,18 @@ Required Vercel env vars:
 
 **Send the ads here**, not to `/join`.
 
-- Single offer, single form, stripped nav (logo + one CTA) — no competing links.
+- Single offer, stripped nav, redemption instructions; no website claim form yet.
 - `noindex, nofollow`: it's a paid-traffic page, so it shouldn't compete with
-  `/pricing` and `/join` in organic search, and it must not outlive the Aug 31
-  offer in Google's index. It is deliberately **not** in `sitemap.xml`.
+  `/pricing` and `/join` in organic search. It is deliberately **not** in `sitemap.xml`.
 - Short aliases for print/QR/bio links, all redirecting to it:
   `/freepass`, `/7day`, `/pass`.
-- **No form, no reservation, no signup.** The offer is: walk in, ask the front
-  desk for the 7-day pass, train that same visit. The page exists to explain that
-  and to get people through the door.
-- Because the conversion happens entirely in person, **Meta cannot see it**. The
-  strongest on-site signals are `FindLocation` and `Contact`. Optimize the
-  campaign for landing page views (or those events, once volume allows) — never
-  for a conversion the site cannot observe.
+- There is no specific claim deadline. Send Meta form submitters to
+  `https://revivefw.com/free-pass#redeem`. They show their free-pass email or form
+  submission confirmation and share the submitted email at the front desk.
+  Seven days begin at redemption, never at form submission.
+- Meta can measure its own lead form submissions. Website visits to redemption
+  instructions must not create duplicate Lead events. Actual in-person activation
+  remains a separate front-desk action.
 - The true conversion count lives at the front desk. Ask Cody to keep a tally of
   pass pickups; that is the only real denominator for this campaign.
 
