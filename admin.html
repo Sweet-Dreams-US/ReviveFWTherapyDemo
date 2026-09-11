@@ -40,6 +40,7 @@
       <div class="admin-nav-group">
         <div class="admin-nav-label mono">Operations</div>
         <a href="#inquiries" class="admin-nav-item active"><span class="ic">▣</span> Inquiries</a>
+        <a href="#freepasses" class="admin-nav-item"><span class="ic">☑</span> Free-Pass Leads</a>
         <a href="#jobs" class="admin-nav-item"><span class="ic">▤</span> Jobs</a>
         <a href="#applications" class="admin-nav-item"><span class="ic">☑</span> Applications</a>
         <a href="#campaign" class="admin-nav-item"><span class="ic">✉</span> Send Campaign</a>
@@ -142,6 +143,24 @@
         </div>
       </div>
     </section>
+    </div>
+
+    <div class="admin-view" data-view="freepasses">
+      <section class="admin-card">
+        <div class="admin-card-head"><div><div class="mono text-dim">Meta forms → Google Sheet → REVIVE</div><h2 class="display admin-h3">Free-Pass Leads</h2></div><button class="btn btn-arrow" id="leadSyncNow" type="button">Sync now</button></div>
+        <p class="text-soft">New sheet rows sync every five minutes. Check <strong>Activate pass</strong> only when the guest checks in at the front desk. That starts their seven days.</p>
+        <p class="mono text-fire mt-4">Email automation is paused globally. These controls do not send email.</p>
+        <p class="text-dim mt-4" id="leadSyncStatus" role="status">Loading sync status…</p>
+        <p class="text-fire mt-3" id="leadError" role="alert"></p>
+        <div class="kpi-row mt-6" id="leadStats"></div>
+        <div class="inq-controls mt-6">
+          <input id="leadSearch" class="input" type="search" placeholder="Search all leads by name, email, or phone" aria-label="Search free-pass leads" />
+          <select id="leadFilter" class="input" aria-label="Filter free-pass leads"><option value="all">All leads</option><option value="unactivated">Not activated</option><option value="active">Active passes</option><option value="expired">Trial ended</option><option value="joined">Joined</option><option value="paused">Follow-up paused</option><option value="do_not_contact">Do not contact</option></select>
+        </div>
+        <div id="leadList" class="mt-6"></div>
+        <button class="btn btn-arrow mt-4" type="button" id="leadMore" hidden>Load more</button>
+        <p class="text-dim mt-4"><a href="https://docs.google.com/spreadsheets/d/1YTkBiJP3SNYz_GE6CL-5mZ9q9emZmiJbzHLGrrg4p_U/edit" target="_blank" rel="noopener">Open source Google Sheet ↗</a></p>
+      </section>
     </div>
 
     <!-- ===== VIEW: Pre-Opening Dates ===== -->
@@ -599,6 +618,8 @@
   .rep-caveats li::before { content: '—'; position: absolute; left: 0; }
 </style>
 
+<link rel="stylesheet" href="/styles/admin-leads.css" />
+<script src="/scripts/admin-leads.js"></script>
 <script>
 (function () {
   'use strict';
@@ -722,6 +743,7 @@
     password = pw;
     sessionStorage.setItem(PW_KEY, pw);
     showApp();
+    window.reviveLeads.init(pw);
     render();
     loadSettings();
     loadCampaignPreview();
@@ -745,11 +767,12 @@
   });
 
   document.getElementById('logoutBtn').addEventListener('click', function () {
-    sessionStorage.removeItem(PW_KEY); password = ''; inquiries = []; pwInput.value = ''; showLogin();
+    sessionStorage.removeItem(PW_KEY); password = ''; inquiries = []; pwInput.value = ''; window.reviveLeads.clear(); showLogin();
   });
 
   document.getElementById('refreshBtn').addEventListener('click', async function () {
     var b = this; var l = b.textContent; b.disabled = true; b.textContent = '…';
+    if (location.hash === '#freepasses') window.reviveLeads.load();
     try { inquiries = await fetchInquiries(password); render(); } catch (e) { if (e.message === 'unauthorized') showLogin(); }
     finally { b.disabled = false; b.textContent = l; }
   });
@@ -1340,6 +1363,7 @@
   var VIEW_TITLES = {
     inquiries: 'Inquiries', jobs: 'Jobs', applications: 'Applications',
     campaign: 'Send Campaign', reports: 'Reports', preopening: 'Pre-Opening Dates',
+    freepasses: 'Free-Pass Leads',
   };
   function showView(name) {
     if (!VIEW_TITLES[name]) name = 'inquiries';
@@ -1353,6 +1377,7 @@
     if (t) t.textContent = VIEW_TITLES[name];
     window.scrollTo(0, 0);
     if (name === 'reports') loadReports();
+    if (name === 'freepasses') window.reviveLeads.load();
   }
   window.addEventListener('hashchange', function () { showView(location.hash.slice(1)); });
   showView(location.hash.slice(1));

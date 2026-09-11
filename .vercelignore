@@ -13,3 +13,6 @@ scripts/build-blog.js
 scripts/check-app-links.js
 REVIVE-AUDIT.md
 press/
+supabase/
+tests/
+LEAD-PIPELINE.md
