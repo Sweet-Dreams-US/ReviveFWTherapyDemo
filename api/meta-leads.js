@@ -8,6 +8,12 @@ module.exports = async (req, res) => {
     if (typeof body === 'string') { try { body = JSON.parse(body); } catch (_) { return res.status(400).json({ error: 'Invalid JSON' }); } }
     body = body || {};
     await requireAdmin(body.password);
+    // Explicit staff-created claims use the same storage and initial email as the public form.
+    if (body.action === 'create_claim') {
+      const name = String(body.fullName || '').trim(), email = String(body.email || '').trim().toLowerCase();
+      if (!name || name.length > 240 || email.length > 200 || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return res.status(400).json({ error: 'Name and valid email required' });
+      return res.status(200).json(await require('./_pass-email').claimAndEmail({ name, email, phone: String(body.phone || '').slice(0, 40) }));
+    }
     if (!body.action || body.action === 'list') {
       const offset = Math.max(0, Number(body.offset) || 0);
       return res.status(200).json(await rpc('revive_meta_list', { p_token: body.password, p_offset: offset,

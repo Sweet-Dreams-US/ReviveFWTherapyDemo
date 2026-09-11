@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 
-test('public pages only allow job applications and the deferred pass claim', () => {
+test('public pages only allow job applications and the pass claim', () => {
   const files = fs.readdirSync(root).filter(f => f.endsWith('.html') && f !== 'admin.html')
     .concat(fs.readdirSync(path.join(root, 'blog')).filter(f => f.endsWith('.html')).map(f => 'blog/' + f));
   for (const file of files) {
@@ -14,6 +14,7 @@ test('public pages only allow job applications and the deferred pass claim', () 
   }
   assert.match(fs.readFileSync(path.join(root, 'careers.html'), 'utf8'), /id="applyForm"/);
   assert.match(fs.readFileSync(path.join(root, 'free-pass.html'), 'utf8'), /id="redeem"/);
+  assert.match(fs.readFileSync(path.join(root, 'free-pass.html'), 'utf8'), /id="claimPassForm"/);
   assert.doesNotMatch(fs.readFileSync(path.join(root, 'scripts/build-blog.js'), 'utf8'), /join\s+(?:the\s+)?waitlist/i);
 });
 

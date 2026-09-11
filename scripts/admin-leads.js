@@ -43,12 +43,14 @@
   function render() {
     var opened = new Set(Array.from($('leadList').querySelectorAll('details[open]')).map(function (n) { return n.dataset.id; }));
     $('leadList').textContent = '';
-    if (!leads.length) $('leadList').appendChild(el('p', 'text-soft', 'No leads match this view. New Meta submissions will appear after they reach the sheet and sync.'));
+    if (!leads.length) $('leadList').appendChild(el('p', 'text-soft', 'No leads match this view. Website claims appear immediately; Meta submissions appear after sheet sync.'));
     leads.forEach(function (lead) {
       var card = el('details', 'lead-card'); card.dataset.id = lead.id; card.open = opened.has(lead.id);
       var summary = el('summary'); var identity = el('div'); identity.append(el('strong', '', lead.full_name), el('div', 'lead-contact', lead.email + (lead.phone ? ' · ' + lead.phone : '')));
       summary.append(identity, el('span', 'lead-badge', state(lead))); card.append(summary);
       card.append(el('p', 'lead-source', 'Submitted: ' + when(lead.lead_created_at) + ' · Activated: ' + when(lead.activated_at) + (lead.activated_at ? ' · Pass ends: ' + when(Date.parse(lead.activated_at) + 7 * 86400000) : '')));
+      var emailState = { not_sent: 'Not sent', sending: 'Sending', sent: 'Sent — accepted by Resend', needs_review: 'Needs review — check Resend before retrying' };
+      card.append(el('p', 'lead-source', 'Pass email: ' + (emailState[lead.pass_email_status] || 'Not sent') + (lead.pass_email_sent_at ? ' · ' + when(lead.pass_email_sent_at) : '') + (lead.pass_email_id ? '\nResend message ID: ' + lead.pass_email_id : '') + '\nInbox delivery, opens, and clicks are not tracked in this panel yet.'));
       var controls = el('div', 'lead-controls');
       [['activate', 'Activate pass — guest has checked in', !!lead.activated_at], ['joined', 'Joined REVIVE', lead.is_member],
         ['paused', 'Pause follow-up for this lead', lead.automation_paused], ['do_not_contact', 'Do not contact', lead.do_not_contact],
@@ -83,7 +85,7 @@
         var row = el('li'); row.append(el('span', '', 'Day ' + step[0] + ' — ' + step[1]), el('span', '', lead.is_member || lead.do_not_contact ? 'Suppressed' : lead.activated_at ? when(Date.parse(lead.activated_at) + step[0] * 86400000) + ' · Paused' : 'Waiting for activation'));
         plan.append(row);
       }); card.append(plan);
-      card.append(el('p', 'lead-source', 'Campaign: ' + (lead.meta.campaign_name || '—') + ' · Ad: ' + (lead.meta.ad_name || '—') + ' · Platform: ' + (lead.meta.platform || '—') + '\nFitness routine: ' + (lead.fitness_routine || '—') + '\nMeta lead ID: ' + lead.meta_lead_id));
+      card.append(el('p', 'lead-source', 'Campaign: ' + (lead.meta.campaign_name || '—') + ' · Ad: ' + (lead.meta.ad_name || '—') + ' · Platform: ' + (lead.meta.platform || '—') + '\nFitness routine: ' + (lead.fitness_routine || '—') + '\nSource lead ID: ' + lead.meta_lead_id));
       $('leadList').append(card);
     });
     $('leadMore').hidden = leads.length >= offset;

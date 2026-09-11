@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Free 7-Day Pass — REVIVE | Fort Wayne Gym + Recovery</title>
-<meta name="description" content="How to redeem your free 7-day pass at REVIVE, Fort Wayne. Training and recovery included. Your seven days begin when you redeem at the front desk." />
+<title>FREE Gym &amp; Recovery for 7 Days — REVIVE Fort Wayne</title>
+<meta name="description" content="Claim FREE Gym &amp; Recovery for 7 Days at REVIVE in Fort Wayne. Your seven days start only when you check in at the front desk." />
 
 <!-- Paid-campaign landing page: kept out of search so it doesn't compete with
      /pricing and /join organically. -->
@@ -13,13 +13,13 @@
 <meta property="og:site_name" content="REVIVE Fitness &amp; Recovery" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://revivefw.com/free-pass" />
-<meta property="og:title" content="Free 7-Day Pass — REVIVE Fort Wayne" />
+<meta property="og:title" content="FREE Gym &amp; Recovery for 7 Days — REVIVE Fort Wayne" />
 <meta property="og:description" content="Your seven days of training and recovery start only when you redeem your free pass at REVIVE's front desk. Bring your email or form confirmation." />
 <meta property="og:image" content="https://revivefw.com/assets/og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Free 7-Day Pass — REVIVE Fort Wayne" />
+<meta name="twitter:title" content="FREE Gym &amp; Recovery for 7 Days — REVIVE Fort Wayne" />
 <meta name="twitter:description" content="Your seven days start when you redeem your free pass at REVIVE's front desk. Bring your email or form confirmation." />
 <meta name="twitter:image" content="https://revivefw.com/assets/og-image.png" />
 <meta name="theme-color" content="#0B0807" />
@@ -28,6 +28,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@600;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=Manrope:wght@200;300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles/globals.css" />
+<link rel="stylesheet" href="styles/claim-pass.css" />
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <link rel="icon" href="/favicon.ico" sizes="32x32" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -39,7 +41,7 @@
 <!-- Stripped nav: logo + one action. A landing page has one job. -->
 <nav class="nav nav-lp" id="nav">
   <a href="/" class="nav-brand">REVIVE</a>
-  <a href="#redeem" class="nav-cta">Redeem Your Pass <span aria-hidden="true">&rarr;</span></a>
+  <a href="#claim" class="nav-cta">Claim Your Pass <span aria-hidden="true">&rarr;</span></a>
 </nav>
 
 <!-- HERO -->
@@ -48,39 +50,60 @@
     <img src="https://xpellfnufhvmqkabvabn.supabase.co/storage/v1/object/public/Images/FullFreeWeightSetsWide.jpg" alt="The free-weight floor at REVIVE gym in Fort Wayne" loading="eager" fetchpriority="high" />
   </div>
 
-  <div class="wrap hero-inner">
-    <div class="eyebrow fade-up" style="animation-delay:0.2s;">Fort Wayne, Indiana &nbsp;/&nbsp; Your first week is on us</div>
-
-    <h1 class="display hero-title fade-up" style="animation-delay:0.4s;">
-      Seven days.<br />
-      <span class="text-fire">On us.</span>
-    </h1>
-
-    <p class="lp-walkin fade-up" style="animation-delay:0.55s;">Your seven days start when you visit.</p>
-
-    <div class="hero-bottom">
-      <p class="lead fade-up" style="animation-delay:0.7s;">
-        A full week of everything — the training floor, the performance turf, and recovery. <span class="editorial text-cream" style="font-size:1.15em;">Your seven days begin at the front desk, not when you submit.</span>
-      </p>
-      <div class="fade-up flex gap-4" style="animation-delay:0.9s; justify-self:end; flex-wrap:wrap;">
-        <a href="#redeem" class="btn btn-primary btn-arrow">How to Redeem Your Pass</a>
-        <a href="#visit" class="btn btn-arrow">Directions &amp; Hours</a>
-      </div>
+  <div class="wrap hero-inner lp-claim-grid">
+    <div class="claim-hero-copy">
+      <div class="eyebrow">Fort Wayne, Indiana &nbsp;/&nbsp; Your first week is on us</div>
+      <h1 class="display hero-title">FREE Gym &amp; Recovery <span class="text-fire">for 7 Days</span></h1>
+      <p class="lead mt-6">The training floor. The performance turf. The recovery tools. Try it all for a full week, with no card on file and no obligation to join.</p>
+      <p class="lp-walkin">Claim today. Start when you visit.</p>
+      <a href="#redeem" class="btn btn-arrow mt-6">Already claimed? How to redeem</a>
     </div>
+    <section class="claim-card" id="claim" aria-labelledby="claim-heading">
+      <div id="claimIntro">
+        <span class="mono">Your first step</span>
+        <h2 class="h-3 mt-3" id="claim-heading">Claim your free pass.</h2>
+        <p class="claim-small mt-3">Just your name and email. Your seven days <strong>do not start</strong> until you check in at REVIVE.</p>
+      </div>
+      <form id="claimPassForm" class="claim-form" aria-labelledby="claim-heading">
+        <label for="claimName">Full name <span aria-hidden="true">*</span></label>
+        <input id="claimName" name="fullName" type="text" autocomplete="name" required maxlength="240" />
+        <label for="claimEmail">Email <span aria-hidden="true">*</span></label>
+        <input id="claimEmail" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="200" />
+        <label for="claimPhone">Phone <span class="claim-optional">(optional)</span></label>
+        <input id="claimPhone" name="phone" type="tel" autocomplete="tel" maxlength="40" />
+        <div class="claim-honeypot" aria-hidden="true"><label for="claimCompany">Company</label><input id="claimCompany" name="company" type="text" tabindex="-1" autocomplete="off" /></div>
+        <p class="claim-small">We use these details to record and redeem your pass. <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a>.</p>
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAADmEM33rK7aFg_cZ" data-theme="light" data-size="flexible" data-action="claim_pass"></div>
+        <p id="claimError" class="claim-error" role="alert"></p>
+        <button class="btn btn-fire btn-arrow" id="claimSubmit" type="submit">Claim My Free 7-Day Pass</button>
+        <p class="claim-small center">No card required · No automatic membership</p>
+      </form>
+      <div id="claimSuccess" class="claim-success" tabindex="-1" hidden>
+        <span class="mono">Claim received</span>
+        <h2 class="h-3 mt-3">You’re ready to visit.</h2>
+        <p class="mt-4"><strong>Your seven days have not started.</strong></p>
+        <p class="claim-small mt-4">Screenshot this confirmation and show it at the front desk. Share the email below so staff can find your claim.</p>
+        <p id="claimReceipt" class="claim-receipt"></p>
+        <p class="claim-small">Visit REVIVE at <strong>3233 St Joe Center Rd, Fort Wayne</strong>. The front desk activates your pass when you arrive, and you can train that same visit.</p>
+        <a href="#redeem" class="btn btn-fire btn-arrow mt-6">How to Redeem</a>
+        <p class="claim-small mt-4" id="claimEmailStatus">Keep this confirmation for your visit.</p>
+      </div>
+      <noscript><p class="claim-error">Please enable JavaScript to claim online, or call <a href="tel:+12604177668">(260) 417-7668</a> for help.</p></noscript>
+    </section>
   </div>
 </header>
 
 <!-- HOW IT WORKS -->
 <section class="section section-tight" id="redeem" aria-labelledby="redeem-heading" style="background: var(--bg-1); border-block: 1px solid var(--border);">
   <div class="wrap">
-    <span class="eyebrow">Already submitted a free-pass form?</span>
+    <span class="eyebrow">Claim online. Check in. Enjoy seven days.</span>
     <h2 class="h-1 mt-4" id="redeem-heading">How to redeem<br /><span class="editorial text-cream">your free pass.</span></h2>
-    <p class="lead mt-6">Your seven days have not started yet. They begin only when you visit REVIVE and redeem your pass at the front desk. No need to fill out another form if you already claimed through a Facebook or Instagram ad.</p>
+    <p class="lead mt-6">Claim your pass above, then visit REVIVE whenever you’re ready. Your seven days begin only at front-desk check-in—not when you submit. Already claimed through a Facebook or Instagram ad? You’re all set; don’t submit again.</p>
     <div class="grid grid-3 mt-8 lp-steps">
       <div class="lp-step" data-reveal>
         <div class="lp-step-num">01</div>
         <h3 class="h-4 mt-3">Bring your confirmation</h3>
-        <p class="text-soft mt-3">Keep your free-pass email or form submission confirmation handy. You can show it on your phone, including a screenshot of your Facebook or Instagram form confirmation.</p>
+        <p class="text-soft mt-3">Screenshot your claim confirmation. A free-pass email or Facebook or Instagram form confirmation also works. No need to wait for an email after claiming here.</p>
       </div>
       <div class="lp-step" data-reveal data-delay="1">
         <div class="lp-step-num">02</div>
@@ -165,7 +188,7 @@
             <a href="https://maps.google.com/?q=3233+St+Joe+Center+Rd,+Fort+Wayne,+IN+46835" target="_blank" rel="noopener" class="btn btn-primary btn-arrow" data-revive-directions>Get Directions</a>
             <a href="tel:+12604177668" class="btn btn-arrow" data-revive-call>(260) 417-7668</a>
           </div>
-          <p class="mono text-faint mt-6">No appointment &middot; No form &middot; No card</p>
+          <p class="mono text-faint mt-6">No appointment &middot; No card &middot; No pressure</p>
         </div>
       </div>
     </div>
@@ -184,7 +207,7 @@
       </details>
       <details class="faq-item" data-reveal data-delay="1">
         <summary>Do I need to sign up or book first?</summary>
-        <p>If you already submitted a free-pass form, including on Facebook or Instagram, you don't need to submit again. Bring your email or form confirmation and share the email address you used with the front desk. No appointment needed. <a href="#redeem">See how to redeem your pass</a>.</p>
+        <p><a href="#claim">Claim your pass using the form above</a>, then stop by during opening hours. If you already claimed through Facebook or Instagram, don’t submit again. Show your confirmation and share your claim email with the front desk. No appointment needed.</p>
       </details>
       <details class="faq-item" data-reveal data-delay="2">
         <summary>Can I train the same day I walk in?</summary>
@@ -290,8 +313,9 @@
 </style>
 
 <script src="scripts/main.js" defer></script>
+<script src="scripts/claim-pass.js" defer></script>
 <script>
-/* This page explains redemption; it does not submit claims or fire Lead events. */
+/* Directions and phone events are separate from pass submission. */
 (function () {
   function once(el, event, params) {
     if (!el) return;

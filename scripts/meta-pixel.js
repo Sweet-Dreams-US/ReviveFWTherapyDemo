@@ -11,9 +11,9 @@
  *   ViewContent  — offer pages only (see OFFER_PAGES), so "saw the offer" is
  *                  separable from "saw any page".
  *
- * Lead is NOT fired here. Public inquiry intake is retired, and website pass
- * claims remain deferred. /free-pass explains redemption of Meta form claims;
- * it fires no Lead — only FindLocation / Contact on directions and phone taps.
+ * Lead is NOT fired here. Public inquiry intake is retired. Website pass claims
+ * are stored separately; conversion tracking for that workflow is not enabled.
+ * /free-pass tracks FindLocation / Contact on directions and phone taps.
  *
  * Server-side deduplication: every event we fire gets an event_id. When the
  * same event is also sent from the server in a future claim workflow,

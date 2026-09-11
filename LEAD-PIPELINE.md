@@ -15,9 +15,13 @@ If the sheet is made private, replace the reader with authenticated Google Sheet
 - An import lease prevents overlapping syncs. Interrupted jobs can resume after two minutes; successful source rows are safe to reimport. Invalid source row numbers appear in admin without logging contact information.
 - CSV is limited to 4 MB. Storage imports run in batches of 100. Search/filter/pagination operate in the database, not just the displayed page.
 
-## Email automation is not enabled
+## Initial website pass email; timed follow-ups paused
 
-The proposal is a planning input. This release does not send confirmations, marketing emails, Meta Lead events, or any other customer messages. Resend and the website's existing inquiry forms are unchanged. Per-lead pause flags prepare for the future workflow; clearing one does not override the global email pause.
+The public `/free-pass#claim` form accepts full name, email, optional phone, and a server-validated Turnstile token (hostname and action checked; fail closed). Website claims go directly to Free-Pass Leads, not the link-viewable Google Sheet. One website claim per normalized email is retained; repeat submissions cannot change saved identity or restart activation. The retired `/api/inquiry` remains closed.
+
+The initial transactional pass email is sent via Resend after storage. An outbox freezes the payload and uses a per-lead idempotency key, a send lease, and a sent flag. Uncertain sends can only retry within 23 hours (Resend deduplicates for 24 hours); older uncertain sends require review rather than risking a duplicate. No scheduled retries are active. A successful API send records provider acceptance, timestamp, and message ID, not inbox delivery. Opens/clicks/delivery webhooks are not yet connected to admin.
+
+Authenticated staff may explicitly create a claim using `/api/meta-leads` action `create_claim` with the existing password, fullName, email, and optional phone. This uses the same claim-and-email helper. Meta Sheet import still does not send an email. Existing job application notifications are unchanged. No marketing emails, timed trial emails, or Meta Lead events are enabled by this release. Per-lead pause flags prepare for the future follow-ups; clearing one does not enable those jobs.
 
 The admin shows a proposed schedule relative to activation: Day 1 experience, Day 3 feedback, Day 5 membership options (proposal allows Day 5–6), Day 7 trial ending, Day 10 extension, Day 13 commitment offer. These are planning dates, not queued jobs.
 

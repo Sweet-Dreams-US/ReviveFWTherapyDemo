@@ -3,7 +3,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "crons": [{ "path": "/api/meta-leads-sync", "schedule": "*/5 * * * *" }],
-  "functions": { "api/meta-leads-sync.js": { "maxDuration": 60 } },
+  "functions": { "api/meta-leads-sync.js": { "maxDuration": 60 }, "api/claim-pass.js": { "maxDuration": 60 }, "api/meta-leads.js": { "maxDuration": 60 } },
   "redirects": [
     { "source": "/founders", "destination": "/pricing", "permanent": true },
     { "source": "/founding", "destination": "/pricing", "permanent": true },
