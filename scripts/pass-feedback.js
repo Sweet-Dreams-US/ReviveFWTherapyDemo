@@ -31,7 +31,7 @@
     button.disabled = true; button.textContent = 'SAVING…';
     try {
       await request({ action: 'submit', rating: Number(fields.get('rating')), areas: areas, comments: document.getElementById('visitComments').value,
-        wantsHelp: document.getElementById('wantsHelp').checked, turnstileToken: fields.get('cf-turnstile-response') || '' });
+        wantsHelp: false, turnstileToken: fields.get('cf-turnstile-response') || '' });
       thanks();
     } catch (e) { error.textContent = e.message; if (window.turnstile) window.turnstile.reset(); }
     finally { button.disabled = false; button.textContent = 'SHARE MY EXPERIENCE ↗'; }

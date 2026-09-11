@@ -72,7 +72,7 @@
       guest.append(el('strong', '', 'Guest first visit feedback'));
       if (lead.visit_feedback_at && lead.visit_feedback) {
         var response = lead.visit_feedback;
-        guest.append(el('p', '', 'Received: ' + when(lead.visit_feedback_at) + '\nRating: ' + response.rating + ' / 5 · Tried: ' + (response.areas || []).join(', ') + '\nHelp planning next visit: ' + (response.wants_help ? 'Requested' : 'Not requested')),
+        guest.append(el('p', '', 'Received: ' + when(lead.visit_feedback_at) + '\nRating: ' + response.rating + ' / 5 · Tried: ' + (response.areas || []).join(', ')),
           el('p', '', response.comments || 'No written comments.'));
       } else { guest.append(el('p', '', 'No response submitted yet.')); }
       card.append(guest);
