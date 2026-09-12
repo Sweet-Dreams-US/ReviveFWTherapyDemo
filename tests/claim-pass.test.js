@@ -44,6 +44,6 @@ test('claim form: validation, fail-closed Turnstile, saved-only success, email i
 test('email contains a readable text alternative, redemption link, privacy, and escaped recipient',()=>{
   const email=passEmail('<guest>@example.com');
   assert.match(email.html,/&lt;guest&gt;/);assert.doesNotMatch(email.html,/<guest>/);
-  assert.match(email.text,/have NOT started/);assert.match(email.html,/https:\/\/revivefw.com\/free-pass#redeem/);
+  assert.match(email.text,/does not start or reset/);assert.match(email.html,/https:\/\/revivefw.com\/free-pass#redeem/);
   assert.match(email.text,/Privacy:/);assert.match(email.html,/role="presentation"/);
 });

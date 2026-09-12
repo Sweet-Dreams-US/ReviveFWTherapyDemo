@@ -4,7 +4,7 @@ const esc = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<'
 
 function passEmail(email) {
   const safeEmail = esc(email);
-  return {
+  const message = {
     from: process.env.NOTIFY_FROM || 'REVIVE Fitness & Recovery <noreply@revivefw.com>',
     to: [email], reply_to: 'info@revivefw.com',
     subject: 'Your FREE 7 Day Gym & Recovery Pass | REVIVE',
@@ -29,12 +29,22 @@ function passEmail(email) {
 <tr><td style="background:#0b0807;padding:25px 32px;"><p style="font-size:12px;letter-spacing:2px;font-weight:bold;color:#f5f0e7;margin:0 0 12px;">TRAIN. RECOVER. REPEAT.</p><p style="font-size:11px;line-height:1.7;color:#c9bdb0;margin:0;">You received this confirmation because a free pass was claimed using this email. If that wasn’t you, ignore it or contact us. This email does not start a trial or enroll you in a membership.</p><p style="font-size:11px;margin:14px 0 0;"><a href="https://revivefw.com/privacy" style="color:#f5f0e7;">Privacy Policy</a> &nbsp;·&nbsp; <a href="https://revivefw.com" style="color:#f5f0e7;">revivefw.com</a></p></td></tr>
 </table></td></tr></table></body></html>`
   };
+  // A Meta import can arrive after front desk redemption. This confirmation
+  // explains the rule without falsely telling an active guest their pass is new.
+  message.text = message.text.replace('Your seven days have NOT started.', 'Claiming does not start or reset your seven days.');
+  message.html = message.html.replace('Your seven days have not started.', 'Claiming does not start or reset your seven days.');
+  return message;
 }
 
 async function claimAndEmail({ name, email, phone = '' }) {
   const token = process.env.CRON_SECRET;
   const saved = await rpc('revive_claim_website_pass', { p_token: token, p_name: name, p_email: email, p_phone: phone });
   if (saved !== true) throw new Error('Claim not saved');
+  return sendConfirmation(email);
+}
+
+async function sendConfirmation(email) {
+  const token = process.env.CRON_SECRET;
   if (!process.env.RESEND_API_KEY) return { ok: true, email_status: 'not_sent' };
   let prepared;
   try {
@@ -53,4 +63,17 @@ async function claimAndEmail({ name, email, phone = '' }) {
     return { ok: true, email_status: 'needs_review' };
   }
 }
-module.exports = { passEmail, claimAndEmail };
+async function sendPendingConfirmations() {
+  if (!process.env.RESEND_API_KEY) return { configured: false, sent: 0, failed: 0 };
+  const emails = await rpc('revive_pending_confirmations', { p_token: process.env.CRON_SECRET });
+  let sent = 0, failed = 0;
+  const started = Date.now();
+  for (const email of emails) {
+    if (Date.now() - started > 25000) break;
+    const result = await sendConfirmation(email);
+    if (result.email_status === 'sent') sent++;
+    else if (result.email_status === 'needs_review') failed++;
+  }
+  return { configured: true, sent, failed };
+}
+module.exports = { passEmail, claimAndEmail, sendConfirmation, sendPendingConfirmations };
