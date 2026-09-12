@@ -12,7 +12,7 @@ function ptOfferEmail(email, activatedAt, finalDay) {
   const heading = finalDay ? 'Your pass ends today.' : 'Make your next step count.';
   const header = base.html.slice(0, base.html.indexOf('<tr><td style="padding:34px'))
     .replace('<title>Your REVIVE Pass</title>', '<title>' + heading + '</title>')
-    .replace('Your pass is ready. Your seven days start at front desk check in, not today.', 'Join before your pass ends. Get 1 free PT session, or 2 with Elite.');
+    .replace('Claiming does not start or reset your seven days. Show your confirmation at check in.', 'Join before your pass ends. Get 1 free PT session, or 2 with Elite.');
   const footer = base.html.slice(base.html.indexOf('<tr><td style="background:#0b0807;padding:25px'))
     .replace('You received this confirmation because a free pass was claimed using this email. If that wasn’t you, ignore it or contact us. This email does not start a trial or enroll you in a membership.', 'You received this email as part of your REVIVE free pass experience. Your pass does not automatically become a paid membership.');
   const terms = 'Complete your membership enrollment at the front desk before your pass ends to qualify. Simply booking a visit does not reserve the bonus. Your PT session can take place afterward. Our team will help coordinate it with Kings Nutrition.';
