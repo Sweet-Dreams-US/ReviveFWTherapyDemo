@@ -32,6 +32,10 @@ module.exports = async (req, res) => {
   }
   try {
     const saved = await claimAndEmail({ name, email, phone });
+    if (body.marketingConsent === true) {
+      try { await require('./_lead-sync').rpc('revive_pass_marketing_consent', { p_token: process.env.CRON_SECRET, p_email: email }); }
+      catch (_) { console.error('Pass marketing consent was not recorded'); }
+    }
     let tracking = {};
     // A measurement failure must never turn a saved claim into a form error.
     try { tracking = await require('./_pass-tracking').trackClaim(req, body, email, phone); }

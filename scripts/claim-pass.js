@@ -14,7 +14,7 @@
     try {
       var response = await fetch('/api/claim-pass', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fullName: name, email: email, phone: data.get('phone') || '', company: data.get('company') || '', turnstileToken: token, adMeasurement: !!(window.reviveMeta && typeof window.reviveMeta.allowed === 'function' && window.reviveMeta.allowed()) }),
+        body: JSON.stringify({ fullName: name, email: email, phone: data.get('phone') || '', company: data.get('company') || '', turnstileToken: token, marketingConsent: data.get('marketingConsent') === 'on', adMeasurement: !!(window.reviveMeta && typeof window.reviveMeta.allowed === 'function' && window.reviveMeta.allowed()) }),
         signal: AbortSignal.timeout(55000)
       });
       var result = await response.json();

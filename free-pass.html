@@ -72,7 +72,8 @@
         <label for="claimPhone">Phone <span class="claim-optional">(optional)</span></label>
         <input id="claimPhone" name="phone" type="tel" autocomplete="tel" maxlength="40" />
         <div class="claim-honeypot" aria-hidden="true"><label for="claimCompany">Company</label><input id="claimCompany" name="company" type="text" tabindex="-1" autocomplete="off" /></div>
-        <p class="claim-small">We use these details to record and redeem your pass. <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a>.</p>
+        <p class="claim-small">We email your pass confirmation and one first visit check in. Membership offers are optional. <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a>.</p>
+        <label style="display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.5;margin:16px 0"><input type="checkbox" name="marketingConsent" style="width:18px;height:18px;min-width:18px;margin-top:2px"> <span>Email me membership offers from REVIVE, including the Day 5 and Day 7 joining bonus. I can unsubscribe anytime. (Optional)</span></label>
         <div class="cf-turnstile" data-sitekey="0x4AAAAAADmEM33rK7aFg_cZ" data-theme="light" data-size="flexible" data-action="claim_pass"></div>
         <p id="claimError" class="claim-error" role="alert"></p>
         <button class="btn btn-fire btn-arrow" id="claimSubmit" type="submit">Claim My Free 7-Day Pass</button>

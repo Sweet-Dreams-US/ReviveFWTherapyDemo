@@ -5,7 +5,7 @@ begin
   select value into token from public.app_secrets where key='meta_sync_secret';
   perform public.revive_claim_website_pass(token,'Synthetic Claim','synthetic-website-test@example.com','');
   select * into l from revive_private.meta_pass_leads where email='synthetic-website-test@example.com';
-  if l.activated_at is not null or not l.automation_paused then raise exception 'Claim activated pass or follow-up'; end if;
+  if l.activated_at is not null or l.automation_paused then raise exception 'Claim activated pass or default worker is paused'; end if;
   perform public.revive_claim_website_pass(token,'Different Name','SYNTHETIC-WEBSITE-TEST@example.com','123');
   if (select count(*) from revive_private.meta_pass_leads where email=l.email)<>1 then raise exception 'Duplicate claim'; end if;
   if (select full_name from revive_private.meta_pass_leads where id=l.id)<>'Synthetic Claim' then raise exception 'Repeat changed identity'; end if;

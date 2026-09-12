@@ -60,13 +60,16 @@ module.exports = async (req, res) => {
     }
     if (!body.action || body.action === 'list') {
       const offset = Math.max(0, Number(body.offset) || 0);
-      return res.status(200).json(await rpc('revive_meta_list', { p_token: body.password, p_offset: offset,
-        p_query: String(body.query || '').slice(0, 200), p_filter: String(body.filter || 'all') }));
+      const data = await rpc('revive_meta_list', { p_token: body.password, p_offset: offset,
+        p_query: String(body.query || '').slice(0, 200), p_filter: String(body.filter || 'all') });
+      const automation = await rpc('revive_followup_state', { p_token: body.password, p_ids: data.leads.map(lead => lead.id) });
+      return res.status(200).json({ ...data, automation });
     }
-    const flags = ['activate', 'joined', 'paused', 'do_not_contact', 'confirmation_recorded'];
+    const flags = ['activate', 'joined', 'paused', 'do_not_contact', 'confirmation_recorded', 'marketing_consent'];
     if (!flags.includes(body.action) && body.action !== 'notes') return res.status(400).json({ error: 'Unknown action' });
     if (!/^[a-f0-9-]{36}$/i.test(body.id || '') || !Number.isInteger(body.version)) return res.status(400).json({ error: 'Lead ID and version required' });
     if (flags.includes(body.action) && typeof body.value !== 'boolean') return res.status(400).json({ error: 'A checkbox value is required' });
+    if (body.action === 'marketing_consent' && body.value && (typeof body.notes !== 'string' || body.notes.trim().length < 15 || body.notes.length > 2000)) return res.status(400).json({ error: 'Record how and when this guest agreed to membership offer emails.' });
     if (body.action === 'notes' && (typeof body.notes !== 'string' || typeof body.feedback !== 'string' || body.notes.length > 4000 || body.feedback.length > 2000)) {
       return res.status(400).json({ error: 'Notes or feedback are too long.' });
     }

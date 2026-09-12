@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  var password = '', leads = [], requestId = 0, offset = 0, timer;
+  var password = '', leads = [], jobs = [], requestId = 0, offset = 0, timer;
   var $ = function (id) { return document.getElementById(id); };
   function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
   function when(value) { return value ? new Date(value).toLocaleString('en-US', { timeZone: 'America/Indiana/Indianapolis', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' }) + ' ET' : 'Not yet'; }
@@ -25,6 +25,7 @@
         query: $('leadSearch').value.trim(), filter: $('leadFilter').value });
       if (id !== requestId || !password) return;
       leads = more ? leads.concat(data.leads) : data.leads; offset = data.total;
+      jobs = more ? jobs.concat((data.automation || {}).jobs || []) : (data.automation || {}).jobs || [];
       $('leadStats').textContent = '';
       [['Total leads', data.stats.total], ['Not activated', data.stats.unactivated], ['Active passes', data.stats.active], ['Joined', data.stats.joined]].forEach(function (pair) {
         var box = el('div', 'kpi'); box.append(el('div', 'mono text-dim', pair[0]), el('div', 'kpi-value display', pair[1])); $('leadStats').appendChild(box);
@@ -34,6 +35,10 @@
         (sync.last_error ? ' · ' + sync.last_error : '') +
         (sync.summary && sync.summary.invalidRows && sync.summary.invalidRows.length ? ' · Check incomplete sheet rows: ' + sync.summary.invalidRows.join(', ') : '') +
         (sync.last_success_at && Date.now() - Date.parse(sync.last_success_at) > 15 * 60000 ? ' · Sync is overdue. Use Sync now and check the connection.' : '');
+      var run = data.automation && data.automation.run;
+      $('leadSyncStatus').textContent += '\nFollowup worker: ' + when(run && run.last_run_at) +
+        (run && run.last_run_at && Date.now() - Date.parse(run.last_run_at) > 15 * 60000 ? ' · Worker is overdue. Check scheduled job logs.' : '') +
+        (run && run.summary && run.summary.failed ? ' · Failed sends need review.' : '');
       render();
     } catch (error) { if (id === requestId) $('leadError').textContent = error.message; }
   }
@@ -55,20 +60,27 @@
       var controls = el('div', 'lead-controls');
       [['activate', 'Activate pass — guest has checked in', !!lead.activated_at], ['joined', 'Joined REVIVE', lead.is_member],
         ['paused', 'Pause follow-up for this lead', lead.automation_paused], ['do_not_contact', 'Do not contact', lead.do_not_contact],
-        ['confirmation_recorded', 'Confirmation already sent outside this panel', !!lead.confirmation_recorded_at]].forEach(function (spec) {
+        ['confirmation_recorded', 'Confirmation already sent outside this panel', !!lead.confirmation_recorded_at],
+        ['marketing_consent', 'Marketing email consent verified', !!lead.marketing_consent_at]].forEach(function (spec) {
         var label = el('label'), input = el('input'); input.type = 'checkbox'; input.checked = !!spec[2];
         label.append(input, document.createTextNode(spec[1])); controls.append(label);
         input.addEventListener('change', async function () {
           var next = input.checked;
+          var evidence;
+          if (spec[0] === 'marketing_consent' && next) {
+            evidence = window.prompt('Record how and when this guest agreed to membership offer emails. Do not assume that claiming a pass is marketing consent.');
+            if (!evidence || evidence.trim().length < 15) { input.checked = false; return; }
+          }
           if (spec[0] === 'activate' && !next && !window.confirm('Clear this activation date? Only do this to correct an accidental check-in.')) { input.checked = true; return; }
           controls.querySelectorAll('input').forEach(function (c) { c.disabled = true; });
           try {
-            var result = await update(lead, spec[0], next);
+            var result = await update(lead, spec[0], next, evidence ? { notes: evidence } : undefined);
             Object.assign(lead, result.lead); await load();
           } catch (error) { input.checked = !next; $('leadError').textContent = error.message; controls.querySelectorAll('input').forEach(function (c) { c.disabled = false; }); }
         });
       });
       card.append(controls);
+      card.append(el('p', 'lead-source', 'Lifecycle controls apply to every claim with this email.\nMarketing consent: ' + (lead.marketing_consent_at ? when(lead.marketing_consent_at) + '\n' + lead.marketing_consent_source : 'Not recorded. Day 5 and Day 7 offers are held.') + (lead.email_unsubscribed_at ? '\nGuest unsubscribed: ' + when(lead.email_unsubscribed_at) : '')));
       var guest = el('section', 'lead-guest-feedback');
       guest.append(el('strong', '', 'Guest first visit feedback'));
       if (lead.visit_feedback_at && lead.visit_feedback) {
@@ -88,13 +100,17 @@
         catch (error) { $('leadError').textContent = error.message; }
         finally { save.disabled = false; }
       }); card.append(save);
-      card.append(el('p', 'mono text-dim mt-6', 'Planned follow-up · email setup pending'));
+      card.append(el('p', 'mono text-dim mt-6', 'Automatic followup · checked every 5 minutes'));
       var plan = el('ul', 'lead-plan');
       card.append(el('p', 'lead-source', 'Join by closing on Day 7: Essential or Plus receive 1 free Kings Nutrition PT session. Elite receives 2 total. Enrollment must be completed at the front desk. PT scheduling and fulfillment are handled by staff.'));
-      [[lead.activated_at && Date.parse(lead.activated_at) + 2 * 3600000, 'First visit follow-up · 2 hours after redemption'], [passSchedule.day5, 'Day 5 · Kings Nutrition PT offer · 9 AM ET'], [passSchedule.day7, 'Day 7 · Final day reminder · 9 AM ET'], [lead.activated_at && Date.parse(lead.activated_at) + 240 * 3600000, 'Day 10 · Additional trial · offer to be decided'], [lead.activated_at && Date.parse(lead.activated_at) + 312 * 3600000, 'Day 13 · Commitment offer · rate to be decided']].forEach(function (step) {
-        var row = el('li'); row.append(el('span', '', step[1]), el('span', '', lead.is_member || lead.do_not_contact ? 'Suppressed' : lead.activated_at ? when(step[0]) + ' · Paused' : 'Waiting for activation'));
+      [['experience',lead.activated_at && Date.parse(lead.activated_at) + 2 * 3600000, 'First visit experience · 2 hours after redemption'], ['day5',passSchedule.day5, 'Day 5 · Kings Nutrition PT offer · 9 AM ET'], ['day7',passSchedule.day7, 'Day 7 · Final day reminder · 9 AM ET']].forEach(function (step) {
+        var job = jobs.find(function (j) { return j.email === lead.email && j.stage === step[0]; });
+        var status = job ? job.status + (job.blocked_reason ? ' · ' + job.blocked_reason : '') + (job.accepted_at ? ' · Accepted ' + when(job.accepted_at) : '') + (job.provider_id ? '\nResend ID: ' + job.provider_id : '')
+          : !lead.activated_at ? 'Waiting for activation' : 'Schedule will refresh on the next worker run';
+        var row = el('li'); row.append(el('span', '', step[2]), el('span', '', (job ? when(job.due_at) : lead.activated_at ? when(step[1]) : '') + ' · ' + status));
         plan.append(row);
       }); card.append(plan);
+      card.append(el('p', 'lead-source', 'Day 10 and Day 13 offers are disabled. Emails stop after joining, unsubscribe, or do not contact. A message already being sent may still arrive.'));
       card.append(el('p', 'lead-source', 'Campaign: ' + (lead.meta.campaign_name || '—') + ' · Ad: ' + (lead.meta.ad_name || '—') + ' · Platform: ' + (lead.meta.platform || '—') + '\nFitness routine: ' + (lead.fitness_routine || '—') + '\nSource lead ID: ' + lead.meta_lead_id));
       if (lead.meta.ad_measurement) card.append(el('p', 'lead-source', 'Meta website conversion: ' + lead.meta.ad_measurement.status + '\nEvent ID: ' + lead.meta.ad_measurement.event_id + '\nSent means accepted by Meta, not attributed to an ad.'));
       $('leadList').append(card);

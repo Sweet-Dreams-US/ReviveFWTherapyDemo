@@ -2,8 +2,8 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
-  "crons": [{ "path": "/api/meta-leads-sync", "schedule": "*/5 * * * *" }],
-  "functions": { "api/meta-leads-sync.js": { "maxDuration": 60 }, "api/claim-pass.js": { "maxDuration": 60 }, "api/meta-leads.js": { "maxDuration": 60 } },
+  "crons": [{ "path": "/api/meta-leads-sync", "schedule": "*/5 * * * *" }, { "path": "/api/pass-automation", "schedule": "*/5 * * * *" }],
+  "functions": { "api/meta-leads-sync.js": { "maxDuration": 120 }, "api/pass-automation.js": { "maxDuration": 120 }, "api/claim-pass.js": { "maxDuration": 60 }, "api/meta-leads.js": { "maxDuration": 60 } },
   "redirects": [
     { "source": "/founders", "destination": "/pricing", "permanent": true },
     { "source": "/founding", "destination": "/pricing", "permanent": true },
@@ -20,6 +20,13 @@
     { "source": "/giveaway.html", "destination": "/", "permanent": true }
   ],
   "headers": [
+    {
+      "source": "/pass-unsubscribe",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" },
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
+    },
     {
       "source": "/pass-feedback",
       "headers": [

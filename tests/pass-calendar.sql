@@ -9,7 +9,7 @@ begin
   assert revive_private.pass_expires_at(null) is null;
   select value into token from public.app_secrets where key='admin_secret';
   result:=public.revive_meta_list(token,0,'','active');
-  assert not (result->>'emails_enabled')::boolean;
+  assert (result->>'emails_enabled')::boolean;
   assert not exists(select 1 from jsonb_array_elements(result->'leads') l where (l->>'pass_expires_at')::timestamptz <= now());
   result:=public.revive_meta_list(token,0,'','expired');
   assert not exists(select 1 from jsonb_array_elements(result->'leads') l where (l->>'pass_expires_at')::timestamptz > now());

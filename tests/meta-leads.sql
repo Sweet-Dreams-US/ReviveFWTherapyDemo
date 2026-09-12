@@ -37,7 +37,7 @@ begin
   if not (l->>'is_member')::boolean then raise exception 'Member toggle failed'; end if;
   if (select count(*) from revive_private.meta_lead_events where lead_id=rowid)<>4 then raise exception 'Edit history missing'; end if;
   l := public.revive_meta_list(admin_token,0,'revive-transaction-test@example.com','joined');
-  if (l->>'total')::int<>1 or (l->>'emails_enabled')::boolean then raise exception 'List or email pause failed'; end if;
+  if (l->>'total')::int<>1 or not (l->>'emails_enabled')::boolean then raise exception 'List or email availability failed'; end if;
 end $$;
 set local role anon;
 do $$ begin
@@ -52,4 +52,4 @@ do $$ begin
 end $$;
 reset role;
 rollback;
-select 'PASS: authorization, import deduplication, activation, preserved controls, version conflicts, edit history, and email pause' as result;
+select 'PASS: authorization, import deduplication, activation, preserved controls, version conflicts, edit history, and email availability' as result;
