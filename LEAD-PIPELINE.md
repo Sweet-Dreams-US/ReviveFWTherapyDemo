@@ -33,7 +33,7 @@ All authored email copy and subjects must avoid dashes, including hyphens, en da
 
 The authenticated `send_experience_preview` action on `/api/meta-leads` sends the first visit template to the exact existing lead selected by ID and email. It does not redeem the pass or enable automation. A stable Resend idempotency key protects immediate retries, and a staff note records the test and provider ID without altering trial state. Its private signed link opens the prefilled website feedback form. Guest responses are saved separately from staff notes. The optional help planning checkbox was removed at the owner's request; historical responses are retained.
 
-Before enabling the Resend sequence, settle consent/unsubscribe handling, holiday closing exceptions, PT fulfillment, extension eligibility, and six-month rate/terms. The proposal's classes wording conflicts with the site's current verified facts and must not be used without confirmation. Marking a confirmation as sent records an external action; it does not send email.
+The Resend sequence is live for every activated pass with unsubscribe handling in place; still settle holiday closing exceptions, PT fulfillment, extension eligibility, and six-month rate/terms. The proposal's classes wording conflicts with the site's current verified facts and must not be used without confirmation. Marking a confirmation as sent records an external action; it does not send email.
 
 ## Verification
 

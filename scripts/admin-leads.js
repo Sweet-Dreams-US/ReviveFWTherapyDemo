@@ -60,27 +60,21 @@
       var controls = el('div', 'lead-controls');
       [['activate', 'Activate pass — guest has checked in', !!lead.activated_at], ['joined', 'Joined REVIVE', lead.is_member],
         ['paused', 'Pause follow-up for this lead', lead.automation_paused], ['do_not_contact', 'Do not contact', lead.do_not_contact],
-        ['confirmation_recorded', 'Confirmation already sent outside this panel', !!lead.confirmation_recorded_at],
-        ['marketing_consent', 'Marketing email consent verified', !!lead.marketing_consent_at]].forEach(function (spec) {
+        ['confirmation_recorded', 'Confirmation already sent outside this panel', !!lead.confirmation_recorded_at]].forEach(function (spec) {
         var label = el('label'), input = el('input'); input.type = 'checkbox'; input.checked = !!spec[2];
         label.append(input, document.createTextNode(spec[1])); controls.append(label);
         input.addEventListener('change', async function () {
           var next = input.checked;
-          var evidence;
-          if (spec[0] === 'marketing_consent' && next) {
-            evidence = window.prompt('Record how and when this guest agreed to membership offer emails. Do not assume that claiming a pass is marketing consent.');
-            if (!evidence || evidence.trim().length < 15) { input.checked = false; return; }
-          }
           if (spec[0] === 'activate' && !next && !window.confirm('Clear this activation date? Only do this to correct an accidental check-in.')) { input.checked = true; return; }
           controls.querySelectorAll('input').forEach(function (c) { c.disabled = true; });
           try {
-            var result = await update(lead, spec[0], next, evidence ? { notes: evidence } : undefined);
+            var result = await update(lead, spec[0], next);
             Object.assign(lead, result.lead); await load();
           } catch (error) { input.checked = !next; $('leadError').textContent = error.message; controls.querySelectorAll('input').forEach(function (c) { c.disabled = false; }); }
         });
       });
       card.append(controls);
-      card.append(el('p', 'lead-source', 'Lifecycle controls apply to every claim with this email.\nMarketing consent: ' + (lead.marketing_consent_at ? when(lead.marketing_consent_at) + '\n' + lead.marketing_consent_source : 'Not recorded. Day 5 and Day 7 offers are held.') + (lead.email_unsubscribed_at ? '\nGuest unsubscribed: ' + when(lead.email_unsubscribed_at) : '')));
+      card.append(el('p', 'lead-source', 'Lifecycle controls apply to every claim with this email. Day 5 and Day 7 offers send to every activated pass unless the guest joined, unsubscribed, or is marked do not contact.' + (lead.email_unsubscribed_at ? '\nGuest unsubscribed: ' + when(lead.email_unsubscribed_at) : '')));
       var guest = el('section', 'lead-guest-feedback');
       guest.append(el('strong', '', 'Guest first visit feedback'));
       if (lead.visit_feedback_at && lead.visit_feedback) {

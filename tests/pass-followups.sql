@@ -20,7 +20,7 @@ begin
   assert (select count(*) from revive_private.meta_pass_leads where email='synthetic-followup@example.com' and activated_at=activation)=2;
   perform public.revive_plan_followups(token);
   assert (select count(*) from revive_private.pass_followup_jobs where email='synthetic-followup@example.com')=3;
-  assert (select count(*) from revive_private.pass_followup_jobs where email='synthetic-followup@example.com' and blocked_reason='Marketing consent required')=2;
+  assert (select count(*) from revive_private.pass_followup_jobs where email='synthetic-followup@example.com' and blocked_reason is not null)=0;
   select id into jid from revive_private.pass_followup_jobs where email='synthetic-followup@example.com' and stage='experience';
   perform public.revive_meta_update(admin_token,a,(select version from revive_private.meta_pass_leads where id=a),'paused',true,'','');
   assert (public.revive_prepare_followup(token,jid,'{}'))->>'status'='blocked';
@@ -36,7 +36,6 @@ begin
   assert r->'payload'->>'subject'='Frozen';
   perform public.revive_finish_followup(token,jid,(r->>'lease')::uuid,'synthetic-provider',null);
   assert (public.revive_prepare_followup(token,jid,'{}'))->>'status'='sent';
-  perform public.revive_pass_marketing_consent(token,'synthetic-followup@example.com');
   perform public.revive_plan_followups(token);
   assert (select count(*) from revive_private.pass_followup_jobs where email='synthetic-followup@example.com' and blocked_reason is not null)=0;
   assert (public.revive_followup_state(admin_token,array[a]))->'jobs' is not null;
@@ -46,9 +45,6 @@ begin
   assert (select count(*) from revive_private.pass_followup_jobs where email='synthetic-followup@example.com' and status='suppressed')=2;
   assert public.revive_unsubscribe_pass(token,a);
   assert (select min(activated_at) from revive_private.meta_pass_leads where email='synthetic-followup@example.com')=activation;
-  update revive_private.meta_pass_leads set marketing_consent_at=null where email='synthetic-followup@example.com';
-  perform public.revive_pass_marketing_consent(token,'synthetic-followup@example.com');
-  assert not exists(select 1 from revive_private.meta_pass_leads where email='synthetic-followup@example.com' and marketing_consent_at is not null);
   foreach kind in array array['joined','dnc','feedback','expired','notdue'] loop
     insert into revive_private.meta_pass_leads(meta_lead_id,full_name,email,source_row,lead_created_at,activated_at,is_member,do_not_contact,visit_feedback_at)
       values('synthetic-stop-'||kind,'Synthetic','synthetic-stop-'||kind||'@example.com',0,now(),
@@ -64,4 +60,4 @@ begin
   assert not has_table_privilege('authenticated','revive_private.pass_followup_jobs','UPDATE');
 end $$;
 rollback;
-select 'PASS: schedule, DST, activation, duplicate lifecycle, pause, consent, lease, frozen retry, unsubscribe, authorization' as result;
+select 'PASS: schedule, DST, activation, duplicate lifecycle, pause, offers without consent gate, lease, frozen retry, unsubscribe, authorization' as result;
