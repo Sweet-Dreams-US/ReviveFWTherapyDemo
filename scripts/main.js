@@ -19,15 +19,31 @@
   const toggle = document.getElementById('navToggle');
   const links  = document.getElementById('navLinks');
   if (toggle && links) {
-    toggle.addEventListener('click', () => {
-      toggle.classList.toggle('open');
-      links.classList.toggle('open');
-    });
+    const setMenu = (open) => {
+      toggle.classList.toggle('open', open);
+      links.classList.toggle('open', open);
+      if (nav) nav.classList.toggle('menu-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      // The page stays visible behind the drawer, so hold it still while it is open.
+      document.body.style.overflow = open ? 'hidden' : '';
+    };
+    const isOpen = () => links.classList.contains('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-controls', links.id);
+    toggle.addEventListener('click', () => setMenu(!isOpen()));
     links.addEventListener('click', (e) => {
-      if (e.target.tagName === 'A') {
-        toggle.classList.remove('open');
-        links.classList.remove('open');
-      }
+      if (e.target.tagName === 'A') setMenu(false);
+    });
+    // A tap on the dimmed page beside the drawer closes it.
+    document.addEventListener('click', (e) => {
+      if (isOpen() && !links.contains(e.target) && !toggle.contains(e.target)) setMenu(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen()) { setMenu(false); toggle.focus(); }
+    });
+    // Returning to the desktop row must not leave the page scroll locked.
+    window.addEventListener('resize', () => {
+      if (isOpen() && window.innerWidth > 800) setMenu(false);
     });
   }
 

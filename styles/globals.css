@@ -294,16 +294,77 @@ p .brand, li .brand, .lead .brand, summary .brand, label .brand,
 
 .nav-toggle { display: none; }
 @media (max-width: 800px) {
-  .nav-links { display: none; position: fixed; top: 70px; left: 0; right: 0; bottom: 0; background: var(--bg); flex-direction: column; padding: var(--s-8) var(--gutter); justify-content: flex-start; gap: var(--s-6); border-top: 1px solid var(--border); }
-  .nav-links.open { display: flex; }
-  .nav-link { font-size: 2rem; font-family: var(--font-display); letter-spacing: 0; }
+  /* The frosted bar moves to a pseudo element. backdrop-filter on .nav itself
+     would make the bar the containing block for the fixed drawer below it,
+     pinning the panel to the header strip instead of the viewport. */
+  .nav, .nav.scrolled {
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom-color: transparent;
+  }
+  .nav::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-bottom: 1px solid transparent;
+    transition: background var(--dur), border-color var(--dur);
+  }
+  .nav.scrolled::before {
+    background: rgba(11, 8, 7, 0.78);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border-bottom-color: var(--border);
+  }
+  /* Difference blending would invert the open panel against the page behind it. */
+  .nav.menu-open { mix-blend-mode: normal; }
+  .nav.menu-open::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: rgba(11, 8, 7, 0.3);
+  }
+
+  /* Drawer: stacked, off the right edge, translucent so the page reads behind it. */
+  .nav-links {
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: auto;
+    width: min(72vw, 310px);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--s-5);
+    padding: 6rem var(--s-6) var(--s-8);
+    background: rgba(11, 8, 7, 0.78);
+    backdrop-filter: blur(22px) saturate(140%);
+    -webkit-backdrop-filter: blur(22px) saturate(140%);
+    border-left: 1px solid var(--border);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform var(--dur) var(--ease-out), visibility 0s linear var(--dur);
+  }
+  .nav-links.open {
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform var(--dur) var(--ease-out), visibility 0s;
+  }
+  .nav-link { font-size: 1.625rem; font-family: var(--font-display); letter-spacing: 0.01em; line-height: 1.15; }
   .nav-link::after { display: none; }
+  .nav-link[aria-current="page"] { color: var(--fire); }
+  /* The toggle paints after the panel, so the close X stays on top of it. */
   .nav-toggle { display: flex; flex-direction: column; gap: 5px; padding: 8px; }
   .nav-toggle span { width: 24px; height: 1.5px; background: var(--text); transition: all var(--dur-fast); }
   .nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
   .nav-toggle.open span:nth-child(2) { opacity: 0; }
   .nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
   .nav-cta { display: none; }
+}
+@media (max-width: 800px) and (prefers-reduced-motion: reduce) {
+  .nav-links, .nav-links.open { transition: none; }
 }
 
 /* ---------- Buttons ---------- */
