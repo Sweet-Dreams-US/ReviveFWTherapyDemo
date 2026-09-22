@@ -34,9 +34,13 @@
     links.addEventListener('click', (e) => {
       if (e.target.tagName === 'A') setMenu(false);
     });
-    // A tap on the dimmed page beside the drawer closes it.
+    // A tap on the dimmed page beside the drawer closes it. The pass button
+    // sits at the foot of the drawer, so it counts as inside.
+    const cta = nav ? nav.querySelector('.nav-cta') : null;
     document.addEventListener('click', (e) => {
-      if (isOpen() && !links.contains(e.target) && !toggle.contains(e.target)) setMenu(false);
+      if (!isOpen()) return;
+      const inside = links.contains(e.target) || toggle.contains(e.target) || (cta && cta.contains(e.target));
+      if (!inside) setMenu(false);
     });
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && isOpen()) { setMenu(false); toggle.focus(); }
