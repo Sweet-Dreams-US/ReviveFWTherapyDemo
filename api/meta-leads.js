@@ -52,6 +52,16 @@ module.exports = async (req, res) => {
       } catch (_) { recorded = false; }
       return res.status(200).json({ ok: true, email_status: 'sent', email_id: sent.id, recorded });
     }
+    // Day 13 holds until all three preferred rates exist; clearing them holds it again.
+    if (body.action === 'set_six_month_rates') {
+      let rates = { essential: null, plus: null, elite: null };
+      if (!body.clear) {
+        try { rates = require('./_later-offer-email').validateSixMonthRates(body.rates); }
+        catch (error) { return res.status(400).json({ error: error.message }); }
+      }
+      return res.status(200).json({ ok: true, offer: await rpc('revive_set_six_month_rates', {
+        p_token: body.password, p_essential: rates.essential, p_plus: rates.plus, p_elite: rates.elite }) });
+    }
     // Explicit staff-created claims use the same storage and initial email as the public form.
     if (body.action === 'create_claim') {
       const name = String(body.fullName || '').trim(), email = String(body.email || '').trim().toLowerCase();

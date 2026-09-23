@@ -26,7 +26,7 @@
     return new Date(instant).toISOString();
   }
   function schedule(activation) {
-    return { day5: atDay(activation, 5, 9), day7: atDay(activation, 7, 9), expiresAt: atDay(activation, 7) };
+    return { day5: atDay(activation, 5, 9), day7: atDay(activation, 7, 9), day10: atDay(activation, 10, 9), day13: atDay(activation, 13, 9), expiresAt: atDay(activation, 7) };
   }
   function deadline(activation) {
     var end = schedule(activation).expiresAt;

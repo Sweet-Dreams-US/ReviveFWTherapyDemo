@@ -4,7 +4,9 @@ const { schedule, deadline } = require('../scripts/pass-schedule');
 const { day5Email } = require('../api/_day5-email');
 const { day7Email } = require('../api/_day7-email');
 test('calendar Day 5 and Day 7 are 9 AM Eastern, with weekday or weekend closing deadlines', () => {
-  assert.deepEqual(schedule('2026-09-11T20:09:05Z'), { day5: '2026-09-15T13:00:00.000Z', day7: '2026-09-17T13:00:00.000Z', expiresAt: '2026-09-18T03:00:00.000Z' });
+  assert.deepEqual(schedule('2026-09-11T20:09:05Z'), { day5: '2026-09-15T13:00:00.000Z', day7: '2026-09-17T13:00:00.000Z', day10: '2026-09-20T13:00:00.000Z', day13: '2026-09-23T13:00:00.000Z', expiresAt: '2026-09-18T03:00:00.000Z' });
+  // Day 13 crosses the November DST change and must stay at 9 AM local.
+  assert.equal(schedule('2026-10-27T18:00:00Z').day13, '2026-11-08T14:00:00.000Z');
   assert.equal(schedule('2026-09-13T15:00:00Z').expiresAt, '2026-09-20T00:00:00.000Z');
   // UTC date is not the redemption date in Fort Wayne.
   assert.equal(schedule('2026-09-12T02:00:00Z').expiresAt, '2026-09-18T03:00:00.000Z');
