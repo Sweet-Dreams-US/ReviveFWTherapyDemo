@@ -1,11 +1,5 @@
 const { passEmail } = require('./_pass-email');
-const MEMBERSHIPS = 'https://revivefw.com/pricing';
 const REDEEM = 'https://revivefw.com/free-pass#redeem';
-// Month to month prices published on pricing.html. The Day 13 rate must beat these.
-const STANDARD_RATES = { essential: 89, plus: 139, elite: 169 };
-const TIERS = [['essential', 'Essential'], ['plus', 'Plus'], ['elite', 'Elite']];
-
-const money = n => '$' + (Number.isInteger(n) ? String(n) : n.toFixed(2));
 
 // Same responsive frame and brand header as every other pass email.
 function frame(heading, preheader) {
@@ -46,40 +40,4 @@ ${steps.map(s => `<p style="font-size:16px;line-height:1.7;color:#d6cbbf;margin:
 ` + signoff + f.footer };
 }
 
-// Throws a staff readable message; returns whole cents so the email never shows 79.999.
-function validateSixMonthRates(input) {
-  const out = {};
-  for (const [key, label] of TIERS) {
-    const n = Number(input && input[key]);
-    if (!Number.isFinite(n) || n <= 0) throw new Error(`Enter a ${label} rate.`);
-    // 79.99 * 100 is 7998.999…, so compare with a tolerance rather than exactly.
-    if (Math.abs(Math.round(n * 100) - n * 100) > 1e-6) throw new Error(`${label} rate can have at most two decimal places.`);
-    if (n >= STANDARD_RATES[key]) throw new Error(`${label} preferred rate must be below the standard ${money(STANDARD_RATES[key])} per month.`);
-    out[key] = Math.round(n * 100) / 100;
-  }
-  return out;
-}
-
-// Day 13: the proposal's commitment offer, reserved for guests who already came back.
-function day13Email(email, offer) {
-  const rates = validateSixMonthRates(offer);
-  const f = frame('Lock in a better rate.', 'Commit to six months and train at a preferred monthly rate.');
-  const intro = 'You have spent real time at REVIVE. If you are ready to make it part of your routine, commit to six months and train at a preferred monthly rate.';
-  const terms = 'Enroll at the front desk and show this email to receive the preferred rate with a six month commitment. Ask our team for the full membership terms before you enroll.';
-  const flexible = 'Prefer flexibility? Our standard memberships stay month to month with no contract.';
-  const rows = TIERS.map(([key, label]) => ({ label, rate: money(rates[key]), normal: money(STANDARD_RATES[key]) }));
-  return { from: f.from, reply_to: f.reply_to, to: [email],
-    subject: 'Your preferred six month rate at REVIVE',
-    text: `REVIVE FITNESS & RECOVERY\n\nReady to commit? Lock in a better rate.\n\n${intro}\n\nSIX MONTH PREFERRED RATES\n${rows.map(r => `${r.label}: ${r.rate} per month (normally ${r.normal} month to month)`).join('\n')}\n\n${terms}\n\n${flexible}\n\nView memberships: ${MEMBERSHIPS}\n\n${TEXT_FOOTER}`,
-    html: f.header + hero('A PREFERRED RATE', 'Ready to commit?', 'Lock in a better rate.', intro) + `
-<tr><td style="padding:0 32px 26px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td style="background:#0b0807;border-left:4px solid #ff3819;padding:24px;color:#f5f0e7;">
-<h2 style="font-size:24px;line-height:1.3;margin:0 0 22px;">Six month preferred rates.</h2>
-${rows.map((r, i) => `<p style="font-size:17px;margin:0 0 6px;font-weight:bold;">${r.label} &nbsp;<span style="color:#ff3819;">${r.rate}</span> per month</p><p style="font-size:15px;line-height:1.7;color:#d6cbbf;margin:0${i < rows.length - 1 ? ' 0 20px' : ''};">Normally ${r.normal} month to month.</p>`).join('\n')}
-</td></tr></table></td></tr>
-<tr><td style="padding:0 32px 26px;"><p style="font-size:15px;line-height:1.7;margin:0;">${terms}</p></td></tr>
-<tr><td style="padding:0 32px 30px;">${button(MEMBERSHIPS, 'VIEW MEMBERSHIPS')}
-<p style="font-size:15px;line-height:1.7;margin:24px 0 0;">${flexible}</p>
-` + signoff + f.footer };
-}
-
-module.exports = { day10Email, day13Email, validateSixMonthRates, STANDARD_RATES };
+module.exports = { day10Email };

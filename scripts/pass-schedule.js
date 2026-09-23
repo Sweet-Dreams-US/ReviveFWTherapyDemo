@@ -26,10 +26,11 @@
     return new Date(instant).toISOString();
   }
   function schedule(activation) {
-    return { day5: atDay(activation, 5, 9), day7: atDay(activation, 7, 9), day10: atDay(activation, 10, 9), day13: atDay(activation, 13, 9), expiresAt: atDay(activation, 7) };
+    return { day5: atDay(activation, 5, 9), day7: atDay(activation, 7, 9), day10: atDay(activation, 10, 9), day13: atDay(activation, 13, 9), expiresAt: atDay(activation, 7), day13Close: atDay(activation, 13) };
   }
-  function deadline(activation) {
-    var end = schedule(activation).expiresAt;
+  // Defaults to the pass closing; Day 13 passes 'day13Close' for its reopened bonus.
+  function deadline(activation, which) {
+    var end = schedule(activation)[which || 'expiresAt'];
     if (!end) throw new Error('An activation date is required');
     return new Intl.DateTimeFormat('en-US', { timeZone: zone, weekday: 'long', month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' }).format(new Date(end)) + ' Eastern';
   }

@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  var password = '', leads = [], jobs = [], requestId = 0, offset = 0, timer, shownOffer;
+  var password = '', leads = [], jobs = [], requestId = 0, offset = 0, timer;
   var $ = function (id) { return document.getElementById(id); };
   function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
   function when(value) { return value ? new Date(value).toLocaleString('en-US', { timeZone: 'America/Indiana/Indianapolis', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' }) + ' ET' : 'Not yet'; }
@@ -39,51 +39,11 @@
       $('leadSyncStatus').textContent += '\nFollowup worker: ' + when(run && run.last_run_at) +
         (run && run.last_run_at && Date.now() - Date.parse(run.last_run_at) > 15 * 60000 ? ' · Worker is overdue. Check scheduled job logs.' : '') +
         (run && run.summary && run.summary.failed ? ' · Failed sends need review.' : '');
-      renderOffer((data.automation || {}).offer || null);
       render();
     } catch (error) { if (id === requestId) $('leadError').textContent = error.message; }
   }
   async function update(lead, action, value, extra) {
     return api('/api/meta-leads', Object.assign({ action: action, id: lead.id, version: lead.version, value: value }, extra));
-  }
-  // Day 13 sends the six month preferred rate. It holds until all three rates are saved.
-  var STANDARD = [['essential', 'Essential', 89], ['plus', 'Plus', 139], ['elite', 'Elite', 169]];
-  function renderOffer(offer) {
-    var key = JSON.stringify(offer);
-    if (key === shownOffer) return; // Leave half typed rates alone on search refreshes.
-    shownOffer = key;
-    var box = $('leadOffer'); box.textContent = '';
-    box.append(el('div', 'mono text-dim', 'Day 13 · Six month preferred rates'),
-      el('p', offer ? 'lead-offer-status is-live' : 'lead-offer-status', offer
-        ? 'Live. Day 13 emails offer these monthly rates for a six month commitment.'
-        : 'Not set. Day 13 emails are held until all three rates are saved. A held guest still receives it if rates are saved within 72 hours of their Day 13.'));
-    var form = el('form', 'lead-offer-form'), inputs = {};
-    STANDARD.forEach(function (tier) {
-      var label = el('label', '', tier[1] + ' · standard $' + tier[2]), input = el('input', 'input');
-      input.type = 'number'; input.min = '0.01'; input.max = String(tier[2] - 0.01); input.step = '0.01'; input.required = true;
-      input.inputMode = 'decimal'; input.placeholder = 'Below $' + tier[2];
-      if (offer) input.value = offer[tier[0]];
-      inputs[tier[0]] = input; label.append(input); form.append(label);
-    });
-    var actions = el('div', 'lead-offer-actions'), save = el('button', 'btn btn-arrow', offer ? 'Update rates' : 'Save rates and start Day 13');
-    save.type = 'submit'; actions.append(save);
-    if (offer) {
-      var clear = el('button', 'btn', 'Hold Day 13'); clear.type = 'button'; actions.append(clear);
-      clear.addEventListener('click', async function () {
-        if (!window.confirm('Hold all Day 13 emails? Pending ones wait until rates are saved again.')) return;
-        clear.disabled = true;
-        try { await api('/api/meta-leads', { action: 'set_six_month_rates', clear: true }); await load(); }
-        catch (error) { $('leadError').textContent = error.message; clear.disabled = false; }
-      });
-    }
-    form.append(actions);
-    form.addEventListener('submit', async function (event) {
-      event.preventDefault(); save.disabled = true; $('leadError').textContent = '';
-      var rates = {}; Object.keys(inputs).forEach(function (k) { rates[k] = inputs[k].value; });
-      try { await api('/api/meta-leads', { action: 'set_six_month_rates', rates: rates }); await load(); }
-      catch (error) { $('leadError').textContent = error.message; save.disabled = false; }
-    });
-    box.append(form);
   }
   function render() {
     var opened = new Set(Array.from($('leadList').querySelectorAll('details[open]')).map(function (n) { return n.dataset.id; }));
@@ -136,15 +96,15 @@
       }); card.append(save);
       card.append(el('p', 'mono text-dim mt-6', 'Automatic followup · checked every 5 minutes'));
       var plan = el('ul', 'lead-plan');
-      card.append(el('p', 'lead-source', 'Join by closing on Day 7: Essential or Plus receive 1 free Kings Nutrition PT session. Elite receives 2 total. Enrollment must be completed at the front desk. PT scheduling and fulfillment are handled by staff.'));
-      [['experience',lead.activated_at && Date.parse(lead.activated_at) + 2 * 3600000, 'First visit experience · 2 hours after redemption'], ['day5',passSchedule.day5, 'Day 5 · Kings Nutrition PT offer · 9 AM ET'], ['day7',passSchedule.day7, 'Day 7 · Final day reminder · 9 AM ET'], ['day10',passSchedule.day10, 'Day 10 · Three more free days · 9 AM ET'], ['day13',passSchedule.day13, 'Day 13 · Six month preferred rate · 9 AM ET']].forEach(function (step) {
+      card.append(el('p', 'lead-source', 'Join by closing on Day 7, or by closing on Day 13 after the reopened offer: Essential or Plus receive 1 free Kings Nutrition PT session. Elite receives 2 total. Enrollment must be completed at the front desk. PT scheduling and fulfillment are handled by staff.'));
+      [['experience',lead.activated_at && Date.parse(lead.activated_at) + 2 * 3600000, 'First visit experience · 2 hours after redemption'], ['day5',passSchedule.day5, 'Day 5 · Kings Nutrition PT offer · 9 AM ET'], ['day7',passSchedule.day7, 'Day 7 · Final day reminder · 9 AM ET'], ['day10',passSchedule.day10, 'Day 10 · Three more free days · 9 AM ET'], ['day13',passSchedule.day13, 'Day 13 · PT bonus reopens until closing · 9 AM ET']].forEach(function (step) {
         var job = jobs.find(function (j) { return j.email === lead.email && j.stage === step[0]; });
         var status = job ? job.status + (job.blocked_reason ? ' · ' + job.blocked_reason : '') + (job.accepted_at ? ' · Accepted ' + when(job.accepted_at) : '') + (job.provider_id ? '\nResend ID: ' + job.provider_id : '')
           : !lead.activated_at ? 'Waiting for activation' : 'Schedule will refresh on the next worker run';
         var row = el('li'); row.append(el('span', '', step[2]), el('span', '', (job ? when(job.due_at) : lead.activated_at ? when(step[1]) : '') + ' · ' + status));
         plan.append(row);
       }); card.append(plan);
-      card.append(el('p', 'lead-source', 'Day 10 offers three more free days that start at the next front desk check in. Day 13 offers the six month preferred rate. Each can catch up for 72 hours if missed. Emails stop after joining, unsubscribe, or do not contact. A message already being sent may still arrive.'));
+      card.append(el('p', 'lead-source', 'Day 10 offers three more free days that start at the next front desk check in, and can catch up for 72 hours if missed. Day 13 reopens the Kings Nutrition PT bonus until closing that day, and never sends after closing. Emails stop after joining, unsubscribe, or do not contact. A message already being sent may still arrive.'));
       card.append(el('p', 'lead-source', 'Campaign: ' + (lead.meta.campaign_name || '—') + ' · Ad: ' + (lead.meta.ad_name || '—') + ' · Platform: ' + (lead.meta.platform || '—') + '\nFitness routine: ' + (lead.fitness_routine || '—') + '\nSource lead ID: ' + lead.meta_lead_id));
       if (lead.meta.ad_measurement) card.append(el('p', 'lead-source', 'Meta website conversion: ' + lead.meta.ad_measurement.status + '\nEvent ID: ' + lead.meta.ad_measurement.event_id + '\nSent means accepted by Meta, not attributed to an ad.'));
       $('leadList').append(card);

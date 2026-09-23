@@ -16,16 +16,7 @@
 .lead-plan { margin-top: 22px; font-size: .82rem; color: var(--text-soft); line-height: 1.8; list-style: none; }
 .lead-plan li { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--border); padding: 7px 0; }
 .lead-source { font-size: .78rem; color: var(--text-dim); margin-top: 18px; overflow-wrap: anywhere; line-height: 1.8; }
-/* Day 13 preferred rate controls */
-.lead-offer { padding: 20px; border: 1px solid var(--border); background: var(--bg-1); }
-.lead-offer-status { font-size: .85rem; color: var(--text-soft); margin: 10px 0 0; line-height: 1.6; }
-.lead-offer-status.is-live { color: var(--fire); }
-.lead-offer-form { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 16px; align-items: end; }
-.lead-offer-form label { display: grid; gap: 8px; font-size: .8rem; color: var(--text-soft); }
-.lead-offer-form .input { width: 100%; }
-.lead-offer-actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 12px; }
 @media (max-width: 650px) {
-  .lead-offer-form { grid-template-columns: 1fr; }
   #leadStats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .lead-controls, .lead-notes { grid-template-columns: 1fr; }
   .lead-card { padding: 15px; }

@@ -6,8 +6,7 @@ function template(job) {
     : job.stage==='day5' ? require('./_day5-email').day5Email(job.email,job.activated_at)
     : job.stage==='day7' ? require('./_day7-email').day7Email(job.email,job.activated_at)
     : job.stage==='day10' ? require('./_later-offer-email').day10Email(job.email)
-    // The planner attaches the staff set rates; a missing or invalid offer throws and nothing sends.
-    : job.stage==='day13' ? require('./_later-offer-email').day13Email(job.email,job.offer) : null;
+    : job.stage==='day13' ? require('./_pt-offer-email').ptBonusEmail(job.email,job.activated_at,'day13') : null;
   if(!email) throw new Error('Unknown stage');
   return addUnsubscribe(email,job.lead_id);
 }
