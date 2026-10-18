@@ -1,5 +1,5 @@
 // POST /api/upload — stores a single small document (resume / cover letter) in the
-// public "applications" bucket and returns its URL. Called by the careers form.
+// public "revive-applications" bucket and returns its URL. Called by the careers form.
 // Documents only, 3MB cap (keeps the base64 body under Vercel's request limit).
 // The anon key stays server-side; files get unguessable UUID paths.
 const crypto = require('crypto');
@@ -37,13 +37,13 @@ module.exports = async (req, res) => {
 
     const storeMime = MIME_TO_EXT[contentType] ? contentType : EXT_TO_MIME[ext];
     const path = crypto.randomUUID() + '.' + ext;
-    const up = await fetch(`${SUPABASE_URL}/storage/v1/object/applications/${path}`, {
+    const up = await fetch(`${SUPABASE_URL}/storage/v1/object/revive-applications/${path}`, {
       method: 'POST',
       headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type': storeMime, 'x-upsert': 'false' },
       body: buf,
     });
     if (!up.ok) { console.error('storage upload failed', up.status, await up.text()); res.status(502).json({ error: 'Upload failed. Please try again.' }); return; }
 
-    res.status(200).json({ ok: true, url: `${SUPABASE_URL}/storage/v1/object/public/applications/${path}` });
+    res.status(200).json({ ok: true, url: `${SUPABASE_URL}/storage/v1/object/public/revive-applications/${path}` });
   } catch (e) { console.error('upload error', e); res.status(500).json({ error: 'Unexpected error uploading file.' }); }
 };

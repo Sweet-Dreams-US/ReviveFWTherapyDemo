@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
   try {
     if (req.method === 'GET') {
       const r = await fetch(
-        `${SUPABASE_URL}/rest/v1/settings?id=eq.1&select=founders_presale_date,public_opening_date,grand_opening_date`,
+        `${SUPABASE_URL}/rest/v1/revive_settings?id=eq.1&select=founders_presale_date,public_opening_date,grand_opening_date`,
         { headers }
       );
       if (!r.ok) { res.status(502).json({ error: 'Could not load settings' }); return; }
