@@ -5,8 +5,7 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 
 test('public pages only allow job applications, pass claims and private visit feedback', () => {
-  const files = fs.readdirSync(root).filter(f => f.endsWith('.html') && f !== 'admin.html')
-    .concat(fs.readdirSync(path.join(root, 'blog')).filter(f => f.endsWith('.html')).map(f => 'blog/' + f));
+  const files = fs.readdirSync(root).filter(f => f.endsWith('.html') && f !== 'admin.html');
   for (const file of files) {
     const html = fs.readFileSync(path.join(root, file), 'utf8');
     assert.doesNotMatch(html, /join\s+(?:the\s+)?waitlist|joinForm|\/api\/inquiry|>Newsletter</i, file);
@@ -15,7 +14,8 @@ test('public pages only allow job applications, pass claims and private visit fe
   assert.match(fs.readFileSync(path.join(root, 'careers.html'), 'utf8'), /id="applyForm"/);
   assert.match(fs.readFileSync(path.join(root, 'free-pass.html'), 'utf8'), /id="redeem"/);
   assert.match(fs.readFileSync(path.join(root, 'free-pass.html'), 'utf8'), /id="claimPassForm"/);
-  assert.doesNotMatch(fs.readFileSync(path.join(root, 'scripts/build-blog.js'), 'utf8'), /join\s+(?:the\s+)?waitlist/i);
+  // The blog is rendered by api/_blog.js from content/blog; it must not carry a form or the retired waitlist copy.
+  assert.doesNotMatch(fs.readFileSync(path.join(root, 'api/_blog.js'), 'utf8'), /join\s+(?:the\s+)?waitlist|<form\b/i);
 });
 
 test('retired inquiry endpoint cannot store or send anything', async () => {

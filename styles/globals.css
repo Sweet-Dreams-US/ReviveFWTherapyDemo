@@ -291,6 +291,11 @@ p .brand, li .brand, .lead .brand, summary .brand, label .brand,
   gap: var(--s-3);
 }
 .nav-cta:hover { background: var(--fire); border-color: var(--fire); color: var(--text); }
+/* The Blog link joins the row once a post is released (see scripts/main.js).
+   Seven links need a tighter gap to clear the pass button on mid width screens. */
+@media (min-width: 801px) and (max-width: 1279px) {
+  .nav-links.has-blog { gap: var(--s-5); }
+}
 
 .nav-toggle { display: none; }
 @media (max-width: 800px) {

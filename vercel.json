@@ -3,7 +3,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "crons": [{ "path": "/api/meta-leads-sync", "schedule": "*/5 * * * *" }, { "path": "/api/pass-automation", "schedule": "*/5 * * * *" }],
-  "functions": { "api/meta-leads-sync.js": { "maxDuration": 120 }, "api/pass-automation.js": { "maxDuration": 120 }, "api/claim-pass.js": { "maxDuration": 60 }, "api/meta-leads.js": { "maxDuration": 60 } },
+  "functions": { "api/meta-leads-sync.js": { "maxDuration": 120 }, "api/pass-automation.js": { "maxDuration": 120 }, "api/claim-pass.js": { "maxDuration": 60 }, "api/meta-leads.js": { "maxDuration": 60 }, "api/blog.js": { "maxDuration": 10, "includeFiles": "{content/blog/**,index.html}" } },
   "redirects": [
     { "source": "/founders", "destination": "/pricing", "permanent": true },
     { "source": "/founding", "destination": "/pricing", "permanent": true },
@@ -17,7 +17,36 @@
     { "source": "/experience", "destination": "/why-revive", "permanent": true },
     { "source": "/experience.html", "destination": "/why-revive", "permanent": true },
     { "source": "/giveaway", "destination": "/", "permanent": true },
-    { "source": "/giveaway.html", "destination": "/", "permanent": true }
+    { "source": "/giveaway.html", "destination": "/", "permanent": true },
+    { "source": "/content/:path((?!blog/images/).*)", "destination": "/blog", "permanent": false },
+    { "source": "/blog/barbell-technique-setup-that-decides-the-lift", "destination": "/blog", "permanent": true },
+    { "source": "/blog/do-you-need-medical-clearance-before-lifting", "destination": "/blog", "permanent": true },
+    { "source": "/blog/how-a-decision-becomes-a-rep-synapses", "destination": "/blog", "permanent": true },
+    { "source": "/blog/how-hard-should-you-lift-training-principles", "destination": "/blog", "permanent": true },
+    { "source": "/blog/how-long-until-lifting-changes-your-body", "destination": "/blog", "permanent": true },
+    { "source": "/blog/how-to-build-a-strength-workout", "destination": "/blog", "permanent": true },
+    { "source": "/blog/how-to-describe-where-it-hurts", "destination": "/blog", "permanent": true },
+    { "source": "/blog/revive-grand-opening-august-15", "destination": "/blog", "permanent": true },
+    { "source": "/blog/shoulder-mobility-versus-hip-stability", "destination": "/blog", "permanent": true },
+    { "source": "/blog/six-fundamental-movement-patterns", "destination": "/blog", "permanent": true },
+    { "source": "/blog/what-happens-inside-a-muscle-when-it-contracts", "destination": "/blog", "permanent": true },
+    { "source": "/blog/why-caffeine-stops-working-receptors-explained", "destination": "/blog", "permanent": true },
+    { "source": "/blog/why-light-weights-feel-heavy-leverage-explained", "destination": "/blog", "permanent": true },
+    { "source": "/blog/why-muscle-fibers-are-all-or-nothing", "destination": "/blog", "permanent": true },
+    { "source": "/blog/why-rep-ten-feels-nothing-like-rep-one", "destination": "/blog", "permanent": true },
+    { "source": "/blog/why-some-tissues-heal-slower", "destination": "/blog", "permanent": true },
+    { "source": "/blog/why-your-body-pushes-back", "destination": "/blog", "permanent": true },
+    { "source": "/blog/why-your-body-speeds-up-before-you-lift", "destination": "/blog", "permanent": true },
+    { "source": "/blog/why-your-spine-has-curves", "destination": "/blog", "permanent": true },
+    { "source": "/blog/you-dont-sweat-out-toxins-what-sweat-really-is", "destination": "/blog", "permanent": true },
+    { "source": "/blog/your-skeleton-responds-to-what-you-lift", "destination": "/blog", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/sitemap.xml", "destination": "/api/blog?view=sitemap" },
+    { "source": "/blog", "destination": "/api/blog?view=index" },
+    { "source": "/blog/rss.xml", "destination": "/api/blog?view=rss" },
+    { "source": "/blog/:slug", "destination": "/api/blog?view=post&slug=:slug" },
+    { "source": "/api/blog/status", "destination": "/api/blog?view=status" }
   ],
   "headers": [
     {

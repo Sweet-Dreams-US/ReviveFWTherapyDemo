@@ -174,3 +174,69 @@
   }
 
 })();
+
+// ==========================================================================
+// Blog link: shown in the header and footer only once at least one post has
+// released. /api/blog/status answers from the same date gate as the blog pages
+// and is cached for an hour at the edge, so the link appears (and would go
+// away) with no deploy. The last answer is remembered so the nav does not jump.
+// ==========================================================================
+(function () {
+  'use strict';
+  var KEY = 'revive-has-blog';
+
+  function build(tag, cls) {
+    var a = document.createElement('a');
+    a.href = '/blog';
+    a.textContent = 'Blog';
+    if (cls) a.className = cls;
+    if (/^\/blog(\/|$)/.test(location.pathname)) a.setAttribute('aria-current', 'page');
+    return a;
+  }
+
+  function apply(has) {
+    var navLinks = document.getElementById('navLinks');
+    var footerLists = document.querySelectorAll('.footer-col ul');
+
+    if (navLinks) {
+      navLinks.classList.toggle('has-blog', has);
+      var inNav = navLinks.querySelector('a[href="/blog"]');
+      if (has && !inNav) {
+        var careers = navLinks.querySelector('a[href="/careers"]');
+        var link = build('a', 'nav-link');
+        navLinks.insertBefore(link, careers || null);
+      } else if (!has && inNav) {
+        inNav.remove();
+      }
+    }
+
+    Array.prototype.forEach.call(footerLists, function (ul) {
+      var anchor = ul.querySelector('a[href="/careers"]') || ul.querySelector('a[href="/run-club"]');
+      if (!anchor) return; // not the Explore list
+      var existing = ul.querySelector('a[href="/blog"]');
+      if (has && !existing) {
+        var li = document.createElement('li');
+        li.appendChild(build('a', ''));
+        var after = anchor.closest('li');
+        if (after && after.querySelector('a[href="/careers"]')) ul.insertBefore(li, after);
+        else ul.appendChild(li);
+      } else if (!has && existing) {
+        var item = existing.closest('li');
+        if (item) item.remove();
+      }
+    });
+  }
+
+  var remembered = null;
+  try { remembered = window.localStorage.getItem(KEY); } catch (e) { /* private mode */ }
+  if (remembered === '1') apply(true);
+
+  fetch('/api/blog/status', { headers: { Accept: 'application/json' } })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      if (!j || typeof j.hasBlog !== 'boolean') return;
+      try { window.localStorage.setItem(KEY, j.hasBlog ? '1' : '0'); } catch (e) { /* ignore */ }
+      apply(j.hasBlog);
+    })
+    .catch(function () { /* leave the nav as it is */ });
+})();
